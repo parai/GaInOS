@@ -1,0 +1,74 @@
+GaInOS_DIR  = ../..
+TEST = $(GaInOS_DIR)/osek_test/GaInOS_Studio
+CC  = D:/usr/opt/SW/Prog/chc12.exe
+ASM = D:/usr/opt/SW/Prog/ahc12.exe
+LD  = D:/usr/opt/SW/Prog/linker.exe
+COMMON_FLAGS = -WErrFileOff -WOutFileOff -EnvOBJPATH=./
+C_FLAGS   = -ID:/usr/opt/SW/lib/hc12c/include -Mb -CpuHCS12XE
+ASM_FLAGS = -ID:/usr/opt/SW/lib/hc12c/include -Mb -CpuHCS12XE
+LD_FLAGS  = -M -WmsgNu=abcet
+LIBS = D:/usr/opt/SW/lib/hc12c/lib/ansibi.lib
+INC=-I$(GaInOS_DIR)/Bsp/9s12xep100/Bsp/Cpu/ \
+	-I$(GaInOS_DIR)/Bsp/9s12xep100/Bsp/Gpt/ \
+	-I$(GaInOS_DIR)/Bsp/9s12xep100/Bsp/Serial/ \
+	-I$(GaInOS_DIR)/Bsp/9s12xep100/vPort/ \
+	-I$(GaInOS_DIR)/include/ \
+	-I$(GaInOS_DIR)/kernel/ \
+	-I$(TEST) \
+	-I$(GaInOS_DIR)/osek_test/ \
+	-IProject/Sources/ \
+	
+OBJS=$(GaInOS_DIR)/Bsp/9s12xep100/Bsp/Cpu/Cpu.o \
+	$(GaInOS_DIR)/Bsp/9s12xep100/Bsp/Gpt/Gpt.o \
+	$(GaInOS_DIR)/Bsp/9s12xep100/Bsp/Serial/Serial.o \
+	$(GaInOS_DIR)/Bsp/9s12xep100/vPort/vPort.o \
+	$(GaInOS_DIR)/kernel/Alarm.o \
+	$(GaInOS_DIR)/kernel/Autosar.o \
+	$(GaInOS_DIR)/kernel/Event.o \
+	$(GaInOS_DIR)/kernel/Hooks.o \
+	$(GaInOS_DIR)/kernel/Interrupt.o \
+	$(GaInOS_DIR)/kernel/Osctrl.o \
+	$(GaInOS_DIR)/kernel/Resource.o \
+	$(GaInOS_DIR)/kernel/Task.o \
+	$(TEST)/CfgObj.o \
+	$(TEST)/CfgRdyQ.o \
+	$(TEST)/CfgSchedTbl.o \
+	$(GaInOS_DIR)/osek_test/testinfo.o \
+	Project/Sources/datapage.o \
+	Project/Sources/main.o \
+	Project/Sources/MC9S12XEP100.o \
+	Project/Sources/Start12.o \
+	
+OBJS_LINK=Cpu.o \
+	Gpt.o \
+	Serial.o \
+	vPort.o \
+	Alarm.o \
+	Autosar.o \
+	Event.o \
+	Hooks.o \
+	Interrupt.o \
+	Osctrl.o \
+	Resource.o \
+	Task.o \
+	CfgObj.o \
+	CfgRdyQ.o \
+	CfgSchedTbl.o \
+	testinfo.o \
+	datapage.o \
+	main.o \
+	MC9S12XEP100.o \
+	Start12.o \
+	
+.s.o:
+	$(ASM) $*.s $(COMMON_FLAGS) $(ASM_FLAGS)
+
+.c.o:
+	$(CC) $*.c $(INC) $(COMMON_FLAGS) $(C_FLAGS)
+
+all:$(OBJS) Project.abs
+	echo "done all"
+
+Project.abs :
+	$(LD) ./Project/prm/Project.prm $(COMMON_FLAGS) $(LD_FLAGS) -Add($(LIBS)) -Add($(OBJS_LINK)) -M -O$*.abs
+	
