@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GaInOsCfg>
+	<GaInOsGeneralCfg>
+		<GaInOsMaxIpl>7</GaInOsMaxIpl>
+		<GaInOsMaxPriority>5</GaInOsMaxPriority>
+		<GaInOsConfCls>ECC2</GaInOsConfCls>
+		<GaInOsSchedPolicy>MIXED_PREEMPTIVE_SCHEDULE</GaInOsSchedPolicy>
+		<GaInOsStatusLevel>OS_STATUS_EXTENED</GaInOsStatusLevel>
+		<GaInOsUseAlarm>True</GaInOsUseAlarm>
+		<GaInOsUseInRes>False</GaInOsUseInRes>
+		<GaInOsUseRes>False</GaInOsUseRes>
+		<GaInOsIsr2UseRes>False</GaInOsIsr2UseRes>
+	</GaInOsGeneralCfg>
+
+	<GaInOsTaskCfg>
+		<GaInOsTask>
+			<TaskName>vTask1</TaskName>
+			<TaskType>BASIC_TASK</TaskType>
+			<TaskPriority>1</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>True</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask2</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>2</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>True</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vEvent2' mask='0x1'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+	</GaInOsTaskCfg>
+	<GaInOsResourceCfg>
+	</GaInOsResourceCfg>
+
+	<GaInOsInternalResourceCfg>
+	</GaInOsInternalResourceCfg>
+
+	<GaInOsCounterCfg>
+		<GaInOsCounter>
+			<CounterName>vCounter1</CounterName>
+			<CounterMaxAllowValue>16</CounterMaxAllowValue>
+			<CounterMinCycle>1</CounterMinCycle>
+			<CounterTickPerBase>1</CounterTickPerBase>
+		</GaInOsCounter>
+	</GaInOsCounterCfg>
+
+	<GaInOsAlarmCfg>
+		<GaInOsAlarm>
+			<AlarmName>vAlarm1</AlarmName>
+			<AlarmOwner>vCounter1</AlarmOwner>
+			<AlarmType>ALARM_EVENT</AlarmType>
+			<AlarmCbk>vAlarm1_Cbk</AlarmCbk>
+			<AlarmTask>vTask2</AlarmTask>
+			<AlarmEvent>vEvent2</AlarmEvent>
+		</GaInOsAlarm>
+	</GaInOsAlarmCfg>
+
+</GaInOsCfg>

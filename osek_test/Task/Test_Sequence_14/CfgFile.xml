@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GaInOsCfg>
+	<GaInOsGeneralCfg>
+		<GaInOsCpuType>MC9S12(X)</GaInOsCpuType>
+		<GaInOsMaxIpl>7</GaInOsMaxIpl>
+		<GaInOsMaxPriority>63</GaInOsMaxPriority>
+		<GaInOsConfCls>ECC2</GaInOsConfCls>
+		<GaInOsSchedPolicy>MIXED_PREEMPTIVE_SCHEDULE</GaInOsSchedPolicy>
+		<GaInOsStatusLevel>OS_STATUS_STANDARD</GaInOsStatusLevel>
+		<GaInOsUseAlarm>False</GaInOsUseAlarm>
+		<GaInOsUseInRes>False</GaInOsUseInRes>
+		<GaInOsUseRes>False</GaInOsUseRes>
+		<GaInOsIsr2UseRes>False</GaInOsIsr2UseRes>
+	</GaInOsGeneralCfg>
+
+	<GaInOsTaskCfg>
+		<GaInOsTask>
+			<TaskName>vTask1</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>16</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>True</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask1Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask1Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask1Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask1Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask1Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask1Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask1Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask1Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask2</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>15</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask2Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask2Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask2Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask2Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask2Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask2Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask2Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask2Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask3</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>14</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask3Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask3Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask3Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask3Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask3Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask3Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask3Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask3Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask4</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>13</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask4Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask4Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask4Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask4Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask4Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask4Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask4Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask4Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask5</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>12</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask5Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask5Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask5Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask5Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask5Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask5Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask5Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask5Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask6</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>11</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask6Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask6Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask6Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask6Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask6Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask6Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask6Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask6Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask7</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>10</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask7Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask7Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask7Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask7Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask7Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask7Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask7Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask7Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask8</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>9</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask8Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask8Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask8Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask8Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask8Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask8Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask8Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask8Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask9</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>8</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask9Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask9Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask9Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask9Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask9Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask9Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask9Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask9Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask10</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>7</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask10Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask10Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask10Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask10Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask10Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask10Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask10Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask10Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask11</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>6</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask11Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask11Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask11Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask11Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask11Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask11Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask11Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask11Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask12</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>5</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask12Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask12Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask12Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask12Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask12Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask12Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask12Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask12Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask13</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>4</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask13Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask13Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask13Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask13Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask13Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask13Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask13Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask13Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask14</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>3</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask14Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask14Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask14Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask14Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask14Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask14Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask14Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask14Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask15</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>2</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask15Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask15Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask15Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask15Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask15Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask15Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask15Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask15Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask16</TaskName>
+			<TaskType>EXTEND_TASK</TaskType>
+			<TaskPriority>1</TaskPriority>
+			<TaskStackSize>256</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+				<TaskEvent name='vTask16Event1' mask='0x1'></TaskEvent>
+				<TaskEvent name='vTask16Event2' mask='0x2'></TaskEvent>
+				<TaskEvent name='vTask16Event3' mask='0x4'></TaskEvent>
+				<TaskEvent name='vTask16Event4' mask='0x8'></TaskEvent>
+				<TaskEvent name='vTask16Event5' mask='0x10'></TaskEvent>
+				<TaskEvent name='vTask16Event6' mask='0x20'></TaskEvent>
+				<TaskEvent name='vTask16Event7' mask='0x40'></TaskEvent>
+				<TaskEvent name='vTask16Event8' mask='0x80'></TaskEvent>
+			</TaskEventList>
+		</GaInOsTask>
+	</GaInOsTaskCfg>
+	<GaInOsResourceCfg>
+	</GaInOsResourceCfg>
+
+	<GaInOsInternalResourceCfg>
+	</GaInOsInternalResourceCfg>
+
+	<GaInOsCounterCfg>
+	</GaInOsCounterCfg>
+
+	<GaInOsAlarmCfg>
+	</GaInOsAlarmCfg>
+
+</GaInOsCfg>

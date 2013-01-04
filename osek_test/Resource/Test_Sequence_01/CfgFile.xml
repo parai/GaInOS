@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GaInOsCfg>
+	<GaInOsGeneralCfg>
+		<GaInOsCpuType>MC9S12(X)</GaInOsCpuType>
+		<GaInOsMaxIpl>7</GaInOsMaxIpl>
+		<GaInOsMaxPriority>11</GaInOsMaxPriority>
+		<GaInOsConfCls>ECC2</GaInOsConfCls>
+		<GaInOsSchedPolicy>MIXED_PREEMPTIVE_SCHEDULE</GaInOsSchedPolicy>
+		<GaInOsStatusLevel>OS_STATUS_EXTENED</GaInOsStatusLevel>
+		<GaInOsUseAlarm>False</GaInOsUseAlarm>
+		<GaInOsUseInRes>False</GaInOsUseInRes>
+		<GaInOsUseRes>True</GaInOsUseRes>
+		<GaInOsIsr2UseRes>False</GaInOsIsr2UseRes>
+	</GaInOsGeneralCfg>
+
+	<GaInOsTaskCfg>
+		<GaInOsTask>
+			<TaskName>vTask1</TaskName>
+			<TaskType>BASIC_TASK</TaskType>
+			<TaskPriority>1</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>True</TaskAutoStart>
+			<TaskPreemtable>False</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask2</TaskName>
+			<TaskType>BASIC_TASK</TaskType>
+			<TaskPriority>2</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>False</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+			</TaskEventList>
+		</GaInOsTask>
+	</GaInOsTaskCfg>
+	<GaInOsResourceCfg>
+		<GaInOsRes name='vRes1' ceilprio='5'></GaInOsRes>
+		<GaInOsRes name='vRes2' ceilprio='6'></GaInOsRes>
+		<GaInOsRes name='vRes3' ceilprio='7'></GaInOsRes>
+		<GaInOsRes name='vRes4' ceilprio='8'></GaInOsRes>
+		<GaInOsRes name='vRes5' ceilprio='9'></GaInOsRes>
+		<GaInOsRes name='vRes6' ceilprio='10'></GaInOsRes>
+		<GaInOsRes name='vResA' ceilprio='0'></GaInOsRes>
+	</GaInOsResourceCfg>
+
+	<GaInOsInternalResourceCfg>
+	</GaInOsInternalResourceCfg>
+
+	<GaInOsCounterCfg>
+	</GaInOsCounterCfg>
+
+	<GaInOsAlarmCfg>
+	</GaInOsAlarmCfg>
+
+</GaInOsCfg>

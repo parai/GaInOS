@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GaInOsCfg>
+	<GaInOsGeneralCfg>
+		<GaInOsCpuType>MC9S12(X)</GaInOsCpuType>
+		<GaInOsMaxIpl>7</GaInOsMaxIpl>
+		<GaInOsMaxPriority>63</GaInOsMaxPriority>
+		<GaInOsConfCls>BCC1</GaInOsConfCls>
+		<GaInOsSchedPolicy>FULL_PREEMPTIVE_SCHEDULE</GaInOsSchedPolicy>
+		<GaInOsStatusLevel>OS_STATUS_STANDARD</GaInOsStatusLevel>
+		<GaInOsUseAlarm>True</GaInOsUseAlarm>
+		<GaInOsUseInRes>False</GaInOsUseInRes>
+		<GaInOsUseRes>False</GaInOsUseRes>
+		<GaInOsIsr2UseRes>False</GaInOsIsr2UseRes>
+	</GaInOsGeneralCfg>
+
+	<GaInOsTaskCfg>
+		<GaInOsTask>
+			<TaskName>vTask1</TaskName>
+			<TaskType>BASIC_TASK</TaskType>
+			<TaskPriority>1</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask2</TaskName>
+			<TaskType>BASIC_TASK</TaskType>
+			<TaskPriority>2</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask3</TaskName>
+			<TaskType>BASIC_TASK</TaskType>
+			<TaskPriority>3</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask4</TaskName>
+			<TaskType>BASIC_TASK</TaskType>
+			<TaskPriority>4</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask5</TaskName>
+			<TaskType>BASIC_TASK</TaskType>
+			<TaskPriority>5</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTask6</TaskName>
+			<TaskType>BASIC_TASK</TaskType>
+			<TaskPriority>6</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>False</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+			</TaskEventList>
+		</GaInOsTask>
+		<GaInOsTask>
+			<TaskName>vTaskStart</TaskName>
+			<TaskType>BASIC_TASK</TaskType>
+			<TaskPriority>7</TaskPriority>
+			<TaskStackSize>512</TaskStackSize>
+			<TaskMaxActCnt>1</TaskMaxActCnt>
+			<TaskAutoStart>True</TaskAutoStart>
+			<TaskPreemtable>True</TaskPreemtable>
+			<TaskWithInRes>False</TaskWithInRes>
+			<TaskInResName>None</TaskInResName>
+			<TaskEventList>
+			</TaskEventList>
+		</GaInOsTask>
+	</GaInOsTaskCfg>
+	<GaInOsResourceCfg>
+	</GaInOsResourceCfg>
+
+	<GaInOsInternalResourceCfg>
+	</GaInOsInternalResourceCfg>
+
+	<GaInOsCounterCfg>
+		<GaInOsCounter>
+			<CounterName>vCounter1</CounterName>
+			<CounterMaxAllowValue>1000</CounterMaxAllowValue>
+			<CounterMinCycle>1</CounterMinCycle>
+			<CounterTickPerBase>1</CounterTickPerBase>
+		</GaInOsCounter>
+	</GaInOsCounterCfg>
+
+	<GaInOsAlarmCfg>
+		<GaInOsAlarm>
+			<AlarmName>vAlarm1</AlarmName>
+			<AlarmOwner>vCounter1</AlarmOwner>
+			<AlarmType>ALARM_TASK</AlarmType>
+			<AlarmCbk>vAlarm1_Cbk</AlarmCbk>
+			<AlarmTask>vTask4</AlarmTask>
+			<AlarmEvent>None</AlarmEvent>
+		</GaInOsAlarm>
+		<GaInOsAlarm>
+			<AlarmName>vAlarm2</AlarmName>
+			<AlarmOwner>vCounter1</AlarmOwner>
+			<AlarmType>ALARM_TASK</AlarmType>
+			<AlarmCbk>vAlarm2_Cbk</AlarmCbk>
+			<AlarmTask>vTask5</AlarmTask>
+			<AlarmEvent>None</AlarmEvent>
+		</GaInOsAlarm>
+		<GaInOsAlarm>
+			<AlarmName>vAlarm3</AlarmName>
+			<AlarmOwner>vCounter1</AlarmOwner>
+			<AlarmType>ALARM_TASK</AlarmType>
+			<AlarmCbk>vAlarm3_Cbk</AlarmCbk>
+			<AlarmTask>vTask6</AlarmTask>
+			<AlarmEvent>None</AlarmEvent>
+		</GaInOsAlarm>
+	</GaInOsAlarmCfg>
+
+	<GaInOsScheduleTableCfg>
+		<GaInOsScheduleTable name='vSchedTbl1' repeatable='True' counter='vCounter1' autostartable='True' autostarttype='RELATIVE' absrelvalue='50' finaldelay='150' strategy='EXPLICIT'>
+			<ExpiryPoint offset='250'>
+				<Action>ActivateTask(vTask1)</Action>
+			</ExpiryPoint>
+			<ExpiryPoint offset='450'>
+				<Action>ActivateTask(vTask2)</Action>
+			</ExpiryPoint>
+			<ExpiryPoint offset='650'>
+				<Action>ActivateTask(vTask3)</Action>
+			</ExpiryPoint>
+		</GaInOsScheduleTable>
+		<GaInOsScheduleTable name='vSchedTbl2' repeatable='False' counter='vCounter1' autostartable='True' autostarttype='ABSOLUTE' absrelvalue='100' finaldelay='150' strategy='IMPLICIT'>
+			<ExpiryPoint offset='300'>
+				<Action>ActivateTask(vTask4)</Action>
+			</ExpiryPoint>
+			<ExpiryPoint offset='500'>
+				<Action>ActivateTask(vTask5)</Action>
+			</ExpiryPoint>
+			<ExpiryPoint offset='700'>
+				<Action>ActivateTask(vTask6)</Action>
+			</ExpiryPoint>
+		</GaInOsScheduleTable>
+	</GaInOsScheduleTableCfg>
+
+</GaInOsCfg>
