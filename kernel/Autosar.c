@@ -54,6 +54,10 @@
 /* |                   | os223.doc                                    | */
 /* |-------------------+----------------------------------------------| */
 #include "Kernel.h"
+
+#define vMax(a,b) ((a)>(b)?(a):(b))
+#define vMin(a,b) ((a)<(b)?(a):(b))
+
 /* Calculate the relative starting time */
 static vDoAddSchedTblTick(TickType xCntCurValue,TickType xMaxAllowedValue ,TickType xTicks)
 {
@@ -468,13 +472,15 @@ StatusType StartScheduleTableRel(ScheduleTableType ScheduleTableID,
     }
     OS_ENTER_CRITICAL();
     listInsertSchedTblAtHead(xCounterID,ScheduleTableID);
-    tableGetSchedTblStartingTime(ScheduleTableID)=vDoAddSchedTblTick(    \
-        tableGetCntCurValue(xCounterID),xMaxAllowedValue,Offset);
+    tableGetSchedTblStartingTime(ScheduleTableID)=vDoAddSchedTblTick(   
+        tableGetCntCurValue(xCounterID), /* time now */
+        xMaxAllowedValue,
+        Offset);                /* relative offset to time now */
     tableGetSchedTblIterator(ScheduleTableID)=0;
     tableGetSchedTblNextExpiryPointTime(ScheduleTableID)=vDoAddSchedTblTick( 
-        tableGetSchedTblStartingTime(ScheduleTableID),
+        tableGetSchedTblStartingTime(ScheduleTableID), /* starting time */
         xMaxAllowedValue,
-        tableGetSchedTblOffset(ScheduleTableID,0));
+        tableGetSchedTblOffset(ScheduleTableID,0)); /* relative offset to starting time */
     tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
     OS_EXIT_CRITICAL();
     
@@ -550,9 +556,9 @@ StatusType StartScheduleTableAbs(ScheduleTableType ScheduleTableID,
     tableGetSchedTblStartingTime(ScheduleTableID)=Start;
     tableGetSchedTblIterator(ScheduleTableID)=0;
     tableGetSchedTblNextExpiryPointTime(ScheduleTableID)=vDoAddSchedTblTick( 
-        Start,
+        Start,                  /* absolute starting time */
         tableGetCntMaxAllowed(xCounterID),
-        tableGetSchedTblOffset(ScheduleTableID,0));
+        tableGetSchedTblOffset(ScheduleTableID,0)); /* relative offset to absolute starting time */
     tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
     OS_EXIT_CRITICAL();
     
@@ -826,6 +832,11 @@ StatusType StartScheduleTableSynchron(ScheduleTableType ScheduleTableID)
 StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
 {
     StatusType xRet = E_OK;
+    CounterType xCounterID;
+    TickType xMaxAllowedValue;
+    TickType xTmpTime1;
+    TickType xTmpTime2;
+    TickType xTmpTime3;
 #if(cfgOS_STATUS_LEVEL==OS_STATUS_EXTEND)
     if(ScheduleTableID > (cfgOS_SCHEDULE_TABLE_NUM-1))
     {
@@ -843,36 +854,107 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
         xRet = E_OS_VALUE;
         goto Error_Exit;
     }
-    if(SCHEDULETABLE_STOPPED != tableGetSchedTblStatus(ScheduleTableID))
+    if((SCHEDULETABLE_STOPPED == tableGetSchedTblStatus(ScheduleTableID))||
+       (SCHEDULETABLE_NEXT    == tableGetSchedTblStatus(ScheduleTableID)))
     {
         xRet = E_OS_STATE;
         goto Error_Exit;
     }
 #endif
+    xCounterID = tableGetSchedTblDrivingCounter(ScheduleTableID);
+    xMaxAllowedValue = tableGetCntMaxAllowed(xCounterID);
+    OS_ENTER_CRITICAL();
     if(SCHEDULETABLE_WAITING == tableGetSchedTblStatus(ScheduleTableID))
     {                           /* start it */
-		OS_ENTER_CRITICAL();
 		listInsertSchedTblAtHead(xCounterID,ScheduleTableID);
-		tableGetSchedTblStartingTime(ScheduleTableID)=vDoAddSchedTblTick(    \
+        /* relative start it at the offset (duration-value) */
+		tableGetSchedTblStartingTime(ScheduleTableID)=vDoAddSchedTblTick( 
 			tableGetCntCurValue(xCounterID),
-			tableGetCntMaxAllowed(xCounterID),
+			xMaxAllowedValue,
 			tableGetSchedTblDuration(ScheduleTableID)-Value);
 		tableGetSchedTblIterator(ScheduleTableID)=0;
 		tableGetSchedTblNextExpiryPointTime(ScheduleTableID)=vDoAddSchedTblTick( 
 			tableGetSchedTblStartingTime(ScheduleTableID),
-			tableGetCntMaxAllowed(xCounterID),
+			xMaxAllowedValue,
 			tableGetSchedTblOffset(ScheduleTableID,0));
+        /* Set status */
 		tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS;
-		OS_EXIT_CRITICAL();
     }
     else                        /* running state,perform Synchronization */
     {
-        /* Fisrt Get Current Offset of Schedule Table */
-        ...
+        /* Fisrt Get Current value of Schedule Table */
+        xTmpTime1 = tableGetSchedTblStartingTime(ScheduleTableID);
+        xTmpTime2 = tableGetCntCurValue(xCounterID);
+        xTmpTime3 = tableGetSchedTblCurValue(xTmpTime1,xTmpTime2,xMaxAllowedValue);
         /* Calculate the deviation */
-        ...
-        /* Do adjustment */
-    }
+        if(Value > xTmpTime3)
+        {
+            xTmpTime3=Value-xTmpTime3; /* xTmpTime3 = deviation */
+            if(xTmpTime3 <= tableGetSchedTblPrecision(ScheduleTableID))
+            {
+                tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS;
+            }
+            else
+            {
+                tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
+            }
+            xTmpTime2=tableGetSchedTblMaxRetart(ScheduleTableID);
+            /* adjust value for next expiry point is max(maxRetard,deviation) */
+            /* xTmpTime2=vMax(xTmpTime2,xTmpTime3); */
+            if(xTmpTime2 < xTmpTime3)
+            {   
+                /* Adjust value is maxRetard */
+                /* Deviation remained which should be processed in ISR */
+                xTmpTime3=xTmpTime3-xTmpTime2; 
+            }
+            else
+            {
+                /* Adjust value is the whole deviation */
+                xTmpTime2=xTmpTime3;
+                /* Deviation left which should be processed in ISR  is ZERO*/
+                xTmpTime3=0u;
+            }
+            /* Adjust Its starting time */            
+            if(xTmpTime1 > xTmpTime2)
+            {                   /* xStartingTime is bigger than adjust value */
+                tableGetSchedTblStartingTime(ScheduleTableID) = xTmpTime1 - xTmpTime2;
+            }
+            else
+            {
+                tableGetSchedTblStartingTime(ScheduleTableID) = xMaxAllowedValue-xTmpTime1 + xTmpTime2; 
+            }
+            xTmpTime1 = tableGetSchedTblNextExpiryPointTime(ScheduleTableID);
+            /* Adjust Its next expiry point time */
+            if(xTmpTime1 > xTmpTime2)
+            {                   /* xNextExpiryPointTime is bigger than adjust value */
+                tableGetSchedTblNextExpiryPointTime(ScheduleTableID) = xTmpTime1 - xTmpTime2;
+            }
+            else
+            {
+                tableGetSchedTblNextExpiryPointTime(ScheduleTableID) = xMaxAllowedValue-xTmpTime1 + xTmpTime2; 
+            }
+            tableGetSchedTblDeviation(ScheduleTableID)=xTmpTime3;
+            tableGetSchedTblAdjustDerection(ScheduleTableID)=SCHEDTBL_RETARD;
+        }
+        else if(Value < xTmpTime3)
+        {
+            xTmpTime3=xTmpTime3 - Value; /* xTmpTime3 = Deviation */
+            if(xTmpTime3 <= tableGetSchedTblPrecision(ScheduleTableID))
+            {
+                tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS;
+            }
+            else
+            {
+                tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
+            }
+            tableGetSchedTblAdjustDerection(ScheduleTableID)=SCHEDTBL_ADVANCED;
+        }
+        else
+        {
+            tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS;
+        }
+     }
+    OS_EXIT_CRITICAL();
 #if(cfgOS_STATUS_LEVEL==OS_STATUS_EXTEND)
   Error_Exit:
 #endif

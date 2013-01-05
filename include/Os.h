@@ -132,6 +132,9 @@ typedef struct{
     PriorityType xSavedPriority; /* Save the xTaskID's Previous xPriority */
     ResourceType xPrevResID;     /* The Previous ResID occupied by xTask or ISR2 */
 }ResCtrlBlkType;
+
+#define SCHEDTBL_ADVANCED  0u
+#define SCHEDTBL_RETARD    1u
 /* control block for schedule table */
 typedef struct{
     ScheduleTableStatusType xSchedTblStatus;
@@ -141,9 +144,19 @@ typedef struct{
     TickType xSchedTblNextExpiryPointTime;
     /* store the the time when the schedule table should be started to be processed */
     TickType xSchedTblStartingTime;
-    /* Next Schedule Table,Which is in state "SCHEDULETABLE_NEXT" */
-    ScheduleTableType xNextScheduleTable;
-    /* to organise all of the schedule tables assigned to one counte */
+    /* For explicitly synchronous schedule tables,record the direction shoud 
+       do adjust:SCHEDTBL_ADVANCED SCHEDTBL_RETARD */
+    uint8_t xAdjustDirection;
+    /* For explicitly synchronous schedule tables,record the deviation */
+    TickType xDeviation;
+    /* -If xNextOrPrevScheduleTable is valid,and the owner of this container 
+       is in state running,then this variant indicates the next schedule table 
+       should be started after the final delay of the owner.
+       -If xNextOrPrevScheduleTable is valid,and the owner of this container
+       is in state next,then this variant indicates the previous schedule table 
+       whitch will ends after its final delay the the owner starts.*/
+    ScheduleTableType xNextOrPrevScheduleTable;
+    /* to organise all of the schedule tables assigned to one counter */
     ScheduleTableType pxNextSchedTbl;
     ScheduleTableType pxPrevSchedTbl;
 }OsSchedTblCtrlBlkType;

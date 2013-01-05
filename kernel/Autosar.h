@@ -5,11 +5,27 @@
 #define tableGetSchedTblIterator(xId)           \
     (OSSchedTblCtrlBlkTable[(xId)].xIterator)
 /* Get The Status of The Schedule Table xId */
-#define tableGetSchedTblStatus(xId)             \
+#define tableGetSchedTblStatus(xId)                 \
     (OSSchedTblCtrlBlkTable[(xId)].xSchedTblStatus)
 /* Get The Starting time of The Schedule Table xId */
-#define tableGetSchedTblStartingTime(xId)       \
-      (OSSchedTblCtrlBlkTable[(xId)].xSchedTblStartingTime)
+#define tableGetSchedTblStartingTime(xId)                   \
+    (OSSchedTblCtrlBlkTable[(xId)].xSchedTblStartingTime)
+/* Get The direction shoud do adjust */
+#define tableGetSchedTblAdjustDerection(xId)            \
+    (OSSchedTblCtrlBlkTable[(xId)].xAdjustDirection)
+/* Get the deviation between driving counter and synchronization counter */
+#define tableGetSchedTblDeviation(xId)          \
+    (OSSchedTblCtrlBlkTable[(xId)].xDeviation)
+/* Get Next schedule table whitch should be in state next */
+#define tableGetSchedTblNextSchedTbl(xId)                       \
+    (OSSchedTblCtrlBlkTable[(xId)].xNextOrPrevScheduleTable)
+/* Get previous schedule table whitch should be in state running */
+#define tableGetSchedTblPrevSchedTbl(xId)                       \
+    (OSSchedTblCtrlBlkTable[(xId)].xNextOrPrevScheduleTable)
+/* Get current value of schedule,infact do calculate */
+#define tableGetSchedTblCurValue(xStartingTime,xCntCurValue,xMaxAllowedValue) \
+    ((xCntCurValue) > (xStartingTime)?((xCntCurValue)-(xStartingTime)): \
+     ((xMaxAllowedValue)-(xStartingTime)+(xCntCurValue)))
 /* Get the initial offset value of the schedule table xId */
 #define tableGetSchedTblInitialOffset(xId)      \
     (OSScheduleTable[(xId)][0].xOffset)
