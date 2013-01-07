@@ -890,14 +890,6 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
         if(Value > xTmpTime3)
         {
             xTmpTime3=Value-xTmpTime3; /* xTmpTime3 = deviation */
-            if(xTmpTime3 <= tableGetSchedTblPrecision(ScheduleTableID))
-            {
-                tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS;
-            }
-            else
-            {
-                tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
-            }
             xTmpTime2=tableGetSchedTblMaxRetart(ScheduleTableID);
             /* adjust value for next expiry point is max(maxRetard,deviation) */
             /* xTmpTime2=vMax(xTmpTime2,xTmpTime3); */
@@ -913,6 +905,15 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
                 xTmpTime2=xTmpTime3;
                 /* Deviation left which should be processed in ISR  is ZERO*/
                 xTmpTime3=0u;
+            }
+            /* Now set status */
+            if(xTmpTime3 <= tableGetSchedTblPrecision(ScheduleTableID))
+            {
+                tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS;
+            }
+            else
+            {
+                tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
             }
             /* Adjust Its starting time */            
             if(xTmpTime1 > xTmpTime2)

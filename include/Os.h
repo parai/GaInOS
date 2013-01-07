@@ -170,6 +170,9 @@ typedef struct
     OsScheduleTableAutostartType xOsScheduleTableAutostartType;
     TickType xOsScheduleTableAutostartValue;  
     OsScheduleTblSyncStrategyType xOsScheduleTableSyncStrategy;  
+    TickType xOsScheduleTableMaxAdvance;
+    TickType xOsScheduleTableMaxRetard;
+    TickType xOsScheduleTableExplicitPrecision; 
 }OsScheduleTableType;
 
 /* How to organise Schedule Table,As every Expiry Potint do different things,

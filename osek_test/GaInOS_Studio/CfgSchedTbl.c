@@ -86,17 +86,23 @@ const OsScheduleTableType OSScheduleTableInfo[cfgOS_SCHEDULE_TABLE_NUM]=
 		STD_TRUE,		/* xOsScheduleTableAutostart */
 		RELATIVE,		/* xOsScheduleTableAutostartType */
 		50,		/* xOsScheduleTableAutostartValue */
-		EXPLICIT		/* XOSSCHEDULETABLESYNCSTRATEGY */
+		EXPLICIT,		/* xOsScheduleTableSyncStrategy */
+		5,		/* xOsScheduleTableMaxAdvance */
+		5,		/* xOsScheduleTableMaxRetard */
+		1		/* xOsScheduleTableExplicitPrecision */
 	},
-	{		/* VSCHEDTBL2 */
-		850,		/* XOSSCHEDULETABLEDURATION */
-		STD_FALSE,		/* XOSSCHEDULETABLEREPEATING */
-		INVALID_OSAPPLICATION, 		/* XOSSCHTBLACCESSINGAPPLICATION */
-		VCOUNTER1,		/* XOSSCHEDULETABLECOUNTERREF */
-		STD_TRUE,		/* XOSSCHEDULETABLEAUTOSTART */
-		ABSOLUTE,		/* XOSSCHEDULETABLEAUTOSTARTTYPE */
-		100,		/* XOSSCHEDULETABLEAUTOSTARTVALUE */
-		IMPLICIT		/* XOSSCHEDULETABLESYNCSTRATEGY */
+	{		/* vSchedTbl2 */
+		850,		/* xOsScheduleTableDuration */
+		STD_FALSE,		/* xOsScheduleTableRepeating */
+		INVALID_OSAPPLICATION, 		/* xOsSchTblAccessingApplication */
+		vCounter1,		/* xOsScheduleTableCounterRef */
+		STD_TRUE,		/* xOsScheduleTableAutostart */
+		ABSOLUTE,		/* xOsScheduleTableAutostartType */
+		100,		/* xOsScheduleTableAutostartValue */
+		EXPLICIT,		/* xOsScheduleTableSyncStrategy */
+		1,		/* xOsScheduleTableMaxAdvance */
+		4,		/* xOsScheduleTableMaxRetard */
+		2		/* xOsScheduleTableExplicitPrecision */
 	}
 };
-#ENDIF  /* CFGOS_SCHEDULE_TABLE_NUM */
+#endif  /* cfgOS_SCHEDULE_TABLE_NUM */

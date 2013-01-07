@@ -149,7 +149,7 @@
 	</GaInOsAlarmCfg>
 
 	<GaInOsScheduleTableCfg>
-		<GaInOsScheduleTable name='vSchedTbl1' repeatable='True' counter='vCounter1' autostartable='True' autostarttype='RELATIVE' absrelvalue='50' finaldelay='150' strategy='EXPLICIT'>
+		<GaInOsScheduleTable name='vSchedTbl1' repeatable='True' counter='vCounter1' autostartable='True' autostarttype='RELATIVE' absrelvalue='50' finaldelay='150' strategy='EXPLICIT' max_advance='5' max_retard='5' precision='1'>
 			<ExpiryPoint offset='250'>
 				<Action>ActivateTask(vTask1)</Action>
 			</ExpiryPoint>
@@ -160,7 +160,7 @@
 				<Action>ActivateTask(vTask3)</Action>
 			</ExpiryPoint>
 		</GaInOsScheduleTable>
-		<GaInOsScheduleTable name='vSchedTbl2' repeatable='False' counter='vCounter1' autostartable='True' autostarttype='ABSOLUTE' absrelvalue='100' finaldelay='150' strategy='IMPLICIT'>
+		<GaInOsScheduleTable name='vSchedTbl2' repeatable='False' counter='vCounter1' autostartable='True' autostarttype='ABSOLUTE' absrelvalue='100' finaldelay='150' strategy='EXPLICIT' max_advance='1' max_retard='4' precision='2'>
 			<ExpiryPoint offset='300'>
 				<Action>ActivateTask(vTask4)</Action>
 			</ExpiryPoint>

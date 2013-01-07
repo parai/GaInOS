@@ -1,6 +1,6 @@
 #ifndef _AUTOSAR_H_
 #define _AUTOSAR_H_
-
+/* ================== OSSchedTblCtrlBlkTable ================================== */
 /* Get the Iterator of the schedule table */
 #define tableGetSchedTblIterator(xId)           \
     (OSSchedTblCtrlBlkTable[(xId)].xIterator)
@@ -22,17 +22,13 @@
 /* Get previous schedule table whitch should be in state running */
 #define tableGetSchedTblPrevSchedTbl(xId)                       \
     (OSSchedTblCtrlBlkTable[(xId)].xNextOrPrevScheduleTable)
+/* Get the next absolute time of next expire point of schedule table */
+#define tableGetSchedTblNextExpiryPointTime(xSchedTblID)            \
+    (OSSchedTblCtrlBlkTable[(xSchedTblID)].xSchedTblNextExpiryPointTime)
 /* Get current value of schedule,infact do calculate */
 #define tableGetSchedTblCurValue(xStartingTime,xCntCurValue,xMaxAllowedValue) \
     ((xCntCurValue) > (xStartingTime)?((xCntCurValue)-(xStartingTime)): \
      ((xMaxAllowedValue)-(xStartingTime)+(xCntCurValue)))
-/* Get the initial offset value of the schedule table xId */
-#define tableGetSchedTblInitialOffset(xId)      \
-    (OSScheduleTable[(xId)][0].xOffset)
-/* Get the counter used to drive this schedule table <xId> */
-#define tableGetSchedTblDrivingCounter(xId)     \
-    (OSScheduleTableInfo[(xId)].xOsScheduleTableCounterRef)
-/* Get The synchronous strategy */
 #define tableGetSchedTblSyncStrategy(xId)                       \
     (OSScheduleTableInfo[(xId)].xOsScheduleTableSyncStrategy)  
 /* Get The first element Schedule Table of the list counter xCounterID */
@@ -44,7 +40,6 @@
 /* Get the previous schedule table */
 #define listGetSchedTblPrevElement(xSchedTblID) \
     (OSSchedTblCtrlBlkTable[(xSchedTblID)].pxPrevSchedTbl)
-
 /* Insert the xSchedTblID at head of the counter list xCounterID*/
 #define listInsertSchedTblAtHead(xCounterID,xSchedTblID)                \
     do{                                                                 \
@@ -56,7 +51,6 @@
         }                                                               \
         listGetSchedTblHeadElement(xCounterID)=(xSchedTblID);           \
     }while(0)
-
 /* Remove the Schedule table from the counter list  */
 #define listRemoveSchedTbl(xCounterID,xSchedTblID)                      \
     do{                                                                 \
@@ -82,24 +76,26 @@
                 listGetSchedTblNextElement((xSchedTblID));              \
         }                                                               \
     }while(0)
-
-/* Get the next absolute time of next expire point of schedule table */
-#define tableGetSchedTblNextExpiryPointTime(xSchedTblID)            \
-    (OSSchedTblCtrlBlkTable[(xSchedTblID)].xSchedTblNextExpiryPointTime)
-
+/* ============================== OSScheduleTable ==================================== */
+/* Get the initial offset value of the schedule table xId */
+#define tableGetSchedTblInitialOffset(xId)      \
+    (OSScheduleTable[(xId)][0].xOffset)
+/* Get The synchronous strategy */
 /* Get the offset ticks of the schedule table at the iterator */
 #define tableGetSchedTblOffset(xSchedTblID,xIterator)       \
     (OSScheduleTable[(xSchedTblID)][(xIterator)].xOffset)
-
 /* Do the action of the schedule table */
 #define tableDoSchedTblAction(xSchedTblID,xIterator)                    \
     do{                                                                 \
         (OSScheduleTable[(xSchedTblID)][(xIterator)].pxOsSchedTblCmd)(); \
     }while(0)
-    
+/* ============================= OSScheduleTableInfo ================================= */
 /* Do judge whether the schedule is repeatable */
 #define IsSchedTbleRepeatable(xSchedTblID)                              \
     (OSScheduleTableInfo[(xSchedTblID)].xOsScheduleTableRepeating==STD_TRUE)
+/* Get the counter used to drive this schedule table <xId> */
+#define tableGetSchedTblDrivingCounter(xId)     \
+    (OSScheduleTableInfo[(xId)].xOsScheduleTableCounterRef)
 
 #define IsSchedTbleAutostartable(xSchedTblID)                           \
      (OSScheduleTableInfo[(xSchedTblID)].xOsScheduleTableAutostartable==STD_TRUE)
@@ -112,6 +108,15 @@
 
 #define tableGetSchedTblDuration(xSchedTblID)                       \
     (OSScheduleTableInfo[(xSchedTblID)].xOsScheduleTableDuration)
+
+#define tableGetSchedTblMaxAdvance(xSchedTblID)  \
+    (OSScheduleTableInfo[(xSchedTblID)].xOsScheduleTableMaxAdvance)
+
+#define tableGetSchedTblMaxRetart(xSchedTblID)  \
+    (OSScheduleTableInfo[(xSchedTblID)].xOsScheduleTableMaxRetard)
+
+#define tableGetSchedTblPrecision(xSchedTblID)  \
+        (OSScheduleTableInfo[(xSchedTblID)].xOsScheduleTableExplicitPrecision)
 
 #if(cfgOS_SCHEDULE_TABLE_NUM>0)
 void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID);
