@@ -518,7 +518,9 @@ StatusType ActivateTask ( TaskType xTaskID )
 /* |------------------+--------------------------------------------------------------| */
 StatusType TerminateTask ( void )
 {
+#if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
     StatusType xRet = E_OK;
+#endif
     OS_ASSERT( STD_TRUE==OSRunning );
 
 #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
@@ -556,7 +558,6 @@ StatusType TerminateTask ( void )
 
 #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
   Error_Exit:
-#endif
 #if(cfgOS_ERROR_HOOK == 1)
     if(xRet != E_OK)
     {
@@ -567,6 +568,7 @@ StatusType TerminateTask ( void )
     }
 #endif
     return xRet;
+#endif    
 }
 /* |------------------+-------------------------------------------------------------| */
 /* | Syntax:          | StatusType ChainTask ( TaskType <TaskID> )                  | */

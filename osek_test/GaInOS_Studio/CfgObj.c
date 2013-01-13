@@ -1,13 +1,15 @@
 #include "CfgObj.h"
 #include "Serial.h"
 
+const TaskType G_INVALID_TASK=INVALID_TASK;
+
 /* GaInOS Counter And Alarm Configuration */
 const AlarmBaseType OSCounterBaseTable[cfgOS_COUNTER_NUM]=
 {
 	{	/* vCounter1 */
 		1000,		/* xMaxAllowedValue */
 		1,		/* xTicksPerBase */
-		1,		/* xMinCycle */
+		1		/* xMinCycle */
 	},
 };
 
@@ -61,7 +63,7 @@ const PriorityType OSTaskInitPriorityTable[cfgOS_TASK_NUM]=
 	4,		/* vTask4 */
 	5,		/* vTask5 */
 	6,		/* vTask6 */
-	7,		/* vTaskStart */
+	0,		/* vTaskStart */
 };
 
 const BoolType OSTaskAutoActivateTable[cfgOS_TASK_NUM]=
@@ -169,7 +171,7 @@ TASK(vTask6){
 
 TASK(vTaskStart){
 /* Add Your Task Code Here. */
-
+    (void)ActivateTask(vTask6);
 	printk("vTaskStart is running.\n");
 	(void)TerminateTask();
 }

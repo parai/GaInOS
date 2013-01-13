@@ -1,0 +1,36 @@
+*** Creating Trace Output File '.\GaInOS\GaInOS.tra' Ok.
+### Preparing for ADS-LD.
+### Creating ADS-LD Command Line
+### List of Objects: adding '".\gainos\start_rvds.o"'
+### List of Objects: adding '".\gainos\vport.o"'
+### List of Objects: adding '".\gainos\vport_rvds.o"'
+### List of Objects: adding '".\gainos\alarm.o"'
+### List of Objects: adding '".\gainos\autosar.o"'
+### List of Objects: adding '".\gainos\event.o"'
+### List of Objects: adding '".\gainos\hooks.o"'
+### List of Objects: adding '".\gainos\interrupt.o"'
+### List of Objects: adding '".\gainos\osctrl.o"'
+### List of Objects: adding '".\gainos\resource.o"'
+### List of Objects: adding '".\gainos\task.o"'
+### List of Objects: adding '".\gainos\serial.o"'
+### List of Objects: adding '".\gainos\cpu.o"'
+### List of Objects: adding '".\gainos\cfgobj.o"'
+### List of Objects: adding '".\gainos\cfgrdyq.o"'
+### List of Objects: adding '".\gainos\cfgschedtbl.o"'
+### List of Objects: adding '".\gainos\main.o"'
+### ADS-LD Command completed:
+--cpu ARM920T ".\gainos\start_rvds.o" ".\gainos\vport.o" ".\gainos\vport_rvds.o" ".\gainos\alarm.o" ".\gainos\autosar.o" ".\gainos\event.o" ".\gainos\hooks.o" ".\gainos\interrupt.o" ".\gainos\osctrl.o" ".\gainos\resource.o" ".\gainos\task.o" ".\gainos\serial.o" ".\gainos\cpu.o" ".\gainos\cfgobj.o" ".\gainos\cfgrdyq.o" ".\gainos\cfgschedtbl.o" ".\gainos\main.o" 
+--library_type=microlib --strict --scatter ".\GaInOS\GaInOS.sct" 
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\GaInOS.map" -o .\GaInOS\GaInOS.axf### Preparing Environment (PrepEnvAds)
+### ADS-LD Output File: '.\GaInOS\GaInOS.axf'
+### ADS-LD Command File: '.\GaInOS\GaInOS.lnp'
+### Checking for dirty Components...
+### Creating CmdFile '.\GaInOS\GaInOS.lnp', Handle=0x000003D4
+### Writing '.lnp' file
+### ADS-LD Command file '.\GaInOS\GaInOS.lnp' is ready.
+### ADS-LD: About to start ADS-LD Thread.
+### ADS-LD: executed with 0 errors
+### Updating obj list
+### LDADS_file() completed.

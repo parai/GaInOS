@@ -4,14 +4,17 @@
 static void vSchedTbl1_CmdEp0(void)
 {
 	(void)ActivateTask(vTask1);
+	OSMakeNextExpiryPointReady(vSchedTbl1);
 }
 static void vSchedTbl1_CmdEp1(void)
 {
 	(void)ActivateTask(vTask2);
+	OSMakeNextExpiryPointReady(vSchedTbl1);
 }
 static void vSchedTbl1_CmdEp2(void)
 {
 	(void)ActivateTask(vTask3);
+	OSMakeNextExpiryPointReady(vSchedTbl1);
 }
 static void vSchedTbl1_CmdEp3(void)
 {
@@ -39,14 +42,17 @@ static const OsSchedTblCmdType g_vSchedTbl1[4]=
 static void vSchedTbl2_CmdEp0(void)
 {
 	(void)ActivateTask(vTask4);
+	OSMakeNextExpiryPointReady(vSchedTbl2);
 }
 static void vSchedTbl2_CmdEp1(void)
 {
 	(void)ActivateTask(vTask5);
+	OSMakeNextExpiryPointReady(vSchedTbl2);
 }
 static void vSchedTbl2_CmdEp2(void)
 {
 	(void)ActivateTask(vTask6);
+	OSMakeNextExpiryPointReady(vSchedTbl2);
 }
 static void vSchedTbl2_CmdEp3(void)
 {
@@ -88,7 +94,7 @@ const OsScheduleTableType OSScheduleTableInfo[cfgOS_SCHEDULE_TABLE_NUM]=
 		50,		/* xOsScheduleTableAutostartValue */
 		EXPLICIT,		/* xOsScheduleTableSyncStrategy */
 		5,		/* xOsScheduleTableMaxAdvance */
-		5,		/* xOsScheduleTableMaxRetard */
+		10,		/* xOsScheduleTableMaxRetard */
 		1		/* xOsScheduleTableExplicitPrecision */
 	},
 	{		/* vSchedTbl2 */

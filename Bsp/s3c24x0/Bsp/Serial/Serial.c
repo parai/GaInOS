@@ -45,7 +45,7 @@ void DebugInfo(char *info)
 void printk(char* fmt,...)
 {
 	unsigned int i=0;
-#if 1	
+#if 0	
     char *buf=NULL;
 #else
 	char buf[64];
@@ -57,7 +57,7 @@ void printk(char* fmt,...)
 		g_sci_state=SCI_INITIALISED;
 	}
 	va_start(args,fmt);
-#if 1	
+#if 0	
 	buf=malloc(64);
 #endif	
 	if(NULL==buf)return;		/* 分配内存失败，直接返回 */

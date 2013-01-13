@@ -93,9 +93,11 @@ void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID)
         }
     }
 }
+/*
 static void OSScheduleTableDoAdjust(ScheduleTableType ScheduleTableType)
 {
 }
+*/
 /* Make it be called at vSchedTblXX_cmdEpnXX().At the generated code CfgSchedTbl.c
    do adjust according synchronization strategy,or just reprepare schedule table's
    starting and next expiry point time.*/
@@ -473,7 +475,7 @@ AccessType CheckTaskMemoryAccess(TaskType TaskID,
 ObjectAccessType CheckObjectAccess(ApplicationType ApplID,
                                    ObjectTypeType ObjectType,void* pxObject)
 {
-    
+			return NO_ACCESS;
 }
 /* |-------------------+-------------------------------------------------------------------| */
 /* | Service name:     | CheckObjectOwnership                                              | */
@@ -507,7 +509,7 @@ ObjectAccessType CheckObjectAccess(ApplicationType ApplID,
 /* |-------------------+-------------------------------------------------------------------| */
 ApplicationType CheckObjectOwnership(ObjectTypeType ObjectType,void* pxObject)
 {
-    
+			return INVALID_OSAPPLICATION;
 }
 /* |-------------------+---------------------------------------------------------------| */
 /* | Service name:     | StartScheduleTableRel                                         | */
@@ -804,7 +806,6 @@ StatusType NextScheduleTable(ScheduleTableType ScheduleTableID_From,
                              ScheduleTableType ScheduleTableID_To)
 {
     StatusType xRet=E_OK;
-    CounterType xCounterID=INVALID_COUNTER;
 
 #if(cfgOS_STATUS_LEVEL==OS_STATUS_EXTEND)
     if((ScheduleTableID_From > (cfgOS_SCHEDULE_TABLE_NUM-1)) ||
@@ -1008,22 +1009,6 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
         if(Value > xTmpTime3)
         {
             xTmpTime3=Value-xTmpTime3; /* xTmpTime3 = deviation */
-            xTmpTime2=tableGetSchedTblMaxRetart(ScheduleTableID);
-            /* adjust value for next expiry point is max(maxRetard,deviation) */
-            /* xTmpTime2=vMax(xTmpTime2,xTmpTime3); */
-            if(xTmpTime2 < xTmpTime3)
-            {   
-                /* Adjust value is maxRetard */
-                /* Deviation remained which should be processed in ISR */
-                xTmpTime3=xTmpTime3-xTmpTime2; 
-            }
-            else
-            {
-                /* Adjust value is the whole deviation */
-                xTmpTime2=xTmpTime3;
-                /* Deviation left which should be processed in ISR  is ZERO*/
-                xTmpTime3=0u;
-            }
             /* Now set status */
             if(xTmpTime3 <= tableGetSchedTblPrecision(ScheduleTableID))
             {
@@ -1032,25 +1017,6 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
             else
             {
                 tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
-            }
-            /* Adjust Its starting time */            
-            if(xTmpTime1 > xTmpTime2)
-            {                   /* xStartingTime is bigger than adjust value */
-                tableGetSchedTblStartingTime(ScheduleTableID) = xTmpTime1 - xTmpTime2;
-            }
-            else
-            {
-                tableGetSchedTblStartingTime(ScheduleTableID) = xMaxAllowedValue-xTmpTime1 + xTmpTime2; 
-            }
-            xTmpTime1 = tableGetSchedTblNextExpiryPointTime(ScheduleTableID);
-            /* Adjust Its next expiry point time */
-            if(xTmpTime1 > xTmpTime2)
-            {                   /* xNextExpiryPointTime is bigger than adjust value */
-                tableGetSchedTblNextExpiryPointTime(ScheduleTableID) = xTmpTime1 - xTmpTime2;
-            }
-            else
-            {
-                tableGetSchedTblNextExpiryPointTime(ScheduleTableID) = xMaxAllowedValue-xTmpTime1 + xTmpTime2; 
             }
             tableGetSchedTblDeviation(ScheduleTableID)=xTmpTime3;
             tableGetSchedTblAdjustDerection(ScheduleTableID)=SCHEDTBL_RETARD;
@@ -1058,22 +1024,6 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
         else if(Value < xTmpTime3)
         {
             xTmpTime3=xTmpTime3 - Value; /* xTmpTime3 = Deviation */
-            xTmpTime2=tableGetSchedTblMaxAdvance(ScheduleTableID);
-            /* adjust value for next expiry point is max(maxAdvance,deviation) */
-            /* xTmpTime2=vMax(xTmpTime2,xTmpTime3); */
-            if(xTmpTime2 < xTmpTime3)
-            {   
-                /* Adjust value is maxAdvance */
-                /* Deviation remained which should be processed in ISR */
-                xTmpTime3=xTmpTime3-xTmpTime2; 
-            }
-            else
-            {
-                /* Adjust value is the whole deviation */
-                xTmpTime2=xTmpTime3;
-                /* Deviation left which should be processed in ISR  is ZERO*/
-                xTmpTime3=0u;
-            }
             /* Now set status */
             if(xTmpTime3 <= tableGetSchedTblPrecision(ScheduleTableID))
             {
@@ -1082,27 +1032,6 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
             else
             {
                 tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
-            }
-            /* Adjust Its starting time */            
-            if(xTmpTime2 < (xMaxAllowedValue - xTmpTime1))
-            {                  
-                tableGetSchedTblStartingTime(ScheduleTableID) = xTmpTime2 + xTmpTime1;
-            }
-            else
-            {
-                xTmpTime1 = xMaxAllowedValue-xTmpTime1;
-                tableGetSchedTblNextExpiryPointTime(ScheduleTableID) = xTmpTime2 - xTmpTime1;
-            }
-            xTmpTime1 = tableGetSchedTblNextExpiryPointTime(ScheduleTableID);
-            /* Adjust Its next expiry point time */
-            if(xTmpTime2 < (xMaxAllowedValue - xTmpTime1))
-            {                  
-                tableGetSchedTblNextExpiryPointTime(ScheduleTableID) = xTmpTime2 + xTmpTime1;
-            }
-            else
-            {
-                xTmpTime1 = xMaxAllowedValue-xTmpTime1;
-                tableGetSchedTblNextExpiryPointTime(ScheduleTableID) = xTmpTime2 - xTmpTime1;
             }
             tableGetSchedTblDeviation(ScheduleTableID)=xTmpTime3;
             tableGetSchedTblAdjustDerection(ScheduleTableID)=SCHEDTBL_ADVANCED;
@@ -1151,6 +1080,7 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
 /* |-------------------+----------------------------------------------------------------| */
 StatusType SetScheduleTableAsync(ScheduleTableType ScheduleTableID)
 {
+		return E_OK;
 }
 
 /* |-------------------+-------------------------------------------------------------------| */
@@ -1202,7 +1132,7 @@ StatusType SetScheduleTableAsync(ScheduleTableType ScheduleTableID)
 StatusType GetScheduleTableStatus(ScheduleTableType ScheduleTableID,
                                   ScheduleTableStatusRefType ScheduleStatus)
 {
-
+    return E_OK;
 }
 
 /* |-------------------+----------------------------------------------------------------| */
@@ -1285,6 +1215,7 @@ StatusType IncrementCounter(CounterType CounterID)
 /* |-------------------+-----------------------------------------------------------------| */
 StatusType GetCounterValue(CounterType CounterID,TickRefType pxValue)
 {
+    return E_OK;
 }
 /* |-------------------+-------------------------------------------------------------------| */
 /* | Service name:     | GetElapsedCounterValue                                            | */
@@ -1321,6 +1252,7 @@ StatusType GetCounterValue(CounterType CounterID,TickRefType pxValue)
 StatusType GetElapsedCounterValue(CounterType CounterID,
                                   TickRefType Value,TickRefType ElapsedValue)
 {
+    return E_OK;
 }
 
 /* |-------------------+--------------------------------------------------------------------| */
@@ -1358,4 +1290,5 @@ StatusType GetElapsedCounterValue(CounterType CounterID,
 /* |-------------------+--------------------------------------------------------------------| */
 StatusType TerminateApplication(RestartType RestartOption)
 {
+    return E_OK;
 }

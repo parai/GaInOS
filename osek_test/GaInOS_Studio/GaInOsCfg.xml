@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GaInOsCfg>
 	<GaInOsGeneralCfg>
-		<GaInOsCpuType>MC9S12(X)</GaInOsCpuType>
+		<GaInOsCpuType>ARM</GaInOsCpuType>
 		<GaInOsMaxIpl>7</GaInOsMaxIpl>
 		<GaInOsMaxPriority>63</GaInOsMaxPriority>
 		<GaInOsConfCls>BCC1</GaInOsConfCls>
@@ -95,7 +95,7 @@
 		<GaInOsTask>
 			<TaskName>vTaskStart</TaskName>
 			<TaskType>BASIC_TASK</TaskType>
-			<TaskPriority>7</TaskPriority>
+			<TaskPriority>0</TaskPriority>
 			<TaskStackSize>512</TaskStackSize>
 			<TaskMaxActCnt>1</TaskMaxActCnt>
 			<TaskAutoStart>True</TaskAutoStart>
@@ -149,7 +149,7 @@
 	</GaInOsAlarmCfg>
 
 	<GaInOsScheduleTableCfg>
-		<GaInOsScheduleTable name='vSchedTbl1' repeatable='True' counter='vCounter1' autostartable='True' autostarttype='RELATIVE' absrelvalue='50' finaldelay='150' strategy='EXPLICIT' max_advance='5' max_retard='5' precision='1'>
+		<GaInOsScheduleTable name='vSchedTbl1' repeatable='True' counter='vCounter1' autostartable='True' autostarttype='RELATIVE' absrelvalue='50' finaldelay='150' strategy='EXPLICIT' max_advance='5' max_retard='10' precision='1'>
 			<ExpiryPoint offset='250'>
 				<Action>ActivateTask(vTask1)</Action>
 			</ExpiryPoint>

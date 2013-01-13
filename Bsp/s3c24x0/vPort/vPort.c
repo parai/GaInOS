@@ -93,7 +93,7 @@ void OSTickISR(void)
     //vPortEnterISR();
 
 #if(cfgOS_USE_ALARM == STD_TRUE)    
-    OSProcessCounter(0);		/* Process the first counter,Default as system counter */
+    IncrementCounter(0);		/* Process the first counter,Default as system counter */
 #endif
     //vPortTickIsrClear();
 

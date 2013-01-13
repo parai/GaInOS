@@ -1,0 +1,5 @@
+--cpu ARM920T ".\gainos\start_rvds.o" ".\gainos\vport.o" ".\gainos\vport_rvds.o" ".\gainos\alarm.o" ".\gainos\autosar.o" ".\gainos\event.o" ".\gainos\hooks.o" ".\gainos\interrupt.o" ".\gainos\osctrl.o" ".\gainos\resource.o" ".\gainos\task.o" ".\gainos\serial.o" ".\gainos\cpu.o" ".\gainos\cfgobj.o" ".\gainos\cfgrdyq.o" ".\gainos\cfgschedtbl.o" ".\gainos\main.o" 
+--library_type=microlib --strict --scatter ".\GaInOS\GaInOS.sct" 
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\GaInOS.map" -o .\GaInOS\GaInOS.axf

@@ -412,9 +412,9 @@ StatusType SetAbsAlarm ( AlarmType xAlarmID , TickType xStart ,TickType xCycle )
 {
     StatusType xRet = E_OK;
     CounterType xCounterID=INVALID_COUNTER;
-    TickType xMaxAllowedValue =0u;
 
 #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+		TickType xMaxAllowedValue =0u;
     if ( xAlarmID > (cfgOS_ALARM_NUM - 1) )
     {
         xRet = E_OS_ID;
@@ -428,8 +428,8 @@ StatusType SetAbsAlarm ( AlarmType xAlarmID , TickType xStart ,TickType xCycle )
         goto Error_Exit;
     }
     xCounterID = tableGetCounterID(xAlarmID);  
-    xMaxAllowedValue=tableGetCntMaxAllowed(xCounterID);
 #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+		xMaxAllowedValue=tableGetCntMaxAllowed(xCounterID);
     if( (xStart > xMaxAllowedValue)
         ||(xCycle > xMaxAllowedValue)
         ||((xCycle != 0) &&(xCycle < tableGetCntMinCycle(xCounterID)))
@@ -483,9 +483,6 @@ StatusType SetAbsAlarm ( AlarmType xAlarmID , TickType xStart ,TickType xCycle )
 StatusType CancelAlarm ( AlarmType xAlarmID )
 {
     StatusType xRet = E_OK;
-    CounterType xCounterID=INVALID_COUNTER;
-    TickType xMaxAllowedValue =0u;
-
 #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
     if ( xAlarmID > (cfgOS_ALARM_NUM - 1) )
     {
