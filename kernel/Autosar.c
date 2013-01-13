@@ -73,7 +73,6 @@ static vDoAddSchedTblTick(TickType xCntCurValue,TickType xMaxAllowedValue ,TickT
    OS427:now is not supported,the final dalay cann't be zero.*/
 void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID)
 {
-    CounterType xCounterID=tableGetSchedTblDrivingCounter(xSchedTblID);
     if((tableGetSchedTblStatus(xSchedTblID)==SCHEDULETABLE_RUNNING)||
        (tableGetSchedTblStatus(xSchedTblID)==SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS))
     {
@@ -81,11 +80,7 @@ void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID)
         {
             /* Reset Its control block and restart */
             tableGetSchedTblIterator(xSchedTblID)=0;
-            tableGetSchedTblStartingTime(xSchedTblID)=tableGetCntCurValue(xCounterID);
-            tableGetSchedTblNextExpiryPointTime(xSchedTblID)=vDoAddSchedTblTick(
-                tableGetCntCurValue(xCounterID),
-                tableGetCntMaxAllowed(xCounterID),
-                tableGetSchedTblOffset(xSchedTblID,0));
+            tableGetSchedTblStartingTime(xSchedTblID)=tableGetCntCurValue(tableGetSchedTblDrivingCounter(xSchedTblID));
         }
         else 
         {
@@ -93,13 +88,8 @@ void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID)
         }
     }
 }
-/*
-static void OSScheduleTableDoAdjust(ScheduleTableType ScheduleTableType)
-{
-}
-*/
-/* Make it be called at vSchedTblXX_cmdEpnXX().At the generated code CfgSchedTbl.c
-   do adjust according synchronization strategy,or just reprepare schedule table's
+
+/* do adjust according synchronization strategy,or just reprepare schedule table's
    starting and next expiry point time.*/
 /* CAUTION:this api cann't be called directly by user api code */
 void OSMakeNextExpiryPointReady(ScheduleTableType ScheduleTableID)
@@ -119,7 +109,7 @@ void OSMakeNextExpiryPointReady(ScheduleTableType ScheduleTableID)
     tableGetSchedTblNextExpiryPointTime(ScheduleTableID)=vDoAddSchedTblTick( 
         xTmpTime1,
         xMaxAllowedValue,
-        tableGetSchedTblOffset(ScheduleTableID,xIterator+1));
+        tableGetSchedTblOffset(ScheduleTableID,xIterator));
 
     xTmpTime3=tableGetSchedTblDeviation(ScheduleTableID); /* xTmpTime3 = deviation */
     /* Should do an adjust */
@@ -224,7 +214,6 @@ void OSMakeNextExpiryPointReady(ScheduleTableType ScheduleTableID)
             tableGetSchedTblDeviation(ScheduleTableID)=xTmpTime3;
         }
     }
-    tableGetSchedTblIterator(ScheduleTableID)=xIterator+1;
 }
 static void OSProcessScheduleTable(CounterType xCounterID)
 {
@@ -236,9 +225,11 @@ static void OSProcessScheduleTable(CounterType xCounterID)
     {
         if(tableGetCntCurValue(xCounterID)==tableGetSchedTblNextExpiryPointTime(xSchedTblID))
         {
+            tableGetSchedTblIterator(xSchedTblID)+=1;
             /* Do an Action */
-            tableDoSchedTblAction(xSchedTblID,tableGetSchedTblIterator(xSchedTblID));
-        }
+            tableDoSchedTblAction(xSchedTblID,tableGetSchedTblIterator(xSchedTblID)-1);
+            OSMakeNextExpiryPointReady(xSchedTblID);
+         }
         xSchedTblID=listGetSchedTblNextElement(xSchedTblID);
     }
     OS_EXIT_CRITICAL();

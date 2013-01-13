@@ -164,7 +164,7 @@ typedef struct
 {
     TickType xOsScheduleTableDuration;
     uint8_t  xOsScheduleTableRepeating; /* Bool Type */
-    ApplicationType xOsSchTblAccessingApplication;
+    ApplicationType xOsScheduleTableAccessingApplication;
     CounterType xOsScheduleTableCounterRef;
     uint8_t xOsScheduleTableAutostartable;
     OsScheduleTableAutostartType xOsScheduleTableAutostartType;

@@ -116,7 +116,7 @@
     (OSScheduleTableInfo[(xSchedTblID)].xOsScheduleTableMaxRetard)
 
 #define tableGetSchedTblPrecision(xSchedTblID)  \
-        (OSScheduleTableInfo[(xSchedTblID)].xOsScheduleTableExplicitPrecision)
+    (OSScheduleTableInfo[(xSchedTblID)].xOsScheduleTableExplicitPrecision)
 
 #if(cfgOS_SCHEDULE_TABLE_NUM>0)
 void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID);

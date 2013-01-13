@@ -1,8 +1,6 @@
 #include "CfgObj.h"
 #include "Serial.h"
 
-const TaskType G_INVALID_TASK=INVALID_TASK;
-
 /* GaInOS Counter And Alarm Configuration */
 const AlarmBaseType OSCounterBaseTable[cfgOS_COUNTER_NUM]=
 {
@@ -171,7 +169,7 @@ TASK(vTask6){
 
 TASK(vTaskStart){
 /* Add Your Task Code Here. */
-    (void)ActivateTask(vTask6);
+
 	printk("vTaskStart is running.\n");
 	(void)TerminateTask();
 }
