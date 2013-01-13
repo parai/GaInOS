@@ -27,7 +27,7 @@
 ### ADS-LD Output File: '.\GaInOS\GaInOS.axf'
 ### ADS-LD Command File: '.\GaInOS\GaInOS.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '.\GaInOS\GaInOS.lnp', Handle=0x000003D4
+### Creating CmdFile '.\GaInOS\GaInOS.lnp', Handle=0x00000310
 ### Writing '.lnp' file
 ### ADS-LD Command file '.\GaInOS\GaInOS.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.

@@ -73,17 +73,6 @@ void vPortRestoreMsr(OsCpuSrType xMSR);		/* In "vPort_Rvds.S"*/
     OSExitISR();                               \
     vPortRestoreContext()
 
-
-/* |----------------+----------------------------------------------| */
-/* | Return Address | An Address when return from ISR              | */
-/* |----------------+----------------------------------------------| */
-/* | Y              | Registers  in this Group will saved into     | */
-/* | X              | the Current used Satck Automatically when    | */
-/* | A              | an interrupt or "swi" was generated,so there | */
-/* | B              | is no need to save these registers.          | */
-/* | CCR(IPL)       |                                              | */
-/* |----------------+----------------------------------------------| */
-
 #define vPortStartCurRdyTsk()                           
 
 OsCpuIplType vPortGetIpl(void);

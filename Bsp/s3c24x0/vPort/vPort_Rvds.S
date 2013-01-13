@@ -33,7 +33,7 @@ vPortSaveMsrAndDisableIrq
 	MOV		R1,R0
 	ORR		R1, R1, #0xC0		;; Disable IRQ, FIQ.
 	MSR		CPSR_cxsf, R1		;; Write back modified value.	
-	LDMIA	SP!, {R1}			;; Pop R0.
+	LDMIA	SP!, {R1}			;; Pop R1.
 	BX		LR
 
 ;;void vPortRestoreMsr(OsCpuSrType xMSR)
@@ -88,42 +88,50 @@ not_in_ready_state
     ;;  vPortRestoreSP();
 	LDR		SP, [R0]
     ;;  vPortRestoreContext() 
+	LDMFD 	SP!, {R1-R12,LR}
 	LDMFD 	SP!, {R0}		;POP CPSR
 	MSR 	CPSR_cxsf, R0
-	LDMFD 	SP!, {R1-R12,LR}
 	LDMFD 	SP!, {R0}		;POP R0
 	BX		LR
     ;;}
 
-		
-;;void vPortDispatcher(void)		
+;; When the context was saved,It looks as below in the stack.
+;; |------------+-----------------|
+;; | R0         | <- High Address |
+;; | CPSR       |                 |		
+;; | LR(PC)     |                 |
+;; | R12        |                 |
+;; | ...        |                 |
+;; | R1         |<- SP            |
+;; |------------+-----------------|
+;;; As vPortDispatcher() is critical method so that the way
+;; void vPortDispatcher(void)		
 vPortDispatcher
 		;; Save R0 For use
+		STMFD	SP!, {R0}		;Push R0
+		MRS		R0,  CPSR       ;Push CPSR
 		STMFD	SP!, {R0}
+		;; Enter Critical Section,Just Disable Interrupt
+		MSR		CPSR_cxsf, #Mode_USR:OR:F_Bit:OR:I_Bit
 		;; if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
 		;; {
 		LDR	 	R0, =OSCurTcb
 		LDR 	R0, [R0]
 		LDRB 	R0, [R0,#5]
 		CMP  	R0, #0  ;;RUNNING
-		BEQ  	start_save_context_and_sp
+		BEQ  	save_context_and_sp
 not_in_running_state
-		CMP 	R0, #2   ;;WAITING
+		CMP 	R0, #2  ;;WAITING
 		BNE 	not_in_waiting_state
-start_save_context_and_sp
-		STMFD	SP!, {R1-R12,LR}   ;R0-R12 PC
-		MRS		R0,  CPSR       	;Push CPSR
-		STMFD	SP!, {R0}
+save_context_and_sp
+		STMFD	SP!, {R1-R12,LR}    ;R0-R12 PC
 		LDR		R0, =OSCurTcb
 		LDR		R0, [R0]
 		STR		SP, [R0]
 not_in_waiting_state
 		;; }
-		;;Disable Both IRQ and FIQ Interrupts
-		;;Enter USER MODE Again
-		MSR		CPSR_cxsf, #Mode_USR:OR:F_Bit:OR:I_Bit
 		LDR		R0, =vPortSwitch2Task
-		BX		R0
-
+		BX		R0	
+		
 		END
 		
