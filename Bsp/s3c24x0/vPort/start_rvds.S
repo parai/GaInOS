@@ -113,7 +113,7 @@ WTCNT_OFS       EQU     0x08            ; Watchdog Timer Count Register   Offset
 ;//     <o2.0..15>  Count Reload Value <0-65535>
 ;//   </h>
 ;// </e> Watchdog Timer Setup
-WT_SETUP        EQU     1
+WT_SETUP        EQU     0
 WTCON_Val       EQU     0x00000000
 WTDAT_Val       EQU     0x00008000
 
@@ -210,7 +210,7 @@ CAMDIVN_OFS     EQU     0x18            ; Camera Clock Divider Register  Offset
 ;//       <i> Divider is used only if CAMCLK_SEL = 1
 ;//   </h>
 ;// </e> Clock Setup
-CLOCK_SETUP     EQU     0
+CLOCK_SETUP     EQU     1
 LOCKTIME_Val    EQU     0x0FFF0FFF
 MPLLCON_Val     EQU     0x00043011
 UPLLCON_Val     EQU     0x00038021

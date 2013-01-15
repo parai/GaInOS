@@ -43,14 +43,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\GaInOS\</OutputDirectory>
+          <OutputDirectory>.\obj\</OutputDirectory>
           <OutputName>GaInOS</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\</ListingPath>
+          <ListingPath>.\obj\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -117,7 +117,7 @@
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
           <Simulator>
-            <UseSimulator>1</UseSimulator>
+            <UseSimulator>0</UseSimulator>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -128,9 +128,9 @@
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
           </Simulator>
           <Target>
-            <UseTarget>0</UseTarget>
+            <UseTarget>1</UseTarget>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>0</RunToMain>
+            <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
             <RestoreWatchpoints>1</RestoreWatchpoints>
             <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
@@ -139,21 +139,21 @@
             <RestoreTracepoints>1</RestoreTracepoints>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>0</TargetSelection>
+          <TargetSelection>6</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile>.\debug.ini</InitializationFile>
+            <InitializationFile></InitializationFile>
           </SimDlls>
           <TargetDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-            <Driver>BIN\UL2ARM.DLL</Driver>
+            <InitializationFile>.\Ext_RAM.ini</InitializationFile>
+            <Driver>Segger\JLTAgdi.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -162,11 +162,11 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>0</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <Capability>1</Capability>
+            <DriverSelection>4098</DriverSelection>
           </Flash1>
-          <Flash2>BIN\UL2ARM.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash2>Segger\JLTAgdi.dll</Flash2>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
         </Utilities>
         <TargetArmAds>
@@ -281,8 +281,8 @@
               </XRAM>
               <OCR_RVCT1>
                 <Type>1</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x400000</Size>
+                <StartAddress>0x30000000</StartAddress>
+                <Size>0x1000000</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
                 <Type>1</Type>
@@ -306,8 +306,8 @@
               </OCR_RVCT5>
               <OCR_RVCT6>
                 <Type>0</Type>
-                <StartAddress>0xc000000</StartAddress>
-                <Size>0x200000</Size>
+                <StartAddress>0x31000000</StartAddress>
+                <Size>0x1000000</Size>
               </OCR_RVCT6>
               <OCR_RVCT7>
                 <Type>0</Type>
@@ -335,7 +335,7 @@
           <Cads>
             <interw>1</interw>
             <Optim>3</Optim>
-            <oTime>0</oTime>
+            <oTime>1</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>0</OneElfS>
             <Strict>0</Strict>
@@ -350,7 +350,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\Bsp\Cpu;..\Bsp\Serial;..\vPort;..\..\..\include;..\..\..\kernel;..\..\..\osek_test\GaInOS_Studio</IncludePath>
+              <IncludePath>..\Bsp\Cpu;..\Bsp\Serial;..\vPort;..\..\..\include;..\..\..\kernel;..\..\..\osek_test\GaInOS_Studio;D:\usr\opt\keil\ARM\ARMCC\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -370,15 +370,15 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
             <RepFail>1</RepFail>
             <useFile>0</useFile>
-            <TextAddressRange>0x00000000</TextAddressRange>
+            <TextAddressRange>0x30000000</TextAddressRange>
             <DataAddressRange>0x40000000</DataAddressRange>
-            <ScatterFile>.\GaInOS\GaInOS.sct</ScatterFile>
+            <ScatterFile>.\obj\GaInOS.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -389,57 +389,22 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Boot</GroupName>
+          <GroupName>boot</GroupName>
           <Files>
             <File>
               <FileName>start_rvds.S</FileName>
               <FileType>2</FileType>
               <FilePath>..\vPort\start_rvds.S</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>vPort</GroupName>
-          <Files>
             <File>
               <FileName>vPort.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\vPort\vPort.c</FilePath>
             </File>
             <File>
-              <FileName>vPort.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\vPort\vPort.h</FilePath>
-            </File>
-            <File>
               <FileName>vPort_Rvds.S</FileName>
               <FileType>2</FileType>
               <FilePath>..\vPort\vPort_Rvds.S</FilePath>
-            </File>
-            <File>
-              <FileName>s3c2440.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\vPort\s3c2440.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>include</GroupName>
-          <Files>
-            <File>
-              <FileName>MemMap.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\include\MemMap.h</FilePath>
-            </File>
-            <File>
-              <FileName>Os.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\include\Os.h</FilePath>
-            </File>
-            <File>
-              <FileName>Std_Types.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\include\Std_Types.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -452,29 +417,14 @@
               <FilePath>..\..\..\kernel\Alarm.c</FilePath>
             </File>
             <File>
-              <FileName>Alarm.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\kernel\Alarm.h</FilePath>
-            </File>
-            <File>
               <FileName>Autosar.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\kernel\Autosar.c</FilePath>
             </File>
             <File>
-              <FileName>Autosar.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\kernel\Autosar.h</FilePath>
-            </File>
-            <File>
               <FileName>Event.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\kernel\Event.c</FilePath>
-            </File>
-            <File>
-              <FileName>Event.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\kernel\Event.h</FilePath>
             </File>
             <File>
               <FileName>Hooks.c</FileName>
@@ -487,29 +437,9 @@
               <FilePath>..\..\..\kernel\Interrupt.c</FilePath>
             </File>
             <File>
-              <FileName>Interrupt.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\kernel\Interrupt.h</FilePath>
-            </File>
-            <File>
-              <FileName>Kernel.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\kernel\Kernel.h</FilePath>
-            </File>
-            <File>
-              <FileName>OsCfgChk.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\kernel\OsCfgChk.h</FilePath>
-            </File>
-            <File>
               <FileName>Osctrl.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\kernel\Osctrl.c</FilePath>
-            </File>
-            <File>
-              <FileName>Osctrl.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\kernel\Osctrl.h</FilePath>
             </File>
             <File>
               <FileName>Resource.c</FileName>
@@ -517,39 +447,39 @@
               <FilePath>..\..\..\kernel\Resource.c</FilePath>
             </File>
             <File>
-              <FileName>Resource.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\kernel\Resource.h</FilePath>
-            </File>
-            <File>
               <FileName>Task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\kernel\Task.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>main</GroupName>
+          <Files>
             <File>
-              <FileName>Task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\kernel\Task.h</FilePath>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\main.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Bsp</GroupName>
+          <GroupName>bsp</GroupName>
           <Files>
-            <File>
-              <FileName>Serial.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Bsp\Serial\Serial.c</FilePath>
-            </File>
             <File>
               <FileName>Cpu.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Bsp\Cpu\Cpu.c</FilePath>
             </File>
+            <File>
+              <FileName>Serial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Bsp\Serial\Serial.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Cfg</GroupName>
+          <GroupName>cfg</GroupName>
           <Files>
             <File>
               <FileName>CfgObj.c</FileName>
@@ -565,26 +495,6 @@
               <FileName>CfgSchedTbl.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\osek_test\GaInOS_Studio\CfgSchedTbl.c</FilePath>
-            </File>
-            <File>
-              <FileName>CfgObj.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\osek_test\GaInOS_Studio\CfgObj.h</FilePath>
-            </File>
-            <File>
-              <FileName>Os_Cfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Source</GroupName>
-          <Files>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\main.c</FilePath>
             </File>
           </Files>
         </Group>

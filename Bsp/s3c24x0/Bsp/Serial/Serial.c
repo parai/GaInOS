@@ -28,7 +28,7 @@ void Sci_Init(void)
 }
 void Sci_Send(unsigned char chr)
 {
-	//while( ! (UTRSTAT0 & TXD0READY) );
+	while( ! (UTRSTAT0 & TXD0READY) );
 	UTXH0 = chr;
 }
 void DebugInfo(char *info)
@@ -45,7 +45,7 @@ void DebugInfo(char *info)
 void printk(char* fmt,...)
 {
 	unsigned int i=0;
-#if 0	
+#if 1	
     char *buf=NULL;
 #else
 	char buf[64];
@@ -57,7 +57,7 @@ void printk(char* fmt,...)
 		g_sci_state=SCI_INITIALISED;
 	}
 	va_start(args,fmt);
-#if 0	
+#if 1	
 	buf=malloc(64);
 #endif	
 	if(NULL==buf)return;		/* 分配内存失败，直接返回 */
