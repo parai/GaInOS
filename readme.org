@@ -1,3 +1,5 @@
 Autor:parai(wangfan)
+=======
 Email:parai@foxmail.com
+=======
 GaInOS kernel source
