@@ -73,26 +73,40 @@ static vDoAddSchedTblTick(TickType xCntCurValue,TickType xMaxAllowedValue ,TickT
    OS427:now is not supported,the final dalay cann't be zero.*/
 void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID)
 {
-    if((tableGetSchedTblStatus(xSchedTblID)==SCHEDULETABLE_RUNNING)||
-       (tableGetSchedTblStatus(xSchedTblID)==SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS))
+    CounterType xCounterID;
+    TickType xMaxAllowedValue;
+    ScheduleTableType ScheduleTableID;
+    
+    if(IsSchedTbleRepeatable(xSchedTblID))
     {
-        if(IsSchedTbleRepeatable(xSchedTblID))
+        /* Reset Its control block and restart */
+        tableGetSchedTblIterator(xSchedTblID)=0;
+        tableGetSchedTblStartingTime(xSchedTblID)=tableGetCntCurValue(tableGetSchedTblDrivingCounter(xSchedTblID));
+    }
+    else 
+    {
+        (void)StopScheduleTable(xSchedTblID);
+        ScheduleTableID = tableGetSchedTblNextSchedTbl(xSchedTblID);
+        if(INVALID_SCHEDULE_TABLE != ScheduleTableID)
         {
-            /* Reset Its control block and restart */
-            tableGetSchedTblIterator(xSchedTblID)=0;
-            tableGetSchedTblStartingTime(xSchedTblID)=tableGetCntCurValue(tableGetSchedTblDrivingCounter(xSchedTblID));
-        }
-        else 
-        {
-            (void)StopScheduleTable(xSchedTblID);
+            xCounterID=tableGetSchedTblDrivingCounter(ScheduleTableID);
+            xMaxAllowedValue=tableGetCntMaxAllowed(xCounterID);
+            listInsertSchedTblAtHead(xCounterID,ScheduleTableID);
+            tableGetSchedTblStartingTime(ScheduleTableID)=tableGetCntCurValue(xCounterID);
+            tableGetSchedTblIterator(ScheduleTableID)=0;
+            tableGetSchedTblNextExpiryPointTime(ScheduleTableID)=vDoAddSchedTblTick( 
+                tableGetSchedTblStartingTime(ScheduleTableID), /* starting time */
+                xMaxAllowedValue,
+                tableGetSchedTblOffset(ScheduleTableID,0)); /* relative offset to starting time */
+            tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING; 
+            tableGetSchedTblNextSchedTbl(ScheduleTableID)=INVALID_SCHEDULE_TABLE;
         }
     }
 }
 
 /* do adjust according synchronization strategy,or just reprepare schedule table's
    starting and next expiry point time.*/
-/* CAUTION:this api cann't be called directly by user api code */
-void OSMakeNextExpiryPointReady(ScheduleTableType ScheduleTableID)
+static void OSMakeNextExpiryPointReady(ScheduleTableType ScheduleTableID)
 {
     /* When called,already in critial section */
     uint8_t xIterator;
@@ -593,6 +607,7 @@ StatusType StartScheduleTableRel(ScheduleTableType ScheduleTableID,
         xMaxAllowedValue,
         tableGetSchedTblOffset(ScheduleTableID,0)); /* relative offset to starting time */
     tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
+    tableGetSchedTblNextSchedTbl(ScheduleTableID)=INVALID_SCHEDULE_TABLE;
     OS_EXIT_CRITICAL();
     
   Error_Exit:
@@ -671,6 +686,7 @@ StatusType StartScheduleTableAbs(ScheduleTableType ScheduleTableID,
         tableGetCntMaxAllowed(xCounterID),
         tableGetSchedTblOffset(ScheduleTableID,0)); /* relative offset to absolute starting time */
     tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
+    tableGetSchedTblNextSchedTbl(ScheduleTableID)=INVALID_SCHEDULE_TABLE;
     OS_EXIT_CRITICAL();
     
   Error_Exit:
@@ -823,7 +839,20 @@ StatusType NextScheduleTable(ScheduleTableType ScheduleTableID_From,
         xRet = E_OS_STATE;
         goto Error_Exit;
     }
-
+    OS_ENTER_CRITICAL();
+    if(INVALID_SCHEDULE_TABLE == tableGetSchedTblNextSchedTbl(ScheduleTableID_From))
+    {
+        tableGetSchedTblNextSchedTbl(ScheduleTableID_From)= ScheduleTableID_To;
+        tableGetSchedTblStatus(ScheduleTableID_To) = SCHEDULETABLE_NEXT;
+    }
+    else
+    {
+        tableGetSchedTblStatus(tableGetSchedTblNextSchedTbl(ScheduleTableID_From)) \
+            =SCHEDULETABLE_STOPPED;
+        tableGetSchedTblNextSchedTbl(ScheduleTableID_From)= ScheduleTableID_To;
+        tableGetSchedTblStatus(ScheduleTableID_To) = SCHEDULETABLE_NEXT;
+    }
+    OS_EXIT_CRITICAL();
   Error_Exit:
     return xRet;
 }

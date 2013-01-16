@@ -386,6 +386,8 @@ StatusType StartScheduleTableRel(ScheduleTableType ScheduleTableID,TickType Offs
 StatusType StartScheduleTableAbs(ScheduleTableType ScheduleTableID,TickType Start);
 StatusType StartScheduleTableSynchron(ScheduleTableType ScheduleTableID);
 StatusType StopScheduleTable(ScheduleTableType ScheduleTableID);
+StatusType NextScheduleTable(ScheduleTableType ScheduleTableID_From,
+                             ScheduleTableType ScheduleTableID_To);
 #endif
 #if (cfgOS_CONFORMANCE_CLASS == ECC1 || cfgOS_CONFORMANCE_CLASS ==ECC2)
 StatusType SetEvent  ( TaskType xTaskID , EventMaskType pxMask );

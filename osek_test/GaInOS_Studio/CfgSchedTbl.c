@@ -80,7 +80,7 @@ const OsScheduleTableType OSScheduleTableInfo[cfgOS_SCHEDULE_TABLE_NUM]=
 {
 	{		/* vSchedTbl1 */
 		800,		/* xOsScheduleTableDuration */
-		STD_TRUE,		/* xOsScheduleTableRepeating */
+		STD_FALSE,		/* xOsScheduleTableRepeating */
 		INVALID_OSAPPLICATION, 		/* xOsSchTblAccessingApplication */
 		vCounter1,		/* xOsScheduleTableCounterRef */
 		STD_TRUE,		/* xOsScheduleTableAutostart */
@@ -96,7 +96,7 @@ const OsScheduleTableType OSScheduleTableInfo[cfgOS_SCHEDULE_TABLE_NUM]=
 		STD_FALSE,		/* xOsScheduleTableRepeating */
 		INVALID_OSAPPLICATION, 		/* xOsSchTblAccessingApplication */
 		vCounter1,		/* xOsScheduleTableCounterRef */
-		STD_TRUE,		/* xOsScheduleTableAutostart */
+		STD_FALSE,		/* xOsScheduleTableAutostart */
 		ABSOLUTE,		/* xOsScheduleTableAutostartType */
 		100,		/* xOsScheduleTableAutostartValue */
 		EXPLICIT,		/* xOsScheduleTableSyncStrategy */

@@ -141,7 +141,7 @@ TASK(vTask2){
 
 TASK(vTask3){
 /* Add Your Task Code Here. */
-
+    (void)NextScheduleTable(vSchedTbl1,vSchedTbl2);
 	printk("vTask3 is running.\n");
 	(void)TerminateTask();
 }
@@ -162,7 +162,7 @@ TASK(vTask5){
 
 TASK(vTask6){
 /* Add Your Task Code Here. */
-
+    (void)NextScheduleTable(vSchedTbl2,vSchedTbl1);
 	printk("vTask6 is running.\n");
 	(void)TerminateTask();
 }

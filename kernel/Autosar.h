@@ -19,7 +19,8 @@
 /* Get Next schedule table whitch should be in state next */
 #define tableGetSchedTblNextSchedTbl(xId)                       \
     (OSSchedTblCtrlBlkTable[(xId)].xNextOrPrevScheduleTable)
-/* Get previous schedule table whitch should be in state running */
+/* Get previous schedule table whitch should be in state running but
+   has a schedule table in state next*/
 #define tableGetSchedTblPrevSchedTbl(xId)                       \
     (OSSchedTblCtrlBlkTable[(xId)].xNextOrPrevScheduleTable)
 /* Get the next absolute time of next expire point of schedule table */
@@ -120,7 +121,6 @@
 
 #if(cfgOS_SCHEDULE_TABLE_NUM>0)
 void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID);
-void OSMakeNextExpiryPointReady(ScheduleTableType xSchedTblID);
 #endif
 
 #endif /* _AUTOSAR_H_ */
