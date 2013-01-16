@@ -1,8 +1,6 @@
 #include "CfgObj.h"
 #include "Serial.h"
 
-const TaskType G_INVALID_TASK=INVALID_TASK;
-
 /* GaInOS Counter And Alarm Configuration */
 const AlarmBaseType OSCounterBaseTable[cfgOS_COUNTER_NUM]=
 {

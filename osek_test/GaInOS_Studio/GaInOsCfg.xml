@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GaInOsCfg>
 	<GaInOsGeneralCfg>
-		<GaInOsCpuType>ARM</GaInOsCpuType>
+		<GaInOsCpuType>MC9S12(X)</GaInOsCpuType>
 		<GaInOsMaxIpl>7</GaInOsMaxIpl>
 		<GaInOsMaxPriority>63</GaInOsMaxPriority>
 		<GaInOsConfCls>BCC1</GaInOsConfCls>

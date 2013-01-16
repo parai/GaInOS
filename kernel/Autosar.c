@@ -1071,7 +1071,30 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
 /* |-------------------+----------------------------------------------------------------| */
 StatusType SetScheduleTableAsync(ScheduleTableType ScheduleTableID)
 {
-		return E_OK;
+    StatusType xRet = E_OK;
+#if(cfgOS_STATUS_LEVEL==OS_STATUS_EXTEND)
+    if(ScheduleTableID > (cfgOS_SCHEDULE_TABLE_NUM-1))
+    {
+        xRet = E_OS_ID;
+        goto Error_Exit;
+    }
+
+    if(EXPLICIT != tableGetSchedTblSyncStrategy(ScheduleTableID))
+    {
+        xRet = E_OS_ID;
+        goto Error_Exit;
+    }
+#endif
+    OS_ENTER_CRITICAL();
+    if(SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS == tableGetSchedTblStatus(ScheduleTableID))
+    { 
+        tableGetSchedTblDeviation(ScheduleTableID)=0;
+    }
+    OS_EXIT_CRITICAL();
+#if(cfgOS_STATUS_LEVEL==OS_STATUS_EXTEND)
+  Error_Exit:
+#endif
+		return xRet;
 }
 
 /* |-------------------+-------------------------------------------------------------------| */

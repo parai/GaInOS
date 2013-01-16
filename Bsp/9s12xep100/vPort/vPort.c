@@ -155,7 +155,7 @@ interrupt 7 void OSTickISR(void)
     vPortEnterISR();
 
 #if(cfgOS_COUNTER_NUM >0)    
-    IncrementCounter(0);		/* Process the first counter,Default as system counter */
+    (void)IncrementCounter(0);		/* Process the first counter,Default as system counter */
 #endif
     vPortTickIsrClear();
 
