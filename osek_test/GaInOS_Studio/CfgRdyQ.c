@@ -3,11 +3,11 @@
 #if (cfgOS_TASK_PER_PRIORITY == SEVERAL_TASKS_PER_PRIORITY )
 #    if(cfgOS_SUM_ACTIVATES > 0)
 
-static TaskType g_RdyQueueOfPriority0[2];
-static TaskType g_RdyQueueOfPriority1[3];
-static TaskType g_RdyQueueOfPriority2[3];
-static TaskType g_RdyQueueOfPriority3[3];
-static TaskType g_RdyQueueOfPriority4[3];
+static TaskType g_RdyQueueOfPriority0[3];
+static TaskType g_RdyQueueOfPriority1[8];
+static TaskType g_RdyQueueOfPriority2[2];
+static TaskType g_RdyQueueOfPriority3[2];
+static TaskType g_RdyQueueOfPriority4[2];
 static TaskType g_RdyQueueOfPriority5[2];
 static TaskType g_RdyQueueOfPriority6[2];
 static TaskType g_RdyQueueOfPriority7[2];
@@ -140,11 +140,11 @@ const TaskRefType OSTskRdyQueuePtr[cfgOS_MAX_PRIORITY+2]=
 
 const uint8_t OSTskRdyQueueSize[cfgOS_MAX_PRIORITY+2]=
 {
-	2,		/* Priority 0*/
-	3,		/* Priority 1*/
-	3,		/* Priority 2*/
-	3,		/* Priority 3*/
-	3,		/* Priority 4*/
+	3,		/* Priority 0*/
+	8,		/* Priority 1*/
+	2,		/* Priority 2*/
+	2,		/* Priority 3*/
+	2,		/* Priority 4*/
 	2,		/* Priority 5*/
 	2,		/* Priority 6*/
 	2,		/* Priority 7*/

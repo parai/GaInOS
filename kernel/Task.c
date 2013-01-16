@@ -117,12 +117,12 @@ void listRemoveTskAtHead(PriorityType xPriority,TaskType xTaskID)
     uint8_t     xTail;
     uint8_t     xSize;
     (void)xTaskID;              /* Surpress The Warning. */
-    xSize  = OSTskRdyQueueSize[xPriority]-1;
+    xSize  = OSTskRdyQueueSize[xPriority];
     xHead  = OSTskRdyListHead[xPriority];
     xTail  = OSTskRdyListTail[xPriority];
   
     xHead++;
-    if(xHead > xSize)
+    if(xHead >= xSize)
     {
         xHead = 0;
     }

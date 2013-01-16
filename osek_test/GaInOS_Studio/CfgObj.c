@@ -56,11 +56,11 @@ const TaskStackRefType OSTaskStackTable[cfgOS_TASK_NUM]=
 const PriorityType OSTaskInitPriorityTable[cfgOS_TASK_NUM]=
 {
 	1,		/* vTask1 */
-	2,		/* vTask2 */
-	3,		/* vTask3 */
-	4,		/* vTask4 */
-	5,		/* vTask5 */
-	6,		/* vTask6 */
+	1,		/* vTask2 */
+	1,		/* vTask3 */
+	1,		/* vTask4 */
+	1,		/* vTask5 */
+	1,		/* vTask6 */
 	0,		/* vTaskStart */
 };
 
