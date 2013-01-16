@@ -386,6 +386,8 @@ StatusType StartScheduleTableRel(ScheduleTableType ScheduleTableID,TickType Offs
 StatusType StartScheduleTableAbs(ScheduleTableType ScheduleTableID,TickType Start);
 StatusType StartScheduleTableSynchron(ScheduleTableType ScheduleTableID);
 StatusType StopScheduleTable(ScheduleTableType ScheduleTableID);
+StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value);
+StatusType SetScheduleTableAsync(ScheduleTableType ScheduleTableID);
 StatusType NextScheduleTable(ScheduleTableType ScheduleTableID_From,
                              ScheduleTableType ScheduleTableID_To);
 #endif
