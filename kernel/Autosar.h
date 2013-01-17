@@ -121,6 +121,7 @@
 
 #if(cfgOS_SCHEDULE_TABLE_NUM>0)
 void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID);
+void OSMakeNextExpiryPointReady(ScheduleTableType ScheduleTableID);
 #endif
 
 #endif /* _AUTOSAR_H_ */

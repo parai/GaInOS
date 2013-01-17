@@ -4,14 +4,17 @@
 static void vSchedTbl1_CmdEp0(void)
 {
 	(void)ActivateTask(vTask1);
+	OSMakeNextExpiryPointReady(vSchedTbl1);
 }
 static void vSchedTbl1_CmdEp1(void)
 {
 	(void)ActivateTask(vTask2);
+	OSMakeNextExpiryPointReady(vSchedTbl1);
 }
 static void vSchedTbl1_CmdEp2(void)
 {
 	(void)ActivateTask(vTask3);
+	OSMakeNextExpiryPointReady(vSchedTbl1);
 }
 static void vSchedTbl1_CmdEp3(void)
 {
@@ -39,14 +42,17 @@ static const OsSchedTblCmdType g_vSchedTbl1[4]=
 static void vSchedTbl2_CmdEp0(void)
 {
 	(void)ActivateTask(vTask4);
+	OSMakeNextExpiryPointReady(vSchedTbl2);
 }
 static void vSchedTbl2_CmdEp1(void)
 {
 	(void)ActivateTask(vTask5);
+	OSMakeNextExpiryPointReady(vSchedTbl2);
 }
 static void vSchedTbl2_CmdEp2(void)
 {
 	(void)ActivateTask(vTask6);
+	OSMakeNextExpiryPointReady(vSchedTbl2);
 }
 static void vSchedTbl2_CmdEp3(void)
 {
@@ -80,7 +86,7 @@ const OsScheduleTableType OSScheduleTableInfo[cfgOS_SCHEDULE_TABLE_NUM]=
 {
 	{		/* vSchedTbl1 */
 		800,		/* xOsScheduleTableDuration */
-		STD_FALSE,		/* xOsScheduleTableRepeating */
+		STD_TRUE,		/* xOsScheduleTableRepeating */
 		INVALID_OSAPPLICATION, 		/* xOsSchTblAccessingApplication */
 		vCounter1,		/* xOsScheduleTableCounterRef */
 		STD_TRUE,		/* xOsScheduleTableAutostart */
@@ -93,10 +99,10 @@ const OsScheduleTableType OSScheduleTableInfo[cfgOS_SCHEDULE_TABLE_NUM]=
 	},
 	{		/* vSchedTbl2 */
 		850,		/* xOsScheduleTableDuration */
-		STD_FALSE,		/* xOsScheduleTableRepeating */
+		STD_TRUE,		/* xOsScheduleTableRepeating */
 		INVALID_OSAPPLICATION, 		/* xOsSchTblAccessingApplication */
 		vCounter1,		/* xOsScheduleTableCounterRef */
-		STD_FALSE,		/* xOsScheduleTableAutostart */
+		STD_TRUE,		/* xOsScheduleTableAutostart */
 		ABSOLUTE,		/* xOsScheduleTableAutostartType */
 		100,		/* xOsScheduleTableAutostartValue */
 		EXPLICIT,		/* xOsScheduleTableSyncStrategy */

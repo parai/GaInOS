@@ -82,6 +82,7 @@ void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID)
         /* Reset Its control block and restart */
         tableGetSchedTblIterator(xSchedTblID)=0;
         tableGetSchedTblStartingTime(xSchedTblID)=tableGetCntCurValue(tableGetSchedTblDrivingCounter(xSchedTblID));
+        OSMakeNextExpiryPointReady(xSchedTblID);
     }
     else 
     {
@@ -89,6 +90,11 @@ void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID)
         ScheduleTableID = tableGetSchedTblNextSchedTbl(xSchedTblID);
         if(INVALID_SCHEDULE_TABLE != ScheduleTableID)
         {
+            /* OS505: If OsScheduleTblSyncStrategy  of the schedule tables 
+               <ScheduleTableID_From>  and <ScheduleTableID_To>   in a call of 
+               NextScheduleTable() is  EXPLICIT  and the Operating System module  already 
+               synchronizes <ScheduleTableID_From>,  NextScheduleTable() shall continue  
+               synchonization after the start of processing <ScheduleTableID_To>.  */
             xCounterID=tableGetSchedTblDrivingCounter(ScheduleTableID);
             xMaxAllowedValue=tableGetCntMaxAllowed(xCounterID);
             listInsertSchedTblAtHead(xCounterID,ScheduleTableID);
@@ -106,7 +112,7 @@ void OSProcessScheduleTableFinalDelay(ScheduleTableType xSchedTblID)
 
 /* do adjust according synchronization strategy,or just reprepare schedule table's
    starting and next expiry point time.*/
-static void OSMakeNextExpiryPointReady(ScheduleTableType ScheduleTableID)
+void OSMakeNextExpiryPointReady(ScheduleTableType ScheduleTableID)
 {
     /* When called,already in critial section */
     uint8_t xIterator;
@@ -242,7 +248,11 @@ static void OSProcessScheduleTable(CounterType xCounterID)
             tableGetSchedTblIterator(xSchedTblID)+=1;
             /* Do an Action */
             tableDoSchedTblAction(xSchedTblID,tableGetSchedTblIterator(xSchedTblID)-1);
-            OSMakeNextExpiryPointReady(xSchedTblID);
+            /* Bug Here.
+             if Action is OSProcessScheduleTableFinalDelay() and the xSchedTblID has been 
+             stopped by that Action. So The Call OSMakeNextExpiryPointReady() has no meaning.
+             So Should Combine it with Action.*/
+            /* OSMakeNextExpiryPointReady(xSchedTblID); */
          }
         xSchedTblID=listGetSchedTblNextElement(xSchedTblID);
     }
@@ -607,6 +617,8 @@ StatusType StartScheduleTableRel(ScheduleTableType ScheduleTableID,
         xMaxAllowedValue,
         tableGetSchedTblOffset(ScheduleTableID,0)); /* relative offset to starting time */
     tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
+    /* Do not judge its sync-strategy EXPLICIT or IMPLICIT */
+    tableGetSchedTblDeviation(ScheduleTableID)=0;
     tableGetSchedTblNextSchedTbl(ScheduleTableID)=INVALID_SCHEDULE_TABLE;
     OS_EXIT_CRITICAL();
     
@@ -686,6 +698,7 @@ StatusType StartScheduleTableAbs(ScheduleTableType ScheduleTableID,
         tableGetCntMaxAllowed(xCounterID),
         tableGetSchedTblOffset(ScheduleTableID,0)); /* relative offset to absolute starting time */
     tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING;
+    tableGetSchedTblDeviation(ScheduleTableID)=0;
     tableGetSchedTblNextSchedTbl(ScheduleTableID)=INVALID_SCHEDULE_TABLE;
     OS_EXIT_CRITICAL();
     
@@ -845,6 +858,15 @@ StatusType NextScheduleTable(ScheduleTableType ScheduleTableID_From,
     }
     if(tableGetSchedTblDrivingCounter(ScheduleTableID_From)!=   \
        tableGetSchedTblDrivingCounter(ScheduleTableID_To))
+    {
+        xRet = E_OS_ID;
+        goto Error_Exit;
+    }
+    /* OS484: If  OsScheduleTblSyncStrategy  of <ScheduleTableID_To>  in a call of 
+       NextScheduleTable() is not equal to the  OsScheduleTblSyncStrategy  of 
+       <ScheduleTableID_From>  then  NextScheduleTable() shall return  E_OS_ID. */
+    if(tableGetSchedTblSyncStrategy(ScheduleTableID_From)!=   \
+       tableGetSchedTblSyncStrategy(ScheduleTableID_To))
     {
         xRet = E_OS_ID;
         goto Error_Exit;
@@ -1036,6 +1058,7 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
 			tableGetSchedTblOffset(ScheduleTableID,0));
         /* Set status */
 		tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS;
+        tableGetSchedTblDeviation(ScheduleTableID)=0;
     }
     else                        /* running state,perform Synchronization */
     {
