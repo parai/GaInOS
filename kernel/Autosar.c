@@ -741,13 +741,29 @@ StatusType StopScheduleTable(ScheduleTableType ScheduleTableID)
     }
     xCounterID=tableGetSchedTblDrivingCounter(ScheduleTableID);
     OS_ENTER_CRITICAL();
-    listRemoveSchedTbl(xCounterID,ScheduleTableID);
-    tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_STOPPED;
-    /* Stop Its Next Schedule table which in state next if it is valid */
-    ScheduleTableID = tableGetSchedTblNextSchedTbl(ScheduleTableID);
-    if(INVALID_SCHEDULE_TABLE != ScheduleTableID)
+    if(SCHEDULETABLE_NEXT == tableGetSchedTblStatus(ScheduleTableID))
     {
         tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_STOPPED;
+        /* Stop Its Prev Schedule table which in state running or waiting if it is valid */
+        ScheduleTableID = tableGetSchedTblPrevSchedTbl(ScheduleTableID);
+        if(INVALID_SCHEDULE_TABLE != ScheduleTableID)
+        {
+            tableGetSchedTblNextSchedTbl(ScheduleTableID)=INVALID_SCHEDULE_TABLE;
+        }
+    }
+    else
+    {
+        if(SCHEDULETABLE_WAITING != tableGetSchedTblStatus(ScheduleTableID))
+        {
+            listRemoveSchedTbl(xCounterID,ScheduleTableID);
+        }
+        tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_STOPPED;
+        /* Stop Its Next Schedule table which in state next if it is valid */
+        ScheduleTableID = tableGetSchedTblNextSchedTbl(ScheduleTableID);
+        if(INVALID_SCHEDULE_TABLE != ScheduleTableID)
+        {
+            tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_STOPPED;
+        }
     }
     OS_EXIT_CRITICAL();
     
@@ -852,6 +868,7 @@ StatusType NextScheduleTable(ScheduleTableType ScheduleTableID_From,
             =SCHEDULETABLE_STOPPED;
     }
     tableGetSchedTblNextSchedTbl(ScheduleTableID_From)= ScheduleTableID_To;
+    tableGetSchedTblPrevSchedTbl(ScheduleTableID_To)  = ScheduleTableID_From;
     tableGetSchedTblStatus(ScheduleTableID_To) = SCHEDULETABLE_NEXT;
     OS_EXIT_CRITICAL();
   Error_Exit:
@@ -1019,7 +1036,6 @@ StatusType SyncScheduleTable(ScheduleTableType ScheduleTableID,TickType Value)
 			tableGetSchedTblOffset(ScheduleTableID,0));
         /* Set status */
 		tableGetSchedTblStatus(ScheduleTableID)=SCHEDULETABLE_RUNNING_AND_SYNCHRONOUS;
-        tableGetSchedTblNextSchedTbl(ScheduleTableID)=INVALID_SCHEDULE_TABLE;
     }
     else                        /* running state,perform Synchronization */
     {
@@ -1177,7 +1193,16 @@ StatusType SetScheduleTableAsync(ScheduleTableType ScheduleTableID)
 StatusType GetScheduleTableStatus(ScheduleTableType ScheduleTableID,
                                   ScheduleTableStatusRefType ScheduleStatus)
 {
-    return E_OK;
+    StatusType xRet = E_OK;
+#if(cfgOS_STATUS_LEVEL==OS_STATUS_EXTEND)
+    if(ScheduleTableID > (cfgOS_SCHEDULE_TABLE_NUM-1))
+    {
+        xRet = E_OS_ID;
+        goto Error_Exit;
+    }
+#endif
+    *ScheduleStatus=tableGetSchedTblStatus(ScheduleTableID);
+    return xRet;
 }
 
 /* |-------------------+----------------------------------------------------------------| */

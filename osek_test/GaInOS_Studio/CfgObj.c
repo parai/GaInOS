@@ -134,14 +134,15 @@ TASK(vTask1){
 
 TASK(vTask2){
 /* Add Your Task Code Here. */
-
+    (void)StartScheduleTableSynchron(vSchedTbl2);
 	printk("vTask2 is running.\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask3){
 /* Add Your Task Code Here. */
-    (void)NextScheduleTable(vSchedTbl1,vSchedTbl2);
+    //(void)NextScheduleTable(vSchedTbl1,vSchedTbl2);
+    (void)SyncScheduleTable(vSchedTbl2,0);
 	printk("vTask3 is running.\n");
 	(void)TerminateTask();
 }
