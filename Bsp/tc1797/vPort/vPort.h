@@ -49,8 +49,16 @@
         __asm( "ret" );                                                 \
     }
 
+#define vPortSwitch2Task()                      \
+    {                                                                   \
+        __asm("movh.a	a11,#@his(__vPortSwitch2Task)");                \
+        __asm("lea	a11,[a11]@los(__vPortSwitch2Task)");                \
+        __nop();                                                        \
+        __asm( "ret" );                                                 \
+    }
+
 /* use the software interrupt to dispatch the high priority task */
-#define vPortDispatch()
+#define vPortDispatch() vPortDispatcher()
 #define vPortEnableInterrupt()  __enable()
 #define vPortDisableInterrupt() __disable()
 
@@ -144,11 +152,8 @@
     }
 
 OsCpuIplType vPortGetIpl(void);
-
+void vPortDispatcher(void);
 void __vPortSwitch2Task(void);
-#define vPortSwitch2Task()                      \
-    __asm("j __vPortSwitch2Task")
-
 void vPortSetIpl(uint8_t xIpl);
 
 #endif /* _VPORT_H_ */

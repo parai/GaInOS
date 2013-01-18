@@ -130,7 +130,7 @@ void vPortDispatcher(void)
         vPortSaveContext();
         vPortSaveSP();
     }
-    vPortSwitch2Task();
+    __asm("j __vPortSwitch2Task");
 }
   
 void OSTickISR(void)
