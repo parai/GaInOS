@@ -1,0 +1,10 @@
+cstart.o :	..\cstart.c
+..\cstart.c :	
+cstart.o :	"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\sfr\regtc1797.sfr"
+"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\sfr\regtc1797.sfr" :	
+cstart.o :	..\cstart.h
+..\cstart.h :	
+cstart.o :	"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\stdlib.h"
+"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\stdlib.h" :	
+cstart.o :	"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\stdbool.h"
+"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\stdbool.h" :	

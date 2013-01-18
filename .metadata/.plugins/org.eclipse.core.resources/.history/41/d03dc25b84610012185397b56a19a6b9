@@ -1,0 +1,1491 @@
+	; TASKING VX-toolset for TriCore: C compiler v3.5r1 Build 484.1.2
+	; Options: -f cc6140a -c99 --dep-file=vPort\.vPort.o.d -Ctc1797 --core=tc1.3.1 --fpu-present -F -IF:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio -IF:\parai@foxmail.com\nt\GaInOS\include -IF:\parai@foxmail.com\nt\GaInOS\kernel -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport -g --make-target=vPort\vPort.o -t4 --language=-gcc,-volatile,+strings --default-near-size=0 -O2 --default-a1-size=0 --default-a0-size=0 --source --align=0 --compact-max-size=200 --switch=auto --tasking-sfr -o vPort\vPort.src
+	; Module start
+	.name	"vPort"
+
+	
+$FPU
+$TC131
+	
+	.sdecl	'.text.vPort.vPortTaskIdle',code,cluster('vPortTaskIdle')
+	.sect	'.text.vPort.vPortTaskIdle'
+	.align	2
+	
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	     1  /* Copyright 2012, Fan Wang(Parai)
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	     2   *
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	     3   * This file is part of GaInOS.
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	     4   *
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	     5   * GaInOS is free software: you can redistribute it and/or modify
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	     6   * it under the terms of the GNU General Public License as published by
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	     7   * the Free Software Foundation, either version 3 of the License, or
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	     8   * (at your option) any later version.
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	     9   *             
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    10   * Linking GaInOS statically or dynamically with other modules is making a
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    11   * combined work based on GaInOS. Thus, the terms and conditions of the GNU
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    12   * General Public License cover the whole combination.
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    13   *
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    14   * In addition, as a special exception, the copyright holders of GaInOS give
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    15   * you permission to combine GaInOS program with free software programs or
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    16   * libraries that are released under the GNU LGPL and with independent modules
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    17   * that communicate with GaInOS solely through the GaInOS defined interface. 
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    18   * You may copy and distribute such a system following the terms of the GNU GPL
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    19   * for GaInOS and the licenses of the other code concerned, provided that you
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    20   * include the source code of that other code when and as the GNU GPL requires
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    21   * distribution of source code.
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    22   *
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    23   * Note that people who make modified versions of GaInOS are not obligated to
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    24   * grant this special exception for their modified versions; it is their choice
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    25   * whether to do so. The GNU General Public License gives permission to release
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    26   * a modified version without this exception; this exception also makes it
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    27   * possible to release a modified version which carries forward this exception.
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    28   * 
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    29   * GaInOS is distributed in the hope that it will be useful,
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    30   * but WITHOUT ANY WARRANTY; without even the implied warranty of
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    31   * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    32   * GNU General Public License for more details.
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    33   *
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    34   * You should have received a copy of the GNU General Public License
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    35   * along with GaInOS. If not, see <http://www.gnu.org/licenses/>.
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    36   *
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    37   */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    38  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    39  /* | Name    | GaIn OS           | */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    40  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    41  /* | Author: | Wang Fan(parai)   | */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    42  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    43  /* | Email:  | parai@foxmail.com | */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    44  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    45  /* | WorkOn: | Emacs23.3         | */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    46  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    47  #include "Kernel.h"
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    48  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    49  /* System register Definitions. */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    50  #define vPortSYSTEM_PROGRAM_STATUS_WORD					( 0x000008FFUL ) /* Supervisor Mode, MPU Register Set 0 and Call Depth Counting disabled. */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    51  #define vPortINITIAL_PRIVILEGED_PROGRAM_STATUS_WORD		( 0x000014FFUL ) /* IO Level 1, MPU Register Set 1 and Call Depth Counting disabled. */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    52  #define vPortINITIAL_UNPRIVILEGED_PROGRAM_STATUS_WORD	( 0x000010FFUL ) /* IO Level 0, MPU Register Set 1 and Call Depth Counting disabled. */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    53  #define vPortINITIAL_PCXI_UPPER_CONTEXT_WORD				( 0x00C00000UL ) /* The lower 20 bits identify the CSA address. */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    54  #define vPortINITIAL_SYSCON								( 0x00000000UL ) /* MPU Disable. */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    55  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    56  /* CSA manipulation macros. */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    57  #define vPortCSA_FCX_MASK					( 0x000FFFFFUL )
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    58  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    59  /* OS Interrupt and Trap mechanisms. */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    60  #define vPortRESTORE_PSW_MASK				( ~( 0x000000FFUL ) )
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    61  #define vPortSYSCALL_TRAP					( 6 )
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    62  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    63  /* Each CSA contains 16 words of data. */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    64  #define vPortNUM_WORDS_IN_CSA				( 16 )
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    65  static void vPortTaskIdle(void)
+; Function vPortTaskIdle
+.L16:
+vPortTaskIdle:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    66  {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    67      /* Wait Untill a task was in ready state */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    68      vPortEnableInterrupt();
+	enable
+.L152:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    69      /* vPortSetIpl(0); */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    70      while(OSCurTsk == INVALID_TASK);
+	movh.a	a15,#@his(OSCurTsk)
+	lea	a15,[a15]@los(OSCurTsk)
+	ld.bu	d15,[a15]
+	eq	d15,d15,#7
+.L2:
+	jne	d15,#0,.L2				; predicted taken
+.L153:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    71      vPortDispatch();
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    72  }
+	ret
+.L84:
+	
+__vPortTaskIdle_function_end:
+	.size	vPortTaskIdle,__vPortTaskIdle_function_end-vPortTaskIdle
+.L54:
+	; End of function
+	
+	.sdecl	'.text.vPort.vPortGetIpl',code,cluster('vPortGetIpl')
+	.sect	'.text.vPort.vPortGetIpl'
+	.align	2
+	
+	.global	vPortGetIpl
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    73  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    74  OsCpuIplType vPortGetIpl(void)
+; Function vPortGetIpl
+.L18:
+vPortGetIpl:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    75  {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    76  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    77      return 0;                   /* Ommit The Compile Warning */
+	mov	d2,#0
+.L133:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    78  }
+	ret
+.L76:
+	
+__vPortGetIpl_function_end:
+	.size	vPortGetIpl,__vPortGetIpl_function_end-vPortGetIpl
+.L39:
+	; End of function
+	
+	.sdecl	'.text.vPort.vPortPreActivateTask',code,cluster('vPortPreActivateTask')
+	.sect	'.text.vPort.vPortPreActivateTask'
+	.align	2
+	
+	.global	vPortPreActivateTask
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    79  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    80  void vPortPreActivateTask(void)
+; Function vPortPreActivateTask
+.L20:
+vPortPreActivateTask:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    81  {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    82  #if(cfgOS_USE_INTERNAL_RESOURCE == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    83      if(OSCurTsk < cfgOS_TASK_WITH_IN_RES_NUM)
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    84      {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    85          /* Do Get The Internal Resource */
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    86          GetInResource();
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    87      }
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    88  #endif
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    89  #if(cfgOS_PRE_TASK_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    90      OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    91      PreTaskHook();
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    92      OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    93  #endif
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    94      OSTaskEntryTable[OSCurTsk]();
+	movh.a	a15,#@his(OSCurTsk)
+	lea	a15,[a15]@los(OSCurTsk)
+	ld.bu	d15,[a15]
+	movh.a	a15,#@his(OSTaskEntryTable)
+	lea	a15,[a15]@los(OSTaskEntryTable)
+	addsc.a	a15,a15,d15,#2
+	ld.a	a15,[a15]
+	calli	a15
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    95      OS_ASSERT(STD_FALSE);
+.L4:
+	j	.L4
+.L85:
+	
+__vPortPreActivateTask_function_end:
+	.size	vPortPreActivateTask,__vPortPreActivateTask_function_end-vPortPreActivateTask
+.L59:
+	; End of function
+	
+	.sdecl	'.text.vPort.vPortSetIpl',code,cluster('vPortSetIpl')
+	.sect	'.text.vPort.vPortSetIpl'
+	.align	2
+	
+	.global	vPortSetIpl
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    96  }
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    97  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    98  void vPortSetIpl(uint8_t xIpl)
+; Function vPortSetIpl
+.L22:
+vPortSetIpl:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	    99  {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   100  }
+	ret
+.L82:
+	
+__vPortSetIpl_function_end:
+	.size	vPortSetIpl,__vPortSetIpl_function_end-vPortSetIpl
+.L49:
+	; End of function
+	
+	.sdecl	'.text.vPort.vPortIntGetIpl',code,cluster('vPortIntGetIpl')
+	.sect	'.text.vPort.vPortIntGetIpl'
+	.align	2
+	
+	.global	vPortIntGetIpl
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   101  void vPortIntGetIpl(void)
+; Function vPortIntGetIpl
+.L24:
+vPortIntGetIpl:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   102  {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   103  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   104  }
+	ret
+.L86:
+	
+__vPortIntGetIpl_function_end:
+	.size	vPortIntGetIpl,__vPortIntGetIpl_function_end-vPortIntGetIpl
+.L64:
+	; End of function
+	
+	.sdecl	'.text.vPort.__vPortSwitch2Task',code,cluster('__vPortSwitch2Task')
+	.sect	'.text.vPort.__vPortSwitch2Task'
+	.align	2
+	
+	.global	__vPortSwitch2Task
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   105  void __vPortSwitch2Task(void)
+; Function __vPortSwitch2Task
+.L26:
+__vPortSwitch2Task:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   106  {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   107      OSCurTsk = OSHighRdyTsk;
+	movh.a	a15,#@his(OSCurTsk)
+	lea	a15,[a15]@los(OSCurTsk)
+	movh.a	a2,#@his(OSHighRdyTsk)
+	lea	a2,[a2]@los(OSHighRdyTsk)
+	ld.bu	d15,[a2]
+	st.b	[a15],d15
+.L138:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   108      if(OSCurTsk == INVALID_TASK)
+	jne	d15,#7,.L5				; predicted taken
+.L139:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   109      {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   110          vPortTaskIdle();
+	call	vPortTaskIdle
+.L5:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   111      }
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   112      OSCurTcb = OSHighRdyTcb;
+	movh.a	a2,#@his(OSCurTcb)
+	lea	a2,[a2]@los(OSCurTcb)
+	movh.a	a15,#@his(OSHighRdyTcb)
+	ld.a	a15,[a15]@los(OSHighRdyTcb)
+	st.a	[a2],a15
+.L140:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   113  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   114      if(READY == OSCurTcb->xState)
+	ld.bu	d15,[+a15]5
+	jne	d15,#1,.L6				; predicted not taken
+.L141:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   115      {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   116          OSCurTcb->xState = RUNNING;
+	mov	d15,#0
+	st.b	[a15],d15
+.L78:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   117          vPortStartCurRdyTsk();
+	disable
+	dsync
+	mfcr	d15,#65080
+	insert	d15,d15,#0,#16,#16
+	sha	d15,#6
+	mfcr	d0,#65080
+	movh	d1,#15
+	and	d0,d1
+	sha	d0,d0,#12
+.L89:
+	or	d0,d15
+	mov.a	a15,d0
+.L91:
+	mov.a	a4,#0
+	jeq.a	a4,a15,.L7				; predicted not taken
+	dsync
+	ld.w	d15,[a15]
+	mtcr	#65080,d15
+	isync
+	isync
+	j	.L8
+.L7:
+	svlcx
+.L8:
+	mov	d15,#0
+	st.w	[a15],d15
+	ld.a	a2,[a2]
+	ld.w	d15,[a2]
+	st.w	[a15]8,d15
+	mov.u	d15,#2303
+	st.w	[a15]4,d15
+	dsync
+	mov.d	d15,a15
+.L90:
+	sh	d0,d15,#-12
+	movh	d1,#15
+	and	d0,d1
+	extr.u	d15,d15,#6,#16
+.L92:
+	or	d0,d15
+	insert	d15,d0,#3,#22,#2
+	mtcr	#65024,d15
+	isync
+	movh.a	a11,#@his(vPortPreActivateTask)
+	lea	a11,[a11]@los(vPortPreActivateTask)
+	isync
+	nop
+	ret
+.L79:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   118      }
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   119      else
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   120      {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   121        vPortRestoreSP();
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   122        vPortRestoreContext()  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   123      }
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   124  }
+	ret
+.L6:
+	dsync
+	ld.a	a15,[a2]
+	ld.w	d15,[a15]
+	mtcr	#65024,d15
+	isync
+	isync
+.L142:
+	nop
+	rslcx
+	nop
+	rfe
+.L143:
+	ret
+.L77:
+	
+____vPortSwitch2Task_function_end:
+	.size	__vPortSwitch2Task,____vPortSwitch2Task_function_end-__vPortSwitch2Task
+.L44:
+	; End of function
+	
+	.sdecl	'.text.vPort.vPortDispatcher',code,cluster('vPortDispatcher')
+	.sect	'.text.vPort.vPortDispatcher'
+	.align	2
+	
+	.global	vPortDispatcher
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   125  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   126  void vPortDispatcher(void)
+; Function vPortDispatcher
+.L28:
+vPortDispatcher:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   127  {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   128      if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+	movh.a	a2,#@his(OSCurTcb)
+	lea	a2,[a2]@los(OSCurTcb)
+	ld.a	a15,[a2]
+	ld.bu	d15,[a15]5
+	jeq	d15,#0,.L10				; predicted not taken
+.L166:
+	jne	d15,#2,.L11				; predicted taken
+.L10:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   129      {
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   130          vPortSaveContext();
+	svlcx
+.L167:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   131          vPortSaveSP();
+	ld.a	a15,[a2]
+	mfcr	d15,#65024
+	st.w	[a15],d15
+.L11:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   132      }
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   133      vPortSwitch2Task();
+	j __vPortSwitch2Task
+.L168:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   134  }
+	ret
+.L87:
+	
+__vPortDispatcher_function_end:
+	.size	vPortDispatcher,__vPortDispatcher_function_end-vPortDispatcher
+.L69:
+	; End of function
+	
+	.sdecl	'.text.vPort.OSTickISR',code,cluster('OSTickISR')
+	.sect	'.text.vPort.OSTickISR'
+	.align	2
+	
+	.global	OSTickISR
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   135    
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   136  void OSTickISR(void)
+; Function OSTickISR
+.L30:
+OSTickISR:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   137  {  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   138      vPortEnterISR();
+	svlcx
+	movh.a	a15,#@his(OSIsr2Nesting)
+	lea	a15,[a15]@los(OSIsr2Nesting)
+	ld.bu	d15,[a15]
+	jne	d15,#0,.L12				; predicted taken
+	movh.a	a15,#@his(OSCurTcb)
+	ld.a	a15,[a15]@los(OSCurTcb)
+	ld.bu	d15,[a15]5
+	jeq	d15,#0,.L13				; predicted not taken
+	jne	d15,#2,.L14				; predicted taken
+.L13:
+	movh.a	a15,#@his(OSCurTcb)
+	ld.a	a15,[a15]@los(OSCurTcb)
+	mfcr	d15,#65024
+	st.w	[a15],d15
+.L14:
+.L12:
+	call	OSEnterISR
+.L173:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   139  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   140  #if(cfgOS_COUNTER_NUM >0)    
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   141      (void)IncrementCounter(0);		/* Process the first counter,Default as system counter */
+	mov	d4,#0
+	call	IncrementCounter
+.L174:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   142  #endif
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   143      vPortTickIsrClear();
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   144  
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   145      vPortLeaveISR();
+	call	OSExitISR
+	nop
+	rslcx
+	nop
+	rfe
+.L175:
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   146  }
+	ret
+.L88:
+	
+__OSTickISR_function_end:
+	.size	OSTickISR,__OSTickISR_function_end-OSTickISR
+.L74:
+	; End of function
+	
+	.calls	'vPortPreActivateTask','__INDIRECT__'
+	.calls	'__vPortSwitch2Task','vPortTaskIdle'
+	.calls	'OSTickISR','OSEnterISR'
+	.calls	'OSTickISR','IncrementCounter'
+	.calls	'OSTickISR','OSExitISR'
+	.calls	'vPortTaskIdle','',0
+	.calls	'vPortGetIpl','',0
+	.calls	'vPortPreActivateTask','',0
+	.calls	'vPortSetIpl','',0
+	.calls	'vPortIntGetIpl','',0
+	.calls	'__vPortSwitch2Task','',0
+	.calls	'vPortDispatcher','',0
+	.extern	OSCurTsk
+	.extern	OSCurTcb
+	.extern	OSHighRdyTsk
+	.extern	OSHighRdyTcb
+	.extern	OSIsr2Nesting
+	.extern	IncrementCounter
+	.extern	OSEnterISR
+	.extern	OSExitISR
+	.extern	OSTaskEntryTable
+	.extern	__INDIRECT__
+	.calls	'OSTickISR','',0
+	.sdecl	'.debug_info',debug
+	.sect	'.debug_info'
+.L32:
+	.word	3059
+	.half	3
+	.word	.L33
+	.byte	4
+.L31:
+	.byte	1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L34
+	.byte	2
+	.byte	'__mtcr',0,1,1,1,1,3
+	.word	.L93-.L32
+	.byte	3
+	.word	.L93-.L32
+	.byte	0
+.L93:
+	.byte	4
+	.byte	'int',0,4,5,5
+	.byte	'__mfcr',0
+	.word	.L94-.L32
+	.byte	1,1,1,1,3
+	.word	197
+	.byte	0
+.L94:
+	.byte	6
+	.word	197
+	.byte	7
+	.byte	'__nop',0,1,1,1,1,7
+	.byte	'__rslcx',0,1,1,1,1,7
+	.byte	'__svlcx',0,1,1,1,1,7
+	.byte	'__isync',0,1,1,1,1,7
+	.byte	'__dsync',0,1,1,1,1,7
+	.byte	'__disable',0,1,1,1,1,7
+	.byte	'__enable',0,1,1,1,1
+.L75:
+	.byte	4
+	.byte	'unsigned char',0,1,8
+.L80:
+	.byte	8
+	.word	.L95-.L32
+.L95:
+	.byte	4
+	.byte	'unsigned long int',0,4,7,9
+	.byte	'IncrementCounter',0,1,248,2,12
+	.word	323
+	.byte	1,1,1,1,10
+	.byte	'CounterID',0,1,248,2,41
+	.word	323
+	.byte	0,11
+	.byte	'OSEnterISR',0,1,168,3,6,1,1,1,1,11
+	.byte	'OSExitISR',0,1,169,3,6,1,1,1,1,12
+	.byte	'__INDIRECT__',0,2,1,1,1,1,1,13
+	.byte	'__size_t',0,2,1,1
+	.word	.L96-.L32
+.L96:
+	.byte	4
+	.byte	'unsigned int',0,4,7,13
+	.byte	'__codeptr',0,2,1,1
+	.word	.L97-.L32
+.L97:
+	.byte	8
+	.word	.L98-.L32
+.L98:
+	.byte	14,1,13
+	.byte	'PCP_GPR6_type',0,3,158,19,3
+	.word	.L99-.L32
+.L99:
+	.byte	6
+	.word	.L100-.L32
+.L100:
+	.byte	15,3,145,19,18,4,16
+	.byte	'B',0,4
+	.word	.L101-.L32
+	.byte	2,35,0,16
+	.byte	'I',0,4
+	.word	197
+	.byte	2,35,0,16
+	.byte	'U',0,4
+	.word	492
+	.byte	2,35,0,0
+.L101:
+	.byte	17,3,147,19,2,4,18
+	.byte	'CNT1',0,4
+	.word	.L102-.L32
+	.byte	12,20,2,35,0,18
+	.byte	'.1.nn',0,4
+	.word	.L102-.L32
+	.byte	2,18,2,35,0,18
+	.byte	'TOS',0,4
+	.word	.L102-.L32
+	.byte	2,16,2,35,0,18
+	.byte	'SRPN',0,4
+	.word	.L102-.L32
+	.byte	8,8,2,35,0,18
+	.byte	'CPPN',0,4
+	.word	.L102-.L32
+	.byte	8,0,2,35,0,0
+.L102:
+	.byte	4
+	.byte	'unsigned int',0,4,7,13
+	.byte	'PCP_GPR7_type',0,3,178,19,3
+	.word	.L103-.L32
+.L103:
+	.byte	6
+	.word	.L104-.L32
+.L104:
+	.byte	15,3,160,19,18,4,16
+	.byte	'B',0,4
+	.word	.L105-.L32
+	.byte	2,35,0,16
+	.byte	'I',0,4
+	.word	197
+	.byte	2,35,0,16
+	.byte	'U',0,4
+	.word	492
+	.byte	2,35,0,0
+.L105:
+	.byte	17,3,162,19,2,4,18
+	.byte	'Z',0,4
+	.word	688
+	.byte	1,31,2,35,0,18
+	.byte	'N',0,4
+	.word	688
+	.byte	1,30,2,35,0,18
+	.byte	'C',0,4
+	.word	688
+	.byte	1,29,2,35,0,18
+	.byte	'V',0,4
+	.word	688
+	.byte	1,28,2,35,0,18
+	.byte	'CNZ',0,4
+	.word	688
+	.byte	1,27,2,35,0,18
+	.byte	'IEN',0,4
+	.word	688
+	.byte	1,26,2,35,0,18
+	.byte	'CEN',0,4
+	.word	688
+	.byte	1,25,2,35,0,18
+	.byte	'.1.nn',0,4
+	.word	688
+	.byte	1,24,2,35,0,18
+	.byte	'DPTR',0,4
+	.word	688
+	.byte	8,16,2,35,0,18
+	.byte	'.2.nn',0,4
+	.word	688
+	.byte	16,0,2,35,0,0,13
+	.byte	'uint8_t',0,4,6,24
+	.word	323
+	.byte	13
+	.byte	'uint16_t',0,4,8,24
+	.word	.L106-.L32
+.L106:
+	.byte	4
+	.byte	'unsigned short int',0,2,7,13
+	.byte	'uint32_t',0,4,10,24
+	.word	345
+	.byte	13
+	.byte	'ubase_t',0,4,14,24
+	.word	492
+	.byte	13
+	.byte	'void_t',0,4,17,24
+	.word	345
+	.byte	13
+	.byte	'BoolType',0,5,59,17
+	.word	323
+	.byte	13
+	.byte	'VoidType',0,5,60,16
+	.word	345
+	.byte	13
+	.byte	'TaskType',0,5,141,1,17
+	.word	323
+	.byte	13
+	.byte	'TaskRefType',0,5,143,1,19
+	.word	.L107-.L32
+.L107:
+	.byte	8
+	.word	323
+	.byte	13
+	.byte	'TaskStateType',0,5,145,1,19
+	.word	323
+	.byte	13
+	.byte	'TaskStateRefType',0,5,147,1,25
+	.word	.L108-.L32
+.L108:
+	.byte	8
+	.word	323
+	.byte	13
+	.byte	'TickType',0,5,149,1,17
+	.word	492
+	.byte	13
+	.byte	'TickRefType',0,5,151,1,19
+	.word	.L109-.L32
+.L109:
+	.byte	8
+	.word	492
+	.byte	13
+	.byte	'AlarmBaseType',0,5,163,1,2
+	.word	.L110-.L32
+.L110:
+	.byte	17,5,154,1,9,12,16
+	.byte	'xMaxAllowedValue',0,4
+	.word	492
+	.byte	2,35,0,16
+	.byte	'xTicksPerBase',0,4
+	.word	492
+	.byte	2,35,4,16
+	.byte	'xMinCycle',0,4
+	.word	492
+	.byte	2,35,8,0,13
+	.byte	'AlarmBaseRefType',0,5,165,1,25
+	.word	.L111-.L32
+.L111:
+	.byte	8
+	.word	1228
+	.byte	13
+	.byte	'AlarmType',0,5,167,1,17
+	.word	323
+	.byte	13
+	.byte	'CounterType',0,5,169,1,17
+	.word	323
+	.byte	13
+	.byte	'EventMaskType',0,5,171,1,18
+	.word	959
+	.byte	13
+	.byte	'EventMaskRefType',0,5,173,1,24
+	.word	.L112-.L32
+.L112:
+	.byte	8
+	.word	959
+	.byte	13
+	.byte	'ResourceType',0,5,174,1,17
+	.word	323
+	.byte	13
+	.byte	'StatusType',0,5,175,1,17
+	.word	323
+	.byte	13
+	.byte	'AppModeType',0,5,176,1,17
+	.word	323
+	.byte	13
+	.byte	'ApplicationType',0,5,185,1,17
+	.word	323
+	.byte	13
+	.byte	'ScheduleTableType',0,5,214,1,17
+	.word	323
+	.byte	13
+	.byte	'ScheduleTableStatusType',0,5,230,1,17
+	.word	323
+	.byte	13
+	.byte	'OsScheduleTableAutostartType',0,5,255,1,17
+	.word	323
+	.byte	13
+	.byte	'OsScheduleTblSyncStrategyType',0,5,137,2,17
+	.word	323
+	.byte	13
+	.byte	'OsCpuIplType',0,6,43,17
+	.word	323
+	.byte	13
+	.byte	'TaskStackType',0,1,89,18
+	.word	345
+	.byte	13
+	.byte	'TaskStackRefType',0,1,96,3
+	.word	.L113-.L32
+.L113:
+	.byte	17,1,91,9,4,16
+	.byte	'pxStackTop',0,4
+	.word	.L114-.L32
+	.byte	2,35,0,0
+.L114:
+	.byte	8
+	.word	345
+	.byte	13
+	.byte	'PriorityType',0,1,98,17
+	.word	323
+	.byte	13
+	.byte	'TaskEntryType',0,1,100,16
+	.word	.L115-.L32
+.L115:
+	.byte	8
+	.word	.L116-.L32
+.L116:
+	.byte	19,1,1,13
+	.byte	'TcbType',0,1,112,2
+	.word	.L117-.L32
+.L117:
+	.byte	20
+	.byte	'_TaskControlBlockTag',0,1,101,16,8,16
+	.byte	'pxStack',0,4
+	.word	1747
+	.byte	2,35,0,16
+	.byte	'xPriority',0,1
+	.word	323
+	.byte	2,35,4,16
+	.byte	'xState',0,1
+	.word	323
+	.byte	2,35,5,16
+	.byte	'xActivateCount',0,1
+	.word	323
+	.byte	2,35,6,0,13
+	.byte	'AlarmClassType',0,1,117,17
+	.word	323
+	.byte	13
+	.byte	'AlarmContainerType',0,1,121,19
+	.word	345
+	.byte	13
+	.byte	'AlmCtrlBlkType',0,1,129,1,2
+	.word	.L118-.L32
+.L118:
+	.byte	20
+	.byte	'_AlmCtrlBlkTag',0,1,123,16,12,16
+	.byte	'xAlarmValue',0,4
+	.word	492
+	.byte	2,35,0,16
+	.byte	'xCycle',0,4
+	.word	492
+	.byte	2,35,4,16
+	.byte	'pxNext',0,1
+	.word	323
+	.byte	2,35,8,16
+	.byte	'pxPrev',0,1
+	.word	323
+	.byte	2,35,9,0,13
+	.byte	'OsSchedTblCtrlBlkType',0,1,162,1,2
+	.word	.L119-.L32
+.L119:
+	.byte	17,1,139,1,9,20,16
+	.byte	'xSchedTblStatus',0,1
+	.word	323
+	.byte	2,35,0,16
+	.byte	'xIterator',0,1
+	.word	323
+	.byte	2,35,1,16
+	.byte	'xSchedTblNextExpiryPointTime',0,4
+	.word	492
+	.byte	2,35,2,16
+	.byte	'xSchedTblStartingTime',0,4
+	.word	492
+	.byte	2,35,6,16
+	.byte	'xAdjustDirection',0,1
+	.word	323
+	.byte	2,35,10,16
+	.byte	'xDeviation',0,4
+	.word	492
+	.byte	2,35,12,16
+	.byte	'xNextOrPrevScheduleTable',0,1
+	.word	323
+	.byte	2,35,16,16
+	.byte	'pxNextSchedTbl',0,1
+	.word	323
+	.byte	2,35,17,16
+	.byte	'pxPrevSchedTbl',0,1
+	.word	323
+	.byte	2,35,18,0,13
+	.byte	'OsScheduleTableType',0,1,176,1,2
+	.word	.L120-.L32
+.L120:
+	.byte	17,1,163,1,9,28,16
+	.byte	'xOsScheduleTableDuration',0,4
+	.word	492
+	.byte	2,35,0,16
+	.byte	'xOsScheduleTableRepeating',0,1
+	.word	323
+	.byte	2,35,4,16
+	.byte	'xOsScheduleTableAccessingApplication',0,1
+	.word	323
+	.byte	2,35,5,16
+	.byte	'xOsScheduleTableCounterRef',0,1
+	.word	323
+	.byte	2,35,6,16
+	.byte	'xOsScheduleTableAutostartable',0,1
+	.word	323
+	.byte	2,35,7,16
+	.byte	'xOsScheduleTableAutostartType',0,1
+	.word	323
+	.byte	2,35,8,16
+	.byte	'xOsScheduleTableAutostartValue',0,4
+	.word	492
+	.byte	2,35,10,16
+	.byte	'xOsScheduleTableSyncStrategy',0,1
+	.word	323
+	.byte	2,35,14,16
+	.byte	'xOsScheduleTableMaxAdvance',0,4
+	.word	492
+	.byte	2,35,16,16
+	.byte	'xOsScheduleTableMaxRetard',0,4
+	.word	492
+	.byte	2,35,20,16
+	.byte	'xOsScheduleTableExplicitPrecision',0,4
+	.word	492
+	.byte	2,35,24,0,13
+	.byte	'OsSchedTblCmdType',0,1,184,1,3
+	.word	.L121-.L32
+.L121:
+	.byte	17,1,180,1,9,8,16
+	.byte	'xOffset',0,4
+	.word	492
+	.byte	2,35,0,16
+	.byte	'pxOsSchedTblCmd',0,4
+	.word	1795
+	.byte	2,35,4,0,21
+	.byte	'OSCurTsk',0,1,192,1,17
+	.word	323
+	.byte	1,1,21
+	.byte	'OSCurTcb',0,1,193,1,17
+	.word	.L122-.L32
+	.byte	1,1
+.L122:
+	.byte	8
+	.word	1819
+	.byte	21
+	.byte	'OSHighRdyTsk',0,1,196,1,17
+	.word	323
+	.byte	1,1,21
+	.byte	'OSHighRdyTcb',0,1,197,1,17
+	.word	2938
+	.byte	1,1,21
+	.byte	'OSIsr2Nesting',0,1,150,2,18
+	.word	323
+	.byte	1,1,21
+	.byte	'OSTaskEntryTable',0,7,22,31
+	.word	.L123-.L32
+	.byte	1,1
+.L123:
+	.byte	22
+	.word	.L124-.L32
+.L124:
+	.byte	23,28
+	.word	1773
+	.byte	24,6,0,8
+	.word	1800
+	.byte	0
+	.sdecl	'.debug_abbrev',debug
+	.sect	'.debug_abbrev'
+.L33:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,16,6,0,0,2,46,1,3,8,54,15,39,12,63,12,60,12,0,0,3,5,0,73,19,0,0,4
+	.byte	36,0,3,8,11,15,62,15,0,0,5,46,1,3,8,73,19,54,15,39,12,63,12,60,12,0,0,6,53,0,73,19,0,0,7,46,0,3,8,54,15
+	.byte	39,12,63,12,60,12,0,0,8,15,0,73,19,0,0,9,46,1,3,8,58,15,59,15,57,15,73,19,54,15,39,12,63,12,60,12,0,0
+	.byte	10,5,0,3,8,58,15,59,15,57,15,73,19,0,0,11,46,0,3,8,58,15,59,15,57,15,54,15,39,12,63,12,60,12,0,0,12,46
+	.byte	0,3,8,58,15,59,15,57,15,54,15,63,12,60,12,0,0,13,22,0,3,8,58,15,59,15,57,15,73,19,0,0,14,21,0,54,15,0
+	.byte	0,15,23,1,58,15,59,15,57,15,11,15,0,0,16,13,0,3,8,11,15,73,19,56,9,0,0,17,19,1,58,15,59,15,57,15,11,15
+	.byte	0,0,18,13,0,3,8,11,15,73,19,13,15,12,15,56,9,0,0,19,21,0,54,15,39,12,0,0,20,19,1,3,8,58,15,59,15,57,15
+	.byte	11,15,0,0,21,52,0,3,8,58,15,59,15,57,15,73,19,63,12,60,12,0,0,22,38,0,73,19,0,0,23,1,1,11,15,73,19,0,0
+	.byte	24,33,0,47,15,0,0,0
+	.sdecl	'.debug_line',debug
+	.sect	'.debug_line'
+.L34:
+	.word	.L126-.L125
+.L125:
+	.half	3
+	.word	.L128-.L127
+.L127:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Os.h',0,0,0,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0,0,0,0
+	.byte	'D:\\Program Files\\TASKING\\TriCore v3.5r1\\ctc\\include\\sfr\\regtc1797.sfr',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Bsp\\Cpu\\Platform_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Std_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\osek_test\\GaInOS_Studio\\Os_Cfg.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\osek_test\\GaInOS_Studio\\CfgObj.h',0,0,0,0,0
+.L128:
+.L126:
+	.sdecl	'.debug_info',debug,cluster('vPortGetIpl')
+	.sect	'.debug_info'
+.L35:
+	.word	225
+	.half	3
+	.word	.L36
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L38,.L37
+	.byte	2
+	.word	.L31
+	.byte	3
+	.byte	'vPortGetIpl',0,1,74,14
+	.word	.L75
+	.byte	1,1,1
+	.word	.L18,.L76,.L17
+	.byte	4
+	.word	.L18,.L76
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('vPortGetIpl')
+	.sect	'.debug_abbrev'
+.L36:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('vPortGetIpl')
+	.sect	'.debug_line'
+.L37:
+	.word	.L130-.L129
+.L129:
+	.half	3
+	.word	.L132-.L131
+.L131:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0,0,0,0,0
+.L132:
+	.byte	5,5,7,0,5,2
+	.word	.L18
+	.byte	3,204,0,1,5,1,9
+	.half	.L133-.L18
+	.byte	3,1,1,7,9
+	.half	.L39-.L133
+	.byte	0,1,1
+.L130:
+	.sdecl	'.debug_ranges',debug,cluster('vPortGetIpl')
+	.sect	'.debug_ranges'
+.L38:
+	.word	-1,.L18,0,.L39-.L18,0,0
+	.sdecl	'.debug_info',debug,cluster('__vPortSwitch2Task')
+	.sect	'.debug_info'
+.L40:
+	.word	263
+	.half	3
+	.word	.L41
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L43,.L42
+	.byte	2
+	.word	.L31
+	.byte	3
+	.byte	'__vPortSwitch2Task',0,1,105,6,1,1,1
+	.word	.L26,.L77,.L25
+	.byte	4
+	.word	.L26,.L77
+	.byte	4
+	.word	.L78,.L79
+	.byte	5
+	.byte	'pulUpperCSA',0,1,117,9
+	.word	.L80,.L81
+	.byte	0,0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('__vPortSwitch2Task')
+	.sect	'.debug_abbrev'
+.L41:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,1,17,1,18,1,0,0,5,52,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('__vPortSwitch2Task')
+	.sect	'.debug_line'
+.L42:
+	.word	.L135-.L134
+.L134:
+	.half	3
+	.word	.L137-.L136
+.L136:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0,0,0,0,0
+.L137:
+	.byte	5,28,7,0,5,2
+	.word	.L26
+	.byte	3,234,0,1,5,5,9
+	.half	.L138-.L26
+	.byte	3,1,1,5,24,7,9
+	.half	.L139-.L138
+	.byte	3,2,1,5,28,9
+	.half	.L5-.L139
+	.byte	3,2,1,5,5,9
+	.half	.L140-.L5
+	.byte	3,2,1,5,35,9
+	.half	.L141-.L140
+	.byte	3,2,1,5,9,9
+	.half	.L78-.L141
+	.byte	3,1,1,5,1,9
+	.half	.L79-.L78
+	.byte	3,7,1,5,7,7,9
+	.half	.L6-.L79
+	.byte	3,125,1,9
+	.half	.L142-.L6
+	.byte	3,1,1,5,1,9
+	.half	.L143-.L142
+	.byte	3,2,1,7,9
+	.half	.L44-.L143
+	.byte	0,1,1
+.L135:
+	.sdecl	'.debug_ranges',debug,cluster('__vPortSwitch2Task')
+	.sect	'.debug_ranges'
+.L43:
+	.word	-1,.L26,0,.L44-.L26,0,0
+	.sdecl	'.debug_info',debug,cluster('vPortSetIpl')
+	.sect	'.debug_info'
+.L45:
+	.word	238
+	.half	3
+	.word	.L46
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L48,.L47
+	.byte	2
+	.word	.L31
+	.byte	3
+	.byte	'vPortSetIpl',0,1,98,6,1,1,1
+	.word	.L22,.L82,.L21
+	.byte	4
+	.byte	'xIpl',0,1,98,26
+	.word	.L75,.L83
+	.byte	5
+	.word	.L22,.L82
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('vPortSetIpl')
+	.sect	'.debug_abbrev'
+.L46:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('vPortSetIpl')
+	.sect	'.debug_line'
+.L47:
+	.word	.L145-.L144
+.L144:
+	.half	3
+	.word	.L147-.L146
+.L146:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0,0,0,0,0
+.L147:
+	.byte	5,1,7,0,5,2
+	.word	.L22
+	.byte	3,227,0,1,7,9
+	.half	.L49-.L22
+	.byte	0,1,1
+.L145:
+	.sdecl	'.debug_ranges',debug,cluster('vPortSetIpl')
+	.sect	'.debug_ranges'
+.L48:
+	.word	-1,.L22,0,.L49-.L22,0,0
+	.sdecl	'.debug_info',debug,cluster('vPortTaskIdle')
+	.sect	'.debug_info'
+.L50:
+	.word	222
+	.half	3
+	.word	.L51
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L53,.L52
+	.byte	2
+	.word	.L31
+	.byte	3
+	.byte	'vPortTaskIdle',0,1,65,13,1,1
+	.word	.L16,.L84,.L15
+	.byte	4
+	.word	.L16,.L84
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('vPortTaskIdle')
+	.sect	'.debug_abbrev'
+.L51:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('vPortTaskIdle')
+	.sect	'.debug_line'
+.L52:
+	.word	.L149-.L148
+.L148:
+	.half	3
+	.word	.L151-.L150
+.L150:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0,0,0,0,0
+.L151:
+	.byte	5,27,7,0,5,2
+	.word	.L16
+	.byte	3,195,0,1,5,35,9
+	.half	.L152-.L16
+	.byte	3,2,1,5,1,9
+	.half	.L153-.L152
+	.byte	3,2,1,7,9
+	.half	.L54-.L153
+	.byte	0,1,1
+.L149:
+	.sdecl	'.debug_ranges',debug,cluster('vPortTaskIdle')
+	.sect	'.debug_ranges'
+.L53:
+	.word	-1,.L16,0,.L54-.L16,0,0
+	.sdecl	'.debug_info',debug,cluster('vPortPreActivateTask')
+	.sect	'.debug_info'
+.L55:
+	.word	230
+	.half	3
+	.word	.L56
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L58,.L57
+	.byte	2
+	.word	.L31
+	.byte	3
+	.byte	'vPortPreActivateTask',0,1,80,6,1,1,1
+	.word	.L20,.L85,.L19
+	.byte	4
+	.word	.L20,.L85
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('vPortPreActivateTask')
+	.sect	'.debug_abbrev'
+.L56:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('vPortPreActivateTask')
+	.sect	'.debug_line'
+.L57:
+	.word	.L155-.L154
+.L154:
+	.half	3
+	.word	.L157-.L156
+.L156:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0,0,0,0,0
+.L157:
+	.byte	5,33,7,0,5,2
+	.word	.L20
+	.byte	3,221,0,1,5,5,9
+	.half	.L4-.L20
+	.byte	3,1,1,5,1,9
+	.half	.L59-.L4
+	.byte	3,1,0,1,1
+.L155:
+	.sdecl	'.debug_ranges',debug,cluster('vPortPreActivateTask')
+	.sect	'.debug_ranges'
+.L58:
+	.word	-1,.L20,0,.L59-.L20,0,0
+	.sdecl	'.debug_info',debug,cluster('vPortIntGetIpl')
+	.sect	'.debug_info'
+.L60:
+	.word	224
+	.half	3
+	.word	.L61
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L63,.L62
+	.byte	2
+	.word	.L31
+	.byte	3
+	.byte	'vPortIntGetIpl',0,1,101,6,1,1,1
+	.word	.L24,.L86,.L23
+	.byte	4
+	.word	.L24,.L86
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('vPortIntGetIpl')
+	.sect	'.debug_abbrev'
+.L61:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('vPortIntGetIpl')
+	.sect	'.debug_line'
+.L62:
+	.word	.L159-.L158
+.L158:
+	.half	3
+	.word	.L161-.L160
+.L160:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0,0,0,0,0
+.L161:
+	.byte	5,1,7,0,5,2
+	.word	.L24
+	.byte	3,231,0,1,7,9
+	.half	.L64-.L24
+	.byte	0,1,1
+.L159:
+	.sdecl	'.debug_ranges',debug,cluster('vPortIntGetIpl')
+	.sect	'.debug_ranges'
+.L63:
+	.word	-1,.L24,0,.L64-.L24,0,0
+	.sdecl	'.debug_info',debug,cluster('vPortDispatcher')
+	.sect	'.debug_info'
+.L65:
+	.word	225
+	.half	3
+	.word	.L66
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L68,.L67
+	.byte	2
+	.word	.L31
+	.byte	3
+	.byte	'vPortDispatcher',0,1,126,6,1,1,1
+	.word	.L28,.L87,.L27
+	.byte	4
+	.word	.L28,.L87
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('vPortDispatcher')
+	.sect	'.debug_abbrev'
+.L66:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('vPortDispatcher')
+	.sect	'.debug_line'
+.L67:
+	.word	.L163-.L162
+.L162:
+	.half	3
+	.word	.L165-.L164
+.L164:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0,0,0,0,0
+.L165:
+	.byte	5,8,7,0,5,2
+	.word	.L28
+	.byte	3,255,0,1,5,47,9
+	.half	.L166-.L28
+	.byte	1,5,27,7,9
+	.half	.L10-.L166
+	.byte	3,2,1,5,22,9
+	.half	.L167-.L10
+	.byte	3,1,1,5,5,9
+	.half	.L11-.L167
+	.byte	3,2,1,5,1,9
+	.half	.L168-.L11
+	.byte	3,1,1,7,9
+	.half	.L69-.L168
+	.byte	0,1,1
+.L163:
+	.sdecl	'.debug_ranges',debug,cluster('vPortDispatcher')
+	.sect	'.debug_ranges'
+.L68:
+	.word	-1,.L28,0,.L69-.L28,0,0
+	.sdecl	'.debug_info',debug,cluster('OSTickISR')
+	.sect	'.debug_info'
+.L70:
+	.word	220
+	.half	3
+	.word	.L71
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L73,.L72
+	.byte	2
+	.word	.L31
+	.byte	3
+	.byte	'OSTickISR',0,1,136,1,6,1,1,1
+	.word	.L30,.L88,.L29
+	.byte	4
+	.word	.L30,.L88
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('OSTickISR')
+	.sect	'.debug_abbrev'
+.L71:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('OSTickISR')
+	.sect	'.debug_line'
+.L72:
+	.word	.L170-.L169
+.L169:
+	.half	3
+	.word	.L172-.L171
+.L171:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c',0,0,0,0,0
+.L172:
+	.byte	5,5,7,0,5,2
+	.word	.L30
+	.byte	3,137,1,1,5,20,9
+	.half	.L12-.L30
+	.byte	1,5,30,9
+	.half	.L173-.L12
+	.byte	3,3,1,5,5,9
+	.half	.L174-.L173
+	.byte	3,4,1,5,1,9
+	.half	.L175-.L174
+	.byte	3,1,1,7,9
+	.half	.L74-.L175
+	.byte	0,1,1
+.L170:
+	.sdecl	'.debug_ranges',debug,cluster('OSTickISR')
+	.sect	'.debug_ranges'
+.L73:
+	.word	-1,.L30,0,.L74-.L30,0,0
+	.sdecl	'.debug_loc',debug,cluster('OSTickISR')
+	.sect	'.debug_loc'
+.L29:
+	.word	-1,.L30,.L30-.L30,.L88-.L30
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('__vPortSwitch2Task')
+	.sect	'.debug_loc'
+.L25:
+	.word	-1,.L26,.L26-.L26,.L77-.L26
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L81:
+	.word	-1,.L26,.L89-.L26,.L90-.L26
+	.half	5
+	.byte	144,32,157,32,0
+	.word	.L91-.L26,.L6-.L26
+	.half	1
+	.byte	111
+	.word	.L90-.L26,.L92-.L26
+	.half	5
+	.byte	144,39,157,32,32
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('vPortDispatcher')
+	.sect	'.debug_loc'
+.L27:
+	.word	-1,.L28,.L28-.L28,.L87-.L28
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('vPortGetIpl')
+	.sect	'.debug_loc'
+.L17:
+	.word	-1,.L18,.L18-.L18,.L76-.L18
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('vPortIntGetIpl')
+	.sect	'.debug_loc'
+.L23:
+	.word	-1,.L24,.L24-.L24,.L86-.L24
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('vPortPreActivateTask')
+	.sect	'.debug_loc'
+.L19:
+	.word	-1,.L20,.L20-.L20,.L85-.L20
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('vPortSetIpl')
+	.sect	'.debug_loc'
+.L21:
+	.word	-1,.L22,.L22-.L22,.L82-.L22
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L83:
+	.word	-1,.L22,.L22-.L22,.L82-.L22
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('vPortTaskIdle')
+	.sect	'.debug_loc'
+.L15:
+	.word	-1,.L16,.L16-.L16,.L84-.L16
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_frame',debug
+	.sect	'.debug_frame'
+.L176:
+	.word	48
+	.word	-1
+	.byte	3,0,2,1,27,12,26,0,8,26,8,27,8,28,8,29,8,30,8,31,8,16,8,17,8,24,8,25,8,32,8,33,8,34,8,35,8,36,8,37,8,38
+	.byte	8,39
+	.sdecl	'.debug_frame',debug,cluster('vPortTaskIdle')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L176,.L16,.L84-.L16
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('vPortGetIpl')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L176,.L18,.L76-.L18
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('vPortPreActivateTask')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L176,.L20,.L85-.L20
+	.sdecl	'.debug_frame',debug,cluster('vPortSetIpl')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L176,.L22,.L82-.L22
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('vPortIntGetIpl')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L176,.L24,.L86-.L24
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('__vPortSwitch2Task')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L176,.L26,.L77-.L26
+	.sdecl	'.debug_frame',debug,cluster('vPortDispatcher')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L176,.L28,.L87-.L28
+	.byte	8,19,8,20,8,21,8,22,8,23,0,0
+	.sdecl	'.debug_frame',debug,cluster('OSTickISR')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L176,.L30,.L88-.L30
+
+; F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c	   147  
+
+	; Module end

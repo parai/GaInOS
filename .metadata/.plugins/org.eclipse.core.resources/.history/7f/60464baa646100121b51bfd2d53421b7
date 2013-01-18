@@ -1,0 +1,32 @@
+#include "Serial.h"
+#include "stdio.h"
+#include "stdlib.h"
+
+
+#define SCI_UNINITIALISED 0 
+#define SCI_INITIALISED  1
+
+static unsigned int g_sci_state = SCI_UNINITIALISED;
+static void Sci_Init()
+{
+}
+static void Sci_Send(unsigned char data)
+{
+}
+void printk(char *fmt,...){
+	unsigned int i=0;
+    char *buf=NULL;
+	int len;
+	va_list args;
+	if(SCI_UNINITIALISED==g_sci_state){
+		Sci_Init();
+		g_sci_state=SCI_INITIALISED;
+	}
+	va_start(args,fmt);
+	buf=malloc(64);
+	if(NULL==buf)return;		/* 分配内存失败，直接返回 */
+	len = vsprintf((char*)buf,(char *)fmt,args)+1;
+	while('\0'!=buf[i]&&i<len)  Sci_Send(buf[i++]) ;
+	free(buf);
+	va_end(args);
+}

@@ -1,0 +1,6 @@
+sync_on_halt.o :	..\sync_on_halt.c
+..\sync_on_halt.c :	
+sync_on_halt.o :	"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\sfr\regtc1797.sfr"
+"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\sfr\regtc1797.sfr" :	
+sync_on_halt.o :	"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\stddef.h"
+"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\stddef.h" :	

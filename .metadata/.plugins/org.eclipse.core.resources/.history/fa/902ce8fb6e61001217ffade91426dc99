@@ -1,0 +1,2413 @@
+	; TASKING VX-toolset for TriCore: C compiler v3.5r1 Build 484.1.2
+	; Options: -f cc5656a -c99 --dep-file=GaInOS_Studio\.CfgRdyQ.o.d -Ctc1797 --core=tc1.3.1 --fpu-present -F -IF:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio -IF:\parai@foxmail.com\nt\GaInOS\include -IF:\parai@foxmail.com\nt\GaInOS\kernel -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport -g --make-target=GaInOS_Studio\CfgRdyQ.o -t4 --language=-gcc,-volatile,+strings --default-near-size=0 -O2 --default-a1-size=0 --default-a0-size=0 --source --align=0 --compact-max-size=200 --switch=auto --tasking-sfr -o GaInOS_Studio\CfgRdyQ.src
+	; Module start
+	.name	"CfgRdyQ"
+
+	
+$FPU
+$TC131
+	
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority0',data,cluster('g_RdyQueueOfPriority0')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority0'
+g_RdyQueueOfPriority0:	.type	object
+	.size	g_RdyQueueOfPriority0,3
+	.space	3
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority1',data,cluster('g_RdyQueueOfPriority1')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority1'
+g_RdyQueueOfPriority1:	.type	object
+	.size	g_RdyQueueOfPriority1,8
+	.space	8
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority2',data,cluster('g_RdyQueueOfPriority2')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority2'
+g_RdyQueueOfPriority2:	.type	object
+	.size	g_RdyQueueOfPriority2,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority3',data,cluster('g_RdyQueueOfPriority3')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority3'
+g_RdyQueueOfPriority3:	.type	object
+	.size	g_RdyQueueOfPriority3,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority4',data,cluster('g_RdyQueueOfPriority4')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority4'
+g_RdyQueueOfPriority4:	.type	object
+	.size	g_RdyQueueOfPriority4,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority5',data,cluster('g_RdyQueueOfPriority5')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority5'
+g_RdyQueueOfPriority5:	.type	object
+	.size	g_RdyQueueOfPriority5,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority6',data,cluster('g_RdyQueueOfPriority6')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority6'
+g_RdyQueueOfPriority6:	.type	object
+	.size	g_RdyQueueOfPriority6,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority7',data,cluster('g_RdyQueueOfPriority7')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority7'
+g_RdyQueueOfPriority7:	.type	object
+	.size	g_RdyQueueOfPriority7,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority8',data,cluster('g_RdyQueueOfPriority8')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority8'
+g_RdyQueueOfPriority8:	.type	object
+	.size	g_RdyQueueOfPriority8,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority9',data,cluster('g_RdyQueueOfPriority9')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority9'
+g_RdyQueueOfPriority9:	.type	object
+	.size	g_RdyQueueOfPriority9,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority10',data,cluster('g_RdyQueueOfPriority10')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority10'
+g_RdyQueueOfPriority10:	.type	object
+	.size	g_RdyQueueOfPriority10,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority11',data,cluster('g_RdyQueueOfPriority11')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority11'
+g_RdyQueueOfPriority11:	.type	object
+	.size	g_RdyQueueOfPriority11,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority12',data,cluster('g_RdyQueueOfPriority12')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority12'
+g_RdyQueueOfPriority12:	.type	object
+	.size	g_RdyQueueOfPriority12,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority13',data,cluster('g_RdyQueueOfPriority13')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority13'
+g_RdyQueueOfPriority13:	.type	object
+	.size	g_RdyQueueOfPriority13,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority14',data,cluster('g_RdyQueueOfPriority14')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority14'
+g_RdyQueueOfPriority14:	.type	object
+	.size	g_RdyQueueOfPriority14,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority15',data,cluster('g_RdyQueueOfPriority15')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority15'
+g_RdyQueueOfPriority15:	.type	object
+	.size	g_RdyQueueOfPriority15,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority16',data,cluster('g_RdyQueueOfPriority16')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority16'
+g_RdyQueueOfPriority16:	.type	object
+	.size	g_RdyQueueOfPriority16,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority17',data,cluster('g_RdyQueueOfPriority17')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority17'
+g_RdyQueueOfPriority17:	.type	object
+	.size	g_RdyQueueOfPriority17,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority18',data,cluster('g_RdyQueueOfPriority18')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority18'
+g_RdyQueueOfPriority18:	.type	object
+	.size	g_RdyQueueOfPriority18,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority19',data,cluster('g_RdyQueueOfPriority19')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority19'
+g_RdyQueueOfPriority19:	.type	object
+	.size	g_RdyQueueOfPriority19,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority20',data,cluster('g_RdyQueueOfPriority20')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority20'
+g_RdyQueueOfPriority20:	.type	object
+	.size	g_RdyQueueOfPriority20,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority21',data,cluster('g_RdyQueueOfPriority21')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority21'
+g_RdyQueueOfPriority21:	.type	object
+	.size	g_RdyQueueOfPriority21,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority22',data,cluster('g_RdyQueueOfPriority22')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority22'
+g_RdyQueueOfPriority22:	.type	object
+	.size	g_RdyQueueOfPriority22,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority23',data,cluster('g_RdyQueueOfPriority23')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority23'
+g_RdyQueueOfPriority23:	.type	object
+	.size	g_RdyQueueOfPriority23,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority24',data,cluster('g_RdyQueueOfPriority24')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority24'
+g_RdyQueueOfPriority24:	.type	object
+	.size	g_RdyQueueOfPriority24,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority25',data,cluster('g_RdyQueueOfPriority25')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority25'
+g_RdyQueueOfPriority25:	.type	object
+	.size	g_RdyQueueOfPriority25,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority26',data,cluster('g_RdyQueueOfPriority26')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority26'
+g_RdyQueueOfPriority26:	.type	object
+	.size	g_RdyQueueOfPriority26,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority27',data,cluster('g_RdyQueueOfPriority27')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority27'
+g_RdyQueueOfPriority27:	.type	object
+	.size	g_RdyQueueOfPriority27,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority28',data,cluster('g_RdyQueueOfPriority28')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority28'
+g_RdyQueueOfPriority28:	.type	object
+	.size	g_RdyQueueOfPriority28,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority29',data,cluster('g_RdyQueueOfPriority29')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority29'
+g_RdyQueueOfPriority29:	.type	object
+	.size	g_RdyQueueOfPriority29,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority30',data,cluster('g_RdyQueueOfPriority30')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority30'
+g_RdyQueueOfPriority30:	.type	object
+	.size	g_RdyQueueOfPriority30,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority31',data,cluster('g_RdyQueueOfPriority31')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority31'
+g_RdyQueueOfPriority31:	.type	object
+	.size	g_RdyQueueOfPriority31,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority32',data,cluster('g_RdyQueueOfPriority32')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority32'
+g_RdyQueueOfPriority32:	.type	object
+	.size	g_RdyQueueOfPriority32,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority33',data,cluster('g_RdyQueueOfPriority33')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority33'
+g_RdyQueueOfPriority33:	.type	object
+	.size	g_RdyQueueOfPriority33,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority34',data,cluster('g_RdyQueueOfPriority34')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority34'
+g_RdyQueueOfPriority34:	.type	object
+	.size	g_RdyQueueOfPriority34,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority35',data,cluster('g_RdyQueueOfPriority35')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority35'
+g_RdyQueueOfPriority35:	.type	object
+	.size	g_RdyQueueOfPriority35,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority36',data,cluster('g_RdyQueueOfPriority36')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority36'
+g_RdyQueueOfPriority36:	.type	object
+	.size	g_RdyQueueOfPriority36,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority37',data,cluster('g_RdyQueueOfPriority37')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority37'
+g_RdyQueueOfPriority37:	.type	object
+	.size	g_RdyQueueOfPriority37,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority38',data,cluster('g_RdyQueueOfPriority38')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority38'
+g_RdyQueueOfPriority38:	.type	object
+	.size	g_RdyQueueOfPriority38,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority39',data,cluster('g_RdyQueueOfPriority39')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority39'
+g_RdyQueueOfPriority39:	.type	object
+	.size	g_RdyQueueOfPriority39,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority40',data,cluster('g_RdyQueueOfPriority40')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority40'
+g_RdyQueueOfPriority40:	.type	object
+	.size	g_RdyQueueOfPriority40,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority41',data,cluster('g_RdyQueueOfPriority41')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority41'
+g_RdyQueueOfPriority41:	.type	object
+	.size	g_RdyQueueOfPriority41,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority42',data,cluster('g_RdyQueueOfPriority42')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority42'
+g_RdyQueueOfPriority42:	.type	object
+	.size	g_RdyQueueOfPriority42,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority43',data,cluster('g_RdyQueueOfPriority43')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority43'
+g_RdyQueueOfPriority43:	.type	object
+	.size	g_RdyQueueOfPriority43,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority44',data,cluster('g_RdyQueueOfPriority44')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority44'
+g_RdyQueueOfPriority44:	.type	object
+	.size	g_RdyQueueOfPriority44,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority45',data,cluster('g_RdyQueueOfPriority45')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority45'
+g_RdyQueueOfPriority45:	.type	object
+	.size	g_RdyQueueOfPriority45,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority46',data,cluster('g_RdyQueueOfPriority46')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority46'
+g_RdyQueueOfPriority46:	.type	object
+	.size	g_RdyQueueOfPriority46,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority47',data,cluster('g_RdyQueueOfPriority47')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority47'
+g_RdyQueueOfPriority47:	.type	object
+	.size	g_RdyQueueOfPriority47,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority48',data,cluster('g_RdyQueueOfPriority48')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority48'
+g_RdyQueueOfPriority48:	.type	object
+	.size	g_RdyQueueOfPriority48,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority49',data,cluster('g_RdyQueueOfPriority49')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority49'
+g_RdyQueueOfPriority49:	.type	object
+	.size	g_RdyQueueOfPriority49,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority50',data,cluster('g_RdyQueueOfPriority50')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority50'
+g_RdyQueueOfPriority50:	.type	object
+	.size	g_RdyQueueOfPriority50,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority51',data,cluster('g_RdyQueueOfPriority51')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority51'
+g_RdyQueueOfPriority51:	.type	object
+	.size	g_RdyQueueOfPriority51,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority52',data,cluster('g_RdyQueueOfPriority52')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority52'
+g_RdyQueueOfPriority52:	.type	object
+	.size	g_RdyQueueOfPriority52,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority53',data,cluster('g_RdyQueueOfPriority53')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority53'
+g_RdyQueueOfPriority53:	.type	object
+	.size	g_RdyQueueOfPriority53,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority54',data,cluster('g_RdyQueueOfPriority54')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority54'
+g_RdyQueueOfPriority54:	.type	object
+	.size	g_RdyQueueOfPriority54,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority55',data,cluster('g_RdyQueueOfPriority55')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority55'
+g_RdyQueueOfPriority55:	.type	object
+	.size	g_RdyQueueOfPriority55,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority56',data,cluster('g_RdyQueueOfPriority56')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority56'
+g_RdyQueueOfPriority56:	.type	object
+	.size	g_RdyQueueOfPriority56,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority57',data,cluster('g_RdyQueueOfPriority57')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority57'
+g_RdyQueueOfPriority57:	.type	object
+	.size	g_RdyQueueOfPriority57,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority58',data,cluster('g_RdyQueueOfPriority58')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority58'
+g_RdyQueueOfPriority58:	.type	object
+	.size	g_RdyQueueOfPriority58,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority59',data,cluster('g_RdyQueueOfPriority59')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority59'
+g_RdyQueueOfPriority59:	.type	object
+	.size	g_RdyQueueOfPriority59,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority60',data,cluster('g_RdyQueueOfPriority60')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority60'
+g_RdyQueueOfPriority60:	.type	object
+	.size	g_RdyQueueOfPriority60,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority61',data,cluster('g_RdyQueueOfPriority61')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority61'
+g_RdyQueueOfPriority61:	.type	object
+	.size	g_RdyQueueOfPriority61,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority62',data,cluster('g_RdyQueueOfPriority62')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority62'
+g_RdyQueueOfPriority62:	.type	object
+	.size	g_RdyQueueOfPriority62,2
+	.space	2
+	.sdecl	'.bss.CfgRdyQ.g_RdyQueueOfPriority63',data,cluster('g_RdyQueueOfPriority63')
+	.sect	'.bss.CfgRdyQ.g_RdyQueueOfPriority63'
+g_RdyQueueOfPriority63:	.type	object
+	.size	g_RdyQueueOfPriority63,2
+	.space	2
+	.sdecl	'.data.CfgRdyQ.g_RdyQueueOfInvalidPriority',data,cluster('g_RdyQueueOfInvalidPriority')
+	.sect	'.data.CfgRdyQ.g_RdyQueueOfInvalidPriority'
+g_RdyQueueOfInvalidPriority:	.type	object
+	.size	g_RdyQueueOfInvalidPriority,1
+	.byte	7
+	.sdecl	'.rodata.CfgRdyQ.OSTskRdyQueuePtr',data,rom,cluster('OSTskRdyQueuePtr')
+	.sect	'.rodata.CfgRdyQ.OSTskRdyQueuePtr'
+	.global	OSTskRdyQueuePtr
+	.align	4
+OSTskRdyQueuePtr:	.type	object
+	.size	OSTskRdyQueuePtr,260
+	.word	g_RdyQueueOfPriority0,g_RdyQueueOfPriority1,g_RdyQueueOfPriority2,g_RdyQueueOfPriority3,g_RdyQueueOfPriority4,g_RdyQueueOfPriority5,g_RdyQueueOfPriority6,g_RdyQueueOfPriority7
+	.word	g_RdyQueueOfPriority8,g_RdyQueueOfPriority9,g_RdyQueueOfPriority10,g_RdyQueueOfPriority11,g_RdyQueueOfPriority12,g_RdyQueueOfPriority13,g_RdyQueueOfPriority14,g_RdyQueueOfPriority15
+	.word	g_RdyQueueOfPriority16,g_RdyQueueOfPriority17,g_RdyQueueOfPriority18,g_RdyQueueOfPriority19,g_RdyQueueOfPriority20,g_RdyQueueOfPriority21,g_RdyQueueOfPriority22,g_RdyQueueOfPriority23
+	.word	g_RdyQueueOfPriority24,g_RdyQueueOfPriority25,g_RdyQueueOfPriority26,g_RdyQueueOfPriority27,g_RdyQueueOfPriority28,g_RdyQueueOfPriority29,g_RdyQueueOfPriority30,g_RdyQueueOfPriority31
+	.word	g_RdyQueueOfPriority32,g_RdyQueueOfPriority33,g_RdyQueueOfPriority34,g_RdyQueueOfPriority35,g_RdyQueueOfPriority36,g_RdyQueueOfPriority37,g_RdyQueueOfPriority38,g_RdyQueueOfPriority39
+	.word	g_RdyQueueOfPriority40,g_RdyQueueOfPriority41,g_RdyQueueOfPriority42,g_RdyQueueOfPriority43,g_RdyQueueOfPriority44,g_RdyQueueOfPriority45,g_RdyQueueOfPriority46,g_RdyQueueOfPriority47
+	.word	g_RdyQueueOfPriority48,g_RdyQueueOfPriority49,g_RdyQueueOfPriority50,g_RdyQueueOfPriority51,g_RdyQueueOfPriority52,g_RdyQueueOfPriority53,g_RdyQueueOfPriority54,g_RdyQueueOfPriority55
+	.word	g_RdyQueueOfPriority56,g_RdyQueueOfPriority57,g_RdyQueueOfPriority58,g_RdyQueueOfPriority59,g_RdyQueueOfPriority60,g_RdyQueueOfPriority61,g_RdyQueueOfPriority62,g_RdyQueueOfPriority63
+	.word	g_RdyQueueOfInvalidPriority
+	.sdecl	'.rodata.CfgRdyQ.OSTskRdyQueueSize',data,rom,cluster('OSTskRdyQueueSize')
+	.sect	'.rodata.CfgRdyQ.OSTskRdyQueueSize'
+	.global	OSTskRdyQueueSize
+OSTskRdyQueueSize:	.type	object
+	.size	OSTskRdyQueueSize,65
+	.byte	3,8,2,2,2,2,2,2
+	.byte	2,2,2,2,2,2,2,2
+	.byte	2,2,2,2,2,2,2,2
+	.byte	2,2,2,2,2,2,2,2
+	.byte	2,2,2,2,2,2,2,2
+	.byte	2,2,2,2,2,2,2,2
+	.byte	2,2,2,2,2,2,2,2
+	.byte	2,2,2,2,2,2,2,2
+	.byte	1
+	.sdecl	'.debug_info',debug
+	.sect	'.debug_info'
+.L3:
+	.word	2718
+	.half	3
+	.word	.L4
+	.byte	4
+.L2:
+	.byte	1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L5
+	.byte	2
+	.byte	'__size_t',0,1,1,1
+	.word	.L146-.L3
+.L146:
+	.byte	3
+	.byte	'unsigned int',0,4,7,2
+	.byte	'__codeptr',0,1,1,1
+	.word	.L147-.L3
+.L147:
+	.byte	4
+	.word	.L148-.L3
+.L148:
+	.byte	5,1,2
+	.byte	'PCP_GPR6_type',0,2,158,19,3
+	.word	.L149-.L3
+.L149:
+	.byte	6
+	.word	.L150-.L3
+.L150:
+	.byte	7,2,145,19,18,4,8
+	.byte	'B',0,4
+	.word	.L151-.L3
+	.byte	2,35,0,8
+	.byte	'I',0,4
+	.word	.L152-.L3
+	.byte	2,35,0,8
+	.byte	'U',0,4
+	.word	200
+	.byte	2,35,0,0
+.L151:
+	.byte	9,2,147,19,2,4,10
+	.byte	'CNT1',0,4
+	.word	.L153-.L3
+	.byte	12,20,2,35,0,10
+	.byte	'.1.nn',0,4
+	.word	.L153-.L3
+	.byte	2,18,2,35,0,10
+	.byte	'TOS',0,4
+	.word	.L153-.L3
+	.byte	2,16,2,35,0,10
+	.byte	'SRPN',0,4
+	.word	.L153-.L3
+	.byte	8,8,2,35,0,10
+	.byte	'CPPN',0,4
+	.word	.L153-.L3
+	.byte	8,0,2,35,0,0
+.L153:
+	.byte	3
+	.byte	'unsigned int',0,4,7
+.L152:
+	.byte	3
+	.byte	'int',0,4,5,2
+	.byte	'PCP_GPR7_type',0,2,178,19,3
+	.word	.L154-.L3
+.L154:
+	.byte	6
+	.word	.L155-.L3
+.L155:
+	.byte	7,2,160,19,18,4,8
+	.byte	'B',0,4
+	.word	.L156-.L3
+	.byte	2,35,0,8
+	.byte	'I',0,4
+	.word	412
+	.byte	2,35,0,8
+	.byte	'U',0,4
+	.word	200
+	.byte	2,35,0,0
+.L156:
+	.byte	9,2,162,19,2,4,10
+	.byte	'Z',0,4
+	.word	396
+	.byte	1,31,2,35,0,10
+	.byte	'N',0,4
+	.word	396
+	.byte	1,30,2,35,0,10
+	.byte	'C',0,4
+	.word	396
+	.byte	1,29,2,35,0,10
+	.byte	'V',0,4
+	.word	396
+	.byte	1,28,2,35,0,10
+	.byte	'CNZ',0,4
+	.word	396
+	.byte	1,27,2,35,0,10
+	.byte	'IEN',0,4
+	.word	396
+	.byte	1,26,2,35,0,10
+	.byte	'CEN',0,4
+	.word	396
+	.byte	1,25,2,35,0,10
+	.byte	'.1.nn',0,4
+	.word	396
+	.byte	1,24,2,35,0,10
+	.byte	'DPTR',0,4
+	.word	396
+	.byte	8,16,2,35,0,10
+	.byte	'.2.nn',0,4
+	.word	396
+	.byte	16,0,2,35,0,0,2
+	.byte	'uint8_t',0,3,6,24
+	.word	.L157-.L3
+.L157:
+	.byte	3
+	.byte	'unsigned char',0,1,8,2
+	.byte	'uint16_t',0,3,8,24
+	.word	.L158-.L3
+.L158:
+	.byte	3
+	.byte	'unsigned short int',0,2,7,2
+	.byte	'uint32_t',0,3,10,24
+	.word	.L159-.L3
+.L159:
+	.byte	3
+	.byte	'unsigned long int',0,4,7,2
+	.byte	'ubase_t',0,3,14,24
+	.word	200
+	.byte	2
+	.byte	'void_t',0,3,17,24
+	.word	730
+	.byte	2
+	.byte	'BoolType',0,4,59,17
+	.word	657
+	.byte	2
+	.byte	'VoidType',0,4,60,16
+	.word	730
+	.byte	2
+	.byte	'TaskType',0,4,141,1,17
+	.word	657
+	.byte	2
+	.byte	'TaskRefType',0,4,143,1,19
+	.word	.L160-.L3
+.L160:
+	.byte	4
+	.word	657
+	.byte	2
+	.byte	'TaskStateType',0,4,145,1,19
+	.word	657
+	.byte	2
+	.byte	'TaskStateRefType',0,4,147,1,25
+	.word	.L161-.L3
+.L161:
+	.byte	4
+	.word	657
+	.byte	2
+	.byte	'TickType',0,4,149,1,17
+	.word	200
+	.byte	2
+	.byte	'TickRefType',0,4,151,1,19
+	.word	.L162-.L3
+.L162:
+	.byte	4
+	.word	200
+	.byte	2
+	.byte	'AlarmBaseType',0,4,163,1,2
+	.word	.L163-.L3
+.L163:
+	.byte	9,4,154,1,9,12,8
+	.byte	'xMaxAllowedValue',0,4
+	.word	200
+	.byte	2,35,0,8
+	.byte	'xTicksPerBase',0,4
+	.word	200
+	.byte	2,35,4,8
+	.byte	'xMinCycle',0,4
+	.word	200
+	.byte	2,35,8,0,2
+	.byte	'AlarmBaseRefType',0,4,165,1,25
+	.word	.L164-.L3
+.L164:
+	.byte	4
+	.word	981
+	.byte	2
+	.byte	'AlarmType',0,4,167,1,17
+	.word	657
+	.byte	2
+	.byte	'CounterType',0,4,169,1,17
+	.word	657
+	.byte	2
+	.byte	'EventMaskType',0,4,171,1,18
+	.word	691
+	.byte	2
+	.byte	'EventMaskRefType',0,4,173,1,24
+	.word	.L165-.L3
+.L165:
+	.byte	4
+	.word	691
+	.byte	2
+	.byte	'ResourceType',0,4,174,1,17
+	.word	657
+	.byte	2
+	.byte	'StatusType',0,4,175,1,17
+	.word	657
+	.byte	2
+	.byte	'AppModeType',0,4,176,1,17
+	.word	657
+	.byte	2
+	.byte	'ApplicationType',0,4,185,1,17
+	.word	657
+	.byte	2
+	.byte	'ScheduleTableType',0,4,214,1,17
+	.word	657
+	.byte	2
+	.byte	'ScheduleTableStatusType',0,4,230,1,17
+	.word	657
+	.byte	2
+	.byte	'OsScheduleTableAutostartType',0,4,255,1,17
+	.word	657
+	.byte	2
+	.byte	'OsScheduleTblSyncStrategyType',0,4,137,2,17
+	.word	657
+	.byte	2
+	.byte	'OsCpuIplType',0,5,43,17
+	.word	657
+	.byte	2
+	.byte	'TaskStackType',0,6,89,18
+	.word	730
+	.byte	2
+	.byte	'TaskStackRefType',0,6,96,3
+	.word	.L166-.L3
+.L166:
+	.byte	9,6,91,9,4,8
+	.byte	'pxStackTop',0,4
+	.word	.L167-.L3
+	.byte	2,35,0,0
+.L167:
+	.byte	4
+	.word	730
+	.byte	2
+	.byte	'PriorityType',0,6,98,17
+	.word	657
+	.byte	2
+	.byte	'TaskEntryType',0,6,100,16
+	.word	.L168-.L3
+.L168:
+	.byte	4
+	.word	.L169-.L3
+.L169:
+	.byte	11,1,1,2
+	.byte	'TcbType',0,6,112,2
+	.word	.L170-.L3
+.L170:
+	.byte	12
+	.byte	'_TaskControlBlockTag',0,6,101,16,8,8
+	.byte	'pxStack',0,4
+	.word	1500
+	.byte	2,35,0,8
+	.byte	'xPriority',0,1
+	.word	657
+	.byte	2,35,4,8
+	.byte	'xState',0,1
+	.word	657
+	.byte	2,35,5,8
+	.byte	'xActivateCount',0,1
+	.word	657
+	.byte	2,35,6,0,2
+	.byte	'AlarmClassType',0,6,117,17
+	.word	657
+	.byte	2
+	.byte	'AlarmContainerType',0,6,121,19
+	.word	730
+	.byte	2
+	.byte	'AlmCtrlBlkType',0,6,129,1,2
+	.word	.L171-.L3
+.L171:
+	.byte	12
+	.byte	'_AlmCtrlBlkTag',0,6,123,16,12,8
+	.byte	'xAlarmValue',0,4
+	.word	200
+	.byte	2,35,0,8
+	.byte	'xCycle',0,4
+	.word	200
+	.byte	2,35,4,8
+	.byte	'pxNext',0,1
+	.word	657
+	.byte	2,35,8,8
+	.byte	'pxPrev',0,1
+	.word	657
+	.byte	2,35,9,0,2
+	.byte	'OsSchedTblCtrlBlkType',0,6,162,1,2
+	.word	.L172-.L3
+.L172:
+	.byte	9,6,139,1,9,20,8
+	.byte	'xSchedTblStatus',0,1
+	.word	657
+	.byte	2,35,0,8
+	.byte	'xIterator',0,1
+	.word	657
+	.byte	2,35,1,8
+	.byte	'xSchedTblNextExpiryPointTime',0,4
+	.word	200
+	.byte	2,35,2,8
+	.byte	'xSchedTblStartingTime',0,4
+	.word	200
+	.byte	2,35,6,8
+	.byte	'xAdjustDirection',0,1
+	.word	657
+	.byte	2,35,10,8
+	.byte	'xDeviation',0,4
+	.word	200
+	.byte	2,35,12,8
+	.byte	'xNextOrPrevScheduleTable',0,1
+	.word	657
+	.byte	2,35,16,8
+	.byte	'pxNextSchedTbl',0,1
+	.word	657
+	.byte	2,35,17,8
+	.byte	'pxPrevSchedTbl',0,1
+	.word	657
+	.byte	2,35,18,0,2
+	.byte	'OsScheduleTableType',0,6,176,1,2
+	.word	.L173-.L3
+.L173:
+	.byte	9,6,163,1,9,28,8
+	.byte	'xOsScheduleTableDuration',0,4
+	.word	200
+	.byte	2,35,0,8
+	.byte	'xOsScheduleTableRepeating',0,1
+	.word	657
+	.byte	2,35,4,8
+	.byte	'xOsScheduleTableAccessingApplication',0,1
+	.word	657
+	.byte	2,35,5,8
+	.byte	'xOsScheduleTableCounterRef',0,1
+	.word	657
+	.byte	2,35,6,8
+	.byte	'xOsScheduleTableAutostartable',0,1
+	.word	657
+	.byte	2,35,7,8
+	.byte	'xOsScheduleTableAutostartType',0,1
+	.word	657
+	.byte	2,35,8,8
+	.byte	'xOsScheduleTableAutostartValue',0,4
+	.word	200
+	.byte	2,35,10,8
+	.byte	'xOsScheduleTableSyncStrategy',0,1
+	.word	657
+	.byte	2,35,14,8
+	.byte	'xOsScheduleTableMaxAdvance',0,4
+	.word	200
+	.byte	2,35,16,8
+	.byte	'xOsScheduleTableMaxRetard',0,4
+	.word	200
+	.byte	2,35,20,8
+	.byte	'xOsScheduleTableExplicitPrecision',0,4
+	.word	200
+	.byte	2,35,24,0,2
+	.byte	'OsSchedTblCmdType',0,6,184,1,3
+	.word	.L174-.L3
+.L174:
+	.byte	9,6,180,1,9,8,8
+	.byte	'xOffset',0,4
+	.word	200
+	.byte	2,35,0,8
+	.byte	'pxOsSchedTblCmd',0,4
+	.word	1548
+	.byte	2,35,4,0
+.L140:
+	.byte	13
+	.word	.L175-.L3
+.L175:
+	.byte	14,132,2
+	.word	834
+	.byte	15,64,0,4
+	.word	657
+.L141:
+	.byte	13
+	.word	.L176-.L3
+.L176:
+	.byte	14,65
+	.word	657
+	.byte	15,64,0
+.L142:
+	.byte	14,3
+	.word	657
+	.byte	15,2,0
+.L143:
+	.byte	14,8
+	.word	657
+	.byte	15,7,0
+.L144:
+	.byte	14,2
+	.word	657
+	.byte	15,1,0
+.L145:
+	.byte	14,1
+	.word	657
+	.byte	15,0,0,0
+	.sdecl	'.debug_abbrev',debug
+	.sect	'.debug_abbrev'
+.L4:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,16,6,0,0,2,22,0,3,8,58,15,59,15,57,15,73,19,0,0,3,36,0,3,8,11,15
+	.byte	62,15,0,0,4,15,0,73,19,0,0,5,21,0,54,15,0,0,6,53,0,73,19,0,0,7,23,1,58,15,59,15,57,15,11,15,0,0,8,13,0
+	.byte	3,8,11,15,73,19,56,9,0,0,9,19,1,58,15,59,15,57,15,11,15,0,0,10,13,0,3,8,11,15,73,19,13,15,12,15,56,9,0
+	.byte	0,11,21,0,54,15,39,12,0,0,12,19,1,3,8,58,15,59,15,57,15,11,15,0,0,13,38,0,73,19,0,0,14,1,1,11,15,73,19
+	.byte	0,0,15,33,0,47,15,0,0,0
+	.sdecl	'.debug_line',debug
+	.sect	'.debug_line'
+.L5:
+	.word	.L178-.L177
+.L177:
+	.half	3
+	.word	.L180-.L179
+.L179:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0,0,0,0
+	.byte	'D:\\Program Files\\TASKING\\TriCore v3.5r1\\ctc\\include\\sfr\\regtc1797.sfr',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Bsp\\Cpu\\Platform_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Std_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\osek_test\\GaInOS_Studio\\Os_Cfg.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Os.h',0,0,0,0,0
+.L180:
+.L178:
+	.sdecl	'.debug_info',debug,cluster('OSTskRdyQueuePtr')
+	.sect	'.debug_info'
+.L6:
+	.word	213
+	.half	3
+	.word	.L7
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'OSTskRdyQueuePtr',0,1,72,19
+	.word	.L140
+	.byte	1,5,3
+	.word	OSTskRdyQueuePtr
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSTskRdyQueuePtr')
+	.sect	'.debug_abbrev'
+.L7:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSTskRdyQueueSize')
+	.sect	'.debug_info'
+.L8:
+	.word	215
+	.half	3
+	.word	.L9
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'OSTskRdyQueueSize',0,1,141,1,15
+	.word	.L141
+	.byte	1,5,3
+	.word	OSTskRdyQueueSize
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSTskRdyQueueSize')
+	.sect	'.debug_abbrev'
+.L9:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority0')
+	.sect	'.debug_info'
+.L10:
+	.word	217
+	.half	3
+	.word	.L11
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority0',0,1,6,17
+	.word	.L142
+	.byte	5,3
+	.word	g_RdyQueueOfPriority0
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority0')
+	.sect	'.debug_abbrev'
+.L11:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority1')
+	.sect	'.debug_info'
+.L12:
+	.word	217
+	.half	3
+	.word	.L13
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority1',0,1,7,17
+	.word	.L143
+	.byte	5,3
+	.word	g_RdyQueueOfPriority1
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority1')
+	.sect	'.debug_abbrev'
+.L13:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority2')
+	.sect	'.debug_info'
+.L14:
+	.word	217
+	.half	3
+	.word	.L15
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority2',0,1,8,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority2
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority2')
+	.sect	'.debug_abbrev'
+.L15:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority3')
+	.sect	'.debug_info'
+.L16:
+	.word	217
+	.half	3
+	.word	.L17
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority3',0,1,9,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority3
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority3')
+	.sect	'.debug_abbrev'
+.L17:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority4')
+	.sect	'.debug_info'
+.L18:
+	.word	217
+	.half	3
+	.word	.L19
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority4',0,1,10,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority4
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority4')
+	.sect	'.debug_abbrev'
+.L19:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority5')
+	.sect	'.debug_info'
+.L20:
+	.word	217
+	.half	3
+	.word	.L21
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority5',0,1,11,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority5
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority5')
+	.sect	'.debug_abbrev'
+.L21:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority6')
+	.sect	'.debug_info'
+.L22:
+	.word	217
+	.half	3
+	.word	.L23
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority6',0,1,12,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority6
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority6')
+	.sect	'.debug_abbrev'
+.L23:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority7')
+	.sect	'.debug_info'
+.L24:
+	.word	217
+	.half	3
+	.word	.L25
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority7',0,1,13,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority7
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority7')
+	.sect	'.debug_abbrev'
+.L25:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority8')
+	.sect	'.debug_info'
+.L26:
+	.word	217
+	.half	3
+	.word	.L27
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority8',0,1,14,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority8
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority8')
+	.sect	'.debug_abbrev'
+.L27:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority9')
+	.sect	'.debug_info'
+.L28:
+	.word	217
+	.half	3
+	.word	.L29
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority9',0,1,15,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority9
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority9')
+	.sect	'.debug_abbrev'
+.L29:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority10')
+	.sect	'.debug_info'
+.L30:
+	.word	218
+	.half	3
+	.word	.L31
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority10',0,1,16,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority10
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority10')
+	.sect	'.debug_abbrev'
+.L31:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority11')
+	.sect	'.debug_info'
+.L32:
+	.word	218
+	.half	3
+	.word	.L33
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority11',0,1,17,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority11
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority11')
+	.sect	'.debug_abbrev'
+.L33:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority12')
+	.sect	'.debug_info'
+.L34:
+	.word	218
+	.half	3
+	.word	.L35
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority12',0,1,18,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority12
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority12')
+	.sect	'.debug_abbrev'
+.L35:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority13')
+	.sect	'.debug_info'
+.L36:
+	.word	218
+	.half	3
+	.word	.L37
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority13',0,1,19,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority13
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority13')
+	.sect	'.debug_abbrev'
+.L37:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority14')
+	.sect	'.debug_info'
+.L38:
+	.word	218
+	.half	3
+	.word	.L39
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority14',0,1,20,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority14
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority14')
+	.sect	'.debug_abbrev'
+.L39:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority15')
+	.sect	'.debug_info'
+.L40:
+	.word	218
+	.half	3
+	.word	.L41
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority15',0,1,21,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority15
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority15')
+	.sect	'.debug_abbrev'
+.L41:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority16')
+	.sect	'.debug_info'
+.L42:
+	.word	218
+	.half	3
+	.word	.L43
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority16',0,1,22,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority16
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority16')
+	.sect	'.debug_abbrev'
+.L43:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority17')
+	.sect	'.debug_info'
+.L44:
+	.word	218
+	.half	3
+	.word	.L45
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority17',0,1,23,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority17
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority17')
+	.sect	'.debug_abbrev'
+.L45:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority18')
+	.sect	'.debug_info'
+.L46:
+	.word	218
+	.half	3
+	.word	.L47
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority18',0,1,24,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority18
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority18')
+	.sect	'.debug_abbrev'
+.L47:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority19')
+	.sect	'.debug_info'
+.L48:
+	.word	218
+	.half	3
+	.word	.L49
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority19',0,1,25,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority19
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority19')
+	.sect	'.debug_abbrev'
+.L49:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority20')
+	.sect	'.debug_info'
+.L50:
+	.word	218
+	.half	3
+	.word	.L51
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority20',0,1,26,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority20
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority20')
+	.sect	'.debug_abbrev'
+.L51:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority21')
+	.sect	'.debug_info'
+.L52:
+	.word	218
+	.half	3
+	.word	.L53
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority21',0,1,27,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority21
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority21')
+	.sect	'.debug_abbrev'
+.L53:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority22')
+	.sect	'.debug_info'
+.L54:
+	.word	218
+	.half	3
+	.word	.L55
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority22',0,1,28,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority22
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority22')
+	.sect	'.debug_abbrev'
+.L55:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority23')
+	.sect	'.debug_info'
+.L56:
+	.word	218
+	.half	3
+	.word	.L57
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority23',0,1,29,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority23
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority23')
+	.sect	'.debug_abbrev'
+.L57:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority24')
+	.sect	'.debug_info'
+.L58:
+	.word	218
+	.half	3
+	.word	.L59
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority24',0,1,30,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority24
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority24')
+	.sect	'.debug_abbrev'
+.L59:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority25')
+	.sect	'.debug_info'
+.L60:
+	.word	218
+	.half	3
+	.word	.L61
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority25',0,1,31,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority25
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority25')
+	.sect	'.debug_abbrev'
+.L61:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority26')
+	.sect	'.debug_info'
+.L62:
+	.word	218
+	.half	3
+	.word	.L63
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority26',0,1,32,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority26
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority26')
+	.sect	'.debug_abbrev'
+.L63:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority27')
+	.sect	'.debug_info'
+.L64:
+	.word	218
+	.half	3
+	.word	.L65
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority27',0,1,33,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority27
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority27')
+	.sect	'.debug_abbrev'
+.L65:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority28')
+	.sect	'.debug_info'
+.L66:
+	.word	218
+	.half	3
+	.word	.L67
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority28',0,1,34,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority28
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority28')
+	.sect	'.debug_abbrev'
+.L67:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority29')
+	.sect	'.debug_info'
+.L68:
+	.word	218
+	.half	3
+	.word	.L69
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority29',0,1,35,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority29
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority29')
+	.sect	'.debug_abbrev'
+.L69:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority30')
+	.sect	'.debug_info'
+.L70:
+	.word	218
+	.half	3
+	.word	.L71
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority30',0,1,36,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority30
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority30')
+	.sect	'.debug_abbrev'
+.L71:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority31')
+	.sect	'.debug_info'
+.L72:
+	.word	218
+	.half	3
+	.word	.L73
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority31',0,1,37,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority31
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority31')
+	.sect	'.debug_abbrev'
+.L73:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority32')
+	.sect	'.debug_info'
+.L74:
+	.word	218
+	.half	3
+	.word	.L75
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority32',0,1,38,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority32
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority32')
+	.sect	'.debug_abbrev'
+.L75:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority33')
+	.sect	'.debug_info'
+.L76:
+	.word	218
+	.half	3
+	.word	.L77
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority33',0,1,39,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority33
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority33')
+	.sect	'.debug_abbrev'
+.L77:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority34')
+	.sect	'.debug_info'
+.L78:
+	.word	218
+	.half	3
+	.word	.L79
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority34',0,1,40,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority34
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority34')
+	.sect	'.debug_abbrev'
+.L79:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority35')
+	.sect	'.debug_info'
+.L80:
+	.word	218
+	.half	3
+	.word	.L81
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority35',0,1,41,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority35
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority35')
+	.sect	'.debug_abbrev'
+.L81:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority36')
+	.sect	'.debug_info'
+.L82:
+	.word	218
+	.half	3
+	.word	.L83
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority36',0,1,42,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority36
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority36')
+	.sect	'.debug_abbrev'
+.L83:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority37')
+	.sect	'.debug_info'
+.L84:
+	.word	218
+	.half	3
+	.word	.L85
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority37',0,1,43,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority37
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority37')
+	.sect	'.debug_abbrev'
+.L85:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority38')
+	.sect	'.debug_info'
+.L86:
+	.word	218
+	.half	3
+	.word	.L87
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority38',0,1,44,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority38
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority38')
+	.sect	'.debug_abbrev'
+.L87:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority39')
+	.sect	'.debug_info'
+.L88:
+	.word	218
+	.half	3
+	.word	.L89
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority39',0,1,45,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority39
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority39')
+	.sect	'.debug_abbrev'
+.L89:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority40')
+	.sect	'.debug_info'
+.L90:
+	.word	218
+	.half	3
+	.word	.L91
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority40',0,1,46,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority40
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority40')
+	.sect	'.debug_abbrev'
+.L91:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority41')
+	.sect	'.debug_info'
+.L92:
+	.word	218
+	.half	3
+	.word	.L93
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority41',0,1,47,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority41
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority41')
+	.sect	'.debug_abbrev'
+.L93:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority42')
+	.sect	'.debug_info'
+.L94:
+	.word	218
+	.half	3
+	.word	.L95
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority42',0,1,48,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority42
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority42')
+	.sect	'.debug_abbrev'
+.L95:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority43')
+	.sect	'.debug_info'
+.L96:
+	.word	218
+	.half	3
+	.word	.L97
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority43',0,1,49,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority43
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority43')
+	.sect	'.debug_abbrev'
+.L97:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority44')
+	.sect	'.debug_info'
+.L98:
+	.word	218
+	.half	3
+	.word	.L99
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority44',0,1,50,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority44
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority44')
+	.sect	'.debug_abbrev'
+.L99:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority45')
+	.sect	'.debug_info'
+.L100:
+	.word	218
+	.half	3
+	.word	.L101
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority45',0,1,51,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority45
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority45')
+	.sect	'.debug_abbrev'
+.L101:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority46')
+	.sect	'.debug_info'
+.L102:
+	.word	218
+	.half	3
+	.word	.L103
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority46',0,1,52,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority46
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority46')
+	.sect	'.debug_abbrev'
+.L103:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority47')
+	.sect	'.debug_info'
+.L104:
+	.word	218
+	.half	3
+	.word	.L105
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority47',0,1,53,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority47
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority47')
+	.sect	'.debug_abbrev'
+.L105:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority48')
+	.sect	'.debug_info'
+.L106:
+	.word	218
+	.half	3
+	.word	.L107
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority48',0,1,54,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority48
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority48')
+	.sect	'.debug_abbrev'
+.L107:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority49')
+	.sect	'.debug_info'
+.L108:
+	.word	218
+	.half	3
+	.word	.L109
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority49',0,1,55,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority49
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority49')
+	.sect	'.debug_abbrev'
+.L109:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority50')
+	.sect	'.debug_info'
+.L110:
+	.word	218
+	.half	3
+	.word	.L111
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority50',0,1,56,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority50
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority50')
+	.sect	'.debug_abbrev'
+.L111:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority51')
+	.sect	'.debug_info'
+.L112:
+	.word	218
+	.half	3
+	.word	.L113
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority51',0,1,57,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority51
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority51')
+	.sect	'.debug_abbrev'
+.L113:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority52')
+	.sect	'.debug_info'
+.L114:
+	.word	218
+	.half	3
+	.word	.L115
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority52',0,1,58,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority52
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority52')
+	.sect	'.debug_abbrev'
+.L115:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority53')
+	.sect	'.debug_info'
+.L116:
+	.word	218
+	.half	3
+	.word	.L117
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority53',0,1,59,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority53
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority53')
+	.sect	'.debug_abbrev'
+.L117:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority54')
+	.sect	'.debug_info'
+.L118:
+	.word	218
+	.half	3
+	.word	.L119
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority54',0,1,60,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority54
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority54')
+	.sect	'.debug_abbrev'
+.L119:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority55')
+	.sect	'.debug_info'
+.L120:
+	.word	218
+	.half	3
+	.word	.L121
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority55',0,1,61,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority55
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority55')
+	.sect	'.debug_abbrev'
+.L121:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority56')
+	.sect	'.debug_info'
+.L122:
+	.word	218
+	.half	3
+	.word	.L123
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority56',0,1,62,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority56
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority56')
+	.sect	'.debug_abbrev'
+.L123:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority57')
+	.sect	'.debug_info'
+.L124:
+	.word	218
+	.half	3
+	.word	.L125
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority57',0,1,63,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority57
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority57')
+	.sect	'.debug_abbrev'
+.L125:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority58')
+	.sect	'.debug_info'
+.L126:
+	.word	218
+	.half	3
+	.word	.L127
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority58',0,1,64,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority58
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority58')
+	.sect	'.debug_abbrev'
+.L127:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority59')
+	.sect	'.debug_info'
+.L128:
+	.word	218
+	.half	3
+	.word	.L129
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority59',0,1,65,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority59
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority59')
+	.sect	'.debug_abbrev'
+.L129:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority60')
+	.sect	'.debug_info'
+.L130:
+	.word	218
+	.half	3
+	.word	.L131
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority60',0,1,66,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority60
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority60')
+	.sect	'.debug_abbrev'
+.L131:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority61')
+	.sect	'.debug_info'
+.L132:
+	.word	218
+	.half	3
+	.word	.L133
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority61',0,1,67,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority61
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority61')
+	.sect	'.debug_abbrev'
+.L133:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority62')
+	.sect	'.debug_info'
+.L134:
+	.word	218
+	.half	3
+	.word	.L135
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority62',0,1,68,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority62
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority62')
+	.sect	'.debug_abbrev'
+.L135:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfPriority63')
+	.sect	'.debug_info'
+.L136:
+	.word	218
+	.half	3
+	.word	.L137
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfPriority63',0,1,69,17
+	.word	.L144
+	.byte	5,3
+	.word	g_RdyQueueOfPriority63
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfPriority63')
+	.sect	'.debug_abbrev'
+.L137:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_RdyQueueOfInvalidPriority')
+	.sect	'.debug_info'
+.L138:
+	.word	223
+	.half	3
+	.word	.L139
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L2
+	.byte	3
+	.byte	'g_RdyQueueOfInvalidPriority',0,1,70,17
+	.word	.L145
+	.byte	5,3
+	.word	g_RdyQueueOfInvalidPriority
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_RdyQueueOfInvalidPriority')
+	.sect	'.debug_abbrev'
+.L139:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	     1  #include "Os.h"
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	     2  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	     3  #if (cfgOS_TASK_PER_PRIORITY == SEVERAL_TASKS_PER_PRIORITY )
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	     4  #    if(cfgOS_SUM_ACTIVATES > 0)
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	     5  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	     6  static TaskType g_RdyQueueOfPriority0[3];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	     7  static TaskType g_RdyQueueOfPriority1[8];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	     8  static TaskType g_RdyQueueOfPriority2[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	     9  static TaskType g_RdyQueueOfPriority3[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    10  static TaskType g_RdyQueueOfPriority4[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    11  static TaskType g_RdyQueueOfPriority5[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    12  static TaskType g_RdyQueueOfPriority6[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    13  static TaskType g_RdyQueueOfPriority7[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    14  static TaskType g_RdyQueueOfPriority8[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    15  static TaskType g_RdyQueueOfPriority9[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    16  static TaskType g_RdyQueueOfPriority10[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    17  static TaskType g_RdyQueueOfPriority11[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    18  static TaskType g_RdyQueueOfPriority12[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    19  static TaskType g_RdyQueueOfPriority13[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    20  static TaskType g_RdyQueueOfPriority14[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    21  static TaskType g_RdyQueueOfPriority15[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    22  static TaskType g_RdyQueueOfPriority16[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    23  static TaskType g_RdyQueueOfPriority17[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    24  static TaskType g_RdyQueueOfPriority18[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    25  static TaskType g_RdyQueueOfPriority19[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    26  static TaskType g_RdyQueueOfPriority20[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    27  static TaskType g_RdyQueueOfPriority21[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    28  static TaskType g_RdyQueueOfPriority22[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    29  static TaskType g_RdyQueueOfPriority23[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    30  static TaskType g_RdyQueueOfPriority24[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    31  static TaskType g_RdyQueueOfPriority25[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    32  static TaskType g_RdyQueueOfPriority26[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    33  static TaskType g_RdyQueueOfPriority27[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    34  static TaskType g_RdyQueueOfPriority28[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    35  static TaskType g_RdyQueueOfPriority29[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    36  static TaskType g_RdyQueueOfPriority30[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    37  static TaskType g_RdyQueueOfPriority31[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    38  static TaskType g_RdyQueueOfPriority32[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    39  static TaskType g_RdyQueueOfPriority33[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    40  static TaskType g_RdyQueueOfPriority34[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    41  static TaskType g_RdyQueueOfPriority35[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    42  static TaskType g_RdyQueueOfPriority36[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    43  static TaskType g_RdyQueueOfPriority37[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    44  static TaskType g_RdyQueueOfPriority38[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    45  static TaskType g_RdyQueueOfPriority39[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    46  static TaskType g_RdyQueueOfPriority40[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    47  static TaskType g_RdyQueueOfPriority41[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    48  static TaskType g_RdyQueueOfPriority42[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    49  static TaskType g_RdyQueueOfPriority43[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    50  static TaskType g_RdyQueueOfPriority44[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    51  static TaskType g_RdyQueueOfPriority45[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    52  static TaskType g_RdyQueueOfPriority46[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    53  static TaskType g_RdyQueueOfPriority47[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    54  static TaskType g_RdyQueueOfPriority48[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    55  static TaskType g_RdyQueueOfPriority49[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    56  static TaskType g_RdyQueueOfPriority50[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    57  static TaskType g_RdyQueueOfPriority51[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    58  static TaskType g_RdyQueueOfPriority52[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    59  static TaskType g_RdyQueueOfPriority53[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    60  static TaskType g_RdyQueueOfPriority54[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    61  static TaskType g_RdyQueueOfPriority55[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    62  static TaskType g_RdyQueueOfPriority56[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    63  static TaskType g_RdyQueueOfPriority57[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    64  static TaskType g_RdyQueueOfPriority58[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    65  static TaskType g_RdyQueueOfPriority59[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    66  static TaskType g_RdyQueueOfPriority60[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    67  static TaskType g_RdyQueueOfPriority61[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    68  static TaskType g_RdyQueueOfPriority62[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    69  static TaskType g_RdyQueueOfPriority63[2];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    70  static TaskType g_RdyQueueOfInvalidPriority[1]={INVALID_TASK};
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    71  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    72  const TaskRefType OSTskRdyQueuePtr[cfgOS_MAX_PRIORITY+2]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    73  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    74  	g_RdyQueueOfPriority0,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    75  	g_RdyQueueOfPriority1,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    76  	g_RdyQueueOfPriority2,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    77  	g_RdyQueueOfPriority3,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    78  	g_RdyQueueOfPriority4,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    79  	g_RdyQueueOfPriority5,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    80  	g_RdyQueueOfPriority6,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    81  	g_RdyQueueOfPriority7,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    82  	g_RdyQueueOfPriority8,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    83  	g_RdyQueueOfPriority9,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    84  	g_RdyQueueOfPriority10,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    85  	g_RdyQueueOfPriority11,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    86  	g_RdyQueueOfPriority12,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    87  	g_RdyQueueOfPriority13,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    88  	g_RdyQueueOfPriority14,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    89  	g_RdyQueueOfPriority15,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    90  	g_RdyQueueOfPriority16,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    91  	g_RdyQueueOfPriority17,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    92  	g_RdyQueueOfPriority18,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    93  	g_RdyQueueOfPriority19,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    94  	g_RdyQueueOfPriority20,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    95  	g_RdyQueueOfPriority21,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    96  	g_RdyQueueOfPriority22,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    97  	g_RdyQueueOfPriority23,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    98  	g_RdyQueueOfPriority24,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	    99  	g_RdyQueueOfPriority25,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   100  	g_RdyQueueOfPriority26,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   101  	g_RdyQueueOfPriority27,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   102  	g_RdyQueueOfPriority28,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   103  	g_RdyQueueOfPriority29,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   104  	g_RdyQueueOfPriority30,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   105  	g_RdyQueueOfPriority31,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   106  	g_RdyQueueOfPriority32,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   107  	g_RdyQueueOfPriority33,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   108  	g_RdyQueueOfPriority34,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   109  	g_RdyQueueOfPriority35,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   110  	g_RdyQueueOfPriority36,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   111  	g_RdyQueueOfPriority37,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   112  	g_RdyQueueOfPriority38,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   113  	g_RdyQueueOfPriority39,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   114  	g_RdyQueueOfPriority40,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   115  	g_RdyQueueOfPriority41,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   116  	g_RdyQueueOfPriority42,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   117  	g_RdyQueueOfPriority43,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   118  	g_RdyQueueOfPriority44,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   119  	g_RdyQueueOfPriority45,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   120  	g_RdyQueueOfPriority46,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   121  	g_RdyQueueOfPriority47,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   122  	g_RdyQueueOfPriority48,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   123  	g_RdyQueueOfPriority49,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   124  	g_RdyQueueOfPriority50,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   125  	g_RdyQueueOfPriority51,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   126  	g_RdyQueueOfPriority52,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   127  	g_RdyQueueOfPriority53,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   128  	g_RdyQueueOfPriority54,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   129  	g_RdyQueueOfPriority55,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   130  	g_RdyQueueOfPriority56,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   131  	g_RdyQueueOfPriority57,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   132  	g_RdyQueueOfPriority58,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   133  	g_RdyQueueOfPriority59,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   134  	g_RdyQueueOfPriority60,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   135  	g_RdyQueueOfPriority61,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   136  	g_RdyQueueOfPriority62,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   137  	g_RdyQueueOfPriority63,
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   138  	g_RdyQueueOfInvalidPriority
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   139  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   140  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   141  const uint8_t OSTskRdyQueueSize[cfgOS_MAX_PRIORITY+2]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   142  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   143  	3,		/* Priority 0*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   144  	8,		/* Priority 1*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   145  	2,		/* Priority 2*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   146  	2,		/* Priority 3*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   147  	2,		/* Priority 4*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   148  	2,		/* Priority 5*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   149  	2,		/* Priority 6*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   150  	2,		/* Priority 7*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   151  	2,		/* Priority 8*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   152  	2,		/* Priority 9*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   153  	2,		/* Priority 10*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   154  	2,		/* Priority 11*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   155  	2,		/* Priority 12*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   156  	2,		/* Priority 13*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   157  	2,		/* Priority 14*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   158  	2,		/* Priority 15*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   159  	2,		/* Priority 16*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   160  	2,		/* Priority 17*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   161  	2,		/* Priority 18*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   162  	2,		/* Priority 19*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   163  	2,		/* Priority 20*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   164  	2,		/* Priority 21*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   165  	2,		/* Priority 22*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   166  	2,		/* Priority 23*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   167  	2,		/* Priority 24*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   168  	2,		/* Priority 25*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   169  	2,		/* Priority 26*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   170  	2,		/* Priority 27*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   171  	2,		/* Priority 28*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   172  	2,		/* Priority 29*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   173  	2,		/* Priority 30*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   174  	2,		/* Priority 31*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   175  	2,		/* Priority 32*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   176  	2,		/* Priority 33*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   177  	2,		/* Priority 34*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   178  	2,		/* Priority 35*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   179  	2,		/* Priority 36*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   180  	2,		/* Priority 37*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   181  	2,		/* Priority 38*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   182  	2,		/* Priority 39*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   183  	2,		/* Priority 40*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   184  	2,		/* Priority 41*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   185  	2,		/* Priority 42*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   186  	2,		/* Priority 43*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   187  	2,		/* Priority 44*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   188  	2,		/* Priority 45*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   189  	2,		/* Priority 46*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   190  	2,		/* Priority 47*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   191  	2,		/* Priority 48*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   192  	2,		/* Priority 49*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   193  	2,		/* Priority 50*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   194  	2,		/* Priority 51*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   195  	2,		/* Priority 52*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   196  	2,		/* Priority 53*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   197  	2,		/* Priority 54*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   198  	2,		/* Priority 55*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   199  	2,		/* Priority 56*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   200  	2,		/* Priority 57*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   201  	2,		/* Priority 58*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   202  	2,		/* Priority 59*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   203  	2,		/* Priority 60*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   204  	2,		/* Priority 61*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   205  	2,		/* Priority 62*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   206  	2,		/* Priority 63*/
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   207  	1		/* Invalid Priority */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   208  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   209  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   210  #    endif
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   211  #endif
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c	   212  
+
+	; Module end

@@ -1,0 +1,74 @@
+
+**** Build of configuration Debug for project Project ****
+
+D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\amk -j all -a 
+Compiling cstart.c
+Compiling sync_on_halt.c
+Compiling Cpu.c
+Compiling main.c
+ctc I808: trial version, 15 day(s) remaining
+Compiling STM.c
+ctc I808: trial version, 15 day(s) remaining
+ctc I808: trial version, 15 day(s) remaining
+ctc W544: ["F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/Bsp/DaveSupport/main.c" 449/3] unreachable code
+ctc W557: ["F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/Bsp/DaveSupport/main.c" 444/8] possible infinite loop
+0 errors, 2 warnings
+ctc I808: trial version, 15 day(s) remaining
+Compiling Serial.c
+Compiling CfgObj.c
+Compiling CfgRdyQ.c
+ctc I808: trial version, 15 day(s) remaining
+Compiling CfgSchedTbl.c
+ctc I808: trial version, 15 day(s) remaining
+Compiling Alarm.c
+ctc I808: trial version, 15 day(s) remaining
+Compiling Autosar.c
+ctc I808: trial version, 15 day(s) remaining
+Compiling Event.c
+ctc I808: trial version, 15 day(s) remaining
+Compiling Hooks.c
+ctc I808: trial version, 15 day(s) remaining
+Compiling Interrupt.c
+ctc I808: trial version, 15 day(s) remaining
+Compiling Osctrl.c
+ctc I808: trial version, 15 day(s) remaining
+Compiling Resource.c
+ctc I808: trial version, 15 day(s) remaining
+ctc W535: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Autosar.c" 59/1] no type specifiers - assumed 'int'
+0 errors, 1 warnings
+Compiling Task.c
+ctc I808: trial version, 15 day(s) remaining
+Compiling vPort.c
+ctc I808: trial version, 15 day(s) remaining
+ctc W557: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Osctrl.c" 289/12] possible infinite loop
+0 errors, 1 warnings
+ctc I808: trial version, 15 day(s) remaining
+ctc W537: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c" 66/21] unused variable "_Sr"
+ctc W537: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c" 68/21] unused variable "_CpuSr"
+ctc W537: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c" 72/21] unused variable "_OSCpuSr"
+ctc W537: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c" 313/20] unused variable "OSCriticalSR"
+0 errors, 4 warnings
+ctc I808: trial version, 15 day(s) remaining
+ctc W545: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Task.c" 572/1] missing 'return'
+ctc W557: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Task.c" 430/5] possible infinite loop
+ctc W557: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Task.c" 524/5] possible infinite loop
+ctc W557: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Task.c" 557/5] possible infinite loop
+ctc W557: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Task.c" 680/13] possible infinite loop
+ctc W557: ["F:/parai@foxmail.com/nt/GaInOS/kernel/Task.c" 693/5] possible infinite loop
+0 errors, 6 warnings
+ctc I808: trial version, 15 day(s) remaining
+ctc W557: ["F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c" 54/35] possible infinite loop
+ctc W557: ["F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort/vPort.c" 79/5] possible infinite loop
+0 errors, 2 warnings
+Linking to Project.elf
+ltc I460: trial version, 15 day(s) remaining
+
+Time consumed: 16676 ms
+**** End of build ****
+
+Tool info: 
+TASKING VX-toolset for TriCore: C compiler v3.5r1 Build 484.1.2
+TASKING program builder v3.5r1 Build 039
+TASKING VX-toolset for TriCore: assembler v3.5r1 Build 263
+TASKING VX-toolset for TriCore: object linker v3.5r1 Build 166
+TASKING VX-toolset for TriCore: control program v3.5r1 Build 131

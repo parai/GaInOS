@@ -1,0 +1,1703 @@
+	; TASKING VX-toolset for TriCore: C compiler v3.5r1 Build 484.1.2
+	; Options: -f cc7452a -c99 --dep-file=kernel\.Event.o.d -Ctc1797 --core=tc1.3.1 --fpu-present -F -IF:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio -IF:\parai@foxmail.com\nt\GaInOS\include -IF:\parai@foxmail.com\nt\GaInOS\kernel -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport -g --make-target=kernel\Event.o -t4 --language=-gcc,-volatile,+strings --default-near-size=0 -O2 --default-a1-size=0 --default-a0-size=0 --source --align=0 --compact-max-size=200 --switch=auto --tasking-sfr -o kernel\Event.src
+	; Module start
+	.name	"Event"
+
+	
+$FPU
+$TC131
+	
+	.sdecl	'.text.Event.try2ResumeTask',code,cluster('try2ResumeTask')
+	.sect	'.text.Event.try2ResumeTask'
+	.align	2
+	
+	.global	try2ResumeTask
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	     1  /* Copyright 2012, Fan Wang(Parai)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	     2   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	     3   * This file is part of GaInOS.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	     4   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	     5   * GaInOS is free software: you can redistribute it and/or modify
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	     6   * it under the terms of the GNU General Public License as published by
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	     7   * the Free Software Foundation, either version 3 of the License, or
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	     8   * (at your option) any later version.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	     9   *             
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    10   * Linking GaInOS statically or dynamically with other modules is making a
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    11   * combined work based on GaInOS. Thus, the terms and conditions of the GNU
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    12   * General Public License cover the whole combination.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    13   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    14   * In addition, as a special exception, the copyright holders of GaInOS give
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    15   * you permission to combine GaInOS program with free software programs or
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    16   * libraries that are released under the GNU LGPL and with independent modules
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    17   * that communicate with GaInOS solely through the GaInOS defined interface. 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    18   * You may copy and distribute such a system following the terms of the GNU GPL
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    19   * for GaInOS and the licenses of the other code concerned, provided that you
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    20   * include the source code of that other code when and as the GNU GPL requires
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    21   * distribution of source code.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    22   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    23   * Note that people who make modified versions of GaInOS are not obligated to
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    24   * grant this special exception for their modified versions; it is their choice
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    25   * whether to do so. The GNU General Public License gives permission to release
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    26   * a modified version without this exception; this exception also makes it
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    27   * possible to release a modified version which carries forward this exception.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    28   * 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    29   * GaInOS is distributed in the hope that it will be useful,
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    30   * but WITHOUT ANY WARRANTY; without even the implied warranty of
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    31   * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    32   * GNU General Public License for more details.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    33   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    34   * You should have received a copy of the GNU General Public License
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    35   * along with GaInOS. If not, see <http://www.gnu.org/licenses/>.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    36   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    37   */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    38  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    39  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    40  /* | Author: | Wang Fan(parai)   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    41  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    42  /* | Email:  | parai@foxmail.com | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    43  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    44  /* | WorkOn: | Emacs23.3         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    45  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    46  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    47  /* |--------------------------------------+----------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    48  /* | History:                             | Year-Month-Day | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    49  /* |--------------------------------------+----------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    50  /* | Creat this file and decide to Design |      2012-9-27 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    51  /* | the AutoSAR OS.                      |                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    52  /* |--------------------------------------+----------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    53  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    54  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    55  /* |-------------------+----------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    56  /* | File-name:        | Event.c                                      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    57  /* |-------------------+----------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    58  /* | Reference Manual: | (1)Specification of Operating System(V3.0.2) | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    59  /* |                   | AUTOSAR_SWS_OS.PDF                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    60  /* |                   |                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    61  /* |                   | (2)Operating SystemSpecification 2.2.3(OSEK) | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    62  /* |                   | os223.doc                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    63  /* |-------------------+----------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    64  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    65  #include "Kernel.h"
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    66  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    67  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    68  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    69  #if(cfgOS_CONFORMANCE_CLASS ==ECC1 ||cfgOS_CONFORMANCE_CLASS ==ECC2)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    70  /* try2ResumeTask() will just change xTaskID into running state
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    71   * And its return value determines whether A Dispatch() should be do 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    72   * After this call, If true,do Dispatch, else not.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    73   */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    74  BoolType try2ResumeTask(TaskType xTaskID)
+; Function try2ResumeTask
+.L13:
+try2ResumeTask:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    75  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    76      TcbType *pxTcb;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    77      PriorityType xPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    78   
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    79      pxTcb=tableGetTskTcb(xTaskID);
+	mov	d15,d4
+	movh.a	a15,#@his(OSTcbTable)
+.L84:
+	lea	a15,[a15]@los(OSTcbTable)
+	addsc.a	a15,a15,d15,#3
+.L78:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    80      xPriority=pxTcb->xPriority;
+	ld.bu	d8,[a15]4
+.L82:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    81  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    82      OS_ENTER_CRITICAL();    /* Translate xTaskID into Running State */
+	call	OS_ENTER_CRITICAL
+.L83:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    83  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    84      pxTcb->xState=RUNNING;
+	mov	d0,#0
+	st.b	[a15]5,d0
+.L157:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    85      listInsertTskAtTail(xPriority,xTaskID);
+	mov	d4,d8
+.L80:
+	mov	d5,d15
+.L86:
+	call	listInsertTskAtTail
+.L81:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    86      
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    87      if(xPriority > OSHighRdyPrio)
+	movh.a	a2,#@his(OSHighRdyPrio)
+	lea	a2,[a2]@los(OSHighRdyPrio)
+	ld.bu	d0,[a2]
+	jge.u	d0,d8,.L2				; predicted not taken
+.L158:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    88      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    89          OSHighRdyPrio = xPriority;
+	st.b	[a2],d8
+.L159:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    90          OSHighRdyTcb  = pxTcb;
+	movh.a	a2,#@his(OSHighRdyTcb)
+	lea	a2,[a2]@los(OSHighRdyTcb)
+	st.a	[a2],a15
+.L160:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    91          OSHighRdyTsk  = xTaskID;
+	movh.a	a15,#@his(OSHighRdyTsk)
+.L79:
+	lea	a15,[a15]@los(OSHighRdyTsk)
+	st.b	[a15],d15
+.L161:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    92  #if (cfgOS_SCHEDULE_POLICY != NONE_PREEMPTIVE_SCHEDULE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    93          /* if unequal, then must there is an high priority Task in ready State */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    94          if( 
+	movh.a	a15,#@his(OSIsr2Nesting)
+	lea	a15,[a15]@los(OSIsr2Nesting)
+	ld.bu	d15,[a15]
+.L85:
+	jne	d15,#0,.L3				; predicted taken
+.L162:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    95  #if (cfgOS_SCHEDULE_POLICY == MIXED_PREEMPTIVE_SCHEDULE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    96              (IsTskPreemptable(OSCurTsk))&&
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    97  #endif  /* In ISR level ,Task Switch was not Allowed */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    98              (OSIsr2Nesting == 0) 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	    99              )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   100          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   101              OS_EXIT_CRITICAL();
+	call	OS_EXIT_CRITICAL
+.L163:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   102              return STD_TRUE;
+	mov	d2,#1
+.L164:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   103          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   104  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   105      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   106      OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   107      return STD_FALSE;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   108  }
+	ret
+.L3:
+.L2:
+	call	OS_EXIT_CRITICAL
+.L165:
+	mov	d2,#0
+.L166:
+	ret
+.L71:
+	
+__try2ResumeTask_function_end:
+	.size	try2ResumeTask,__try2ResumeTask_function_end-try2ResumeTask
+.L52:
+	; End of function
+	
+	.sdecl	'.text.Event.try2SuspendCurrentTask',code,cluster('try2SuspendCurrentTask')
+	.sect	'.text.Event.try2SuspendCurrentTask'
+	.align	2
+	
+	.global	try2SuspendCurrentTask
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   109  /* try2SuspendCurrentTask() doesn't equal to try2TerminateCurrentTask().
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   110   * This API just put current Task into waiting state when OSCurTsk
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   111   * Called WaitEvent(), and no events had been set.*/
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   112  void try2SuspendCurrentTask(void)
+; Function try2SuspendCurrentTask
+.L15:
+try2SuspendCurrentTask:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   113  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   114      PriorityType xPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   115      xPriority = OSCurTcb -> xPriority;
+	movh.a	a12,#@his(OSCurTcb)
+	ld.a	a15,[a12]@los(OSCurTcb)
+	ld.bu	d15,[a15]4
+.L87:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   116      OS_ENTER_CRITICAL();    /* Translate OSCurTsk into Waiting State */
+	call	OS_ENTER_CRITICAL
+.L171:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   117      listRemoveTskAtHead(xPriority,OSCurTsk);
+	mov	d4,d15
+	movh.a	a15,#@his(OSCurTsk)
+.L89:
+	lea	a15,[a15]@los(OSCurTsk)
+	ld.bu	d5,[a15]
+	call	listRemoveTskAtHead
+.L90:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   118      OSCurTcb->xState=WAITING;
+	ld.a	a15,[a12]@los(OSCurTcb)
+	mov	d15,#2
+	st.b	[a15]5,d15
+.L88:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   119      OS_EXIT_CRITICAL();
+	j	OS_EXIT_CRITICAL
+.L76:
+	
+__try2SuspendCurrentTask_function_end:
+	.size	try2SuspendCurrentTask,__try2SuspendCurrentTask_function_end-try2SuspendCurrentTask
+.L57:
+	; End of function
+	
+	.sdecl	'.text.Event.SetEvent',code,cluster('SetEvent')
+	.sect	'.text.Event.SetEvent'
+	.align	2
+	
+	.global	SetEvent
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   120  }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   121  /* |------------------+----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   122  /* | Syntax:          | StatusType SetEvent ( TaskType <TaskID>                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   123  /* |                  | EventMaskType <Mask> )                                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   124  /* |------------------+----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   125  /* | Parameter (In):  | TaskID:Reference to the task for which one or several    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   126  /* |                  | events are to be set.                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   127  /* |                  | Mask:Mask of the events to be set                        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   128  /* |------------------+----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   129  /* | Parameter (Out): | none                                                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   130  /* |------------------+----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   131  /* | Description:     | 1.The service may be called from an interrupt service    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   132  /* |                  | routine and from the task level, but not from hook       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   133  /* |                  | routines.                                                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   134  /* |                  | 2.The events of task <TaskID> are set according to the   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   135  /* |                  | event mask <Mask>. Calling SetEvent causes the task      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   136  /* |                  | <TaskID> to be transferred to the ready state, if it     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   137  /* |                  | was waiting for at least one of the events specified     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   138  /* |                  | in <Mask>.                                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   139  /* |------------------+----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   140  /* | Particularities: | Any events not set in the event mask remain unchanged.   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   141  /* |------------------+----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   142  /* | Status:          | Standard: 1.No error, E_OK                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   143  /* |                  | Extended: 2.Task <TaskID> is invalid, E_OS_ID            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   144  /* |                  | 3.Referenced task is no extended task, E_OS_ACCESS       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   145  /* |                  | 4.Events can not be set as the referenced task is in the | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   146  /* |                  | suspended state, E_OS_STATE                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   147  /* |------------------+----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   148  /* | Conformance:     | ECC1, ECC2                                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   149  /* |------------------+----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   150  StatusType SetEvent ( TaskType xTaskID , EventMaskType xMask )
+; Function SetEvent
+.L17:
+SetEvent:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   151  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   152      StatusType xRet = E_OK;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   153  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   154      if(xTaskID > (cfgOS_TASK_NUM -1))
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   155      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   156          xRet = E_OS_ID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   157          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   158      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   159  #if (cfgOS_CONFORMANCE_CLASS == ECC1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   160      if(tableGetTskClsType(xTaskID) != ECC1){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   161          xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   162          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   163      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   164  #elif(cfgOS_CONFORMANCE_CLASS == ECC2)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   165      if(tableGetTskClsType(xTaskID) != ECC2){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   166          xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   167          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   168      }    
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   169  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   170      if(tableGetTskState(xTaskID) == SUSPENDED){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   171          xRet = E_OS_STATE;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   172          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   173      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   174  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   175  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   176      tableSetEvent(xTaskID,xMask);
+	movh.a	a15,#@his(OSSetEventTable)
+	lea	a15,[a15]@los(OSSetEventTable)
+	addsc.a	a15,a15,d4,#1
+	ld.hu	d15,[a15]0
+	or	d15,d5
+	st.h	[a15],d15
+.L130:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   177      if( (tableGetEvent(xTaskID) & tableGetWaitEvent(xTaskID)) != 0u)
+	movh.a	a15,#@his(OSWaitEventTable)
+	lea	a15,[a15]@los(OSWaitEventTable)
+	addsc.a	a15,a15,d4,#1
+	ld.hu	d0,[a15]0
+	and	d15,d0
+	jeq	d15,#0,.L6				; predicted taken
+.L131:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   178      {                           /* See Particularities 2 */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   179          tableResetWaitEvent(xTaskID);
+	mov	d15,#0
+	st.h	[a15],d15
+.L132:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   180          if(STD_TRUE == try2ResumeTask(xTaskID))
+	call	try2ResumeTask
+.L6:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   181          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   182              Dispatch();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   183          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   184      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   185  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   186  Error_Exit:
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   187  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   188  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   189      if(E_OK != xRet)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   190      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   191          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   192          OSErrorSetServiceId(OSServiceId_SetEvent);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   193          OSErrorSetParam1(xTaskID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   194          OSErrorSetParam2(xMask);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   195          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   196          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   197      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   198  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   199      return xRet;
+	mov	d2,#0
+.L133:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   200  }
+	ret
+.L59:
+	
+__SetEvent_function_end:
+	.size	SetEvent,__SetEvent_function_end-SetEvent
+.L32:
+	; End of function
+	
+	.sdecl	'.text.Event.ClearEvent',code,cluster('ClearEvent')
+	.sect	'.text.Event.ClearEvent'
+	.align	2
+	
+	.global	ClearEvent
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   201  /* |------------------+---------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   202  /* | Syntax:          | StatusType ClearEvent ( EventMaskType <Mask> )          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   203  /* |------------------+---------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   204  /* | Parameter (In)   | Mask:Mask of the events to be cleared                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   205  /* |------------------+---------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   206  /* | Parameter (Out)  | none                                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   207  /* |------------------+---------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   208  /* | Description:     | The events of the extended task calling ClearEvent are  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   209  /* |                  | cleared according to the event mask <Mask>.             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   210  /* |------------------+---------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   211  /* | Particularities: | The system service ClearEvent is restricted to extended | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   212  /* |                  | tasks which own the event.                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   213  /* |------------------+---------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   214  /* | Status:          | Standard: 1.No error, E_OK                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   215  /* |                  | Extended: 1.Call not from extended task, E_OS_ACCESS    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   216  /* |                  | 2.Call at interrupt level, E_OS_CALLEVEL                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   217  /* |------------------+---------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   218  /* | Conformance:     | ECC1, ECC2                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   219  /* |------------------+---------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   220  StatusType ClearEvent ( EventMaskType xMask )
+; Function ClearEvent
+.L19:
+ClearEvent:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   221  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   222      StatusType xRet = E_OK;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   223  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   224      if(OSIsr2Nesting > 0)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   225      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   226          xRet = E_OS_CALLEVEL;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   227          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   228      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   229  #if (cfgOS_CONFORMANCE_CLASS == ECC1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   230      if(tableGetTskClsType(OSCurTsk) != ECC1){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   231          xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   232          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   233      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   234  #elif(cfgOS_CONFORMANCE_CLASS == ECC2)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   235      if(tableGetTskClsType(OSCurTsk) != ECC2){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   236          xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   237          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   238      }    
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   239  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   240  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   241      tableClearEvent(OSCurTsk,xMask);
+	movh.a	a15,#@his(OSCurTsk)
+	lea	a15,[a15]@los(OSCurTsk)
+	ld.bu	d15,[a15]
+	movh.a	a15,#@his(OSSetEventTable)
+	mov.u	d0,#65535
+	lea	a15,[a15]@los(OSSetEventTable)
+	addsc.a	a15,a15,d15,#1
+	xor	d4,d0
+	ld.hu	d15,[a15]0
+.L91:
+	and	d15,d4
+	st.h	[a15],d15
+.L138:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   242  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   243  Error_Exit:
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   244  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   245  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   246      if(E_OK != xRet)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   247      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   248          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   249          OSErrorSetServiceId(OSServiceId_ClearEvent);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   250          OSErrorSetParam1(xMask);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   251          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   252          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   253      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   254  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   255      return xRet;
+	mov	d2,#0
+.L139:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   256  }
+	ret
+.L63:
+	
+__ClearEvent_function_end:
+	.size	ClearEvent,__ClearEvent_function_end-ClearEvent
+.L37:
+	; End of function
+	
+	.sdecl	'.text.Event.GetEvent',code,cluster('GetEvent')
+	.sect	'.text.Event.GetEvent'
+	.align	2
+	
+	.global	GetEvent
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   257  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   258  /* |------------------+--------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   259  /* | Syntax:          | StatusType GetEvent ( TaskType <TaskID>                      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   260  /* |                  | EventMaskRefType <Event> )                                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   261  /* |------------------+--------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   262  /* | Parameter (In):  | TaskID:Task whose event mask is to be returned.              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   263  /* |------------------+--------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   264  /* | Parameter (Out): | Event:Reference to the memory of the return data.            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   265  /* |------------------+--------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   266  /* | Description:     | 1.This service returns the current state of all event bits   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   267  /* |                  | of the task <TaskID>, not the events that the task is        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   268  /* |                  | waiting for.                                                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   269  /* |                  | 2.The service may be called from interrupt service routines, | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   270  /* |                  | task level and some hook routines (see Figure 12-1).         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   271  /* |                  | 3.The current status of the event mask of task <TaskID> is   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   272  /* |                  | copied to <Event>.                                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   273  /* |------------------+--------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   274  /* | Particularities: | The referenced task shall be an extended task.               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   275  /* |------------------+--------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   276  /* | Status:          | Standard: No error, E_OK                                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   277  /* |                  | Extended: Task <TaskID> is invalid, E_OS_ID                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   278  /* |                  | Referenced task <TaskID> is not an extended task,            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   279  /* |                  | E_OS_ACCESS                                                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   280  /* |                  | Referenced task <TaskID> is in the suspended state,          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   281  /* |                  | E_OS_STATE                                                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   282  /* |------------------+--------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   283  /* | Conformance:     | ECC1, ECC2                                                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   284  /* |------------------+--------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   285  StatusType GetEvent ( TaskType xTaskID , EventMaskRefType pxEvent )
+; Function GetEvent
+.L21:
+GetEvent:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   286  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   287      StatusType xRet = E_OK;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   288  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   289      if(xTaskID > (cfgOS_TASK_NUM -1))
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   290      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   291          xRet = E_OS_ID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   292          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   293      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   294  #if (cfgOS_CONFORMANCE_CLASS == ECC1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   295      if(tableGetTskClsType(xTaskID) != ECC1){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   296          xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   297          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   298      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   299  #elif(cfgOS_CONFORMANCE_CLASS == ECC2)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   300      if(tableGetTskClsType(xTaskID) != ECC2){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   301          xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   302          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   303      }    
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   304  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   305      if(tableGetTskState(xTaskID) == SUSPENDED){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   306          xRet = E_OS_STATE;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   307          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   308      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   309  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   310      *pxEvent=tableGetEvent(xTaskID);
+	movh.a	a15,#@his(OSSetEventTable)
+	lea	a15,[a15]@los(OSSetEventTable)
+	addsc.a	a15,a15,d4,#1
+.L144:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   311  #if(cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   312  Error_Exit:
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   313  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   314  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   315      if(E_OK != xRet)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   316      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   317          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   318          OSErrorSetServiceId(OSServiceId_GetEvent);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   319          OSErrorSetParam1(xTaskID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   320          OSErrorSetParam2(pxEvent);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   321          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   322          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   323      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   324  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   325      return xRet;
+	mov	d2,#0
+	ld.hu	d15,[a15]0
+	st.h	[a4],d15
+.L145:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   326  }
+	ret
+.L65:
+	
+__GetEvent_function_end:
+	.size	GetEvent,__GetEvent_function_end-GetEvent
+.L42:
+	; End of function
+	
+	.sdecl	'.text.Event.WaitEvent',code,cluster('WaitEvent')
+	.sect	'.text.Event.WaitEvent'
+	.align	2
+	
+	.global	WaitEvent
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   327  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   328  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   329  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   330  /* | Syntax:          | StatusType WaitEvent ( EventMaskType <Mask> )              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   331  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   332  /* | Parameter (In):  | Mask:Mask of the events waited for.                        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   333  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   334  /* | Parameter (Out): | none                                                       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   335  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   336  /* | Description:     | The state of the calling task is set to waiting, unless    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   337  /* |                  | at least one of the events specified in <Mask> has         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   338  /* |                  | already been set.                                          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   339  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   340  /* | Particularities: | 1.This call enforces rescheduling, if the wait condition   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   341  /* |                  | occurs. If rescheduling takes place, the internal resource | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   342  /* |                  | of the task is released while the task is in the waiting   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   343  /* |                  | state.                                                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   344  /* |                  | 2.This service shall only be called from the extended task | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   345  /* |                  | owning the event.                                          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   346  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   347  /* | Status:          | Standard:No error, E_OK                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   348  /* |                  | Extended:Calling task is not an extended task, E_OS_ACCESS | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   349  /* |                  | Calling task occupies resources, E_OS_RESOURCE             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   350  /* |                  | Call at interrupt level, E_OS_CALLEVEL                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   351  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   352  /* | Conformance:     | ECC1, ECC2                                                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   353  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   354  StatusType WaitEvent( EventMaskType xMask )
+; Function WaitEvent
+.L23:
+WaitEvent:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   355  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   356      StatusType xRet = E_OK;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   357  #if(cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   358      if(OSGetContextLevel() != TASK_LEVEL){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   359          xRet = E_OS_CALLEVEL;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   360          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   361      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   362      
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   363  #  if (cfgOS_CONFORMANCE_CLASS == ECC1) || (cfgOS_CONFORMANCE_CLASS == ECC2)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   364      if(tableGetTskClsType(OSCurTsk) != EXTEND_TASK){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   365          xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   366          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   367      }    
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   368  #  endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   369  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   370  #  if (cfgOS_USE_RESOURCE == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   371      if(OSCurTcb->xCurResID != INVALID_RESOURCE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   372      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   373          xRet = E_OS_RESOURCE;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   374          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   375      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   376  #  endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   377  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   378      if((xMask & tableGetEvent(OSCurTsk)) == 0x0000u)
+	movh.a	a15,#@his(OSCurTsk)
+	lea	a15,[a15]@los(OSCurTsk)
+	ld.bu	d15,[a15]
+	sha	d0,d15,#1
+	movh.a	a15,#@his(OSSetEventTable)
+	lea	a15,[a15]@los(OSSetEventTable)
+	addsc.a	a15,a15,d15,#1
+	ld.hu	d15,[a15]0
+	and	d15,d4
+	jne	d15,#0,.L10				; predicted taken
+.L150:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   379      { /* No Events specified in xMask has been set */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   380          tableSetWaitEvent(OSCurTsk,xMask);
+	movh.a	a15,#@his(OSWaitEventTable)
+	lea	a15,[a15]@los(OSWaitEventTable)
+	addsc.a	a15,a15,d0,#0
+	ld.hu	d15,[a15]0
+	or	d15,d4
+	st.h	[a15],d15
+.L151:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   381  #if (cfgOS_USE_INTERNAL_RESOURCE == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   382  		if (OSCurTsk < cfgOS_TASK_WITH_IN_RES_NUM)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   383  		{
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   384  			ReleaseInResource();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   385  		}
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   386  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   387          try2SuspendCurrentTask();
+	call	try2SuspendCurrentTask
+.L92:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   388          doSchedule();
+	call	doSchedule
+.L10:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   389  #if (cfgOS_USE_INTERNAL_RESOURCE == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   390  		if (OSCurTsk < cfgOS_TASK_WITH_IN_RES_NUM)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   391  		{
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   392  			GetInResource();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   393  		}
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   394  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   395      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   396      /* else, has at least one event specified in xMask has already been set,
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   397       * just return  */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   398  #if(cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   399  Error_Exit:
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   400  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   401  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   402      if(E_OK != xRet)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   403      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   404          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   405          OSErrorSetServiceId(OSServiceId_WaitEvent);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   406          OSErrorSetParam1(xMask);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   407          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   408          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   409      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   410  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   411      return xRet;
+	mov	d2,#0
+.L152:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   412  }
+	ret
+.L69:
+	
+__WaitEvent_function_end:
+	.size	WaitEvent,__WaitEvent_function_end-WaitEvent
+.L47:
+	; End of function
+	
+	.calls	'try2ResumeTask','OS_ENTER_CRITICAL'
+	.calls	'try2ResumeTask','listInsertTskAtTail'
+	.calls	'try2ResumeTask','OS_EXIT_CRITICAL'
+	.calls	'try2SuspendCurrentTask','OS_ENTER_CRITICAL'
+	.calls	'try2SuspendCurrentTask','listRemoveTskAtHead'
+	.calls	'try2SuspendCurrentTask','OS_EXIT_CRITICAL'
+	.calls	'SetEvent','try2ResumeTask'
+	.calls	'WaitEvent','try2SuspendCurrentTask'
+	.calls	'WaitEvent','doSchedule'
+	.calls	'try2ResumeTask','',0
+	.calls	'try2SuspendCurrentTask','',0
+	.calls	'SetEvent','',0
+	.calls	'ClearEvent','',0
+	.calls	'GetEvent','',0
+	.extern	OSCurTsk
+	.extern	OSCurTcb
+	.extern	OSHighRdyTsk
+	.extern	OSHighRdyTcb
+	.extern	OSHighRdyPrio
+	.extern	OSTcbTable
+	.extern	OSWaitEventTable
+	.extern	OSSetEventTable
+	.extern	OSIsr2Nesting
+	.extern	doSchedule
+	.extern	listInsertTskAtTail
+	.extern	listRemoveTskAtHead
+	.extern	OS_ENTER_CRITICAL
+	.extern	OS_EXIT_CRITICAL
+	.calls	'WaitEvent','',0
+	.sdecl	'.debug_info',debug
+	.sect	'.debug_info'
+.L25:
+	.word	3075
+	.half	3
+	.word	.L26
+	.byte	4
+.L24:
+	.byte	1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L27
+.L58:
+	.byte	2
+	.byte	'unsigned char',0,1,8
+.L61:
+	.byte	2
+	.byte	'unsigned short int',0,2,7,3
+	.word	181
+.L67:
+	.byte	4
+	.byte	'EventMaskRefType',0,1,173,1,24
+	.word	.L93-.L25
+.L93:
+	.byte	3
+	.word	181
+	.byte	5
+	.byte	'doSchedule',0,2,166,2,13,1,1,1,1,6
+	.byte	'listInsertTskAtTail',0,2,170,2,13,1,1,1,1,7
+	.byte	'xPriority',0,2,170,2,46
+	.word	164
+	.byte	7
+	.byte	'xTaskID',0,2,170,2,65
+	.word	164
+	.byte	0,6
+	.byte	'listRemoveTskAtHead',0,2,171,2,13,1,1,1,1,7
+	.byte	'xPriority',0,2,171,2,46
+	.word	164
+	.byte	7
+	.byte	'xTaskID',0,2,171,2,65
+	.word	164
+	.byte	0,5
+	.byte	'OS_ENTER_CRITICAL',0,3,66,6,1,1,1,1,5
+	.byte	'OS_EXIT_CRITICAL',0,3,67,6,1,1,1,1
+.L73:
+	.byte	3
+	.word	.L94-.L25
+.L94:
+	.byte	8
+	.byte	'_TaskControlBlockTag',0,4,101,16,8,9
+	.byte	'pxStack',0,4
+	.word	.L95-.L25
+	.byte	2,35,0,9
+	.byte	'xPriority',0,1
+	.word	164
+	.byte	2,35,4,9
+	.byte	'xState',0,1
+	.word	164
+	.byte	2,35,5,9
+	.byte	'xActivateCount',0,1
+	.word	164
+	.byte	2,35,6,0
+.L95:
+	.byte	3
+	.word	.L96-.L25
+.L96:
+	.byte	2
+	.byte	'unsigned long int',0,4,7,4
+	.byte	'__size_t',0,5,1,1
+	.word	.L97-.L25
+.L97:
+	.byte	2
+	.byte	'unsigned int',0,4,7,4
+	.byte	'__codeptr',0,5,1,1
+	.word	.L98-.L25
+.L98:
+	.byte	3
+	.word	.L99-.L25
+.L99:
+	.byte	10,1,4
+	.byte	'PCP_GPR6_type',0,6,158,19,3
+	.word	.L100-.L25
+.L100:
+	.byte	11
+	.word	.L101-.L25
+.L101:
+	.byte	12,6,145,19,18,4,9
+	.byte	'B',0,4
+	.word	.L102-.L25
+	.byte	2,35,0,9
+	.byte	'I',0,4
+	.word	.L103-.L25
+	.byte	2,35,0,9
+	.byte	'U',0,4
+	.word	593
+	.byte	2,35,0,0
+.L102:
+	.byte	13,6,147,19,2,4,14
+	.byte	'CNT1',0,4
+	.word	.L104-.L25
+	.byte	12,20,2,35,0,14
+	.byte	'.1.nn',0,4
+	.word	.L104-.L25
+	.byte	2,18,2,35,0,14
+	.byte	'TOS',0,4
+	.word	.L104-.L25
+	.byte	2,16,2,35,0,14
+	.byte	'SRPN',0,4
+	.word	.L104-.L25
+	.byte	8,8,2,35,0,14
+	.byte	'CPPN',0,4
+	.word	.L104-.L25
+	.byte	8,0,2,35,0,0
+.L104:
+	.byte	2
+	.byte	'unsigned int',0,4,7
+.L103:
+	.byte	2
+	.byte	'int',0,4,5,4
+	.byte	'PCP_GPR7_type',0,6,178,19,3
+	.word	.L105-.L25
+.L105:
+	.byte	11
+	.word	.L106-.L25
+.L106:
+	.byte	12,6,160,19,18,4,9
+	.byte	'B',0,4
+	.word	.L107-.L25
+	.byte	2,35,0,9
+	.byte	'I',0,4
+	.word	805
+	.byte	2,35,0,9
+	.byte	'U',0,4
+	.word	593
+	.byte	2,35,0,0
+.L107:
+	.byte	13,6,162,19,2,4,14
+	.byte	'Z',0,4
+	.word	789
+	.byte	1,31,2,35,0,14
+	.byte	'N',0,4
+	.word	789
+	.byte	1,30,2,35,0,14
+	.byte	'C',0,4
+	.word	789
+	.byte	1,29,2,35,0,14
+	.byte	'V',0,4
+	.word	789
+	.byte	1,28,2,35,0,14
+	.byte	'CNZ',0,4
+	.word	789
+	.byte	1,27,2,35,0,14
+	.byte	'IEN',0,4
+	.word	789
+	.byte	1,26,2,35,0,14
+	.byte	'CEN',0,4
+	.word	789
+	.byte	1,25,2,35,0,14
+	.byte	'.1.nn',0,4
+	.word	789
+	.byte	1,24,2,35,0,14
+	.byte	'DPTR',0,4
+	.word	789
+	.byte	8,16,2,35,0,14
+	.byte	'.2.nn',0,4
+	.word	789
+	.byte	16,0,2,35,0,0,4
+	.byte	'uint8_t',0,7,6,24
+	.word	164
+	.byte	4
+	.byte	'uint16_t',0,7,8,24
+	.word	181
+	.byte	4
+	.byte	'uint32_t',0,7,10,24
+	.word	555
+	.byte	4
+	.byte	'ubase_t',0,7,14,24
+	.word	593
+	.byte	4
+	.byte	'void_t',0,7,17,24
+	.word	555
+	.byte	4
+	.byte	'BoolType',0,1,59,17
+	.word	164
+	.byte	4
+	.byte	'VoidType',0,1,60,16
+	.word	555
+	.byte	4
+	.byte	'TaskType',0,1,141,1,17
+	.word	164
+	.byte	4
+	.byte	'TaskRefType',0,1,143,1,19
+	.word	.L108-.L25
+.L108:
+	.byte	3
+	.word	164
+	.byte	4
+	.byte	'TaskStateType',0,1,145,1,19
+	.word	164
+	.byte	4
+	.byte	'TaskStateRefType',0,1,147,1,25
+	.word	.L109-.L25
+.L109:
+	.byte	3
+	.word	164
+	.byte	4
+	.byte	'TickType',0,1,149,1,17
+	.word	593
+	.byte	4
+	.byte	'TickRefType',0,1,151,1,19
+	.word	.L110-.L25
+.L110:
+	.byte	3
+	.word	593
+	.byte	4
+	.byte	'AlarmBaseType',0,1,163,1,2
+	.word	.L111-.L25
+.L111:
+	.byte	13,1,154,1,9,12,9
+	.byte	'xMaxAllowedValue',0,4
+	.word	593
+	.byte	2,35,0,9
+	.byte	'xTicksPerBase',0,4
+	.word	593
+	.byte	2,35,4,9
+	.byte	'xMinCycle',0,4
+	.word	593
+	.byte	2,35,8,0,4
+	.byte	'AlarmBaseRefType',0,1,165,1,25
+	.word	.L112-.L25
+.L112:
+	.byte	3
+	.word	1314
+	.byte	4
+	.byte	'AlarmType',0,1,167,1,17
+	.word	164
+	.byte	4
+	.byte	'CounterType',0,1,169,1,17
+	.word	164
+	.byte	4
+	.byte	'EventMaskType',0,1,171,1,18
+	.word	181
+	.byte	4
+	.byte	'ResourceType',0,1,174,1,17
+	.word	164
+	.byte	4
+	.byte	'StatusType',0,1,175,1,17
+	.word	164
+	.byte	4
+	.byte	'AppModeType',0,1,176,1,17
+	.word	164
+	.byte	4
+	.byte	'ApplicationType',0,1,185,1,17
+	.word	164
+	.byte	4
+	.byte	'ScheduleTableType',0,1,214,1,17
+	.word	164
+	.byte	4
+	.byte	'ScheduleTableStatusType',0,1,230,1,17
+	.word	164
+	.byte	4
+	.byte	'OsScheduleTableAutostartType',0,1,255,1,17
+	.word	164
+	.byte	4
+	.byte	'OsScheduleTblSyncStrategyType',0,1,137,2,17
+	.word	164
+	.byte	4
+	.byte	'OsCpuIplType',0,8,43,17
+	.word	164
+	.byte	4
+	.byte	'TaskStackType',0,4,89,18
+	.word	555
+	.byte	4
+	.byte	'TaskStackRefType',0,4,96,3
+	.word	.L113-.L25
+.L113:
+	.byte	13,4,91,9,4,9
+	.byte	'pxStackTop',0,4
+	.word	550
+	.byte	2,35,0,0,4
+	.byte	'PriorityType',0,4,98,17
+	.word	164
+	.byte	4
+	.byte	'TaskEntryType',0,4,100,16
+	.word	.L114-.L25
+.L114:
+	.byte	3
+	.word	.L115-.L25
+.L115:
+	.byte	15,1,1,4
+	.byte	'TcbType',0,4,112,2
+	.word	447
+	.byte	4
+	.byte	'AlarmClassType',0,4,117,17
+	.word	164
+	.byte	4
+	.byte	'AlarmContainerType',0,4,121,19
+	.word	555
+	.byte	4
+	.byte	'AlmCtrlBlkType',0,4,129,1,2
+	.word	.L116-.L25
+.L116:
+	.byte	8
+	.byte	'_AlmCtrlBlkTag',0,4,123,16,12,9
+	.byte	'xAlarmValue',0,4
+	.word	593
+	.byte	2,35,0,9
+	.byte	'xCycle',0,4
+	.word	593
+	.byte	2,35,4,9
+	.byte	'pxNext',0,1
+	.word	164
+	.byte	2,35,8,9
+	.byte	'pxPrev',0,1
+	.word	164
+	.byte	2,35,9,0,4
+	.byte	'OsSchedTblCtrlBlkType',0,4,162,1,2
+	.word	.L117-.L25
+.L117:
+	.byte	13,4,139,1,9,20,9
+	.byte	'xSchedTblStatus',0,1
+	.word	164
+	.byte	2,35,0,9
+	.byte	'xIterator',0,1
+	.word	164
+	.byte	2,35,1,9
+	.byte	'xSchedTblNextExpiryPointTime',0,4
+	.word	593
+	.byte	2,35,2,9
+	.byte	'xSchedTblStartingTime',0,4
+	.word	593
+	.byte	2,35,6,9
+	.byte	'xAdjustDirection',0,1
+	.word	164
+	.byte	2,35,10,9
+	.byte	'xDeviation',0,4
+	.word	593
+	.byte	2,35,12,9
+	.byte	'xNextOrPrevScheduleTable',0,1
+	.word	164
+	.byte	2,35,16,9
+	.byte	'pxNextSchedTbl',0,1
+	.word	164
+	.byte	2,35,17,9
+	.byte	'pxPrevSchedTbl',0,1
+	.word	164
+	.byte	2,35,18,0,4
+	.byte	'OsScheduleTableType',0,4,176,1,2
+	.word	.L118-.L25
+.L118:
+	.byte	13,4,163,1,9,28,9
+	.byte	'xOsScheduleTableDuration',0,4
+	.word	593
+	.byte	2,35,0,9
+	.byte	'xOsScheduleTableRepeating',0,1
+	.word	164
+	.byte	2,35,4,9
+	.byte	'xOsScheduleTableAccessingApplication',0,1
+	.word	164
+	.byte	2,35,5,9
+	.byte	'xOsScheduleTableCounterRef',0,1
+	.word	164
+	.byte	2,35,6,9
+	.byte	'xOsScheduleTableAutostartable',0,1
+	.word	164
+	.byte	2,35,7,9
+	.byte	'xOsScheduleTableAutostartType',0,1
+	.word	164
+	.byte	2,35,8,9
+	.byte	'xOsScheduleTableAutostartValue',0,4
+	.word	593
+	.byte	2,35,10,9
+	.byte	'xOsScheduleTableSyncStrategy',0,1
+	.word	164
+	.byte	2,35,14,9
+	.byte	'xOsScheduleTableMaxAdvance',0,4
+	.word	593
+	.byte	2,35,16,9
+	.byte	'xOsScheduleTableMaxRetard',0,4
+	.word	593
+	.byte	2,35,20,9
+	.byte	'xOsScheduleTableExplicitPrecision',0,4
+	.word	593
+	.byte	2,35,24,0,4
+	.byte	'OsSchedTblCmdType',0,4,184,1,3
+	.word	.L119-.L25
+.L119:
+	.byte	13,4,180,1,9,8,9
+	.byte	'xOffset',0,4
+	.word	593
+	.byte	2,35,0,9
+	.byte	'pxOsSchedTblCmd',0,4
+	.word	1845
+	.byte	2,35,4,0,16
+	.byte	'OSCurTsk',0,4,192,1,17
+	.word	164
+	.byte	1,1,16
+	.byte	'OSCurTcb',0,4,193,1,17
+	.word	442
+	.byte	1,1,16
+	.byte	'OSHighRdyTsk',0,4,196,1,17
+	.word	164
+	.byte	1,1,16
+	.byte	'OSHighRdyTcb',0,4,197,1,17
+	.word	442
+	.byte	1,1,16
+	.byte	'OSHighRdyPrio',0,4,200,1,21
+	.word	164
+	.byte	1,1,16
+	.byte	'OSTcbTable',0,4,243,1,18
+	.word	.L120-.L25
+	.byte	1,1
+.L120:
+	.byte	17,64
+	.word	447
+	.byte	18,7,0,16
+	.byte	'OSWaitEventTable',0,4,135,2,22
+	.word	.L121-.L25
+	.byte	1,1
+.L121:
+	.byte	17,14
+	.word	181
+	.byte	18,6,0,16
+	.byte	'OSSetEventTable',0,4,136,2,22
+	.word	3017
+	.byte	1,1,16
+	.byte	'OSIsr2Nesting',0,4,150,2,18
+	.word	164
+	.byte	1,1,0
+	.sdecl	'.debug_abbrev',debug
+	.sect	'.debug_abbrev'
+.L26:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,16,6,0,0,2,36,0,3,8,11,15,62,15,0,0,3,15,0,73,19,0,0,4,22,0,3,8,58
+	.byte	15,59,15,57,15,73,19,0,0,5,46,0,3,8,58,15,59,15,57,15,54,15,39,12,63,12,60,12,0,0,6,46,1,3,8,58,15,59
+	.byte	15,57,15,54,15,39,12,63,12,60,12,0,0,7,5,0,3,8,58,15,59,15,57,15,73,19,0,0,8,19,1,3,8,58,15,59,15,57,15
+	.byte	11,15,0,0,9,13,0,3,8,11,15,73,19,56,9,0,0,10,21,0,54,15,0,0,11,53,0,73,19,0,0,12,23,1,58,15,59,15,57,15
+	.byte	11,15,0,0,13,19,1,58,15,59,15,57,15,11,15,0,0,14,13,0,3,8,11,15,73,19,13,15,12,15,56,9,0,0,15,21,0,54
+	.byte	15,39,12,0,0,16,52,0,3,8,58,15,59,15,57,15,73,19,63,12,60,12,0,0,17,1,1,11,15,73,19,0,0,18,33,0,47,15
+	.byte	0,0,0
+	.sdecl	'.debug_line',debug
+	.sect	'.debug_line'
+.L27:
+	.word	.L123-.L122
+.L122:
+	.half	3
+	.word	.L125-.L124
+.L124:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Std_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\kernel\\Task.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\kernel\\Kernel.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Os.h',0,0,0,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0,0,0,0
+	.byte	'D:\\Program Files\\TASKING\\TriCore v3.5r1\\ctc\\include\\sfr\\regtc1797.sfr',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Bsp\\Cpu\\Platform_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\osek_test\\GaInOS_Studio\\Os_Cfg.h',0,0,0,0,0
+.L125:
+.L123:
+	.sdecl	'.debug_info',debug,cluster('SetEvent')
+	.sect	'.debug_info'
+.L28:
+	.word	253
+	.half	3
+	.word	.L29
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L31,.L30
+	.byte	2
+	.word	.L24
+	.byte	3
+	.byte	'SetEvent',0,1,150,1,12
+	.word	.L58
+	.byte	1,1,1
+	.word	.L17,.L59,.L16
+	.byte	4
+	.byte	'xTaskID',0,1,150,1,32
+	.word	.L58,.L60
+	.byte	4
+	.byte	'xMask',0,1,150,1,56
+	.word	.L61,.L62
+	.byte	5
+	.word	.L17,.L59
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('SetEvent')
+	.sect	'.debug_abbrev'
+.L29:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('SetEvent')
+	.sect	'.debug_line'
+.L30:
+	.word	.L127-.L126
+.L126:
+	.half	3
+	.word	.L129-.L128
+.L128:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0,0,0,0,0
+.L129:
+	.byte	5,5,7,0,5,2
+	.word	.L17
+	.byte	3,175,1,1,9
+	.half	.L130-.L17
+	.byte	3,1,1,5,9,9
+	.half	.L131-.L130
+	.byte	3,2,1,9
+	.half	.L132-.L131
+	.byte	3,1,1,5,5,9
+	.half	.L6-.L132
+	.byte	3,19,1,5,1,9
+	.half	.L133-.L6
+	.byte	3,1,1,7,9
+	.half	.L32-.L133
+	.byte	0,1,1
+.L127:
+	.sdecl	'.debug_ranges',debug,cluster('SetEvent')
+	.sect	'.debug_ranges'
+.L31:
+	.word	-1,.L17,0,.L32-.L17,0,0
+	.sdecl	'.debug_info',debug,cluster('ClearEvent')
+	.sect	'.debug_info'
+.L33:
+	.word	234
+	.half	3
+	.word	.L34
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L36,.L35
+	.byte	2
+	.word	.L24
+	.byte	3
+	.byte	'ClearEvent',0,1,220,1,12
+	.word	.L58
+	.byte	1,1,1
+	.word	.L19,.L63,.L18
+	.byte	4
+	.byte	'xMask',0,1,220,1,39
+	.word	.L61,.L64
+	.byte	5
+	.word	.L19,.L63
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('ClearEvent')
+	.sect	'.debug_abbrev'
+.L34:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('ClearEvent')
+	.sect	'.debug_line'
+.L35:
+	.word	.L135-.L134
+.L134:
+	.half	3
+	.word	.L137-.L136
+.L136:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0,0,0,0,0
+.L137:
+	.byte	5,5,7,0,5,2
+	.word	.L19
+	.byte	3,240,1,1,9
+	.half	.L138-.L19
+	.byte	3,14,1,5,1,9
+	.half	.L139-.L138
+	.byte	3,1,1,7,9
+	.half	.L37-.L139
+	.byte	0,1,1
+.L135:
+	.sdecl	'.debug_ranges',debug,cluster('ClearEvent')
+	.sect	'.debug_ranges'
+.L36:
+	.word	-1,.L19,0,.L37-.L19,0,0
+	.sdecl	'.debug_info',debug,cluster('GetEvent')
+	.sect	'.debug_info'
+.L38:
+	.word	255
+	.half	3
+	.word	.L39
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L41,.L40
+	.byte	2
+	.word	.L24
+	.byte	3
+	.byte	'GetEvent',0,1,157,2,12
+	.word	.L58
+	.byte	1,1,1
+	.word	.L21,.L65,.L20
+	.byte	4
+	.byte	'xTaskID',0,1,157,2,32
+	.word	.L58,.L66
+	.byte	4
+	.byte	'pxEvent',0,1,157,2,59
+	.word	.L67,.L68
+	.byte	5
+	.word	.L21,.L65
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('GetEvent')
+	.sect	'.debug_abbrev'
+.L39:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('GetEvent')
+	.sect	'.debug_line'
+.L40:
+	.word	.L141-.L140
+.L140:
+	.half	3
+	.word	.L143-.L142
+.L142:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0,0,0,0,0
+.L143:
+	.byte	5,36,7,0,5,2
+	.word	.L21
+	.byte	3,181,2,1,5,5,9
+	.half	.L144-.L21
+	.byte	3,15,1,5,36,3,113,1,5,1,9
+	.half	.L145-.L144
+	.byte	3,16,1,7,9
+	.half	.L42-.L145
+	.byte	0,1,1
+.L141:
+	.sdecl	'.debug_ranges',debug,cluster('GetEvent')
+	.sect	'.debug_ranges'
+.L41:
+	.word	-1,.L21,0,.L42-.L21,0,0
+	.sdecl	'.debug_info',debug,cluster('WaitEvent')
+	.sect	'.debug_info'
+.L43:
+	.word	233
+	.half	3
+	.word	.L44
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L46,.L45
+	.byte	2
+	.word	.L24
+	.byte	3
+	.byte	'WaitEvent',0,1,226,2,12
+	.word	.L58
+	.byte	1,1,1
+	.word	.L23,.L69,.L22
+	.byte	4
+	.byte	'xMask',0,1,226,2,37
+	.word	.L61,.L70
+	.byte	5
+	.word	.L23,.L69
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('WaitEvent')
+	.sect	'.debug_abbrev'
+.L44:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('WaitEvent')
+	.sect	'.debug_line'
+.L45:
+	.word	.L147-.L146
+.L146:
+	.half	3
+	.word	.L149-.L148
+.L148:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0,0,0,0,0
+.L149:
+	.byte	5,5,7,0,5,2
+	.word	.L23
+	.byte	3,249,2,1,5,9,9
+	.half	.L150-.L23
+	.byte	3,2,1,5,33,9
+	.half	.L151-.L150
+	.byte	3,7,1,5,21,9
+	.half	.L92-.L151
+	.byte	3,1,1,5,5,9
+	.half	.L10-.L92
+	.byte	3,23,1,5,1,9
+	.half	.L152-.L10
+	.byte	3,1,1,7,9
+	.half	.L47-.L152
+	.byte	0,1,1
+.L147:
+	.sdecl	'.debug_ranges',debug,cluster('WaitEvent')
+	.sect	'.debug_ranges'
+.L46:
+	.word	-1,.L23,0,.L47-.L23,0,0
+	.sdecl	'.debug_info',debug,cluster('try2ResumeTask')
+	.sect	'.debug_info'
+.L48:
+	.word	279
+	.half	3
+	.word	.L49
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L51,.L50
+	.byte	2
+	.word	.L24
+	.byte	3
+	.byte	'try2ResumeTask',0,1,74,10
+	.word	.L58
+	.byte	1,1,1
+	.word	.L13,.L71,.L12
+	.byte	4
+	.byte	'xTaskID',0,1,74,34
+	.word	.L58,.L72
+	.byte	5
+	.word	.L13,.L71
+	.byte	6
+	.byte	'pxTcb',0,1,76,14
+	.word	.L73,.L74
+	.byte	6
+	.byte	'xPriority',0,1,77,18
+	.word	.L58,.L75
+	.byte	0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('try2ResumeTask')
+	.sect	'.debug_abbrev'
+.L49:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,1,17,1,18,1,0,0,6
+	.byte	52,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('try2ResumeTask')
+	.sect	'.debug_line'
+.L50:
+	.word	.L154-.L153
+.L153:
+	.half	3
+	.word	.L156-.L155
+.L155:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0,0,0,0,0
+.L156:
+	.byte	5,10,7,0,5,2
+	.word	.L13
+	.byte	3,201,0,1,5,34,3,5,1,5,31,9
+	.half	.L78-.L13
+	.byte	3,1,1,5,24,9
+	.half	.L82-.L78
+	.byte	3,2,1,5,26,9
+	.half	.L83-.L82
+	.byte	3,2,1,5,43,9
+	.half	.L157-.L83
+	.byte	3,1,1,5,5,9
+	.half	.L81-.L157
+	.byte	3,2,1,5,34,9
+	.half	.L158-.L81
+	.byte	3,2,1,5,30,9
+	.half	.L159-.L158
+	.byte	3,1,1,5,32,9
+	.half	.L160-.L159
+	.byte	3,1,1,5,9,9
+	.half	.L161-.L160
+	.byte	3,3,1,5,31,9
+	.half	.L162-.L161
+	.byte	3,7,1,5,13,9
+	.half	.L163-.L162
+	.byte	3,1,1,5,1,9
+	.half	.L164-.L163
+	.byte	3,6,1,5,23,7,9
+	.half	.L2-.L164
+	.byte	3,126,1,5,5,9
+	.half	.L165-.L2
+	.byte	3,1,1,5,1,9
+	.half	.L166-.L165
+	.byte	3,1,1,7,9
+	.half	.L52-.L166
+	.byte	0,1,1
+.L154:
+	.sdecl	'.debug_ranges',debug,cluster('try2ResumeTask')
+	.sect	'.debug_ranges'
+.L51:
+	.word	-1,.L13,0,.L52-.L13,0,0
+	.sdecl	'.debug_info',debug,cluster('try2SuspendCurrentTask')
+	.sect	'.debug_info'
+.L53:
+	.word	245
+	.half	3
+	.word	.L54
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L56,.L55
+	.byte	2
+	.word	.L24
+	.byte	3
+	.byte	'try2SuspendCurrentTask',0,1,112,6,1,1,1
+	.word	.L15,.L76,.L14
+	.byte	4
+	.word	.L15,.L76
+	.byte	5
+	.byte	'xPriority',0,1,114,18
+	.word	.L58,.L77
+	.byte	0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('try2SuspendCurrentTask')
+	.sect	'.debug_abbrev'
+.L54:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,1,17,1,18,1,0,0,5,52,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('try2SuspendCurrentTask')
+	.sect	'.debug_line'
+.L55:
+	.word	.L168-.L167
+.L167:
+	.half	3
+	.word	.L170-.L169
+.L169:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c',0,0,0,0,0
+.L170:
+	.byte	5,38,7,0,5,2
+	.word	.L15
+	.byte	3,242,0,1,5,24,9
+	.half	.L87-.L15
+	.byte	3,1,1,5,44,9
+	.half	.L171-.L87
+	.byte	3,1,1,5,29,9
+	.half	.L90-.L171
+	.byte	3,1,1,5,23,9
+	.half	.L88-.L90
+	.byte	3,1,1,5,1,7,9
+	.half	.L57-.L88
+	.byte	3,1,0,1,1
+.L168:
+	.sdecl	'.debug_ranges',debug,cluster('try2SuspendCurrentTask')
+	.sect	'.debug_ranges'
+.L56:
+	.word	-1,.L15,0,.L57-.L15,0,0
+	.sdecl	'.debug_loc',debug,cluster('ClearEvent')
+	.sect	'.debug_loc'
+.L18:
+	.word	-1,.L19,.L19-.L19,.L63-.L19
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L64:
+	.word	-1,.L19,.L19-.L19,.L91-.L19
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('GetEvent')
+	.sect	'.debug_loc'
+.L20:
+	.word	-1,.L21,.L21-.L21,.L65-.L21
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L68:
+	.word	-1,.L21,.L21-.L21,.L65-.L21
+	.half	1
+	.byte	100
+	.word	0,0
+.L66:
+	.word	-1,.L21,.L21-.L21,.L65-.L21
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('SetEvent')
+	.sect	'.debug_loc'
+.L16:
+	.word	-1,.L17,.L17-.L17,.L59-.L17
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L62:
+	.word	-1,.L17,.L17-.L17,.L6-.L17
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+.L60:
+	.word	-1,.L17,.L17-.L17,.L6-.L17
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('WaitEvent')
+	.sect	'.debug_loc'
+.L22:
+	.word	-1,.L23,.L23-.L23,.L69-.L23
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L70:
+	.word	-1,.L23,.L23-.L23,.L92-.L23
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('try2ResumeTask')
+	.sect	'.debug_loc'
+.L74:
+	.word	-1,.L13,.L78-.L13,.L79-.L13
+	.half	1
+	.byte	111
+	.word	0,0
+.L12:
+	.word	-1,.L13,.L13-.L13,.L71-.L13
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L75:
+	.word	-1,.L13,.L80-.L13,.L81-.L13
+	.half	5
+	.byte	144,34,157,32,0
+	.word	.L82-.L13,.L71-.L13
+	.half	5
+	.byte	144,36,157,32,0
+	.word	0,0
+.L72:
+	.word	-1,.L13,.L13-.L13,.L83-.L13
+	.half	5
+	.byte	144,34,157,32,0
+	.word	.L84-.L13,.L85-.L13
+	.half	5
+	.byte	144,39,157,32,32
+	.word	.L86-.L13,.L81-.L13
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('try2SuspendCurrentTask')
+	.sect	'.debug_loc'
+.L14:
+	.word	-1,.L15,.L15-.L15,.L76-.L15
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L77:
+	.word	-1,.L15,.L87-.L15,.L88-.L15
+	.half	5
+	.byte	144,39,157,32,32
+	.word	.L89-.L15,.L90-.L15
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+	.sdecl	'.debug_frame',debug
+	.sect	'.debug_frame'
+.L172:
+	.word	48
+	.word	-1
+	.byte	3,0,2,1,27,12,26,0,8,26,8,27,8,28,8,29,8,30,8,31,8,16,8,17,8,24,8,25,8,32,8,33,8,34,8,35,8,36,8,37,8,38
+	.byte	8,39
+	.sdecl	'.debug_frame',debug,cluster('try2ResumeTask')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L172,.L13,.L71-.L13
+	.sdecl	'.debug_frame',debug,cluster('try2SuspendCurrentTask')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L172,.L15,.L76-.L15
+	.sdecl	'.debug_frame',debug,cluster('SetEvent')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L172,.L17,.L59-.L17
+	.sdecl	'.debug_frame',debug,cluster('ClearEvent')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L172,.L19,.L63-.L19
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('GetEvent')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L172,.L21,.L65-.L21
+	.byte	8,18,8,19,8,21,8,22,8,23,0,0
+	.sdecl	'.debug_frame',debug,cluster('WaitEvent')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L172,.L23,.L69-.L23
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   413  #endif /* cfgOS_CONFORMANCE_CLASS ==ECC1 ||cfgOS_CONFORMANCE_CLASS ==ECC2 */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c	   414  
+
+	; Module end

@@ -1,0 +1,2927 @@
+	; TASKING VX-toolset for TriCore: C compiler v3.5r1 Build 484.1.2
+	; Options: -f cc7304a -c99 --dep-file=kernel\.Alarm.o.d -Ctc1797 --core=tc1.3.1 --fpu-present -F -IF:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio -IF:\parai@foxmail.com\nt\GaInOS\include -IF:\parai@foxmail.com\nt\GaInOS\kernel -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport -g --make-target=kernel\Alarm.o -t4 --language=-gcc,-volatile,+strings --default-near-size=0 -O2 --default-a1-size=0 --default-a0-size=0 --source --align=0 --compact-max-size=200 --switch=auto --tasking-sfr -o kernel\Alarm.src
+	; Module start
+	.name	"Alarm"
+
+	
+$FPU
+$TC131
+	
+	.sdecl	'.text.Alarm.addAlarmTick',code,cluster('addAlarmTick')
+	.sect	'.text.Alarm.addAlarmTick'
+	.align	2
+	
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	     1  /* Copyright 2012, Fan Wang(Parai)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	     2   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	     3   * This file is part of GaInOS.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	     4   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	     5   * GaInOS is free software: you can redistribute it and/or modify
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	     6   * it under the terms of the GNU General Public License as published by
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	     7   * the Free Software Foundation, either version 3 of the License, or
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	     8   * (at your option) any later version.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	     9   *             
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    10   * Linking GaInOS statically or dynamically with other modules is making a
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    11   * combined work based on GaInOS. Thus, the terms and conditions of the GNU
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    12   * General Public License cover the whole combination.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    13   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    14   * In addition, as a special exception, the copyright holders of GaInOS give
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    15   * you permission to combine GaInOS program with free software programs or
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    16   * libraries that are released under the GNU LGPL and with independent modules
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    17   * that communicate with GaInOS solely through the GaInOS defined interface. 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    18   * You may copy and distribute such a system following the terms of the GNU GPL
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    19   * for GaInOS and the licenses of the other code concerned, provided that you
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    20   * include the source code of that other code when and as the GNU GPL requires
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    21   * distribution of source code.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    22   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    23   * Note that people who make modified versions of GaInOS are not obligated to
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    24   * grant this special exception for their modified versions; it is their choice
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    25   * whether to do so. The GNU General Public License gives permission to release
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    26   * a modified version without this exception; this exception also makes it
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    27   * possible to release a modified version which carries forward this exception.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    28   * 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    29   * GaInOS is distributed in the hope that it will be useful,
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    30   * but WITHOUT ANY WARRANTY; without even the implied warranty of
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    31   * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    32   * GNU General Public License for more details.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    33   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    34   * You should have received a copy of the GNU General Public License
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    35   * along with GaInOS. If not, see <http://www.gnu.org/licenses/>.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    36   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    37   */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    38  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    39  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    40  /* | Author: | Wang Fan(parai)   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    41  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    42  /* | Email:  | parai@foxmail.com | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    43  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    44  /* | WorkOn: | Emacs23.3         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    45  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    46  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    47  /* |--------------------------------------+----------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    48  /* | History:                             | Year-Month-Day | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    49  /* |--------------------------------------+----------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    50  /* | Creat this file and decide to Design |      2012-9-27 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    51  /* | the AutoSAR OS.                      |                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    52  /* |--------------------------------------+----------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    53  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    54  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    55  /* |-------------------+----------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    56  /* | File-name:        | Alarm.c                                      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    57  /* |-------------------+----------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    58  /* | Reference Manual: | (1)Specification of Operating System(V3.0.2) | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    59  /* |                   | AUTOSAR_SWS_OS.PDF                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    60  /* |                   |                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    61  /* |                   | (2)Operating SystemSpecification 2.2.3(OSEK) | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    62  /* |                   | os223.doc                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    63  /* |-------------------+----------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    64  #include "Kernel.h"
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    65  #if (cfgOS_USE_ALARM==STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    66  static TickType
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    67  addAlarmTick(TickType xCntCurValue,TickType xMaxAllowedValue ,TickType xTicks)
+; Function addAlarmTick
+.L52:
+addAlarmTick:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    68  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    69      if( xTicks < (xMaxAllowedValue - xCntCurValue) )
+	add	d2,d4,d6
+	sub	d15,d5,d4
+	lt.u	d15,d6,d15
+.L319:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    70      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    71          return (xCntCurValue + xTicks);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    72      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    73      else
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    74      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    75          return (xCntCurValue + xTicks -xMaxAllowedValue);
+	csubn	d2,d15,d2,d5
+.L320:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    76      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    77  }
+	ret
+.L151:
+	
+__addAlarmTick_function_end:
+	.size	addAlarmTick,__addAlarmTick_function_end-addAlarmTick
+.L107:
+	; End of function
+	
+	.sdecl	'.text.Alarm.listCntInsert',code,cluster('listCntInsert')
+	.sect	'.text.Alarm.listCntInsert'
+	.align	2
+	
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    78  /* listCntInsert():
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    79   * Will Insert xAlarmID to the place according to xAlarmValue,
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    80   * The situation That an overflow of xAlarmValue should be considered.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    81   * An overflowed xAlarmValue is bigger than no overflowed one.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    82   * So When the Insert was done, the listCnt was Sorted by xAlarmValue
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    83   * from smaller to bigger.*/
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    84  static void listCntInsert(CounterType xCounterID, AlarmType xAlarmID )
+; Function listCntInsert
+.L54:
+listCntInsert:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    85  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    86      AlarmType pxNext;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    87      AlarmType pxPrev;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    88      TickType xAlarmValue  = 0u;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    89      TickType xCntCurValue = 0u;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    90  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    91      xAlarmValue  = tableGetAlmValue(xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    92      xCntCurValue = tableGetCntCurValue(xCounterID);
+	mov	d15,d4
+	movh.a	a2,#@his(OSCntCurValueTable)
+.L170:
+	lea	a2,[a2]@los(OSCntCurValueTable)
+	addsc.a	a2,a2,d15,#2
+.L325:
+	mul	d0,d5,#12
+	movh.a	a5,#@his(OSAlarmTable)
+.L326:
+	ld.w	d1,[a2]
+.L169:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    93  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    94      pxPrev =  INVALID_ALARM; 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    95      pxNext =  listGetCntHeadElement(xCounterID);
+	movh.a	a2,#@his(OSCntAlmList)
+.L327:
+	lea	a5,[a5]@los(OSAlarmTable)
+	addsc.a	a6,a5,d0,#0
+.L328:
+	lea	a2,[a2]@los(OSCntAlmList)
+	addsc.a	a2,a2,d15,#0
+.L329:
+	mov.u	d6,#255
+	ld.w	d0,[a6]
+.L168:
+	ld.bu	d2,[a2]
+	mov	d3,d2
+.L167:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    96          
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    97      if( xAlarmValue < xCntCurValue )
+	jge.u	d0,d1,.L9				; prediction unknown
+.L330:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    98      {   /* It's an overflowed xAlarmValue,So Skip all the no overflowed one*/
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	    99          while( (pxNext != INVALID_ALARM) &&
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   100                 (tableGetAlmValue(pxNext) > xCntCurValue ))
+	j	.L6
+.L7:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   101          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   102              pxPrev = pxNext;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   103              pxNext = listGetCntNextElement(pxNext);
+	mul	d15,d3,#12
+	addsc.a	a15,a5,d15,#0
+.L331:
+	mov	d6,d3
+	ld.bu	d3,[a15]8
+.L6:
+	mov	d15,#255
+	jeq	d15,d3,.L9				; predicted not taken
+.L332:
+	mul	d15,d3,#12
+	addsc.a	a4,a5,d15,#0
+	ld.w	d4,[a4]
+	jlt.u	d1,d4,.L7				; predicted taken
+.L333:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   104          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   105  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   106      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   107      while( (pxNext != INVALID_ALARM ) &&
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   108             (tableGetAlmValue(pxNext) < xAlarmValue))
+	j	.L9
+.L10:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   109      {   /*  Find untill pxNext's xAlarmValue is bigger that xAlarmID's xAlarmValue,
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   110           *  Tast is just the place to insert xAlarmID*/
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   111          pxPrev = pxNext;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   112          pxNext = listGetCntNextElement(pxNext);
+	mul	d15,d3,#12
+	addsc.a	a15,a5,d15,#0
+.L334:
+	mov	d6,d3
+	ld.bu	d3,[a15]8
+.L9:
+	mov	d15,#255
+	jeq	d15,d3,.L11				; predicted not taken
+.L335:
+	mul	d15,d3,#12
+	addsc.a	a4,a5,d15,#0
+	ld.w	d1,[a4]
+	jlt.u	d1,d0,.L10				; predicted taken
+.L11:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   113      }     
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   114      if(pxPrev == INVALID_ALARM)
+	mov	d15,#255
+	lea	a4,[a6]8
+	jne	d15,d6,.L12				; predicted taken
+.L336:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   115      {                           /* Should insert it At Head */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   116          listCntInsertAtHead(xCounterID , xAlarmID); 
+	st.b	[a4],d2
+	st.b	[a6]9,d15
+	jeq	d15,d2,.L13				; predicted not taken
+	mul	d15,d2,#12
+	addsc.a	a15,a5,d15,#0
+	st.b	[a15]9,d5
+.L13:
+	st.b	[a2],d5
+.L337:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   117      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   118      else if(pxNext == INVALID_ALARM )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   119      {                           /* Should insert it At Tail */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   120          listCntInsertAtTail(pxPrev , xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   121      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   122      else
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   123      {                           /* Should insert it between pxPrev,pxNext */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   124          listCntInsertBetween(pxPrev,pxNext,xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   125      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   126  }
+	ret
+.L12:
+	mul	d15,d6,#12
+	addsc.a	a15,a5,d15,#0
+	mov	d15,#255
+	lea	a15,[a15]8
+	jne	d15,d3,.L15				; predicted taken
+.L338:
+	st.b	[a15],d5
+	st.b	[a4],d15
+	j	.L16
+.L15:
+	mul	d15,d3,#12
+	st.b	[a15],d5
+	addsc.a	a15,a5,d15,#0
+	st.b	[a15]9,d5
+	st.b	[a4],d3
+.L16:
+	st.b	[a6]9,d6
+.L339:
+	ret
+.L155:
+	
+__listCntInsert_function_end:
+	.size	listCntInsert,__listCntInsert_function_end-listCntInsert
+.L112:
+	; End of function
+	
+	.sdecl	'.text.Alarm.listCntRemove',code,cluster('listCntRemove')
+	.sect	'.text.Alarm.listCntRemove'
+	.align	2
+	
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   127  static void listCntRemove(CounterType xCounterID ,AlarmType xAlarmID)
+; Function listCntRemove
+.L56:
+listCntRemove:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   128  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   129      AlarmType pxNext;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   130      AlarmType pxPrev;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   131      pxPrev=listGetCntPrevElement(xAlarmID);
+	mul	d15,d5,#12
+	movh.a	a2,#@his(OSAlarmTable)
+	lea	a2,[a2]@los(OSAlarmTable)
+	addsc.a	a15,a2,d15,#0
+.L344:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   132      pxNext=listGetCntNextElement(xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   133      if(pxPrev == INVALID_ALARM)
+	mov	d15,#255
+	ld.bu	d0,[a15]9
+.L172:
+	ld.bu	d1,[a15]8
+.L171:
+	jne	d15,d0,.L17				; predicted taken
+.L345:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   134      {                           /* Should remove it At Head */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   135          listCntRemoveAtHead(xCounterID); 
+	movh.a	a15,#@his(OSCntAlmList)
+	lea	a15,[a15]@los(OSCntAlmList)
+	addsc.a	a4,a15,d4,#0
+	ld.bu	d0,[a4]
+.L173:
+	mul	d0,d0,#12
+	addsc.a	a15,a2,d0,#0
+	lea	a5,[a15]8
+	ld.bu	d0,[a5]
+	jeq	d15,d0,.L18				; predicted not taken
+	mul	d0,d0,#12
+	addsc.a	a15,a2,d0,#0
+	st.b	[a15]9,d15
+.L18:
+	ld.bu	d15,[a5]
+	st.b	[a4],d15
+.L346:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   136      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   137      else if(pxNext == INVALID_ALARM )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   138      {                           /* Should remove it At Tail */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   139          listCntRemoveAtTail(pxPrev);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   140      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   141      else
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   142      {                           /* Should remove it between pxPrev,pxNext */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   143          listCntRemoveBetween(pxPrev,pxNext);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   144      } 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   145  }
+	ret
+.L17:
+	mul	d15,d0,#12
+	addsc.a	a15,a2,d15,#0
+	mov	d15,#255
+	lea	a15,[a15]8
+	jne	d15,d1,.L20				; predicted taken
+.L347:
+	st.b	[a15],d15
+.L348:
+	ret
+.L20:
+	mul	d15,d1,#12
+	st.b	[a15],d1
+	addsc.a	a15,a2,d15,#0
+	st.b	[a15]9,d0
+.L349:
+	ret
+.L162:
+	
+__listCntRemove_function_end:
+	.size	listCntRemove,__listCntRemove_function_end-listCntRemove
+.L117:
+	; End of function
+	
+	.sdecl	'.text.Alarm.GetAlarmBase',code,cluster('GetAlarmBase')
+	.sect	'.text.Alarm.GetAlarmBase'
+	.align	2
+	
+	.global	GetAlarmBase
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   146  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   147  /* | Syntax:          | StatusType GetAlarmBase (AlarmType <AlarmID>,                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   148  /* |                  | AlarmBaseRefType <Info> )                                        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   149  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   150  /* | Parameter (In):  | AlarmID: Reference to alarm                                      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   151  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   152  /* | Parameter (Out): | Info: Reference to structure with constants of the alarm base.   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   153  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   154  /* | Description:     | The system service GetAlarmBase reads the alarm base             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   155  /* |                  | characteristics. The return value <Info> is a structure in which | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   156  /* |                  | the information of data type AlarmBaseType is stored.            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   157  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   158  /* | Particularities: | Allowed on task level, ISR, and in several hook routines (see    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   159  /* |                  | Figure 12-1).                                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   160  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   161  /* | Status:          | Standard:No error, E_OK                                          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   162  /* |                  | Extended:Alarm <AlarmID> is invalid, E_OS_ID                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   163  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   164  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   165  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   166  StatusType GetAlarmBase ( AlarmType xAlarmID, AlarmBaseRefType pxInfo )
+; Function GetAlarmBase
+.L58:
+GetAlarmBase:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   167  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   168      StatusType xRet=E_OK;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   169  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   170      if ( xAlarmID > (cfgOS_ALARM_NUM - 1) )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   171      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   172          xRet = E_OS_ID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   173          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   174      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   175  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   176      *pxInfo = listGetAlarmBase(xAlarmID);
+	movh.a	a15,#@his(OSAlarmOwnerTable)
+	lea	a15,[a15]@los(OSAlarmOwnerTable)
+	addsc.a	a15,a15,d4,#0
+	ld.bu	d15,[a15]
+	mul	d15,d15,#12
+	movh.a	a15,#@his(OSCounterBaseTable)
+	lea	a15,[a15]@los(OSCounterBaseTable)
+	addsc.a	a15,a15,d15,#0
+	mov.a	a2,#2
+.L22:
+	ld.w	d15,[a15+]
+	st.w	[a4+],d15
+	loop	a2,.L22				; predicted taken
+.L264:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   177  #if(cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)    
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   178    Error_Exit:
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   179  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   180      if(E_OK != xRet)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   181      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   182          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   183          OSErrorSetServiceId(OSServiceId_GetAlarmBase);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   184          OSErrorSetParam1(xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   185          OSErrorSetParam2(pxInfo);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   186          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   187          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   188      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   189  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   190  #endif  /* cfgOS_STATUS_LEVEL */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   191      return xRet;
+	mov	d2,#0
+.L265:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   192  }
+	ret
+.L119:
+	
+__GetAlarmBase_function_end:
+	.size	GetAlarmBase,__GetAlarmBase_function_end-GetAlarmBase
+.L77:
+	; End of function
+	
+	.sdecl	'.text.Alarm.GetAlarm',code,cluster('GetAlarm')
+	.sect	'.text.Alarm.GetAlarm'
+	.align	2
+	
+	.global	GetAlarm
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   193  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   194  /* | Syntax:          | StatusType GetAlarm ( AlarmType <AlarmID>,TickRefType <Tick>)    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   195  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   196  /* | Parameter (In):  | AlarmID:Reference to an alarm                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   197  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   198  /* | Parameter (Out): | Tick:Relative value in ticks before the alarm <AlarmID> expires. | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   199  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   200  /* | Description:     | The system service GetAlarm returns the relative value in ticks  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   201  /* |                  | before the alarm <AlarmID> expires.                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   202  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   203  /* | Particularities: | 1.It is up to the application to decide whether for example a    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   204  /* |                  | CancelAlarm may still be useful.                                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   205  /* |                  | 2.If <AlarmID> is not in use, <Tick> is not defined.             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   206  /* |                  | 3.Allowed on task level, ISR, and in several hook routines (see  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   207  /* |                  | Figure 12-1).                                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   208  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   209  /* | Status:          | Standard: No error, E_OK                                         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   210  /* |                  | Alarm <AlarmID> is not used, E_OS_NOFUNC                         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   211  /* |                  | Extended:  Alarm <AlarmID> is invalid, E_OS_ID                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   212  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   213  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   214  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   215  StatusType GetAlarm ( AlarmType xAlarmID ,TickRefType pxTick )
+; Function GetAlarm
+.L60:
+GetAlarm:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   216  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   217      StatusType xRet=E_OK;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   218      TickType xAlarmValue = 0u;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   219      TickType xCntCurValue = 0u;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   220  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   221      if ( xAlarmID > (cfgOS_ALARM_NUM - 1) )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   222      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   223          xRet = E_OS_ID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   224          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   225      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   226  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   227      if (STD_FALSE == IsAlmInUse(xAlarmID))
+	mov	d2,#0
+	movh.a	a15,#@his(OSAlmInUseTable)
+.L179:
+	lea	a15,[a15]@los(OSAlmInUseTable)
+	addsc.a	a15,a15,d4,#0
+	ld.bu	d15,[a15]
+	jeq	d15,#1,.L24				; predicted taken
+.L270:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   228      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   229          xRet = E_OS_NOFUNC;
+	mov	d2,#5
+.L271:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   230          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   231      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   232      xAlarmValue = tableGetAlmValue(xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   233      /* Now xAlarmID is no use, So use it To Store xCounterID, The Owner of xAlarmID */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   234      xAlarmID = tableGetCounterID(xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   235      xCntCurValue =tableGetCntCurValue(xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   236      if(xAlarmValue > xCntCurValue)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   237      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   238          *pxTick = xAlarmValue - xCntCurValue;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   239      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   240      else
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   241      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   242          *pxTick = tableGetCntMaxAllowed(xAlarmID) + xAlarmValue -xCntCurValue;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   243      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   244    Error_Exit:
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   245  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   246      if(E_OK != xRet)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   247      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   248          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   249          OSErrorSetServiceId(OSServiceId_GetAlarm);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   250          OSErrorSetParam1(xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   251          OSErrorSetParam2(pxTick);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   252          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   253          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   254      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   255  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   256      return xRet;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   257  }
+	ret
+.L24:
+	mul	d15,d4,#12
+	movh.a	a15,#@his(OSAlarmTable)
+	lea	a15,[a15]@los(OSAlarmTable)
+	addsc.a	a15,a15,d15,#0
+	ld.w	d15,[a15]
+.L176:
+	movh.a	a15,#@his(OSAlarmOwnerTable)
+	lea	a15,[a15]@los(OSAlarmOwnerTable)
+	addsc.a	a15,a15,d4,#0
+	ld.bu	d0,[a15]
+.L174:
+	movh.a	a15,#@his(OSCntCurValueTable)
+	lea	a15,[a15]@los(OSCntCurValueTable)
+	addsc.a	a15,a15,d0,#2
+	ld.w	d1,[a15]
+.L178:
+	jge.u	d1,d15,.L26				; prediction unknown
+.L272:
+	sub	d15,d1
+	st.w	[a4],d15
+.L177:
+	ret
+.L26:
+	mul	d0,d0,#12
+	movh.a	a15,#@his(OSCounterBaseTable)
+.L175:
+	lea	a15,[a15]@los(OSCounterBaseTable)
+	addsc.a	a15,a15,d0,#0
+	ld.w	d0,[a15]
+	add	d0,d15
+	sub	d0,d1
+	st.w	[a4],d0
+.L273:
+	ret
+.L123:
+	
+__GetAlarm_function_end:
+	.size	GetAlarm,__GetAlarm_function_end-GetAlarm
+.L82:
+	; End of function
+	
+	.sdecl	'.text.Alarm.SetRelAlarm',code,cluster('SetRelAlarm')
+	.sect	'.text.Alarm.SetRelAlarm'
+	.align	2
+	
+	.global	SetRelAlarm
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   258  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   259  /* | Syntax:          | StatusType SetRelAlarm ( AlarmType <AlarmID>,                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   260  /* |                  | TickType <increment>,                                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   261  /* |                  | TickType <cycle> )                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   262  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   263  /* | Parameter (In):  | AlarmID:Reference to the alarm element                          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   264  /* |                  | increment:Relative value in ticks                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   265  /* |                  | cycle:Cycle value in case of cyclic alarm. In case of single    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   266  /* |                  | alarms, cycle shall be zero.                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   267  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   268  /* | Parameter (Out): | none                                                            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   269  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   270  /* | Description:     | The system service occupies the alarm <AlarmID> element.        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   271  /* |                  | After <increment> ticks have elapsed, the task assigned         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   272  /* |                  | to the alarm <AlarmID> is activated or the assigned event       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   273  /* |                  | (only for extended tasks) is set or the alarm-callback          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   274  /* |                  | routine is called.                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   275  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   276  /* | Particularities: | 1.The behaviour of <increment> equal to 0 is up to the          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   277  /* |                  | implementation.                                                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   278  /* |                  | 2.If the relative value <increment> is very small, the alarm    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   279  /* |                  | may expire, and the task may become ready or the alarm-callback | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   280  /* |                  | may be called before the system service returns to the user.    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   281  /* |                  | 3.If <cycle> is unequal zero, the alarm element is logged on    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   282  /* |                  | again immediately after expiry with the relative value <cycle>. | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   283  /* |                  | 4.The alarm <AlarmID> must not already be in use.               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   284  /* |                  | 5.To change values of alarms already in use the alarm shall be  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   285  /* |                  | cancelled first.                                                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   286  /* |                  | 6.If the alarm is already in use, this call will be ignored and | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   287  /* |                  | the error E_OS_STATE is returned.                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   288  /* |                  | 7.Allowed on task level and in ISR, but not in hook routines.   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   289  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   290  /* | Status:          | Standard:                                                       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   291  /* |                  | 1.No error, E_OK                                                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   292  /* |                  | 2.Alarm <AlarmID> is already in use, E_OS_STATE                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   293  /* |                  | Extended:                                                       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   294  /* |                  | 1.Alarm <AlarmID> is invalid, E_OS_ID                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   295  /* |                  | 2.Value of <increment> outside of the admissible limits         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   296  /* |                  | (lower than zero or greater than maxallowedvalue), E_OS_VALUE   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   297  /* |                  | 3.Value of <cycle> unequal to 0 and outside of the admissible   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   298  /* |                  | counter limits (less than mincycle or greater than              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   299  /* |                  | maxallowedvalue), E_OS_VALUE                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   300  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   301  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2; Events only ECC1, ECC2                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   302  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   303  StatusType SetRelAlarm ( AlarmType xAlarmID , TickType xIncrement ,TickType xCycle )
+; Function SetRelAlarm
+.L62:
+SetRelAlarm:	.type	func
+	mov	d8,d4
+.L180:
+	mov	d0,d5
+.L188:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   304  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   305      StatusType xRet = E_OK;
+	mov	d9,#0
+.L190:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   306      CounterType xCounterID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   307      TickType xMaxAllowedValue;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   308  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   309  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   310      if ( xAlarmID > (cfgOS_ALARM_NUM - 1) )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   311      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   312          xRet = E_OS_ID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   313          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   314      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   315  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   316  /* OS304: If in a call to SetRelAlarm() the parameter ¡°increment¡± is set to zero, 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   317     the service shall return E_OS_VALUE in standard and extended status . */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   318      if(xIncrement == 0)
+	jne	d0,#0,.L29				; prediction unknown
+.L278:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   319      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   320          xRet = E_OS_VALUE;
+	mov.u	d9,#8
+.L279:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   321          goto Error_Exit;
+	j	.L30
+.L29:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   322      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   323      if (IsAlmInUse(xAlarmID))
+	movh.a	a15,#@his(OSAlmInUseTable)
+	lea	a15,[a15]@los(OSAlmInUseTable)
+	addsc.a	a15,a15,d8,#0
+	ld.bu	d15,[a15]
+	jne	d15,#1,.L31				; predicted not taken
+.L280:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   324      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   325          xRet = E_OS_STATE;
+	mov	d9,#7
+.L281:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   326          goto Error_Exit;
+	j	.L32
+.L31:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   327      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   328      xCounterID = tableGetCounterID(xAlarmID);  
+	movh.a	a2,#@his(OSAlarmOwnerTable)
+	lea	a2,[a2]@los(OSAlarmOwnerTable)
+	addsc.a	a2,a2,d8,#0
+	ld.bu	d10,[a2]
+.L184:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   329      xMaxAllowedValue=tableGetCntMaxAllowed(xCounterID);
+	mul	d15,d10,#12
+	movh.a	a2,#@his(OSCounterBaseTable)
+	lea	a2,[a2]@los(OSCounterBaseTable)
+	addsc.a	a2,a2,d15,#0
+.L282:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   330  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   331      if( (xIncrement > xMaxAllowedValue)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   332          ||(xCycle > xMaxAllowedValue)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   333          ||((xCycle != 0) &&(xCycle < tableGetCntMinCycle(xCounterID)))
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   334          )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   335      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   336          xRet = E_OS_VALUE;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   337          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   338      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   339  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   340      DoUseAlm(xAlarmID) ; /* No check Error, use it */
+	mov	d15,#1
+	ld.w	d5,[a2]
+.L189:
+	st.b	[a15],d15
+.L283:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   341      tableSetAlmCycle(xAlarmID,xCycle); /* Set Its xCycle */
+	mul	d15,d8,#12
+	movh.a	a15,#@his(OSAlarmTable)
+	lea	a15,[a15]@los(OSAlarmTable)
+	addsc.a	a15,a15,d15,#0
+.L284:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   342      /* As xCycle has already been stored, So use it as temp */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   343      xCycle=addAlarmTick(tableGetCntCurValue(xCounterID),xMaxAllowedValue,xIncrement);
+	movh.a	a2,#@his(OSCntCurValueTable)
+	lea	a2,[a2]@los(OSCntCurValueTable)
+	addsc.a	a2,a2,d10,#2
+.L285:
+	st.w	[a15]4,d6
+.L286:
+	mov	d6,d0
+	ld.w	d4,[a2]
+.L181:
+	call	addAlarmTick
+.L186:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   344      tableSetAlmValue(xAlarmID,xCycle); /* Set Its xAlarmValue */
+	st.w	[a15],d2
+.L287:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   345      OS_ENTER_CRITICAL();
+	call	OS_ENTER_CRITICAL
+.L187:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   346      /* Insert xAlarmID to proper place accordint to xAlarmValue */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   347      listCntInsert(xCounterID,xAlarmID); 
+	mov	d4,d10
+.L185:
+	mov	d5,d8
+.L182:
+	call	listCntInsert
+.L183:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   348      OS_EXIT_CRITICAL();
+	call	OS_EXIT_CRITICAL
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   349    Error_Exit:
+.L30:
+.L32:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   350  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   351      if(E_OK != xRet)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   352      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   353          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   354          OSErrorSetServiceId(OSServiceId_SetRelAlarm);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   355          OSErrorSetParam1(xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   356          OSErrorSetParam2(xIncrement);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   357          OSErrorSetParam3(xCycle);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   358          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   359          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   360      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   361  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   362      return xRet;
+	mov	d2,d9
+.L191:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   363  }
+	ret
+.L131:
+	
+__SetRelAlarm_function_end:
+	.size	SetRelAlarm,__SetRelAlarm_function_end-SetRelAlarm
+.L87:
+	; End of function
+	
+	.sdecl	'.text.Alarm.SetAbsAlarm',code,cluster('SetAbsAlarm')
+	.sect	'.text.Alarm.SetAbsAlarm'
+	.align	2
+	
+	.global	SetAbsAlarm
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   364  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   365  /* | Syntax:          | StatusType SetAbsAlarm (AlarmType <AlarmID>,                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   366  /* |                  | TickType <start>,                                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   367  /* |                  | TickType <cycle> )                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   368  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   369  /* | Parameter (In):  | AlarmID:Reference to the alarm element                          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   370  /* |                  | start:Absolute value in ticks                                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   371  /* |                  | cycle:Cycle value in case of cyclic alarm. In case of           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   372  /* |                  | single alarms, cycle shall be zero.                             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   373  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   374  /* | Parameter (Out): | none                                                            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   375  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   376  /* | Description:     | The system service occupies the alarm <AlarmID> element.        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   377  /* |                  | When <start> ticks are reached, the task assigned to the alarm  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   378  /* |                  | <AlarmID> is activated or the assigned event (only for extended | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   379  /* |                  | tasks) is set or the alarm-callback routine is called.          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   380  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   381  /* | Particularities: | 1.If the absolute value <start> is very close to the current    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   382  /* |                  | counter value, the alarm may expire, and the task may become    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   383  /* |                  | ready or the alarm-callback may be called before the system     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   384  /* |                  | service returns to the user.                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   385  /* |                  | 2.If the absolute value <start> already was reached before      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   386  /* |                  | the system call, the alarm shall only expire when the           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   387  /* |                  | absolute value <start> is reached again, i.e. after the next    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   388  /* |                  | overrun of the counter.                                         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   389  /* |                  | 3.If <cycle> is unequal zero, the alarm element is logged on    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   390  /* |                  | again immediately after expiry with the relative value <cycle>. | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   391  /* |                  | 4.The alarm <AlarmID> shall not already be in use.              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   392  /* |                  | 5.To change values of alarms already in use the alarm shall be  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   393  /* |                  | cancelled first.                                                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   394  /* |                  | 6.If the alarm is already in use, this call will be ignored and | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   395  /* |                  | the error E_OS_STATE is returned.                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   396  /* |                  | 7.Allowed on task level and in ISR, but not in hook routines.   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   397  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   398  /* | Status:          | Standard:                                                       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   399  /* |                  | 1.No error, E_OK                                                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   400  /* |                  | 2.Alarm <AlarmID> is already in use, E_OS_STATE                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   401  /* |                  | Extended:                                                       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   402  /* |                  | 1.Alarm <AlarmID> is invalid, E_OS_ID                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   403  /* |                  | 2.Value of <start> outside of the admissible counter limit      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   404  /* |                  | (less than zero or greater than maxallowedvalue), E_OS_VALUE    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   405  /* |                  | 3.Value of <cycle> unequal to 0 and outside of the admissible   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   406  /* |                  | counter limits (less than mincycle or greater than              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   407  /* |                  | maxallowedvalue), E_OS_VALUE                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   408  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   409  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2; Events only ECC1, ECC2                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   410  /* |------------------+-----------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   411  StatusType SetAbsAlarm ( AlarmType xAlarmID , TickType xStart ,TickType xCycle )
+; Function SetAbsAlarm
+.L64:
+SetAbsAlarm:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   412  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   413      StatusType xRet = E_OK;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   414      CounterType xCounterID=INVALID_COUNTER;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   415  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   416  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   417  		TickType xMaxAllowedValue =0u;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   418      if ( xAlarmID > (cfgOS_ALARM_NUM - 1) )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   419      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   420          xRet = E_OS_ID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   421          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   422      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   423  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   424  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   425      if (IsAlmInUse(xAlarmID))
+	mov	d8,d4
+	movh.a	a15,#@his(OSAlmInUseTable)
+.L192:
+	lea	a15,[a15]@los(OSAlmInUseTable)
+	addsc.a	a15,a15,d8,#0
+.L292:
+	mov	d9,#0
+	ld.bu	d15,[a15]
+.L197:
+	jne	d15,#1,.L34				; predicted not taken
+.L293:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   426      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   427          xRet = E_OS_STATE;
+	mov	d9,#7
+.L294:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   428          goto Error_Exit;
+	j	.L35
+.L34:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   429      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   430      xCounterID = tableGetCounterID(xAlarmID);  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   431  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   432  		xMaxAllowedValue=tableGetCntMaxAllowed(xCounterID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   433      if( (xStart > xMaxAllowedValue)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   434          ||(xCycle > xMaxAllowedValue)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   435          ||((xCycle != 0) &&(xCycle < tableGetCntMinCycle(xCounterID)))
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   436          )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   437      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   438          xRet = E_OS_VALUE;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   439          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   440      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   441  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   442      DoUseAlm(xAlarmID) ; /* No check Error, use it */
+	mov	d15,#1
+	st.b	[a15],d15
+.L295:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   443      tableSetAlmCycle(xAlarmID,xCycle); /* Set Its xCycle */
+	mul	d15,d8,#12
+	movh.a	a15,#@his(OSAlarmTable)
+	lea	a15,[a15]@los(OSAlarmTable)
+	addsc.a	a15,a15,d15,#0
+	st.w	[a15]4,d6
+.L296:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   444      tableSetAlmValue(xAlarmID,xStart); /* Set Its xAlarmValue */
+	st.w	[a15],d5
+.L297:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   445      OS_ENTER_CRITICAL();
+	call	OS_ENTER_CRITICAL
+.L193:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   446      /* Insert xAlarmID to proper place accordint to xAlarmValue */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   447      listCntInsert(xCounterID,xAlarmID); 
+	movh.a	a15,#@his(OSAlarmOwnerTable)
+	lea	a15,[a15]@los(OSAlarmOwnerTable)
+	addsc.a	a15,a15,d8,#0
+	mov	d5,d8
+	ld.bu	d4,[a15]
+.L194:
+	call	listCntInsert
+.L195:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   448      OS_EXIT_CRITICAL();
+	call	OS_EXIT_CRITICAL
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   449    Error_Exit:
+.L35:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   450  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   451      if(E_OK != xRet)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   452      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   453          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   454          OSErrorSetServiceId(OSServiceId_SetAbsAlarm);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   455          OSErrorSetParam1(xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   456          OSErrorSetParam2(xStart);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   457          OSErrorSetParam3(xCycle);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   458          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   459          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   460      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   461  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   462      return xRet;
+	mov	d2,d9
+.L196:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   463  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   464  }
+	ret
+.L138:
+	
+__SetAbsAlarm_function_end:
+	.size	SetAbsAlarm,__SetAbsAlarm_function_end-SetAbsAlarm
+.L92:
+	; End of function
+	
+	.sdecl	'.text.Alarm.CancelAlarm',code,cluster('CancelAlarm')
+	.sect	'.text.Alarm.CancelAlarm'
+	.align	2
+	
+	.global	CancelAlarm
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   465  /* |------------------+-------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   466  /* | Syntax:          | StatusType CancelAlarm ( AlarmType <AlarmID> )              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   467  /* |------------------+-------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   468  /* | Parameter (In):  | AlarmID:Reference to an alarm                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   469  /* |------------------+-------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   470  /* | Parameter (Out): | none                                                        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   471  /* |------------------+-------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   472  /* | Description:     | The system service cancels the alarm <AlarmID>.             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   473  /* |------------------+-------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   474  /* | Particularities: | Allowed on task level and in ISR, but not in hook routines. | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   475  /* |------------------+-------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   476  /* | Status:          | Standard:                                                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   477  /* |                  | 1.No error, E_OK                                            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   478  /* |                  | 2.Alarm <AlarmID> not in use, E_OS_NOFUNC                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   479  /* |                  | Extended: 1.Alarm <AlarmID> is invalid, E_OS_ID             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   480  /* |------------------+-------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   481  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   482  /* |------------------+-------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   483  StatusType CancelAlarm ( AlarmType xAlarmID )
+; Function CancelAlarm
+.L66:
+CancelAlarm:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   484  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   485      StatusType xRet = E_OK;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   486  #if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   487      if ( xAlarmID > (cfgOS_ALARM_NUM - 1) )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   488      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   489          xRet = E_OS_ID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   490          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   491      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   492  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   493      if (!IsAlmInUse(xAlarmID))  /* if alarm is not in use */
+	mov	d15,d4
+	movh.a	a15,#@his(OSAlmInUseTable)
+.L201:
+	lea	a15,[a15]@los(OSAlmInUseTable)
+	addsc.a	a15,a15,d15,#0
+.L302:
+	mov	d8,#0
+	ld.bu	d0,[a15]
+.L204:
+	jeq	d0,#1,.L37				; predicted not taken
+.L303:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   494      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   495          xRet = E_OS_NOFUNC;
+	mov	d8,#5
+.L304:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   496          goto Error_Exit;
+	j	.L38
+.L37:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   497      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   498      OS_ENTER_CRITICAL();
+	call	OS_ENTER_CRITICAL
+.L198:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   499      listCntRemove(tableGetCounterID(xAlarmID), xAlarmID);
+	movh.a	a2,#@his(OSAlarmOwnerTable)
+	lea	a2,[a2]@los(OSAlarmOwnerTable)
+	addsc.a	a2,a2,d15,#0
+	mov	d5,d15
+	ld.bu	d4,[a2]
+.L199:
+	call	listCntRemove
+.L200:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   500      DoCancleAlm(xAlarmID);
+	mov	d15,#0
+	st.b	[a15],d15
+.L202:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   501      OS_EXIT_CRITICAL();
+	call	OS_EXIT_CRITICAL
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   502    Error_Exit:
+.L38:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   503  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   504      if(E_OK != xRet)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   505      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   506          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   507          OSErrorSetServiceId(OSServiceId_CancelAlarm);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   508          OSErrorSetParam1(xAlarmID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   509          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   510          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   511      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   512  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   513      return xRet;
+	mov	d2,d8
+.L203:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   514  }
+	ret
+.L143:
+	
+__CancelAlarm_function_end:
+	.size	CancelAlarm,__CancelAlarm_function_end-CancelAlarm
+.L97:
+	; End of function
+	
+	.sdecl	'.text.Alarm.OSProcessAlarm',code,cluster('OSProcessAlarm')
+	.sect	'.text.Alarm.OSProcessAlarm'
+	.align	2
+	
+	.global	OSProcessAlarm
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   515  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   516  void OSProcessAlarm( CounterType xCounterID )
+; Function OSProcessAlarm
+.L68:
+OSProcessAlarm:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   517  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   518      TickType xCntCurValue;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   519      AlarmType xAlarmID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   520      AlarmType xNextAlarm;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   521      xCntCurValue = tableGetCntCurValue(xCounterID);
+	mov	d8,d4
+	movh.a	a15,#@his(OSCntCurValueTable)
+.L213:
+	lea	a15,[a15]@los(OSCntCurValueTable)
+	addsc.a	a15,a15,d8,#2
+	ld.w	d9,[a15]
+.L210:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   522      OS_ENTER_CRITICAL();
+	call	OS_ENTER_CRITICAL
+.L215:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   523      xAlarmID = listGetCntHeadElement(xCounterID);
+	movh.a	a15,#@his(OSCntAlmList)
+	lea	a15,[a15]@los(OSCntAlmList)
+	addsc.a	a15,a15,d8,#0
+	ld.bu	d10,[a15]
+.L205:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   524      while(xAlarmID!=INVALID_ALARM)
+	mul	d15,d8,#12
+	movh.a	a15,#@his(OSCounterBaseTable)
+	lea	a15,[a15]@los(OSCounterBaseTable)
+	addsc.a	a12,a15,d15,#0
+.L309:
+	movh.a	a13,#@his(OSAlarmTable)
+	lea	a13,[a13]@los(OSAlarmTable)
+.L310:
+	j	.L40
+.L41:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   525      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   526          if(tableGetAlmValue(xAlarmID) == xCntCurValue)
+	mul	d15,d10,#12
+	addsc.a	a15,a13,d15,#0
+	ld.w	d0,[a15]
+	jne	d0,d9,.L42				; predicted not taken
+.L311:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   527          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   528              switch(tableGetAlmClsType(xAlarmID))
+	movh.a	a2,#@his(OSAlarmClassTable)
+	lea	a2,[a2]@los(OSAlarmClassTable)
+	addsc.a	a2,a2,d10,#0
+	ld.bu	d15,[a2]
+	jeq	d15,#0,.L43				; prediction unknown
+	jeq	d15,#1,.L44				; prediction unknown
+	jeq	d15,#2,.L45				; prediction unknown
+	j	.L46
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   529              {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   530                  case ALARM_CALLBACK :
+.L43:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   531                      ((TaskEntryType)(OSAlarmContainerTable[xAlarmID]))();
+	movh.a	a2,#@his(OSAlarmContainerTable)
+	lea	a2,[a2]@los(OSAlarmContainerTable)
+	addsc.a	a2,a2,d10,#2
+	ld.w	d0,[a2]
+	mov.a	a2,d0
+	calli	a2
+.L312:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   532                      break;
+	j	.L47
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   533                  case ALARM_TASK :
+.L44:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   534                      (void)ActivateTask((TaskType)(OSAlarmContainerTable[xAlarmID]));
+	movh.a	a2,#@his(OSAlarmContainerTable)
+	lea	a2,[a2]@los(OSAlarmContainerTable)
+	addsc.a	a2,a2,d10,#2
+	ld.w	d15,[a2]
+	extr.u	d4,d15,#0,#8
+	call	ActivateTask
+.L313:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   535                      break;
+	j	.L48
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   536  #if(cfgOS_CONFORMANCE_CLASS == ECC1 || cfgOS_CONFORMANCE_CLASS == ECC2)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   537                  case ALARM_EVENT :
+.L45:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   538                      (void)SetEvent((TaskType)(OSAlarmContainerTable[xAlarmID]>>16),
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   539                               (EventMaskType)(OSAlarmContainerTable[xAlarmID]&0x00FF));
+	movh.a	a2,#@his(OSAlarmContainerTable)
+	lea	a2,[a2]@los(OSAlarmContainerTable)
+	addsc.a	a2,a2,d10,#2
+	ld.w	d15,[a2]
+	extr.u	d4,d15,#16,#8
+	extr.u	d15,d15,#0,#16
+	and	d5,d15,#255
+	call	SetEvent
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   540                      break;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   541  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   542                  default:
+.L46:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   543                      break;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   544              }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   545              /* Firstly,Find out next one */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   546              xNextAlarm=listGetCntNextElement(xAlarmID);
+.L48:
+.L47:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   547              /* then,Alarm Post Process */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   548              listCntRemove(xCounterID,xAlarmID);
+	mov	d4,d8
+	ld.bu	d15,[a15]8
+.L214:
+	mov	d5,d10
+.L208:
+	call	listCntRemove
+.L209:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   549              if(tableGetAlmCycle(xAlarmID) != 0){
+	ld.w	d6,[a15]4
+	jeq	d6,#0,.L49				; predicted taken
+.L314:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   550                  tableGetAlmValue(xAlarmID)=addAlarmTick(xCntCurValue,
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   551                                                          tableGetCntMaxAllowed(xCounterID),
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   552                                                          tableGetAlmCycle(xAlarmID));
+	mov	d4,d9
+	ld.w	d5,[a12]
+.L211:
+	call	addAlarmTick
+.L212:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   553                  listCntInsert(xCounterID ,xAlarmID);
+	mov	d4,d8
+	st.w	[a15],d2
+.L216:
+	mov	d5,d10
+.L206:
+	call	listCntInsert
+.L207:
+	j	.L50
+.L49:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   554              }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   555              else{
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   556                  DoCancleAlm(xAlarmID);
+	movh.a	a15,#@his(OSAlmInUseTable)
+	lea	a15,[a15]@los(OSAlmInUseTable)
+	addsc.a	a15,a15,d10,#0
+	mov	d0,#0
+	st.b	[a15],d0
+.L50:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   557              }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   558              /* Store */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   559              xAlarmID=xNextAlarm;
+	mov	d10,d15
+.L40:
+	mov	d15,#255
+	jne	d15,d10,.L41				; predicted taken
+.L42:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   560          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   561          else
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   562          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   563              /* Exit This Function */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   564              break;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   565          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   566      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   567      OS_EXIT_CRITICAL();
+	j	OS_EXIT_CRITICAL
+.L146:
+	
+__OSProcessAlarm_function_end:
+	.size	OSProcessAlarm,__OSProcessAlarm_function_end-OSProcessAlarm
+.L102:
+	; End of function
+	
+	.calls	'SetRelAlarm','addAlarmTick'
+	.calls	'SetRelAlarm','OS_ENTER_CRITICAL'
+	.calls	'SetRelAlarm','listCntInsert'
+	.calls	'SetRelAlarm','OS_EXIT_CRITICAL'
+	.calls	'SetAbsAlarm','OS_ENTER_CRITICAL'
+	.calls	'SetAbsAlarm','listCntInsert'
+	.calls	'SetAbsAlarm','OS_EXIT_CRITICAL'
+	.calls	'CancelAlarm','OS_ENTER_CRITICAL'
+	.calls	'CancelAlarm','listCntRemove'
+	.calls	'CancelAlarm','OS_EXIT_CRITICAL'
+	.calls	'OSProcessAlarm','OS_ENTER_CRITICAL'
+	.calls	'OSProcessAlarm','__INDIRECT__'
+	.calls	'OSProcessAlarm','ActivateTask'
+	.calls	'OSProcessAlarm','SetEvent'
+	.calls	'OSProcessAlarm','listCntRemove'
+	.calls	'OSProcessAlarm','addAlarmTick'
+	.calls	'OSProcessAlarm','listCntInsert'
+	.calls	'OSProcessAlarm','OS_EXIT_CRITICAL'
+	.calls	'addAlarmTick','',0
+	.calls	'listCntInsert','',0
+	.calls	'listCntRemove','',0
+	.calls	'GetAlarmBase','',0
+	.calls	'GetAlarm','',0
+	.calls	'SetRelAlarm','',0
+	.calls	'SetAbsAlarm','',0
+	.calls	'CancelAlarm','',0
+	.extern	OSCntAlmList
+	.extern	OSCntCurValueTable
+	.extern	OSAlmInUseTable
+	.extern	OSAlarmTable
+	.extern	ActivateTask
+	.extern	SetEvent
+	.extern	OSCounterBaseTable
+	.extern	OSAlarmClassTable
+	.extern	OSAlarmContainerTable
+	.extern	OSAlarmOwnerTable
+	.extern	OS_ENTER_CRITICAL
+	.extern	OS_EXIT_CRITICAL
+	.extern	__INDIRECT__
+	.calls	'OSProcessAlarm','',0
+	.sdecl	'.debug_info',debug
+	.sect	'.debug_info'
+.L70:
+	.word	3124
+	.half	3
+	.word	.L71
+	.byte	4
+.L69:
+	.byte	1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L72
+	.byte	2
+	.byte	'ActivateTask',0,1,241,2,12
+	.word	.L118-.L70
+	.byte	1,1,1,1,3
+	.byte	'xTaskID',0,1,241,2,36
+	.word	.L118-.L70
+	.byte	0
+.L118:
+	.byte	4
+	.byte	'unsigned char',0,1,8,5
+	.word	.L217-.L70
+.L217:
+	.byte	6,2,154,1,9,12,7
+	.byte	'xMaxAllowedValue',0,4
+	.word	.L128-.L70
+	.byte	2,35,0,7
+	.byte	'xTicksPerBase',0,4
+	.word	.L128-.L70
+	.byte	2,35,4,7
+	.byte	'xMinCycle',0,4
+	.word	.L128-.L70
+	.byte	2,35,8,0
+.L128:
+	.byte	4
+	.byte	'unsigned int',0,4,7
+.L121:
+	.byte	8
+	.byte	'AlarmBaseRefType',0,2,165,1,25
+	.word	.L218-.L70
+.L218:
+	.byte	5
+	.word	230
+	.byte	5
+	.word	305
+.L125:
+	.byte	8
+	.byte	'TickRefType',0,2,151,1,19
+	.word	.L219-.L70
+.L219:
+	.byte	5
+	.word	305
+	.byte	2
+	.byte	'SetEvent',0,1,139,3,12
+	.word	208
+	.byte	1,1,1,1,3
+	.byte	'xTaskID',0,1,139,3,33
+	.word	208
+	.byte	3
+	.byte	'pxMask',0,1,139,3,57
+	.word	.L220-.L70
+	.byte	0
+.L220:
+	.byte	4
+	.byte	'unsigned short int',0,2,7,9
+	.byte	'OS_ENTER_CRITICAL',0,3,66,6,1,1,1,1,9
+	.byte	'OS_EXIT_CRITICAL',0,3,67,6,1,1,1,1,10
+	.byte	'__INDIRECT__',0,4,1,1,1,1,1,8
+	.byte	'__size_t',0,4,1,1
+	.word	305
+	.byte	8
+	.byte	'__codeptr',0,4,1,1
+	.word	.L221-.L70
+.L221:
+	.byte	5
+	.word	.L222-.L70
+.L222:
+	.byte	11,1,8
+	.byte	'PCP_GPR6_type',0,5,158,19,3
+	.word	.L223-.L70
+.L223:
+	.byte	12
+	.word	.L224-.L70
+.L224:
+	.byte	13,5,145,19,18,4,7
+	.byte	'B',0,4
+	.word	.L225-.L70
+	.byte	2,35,0,7
+	.byte	'I',0,4
+	.word	.L226-.L70
+	.byte	2,35,0,7
+	.byte	'U',0,4
+	.word	305
+	.byte	2,35,0,0
+.L225:
+	.byte	6,5,147,19,2,4,14
+	.byte	'CNT1',0,4
+	.word	.L227-.L70
+	.byte	12,20,2,35,0,14
+	.byte	'.1.nn',0,4
+	.word	.L227-.L70
+	.byte	2,18,2,35,0,14
+	.byte	'TOS',0,4
+	.word	.L227-.L70
+	.byte	2,16,2,35,0,14
+	.byte	'SRPN',0,4
+	.word	.L227-.L70
+	.byte	8,8,2,35,0,14
+	.byte	'CPPN',0,4
+	.word	.L227-.L70
+	.byte	8,0,2,35,0,0
+.L227:
+	.byte	4
+	.byte	'unsigned int',0,4,7
+.L226:
+	.byte	4
+	.byte	'int',0,4,5,8
+	.byte	'PCP_GPR7_type',0,5,178,19,3
+	.word	.L228-.L70
+.L228:
+	.byte	12
+	.word	.L229-.L70
+.L229:
+	.byte	13,5,160,19,18,4,7
+	.byte	'B',0,4
+	.word	.L230-.L70
+	.byte	2,35,0,7
+	.byte	'I',0,4
+	.word	745
+	.byte	2,35,0,7
+	.byte	'U',0,4
+	.word	305
+	.byte	2,35,0,0
+.L230:
+	.byte	6,5,162,19,2,4,14
+	.byte	'Z',0,4
+	.word	729
+	.byte	1,31,2,35,0,14
+	.byte	'N',0,4
+	.word	729
+	.byte	1,30,2,35,0,14
+	.byte	'C',0,4
+	.word	729
+	.byte	1,29,2,35,0,14
+	.byte	'V',0,4
+	.word	729
+	.byte	1,28,2,35,0,14
+	.byte	'CNZ',0,4
+	.word	729
+	.byte	1,27,2,35,0,14
+	.byte	'IEN',0,4
+	.word	729
+	.byte	1,26,2,35,0,14
+	.byte	'CEN',0,4
+	.word	729
+	.byte	1,25,2,35,0,14
+	.byte	'.1.nn',0,4
+	.word	729
+	.byte	1,24,2,35,0,14
+	.byte	'DPTR',0,4
+	.word	729
+	.byte	8,16,2,35,0,14
+	.byte	'.2.nn',0,4
+	.word	729
+	.byte	16,0,2,35,0,0,8
+	.byte	'uint8_t',0,6,6,24
+	.word	208
+	.byte	8
+	.byte	'uint16_t',0,6,8,24
+	.word	439
+	.byte	8
+	.byte	'uint32_t',0,6,10,24
+	.word	.L231-.L70
+.L231:
+	.byte	4
+	.byte	'unsigned long int',0,4,7,8
+	.byte	'ubase_t',0,6,14,24
+	.word	305
+	.byte	8
+	.byte	'void_t',0,6,17,24
+	.word	1024
+	.byte	8
+	.byte	'BoolType',0,2,59,17
+	.word	208
+	.byte	8
+	.byte	'VoidType',0,2,60,16
+	.word	1024
+	.byte	8
+	.byte	'TaskType',0,2,141,1,17
+	.word	208
+	.byte	8
+	.byte	'TaskRefType',0,2,143,1,19
+	.word	.L232-.L70
+.L232:
+	.byte	5
+	.word	208
+	.byte	8
+	.byte	'TaskStateType',0,2,145,1,19
+	.word	208
+	.byte	8
+	.byte	'TaskStateRefType',0,2,147,1,25
+	.word	.L233-.L70
+.L233:
+	.byte	5
+	.word	208
+	.byte	8
+	.byte	'TickType',0,2,149,1,17
+	.word	305
+	.byte	8
+	.byte	'AlarmBaseType',0,2,163,1,2
+	.word	230
+	.byte	8
+	.byte	'AlarmType',0,2,167,1,17
+	.word	208
+	.byte	8
+	.byte	'CounterType',0,2,169,1,17
+	.word	208
+	.byte	8
+	.byte	'EventMaskType',0,2,171,1,18
+	.word	439
+	.byte	8
+	.byte	'EventMaskRefType',0,2,173,1,24
+	.word	.L234-.L70
+.L234:
+	.byte	5
+	.word	439
+	.byte	8
+	.byte	'ResourceType',0,2,174,1,17
+	.word	208
+	.byte	8
+	.byte	'StatusType',0,2,175,1,17
+	.word	208
+	.byte	8
+	.byte	'AppModeType',0,2,176,1,17
+	.word	208
+	.byte	8
+	.byte	'ApplicationType',0,2,185,1,17
+	.word	208
+	.byte	8
+	.byte	'ScheduleTableType',0,2,214,1,17
+	.word	208
+	.byte	8
+	.byte	'ScheduleTableStatusType',0,2,230,1,17
+	.word	208
+	.byte	8
+	.byte	'OsScheduleTableAutostartType',0,2,255,1,17
+	.word	208
+	.byte	8
+	.byte	'OsScheduleTblSyncStrategyType',0,2,137,2,17
+	.word	208
+	.byte	8
+	.byte	'OsCpuIplType',0,7,43,17
+	.word	208
+	.byte	8
+	.byte	'TaskStackType',0,1,89,18
+	.word	1024
+	.byte	8
+	.byte	'TaskStackRefType',0,1,96,3
+	.word	.L235-.L70
+.L235:
+	.byte	6,1,91,9,4,7
+	.byte	'pxStackTop',0,4
+	.word	.L236-.L70
+	.byte	2,35,0,0
+.L236:
+	.byte	5
+	.word	1024
+	.byte	8
+	.byte	'PriorityType',0,1,98,17
+	.word	208
+	.byte	8
+	.byte	'TaskEntryType',0,1,100,16
+	.word	.L237-.L70
+.L237:
+	.byte	5
+	.word	.L238-.L70
+.L238:
+	.byte	15,1,1,8
+	.byte	'TcbType',0,1,112,2
+	.word	.L239-.L70
+.L239:
+	.byte	16
+	.byte	'_TaskControlBlockTag',0,1,101,16,8,7
+	.byte	'pxStack',0,4
+	.word	1662
+	.byte	2,35,0,7
+	.byte	'xPriority',0,1
+	.word	208
+	.byte	2,35,4,7
+	.byte	'xState',0,1
+	.word	208
+	.byte	2,35,5,7
+	.byte	'xActivateCount',0,1
+	.word	208
+	.byte	2,35,6,0,8
+	.byte	'AlarmClassType',0,1,117,17
+	.word	208
+	.byte	8
+	.byte	'AlarmContainerType',0,1,121,19
+	.word	1024
+	.byte	8
+	.byte	'AlmCtrlBlkType',0,1,129,1,2
+	.word	.L240-.L70
+.L240:
+	.byte	16
+	.byte	'_AlmCtrlBlkTag',0,1,123,16,12,7
+	.byte	'xAlarmValue',0,4
+	.word	305
+	.byte	2,35,0,7
+	.byte	'xCycle',0,4
+	.word	305
+	.byte	2,35,4,7
+	.byte	'pxNext',0,1
+	.word	208
+	.byte	2,35,8,7
+	.byte	'pxPrev',0,1
+	.word	208
+	.byte	2,35,9,0,8
+	.byte	'OsSchedTblCtrlBlkType',0,1,162,1,2
+	.word	.L241-.L70
+.L241:
+	.byte	6,1,139,1,9,20,7
+	.byte	'xSchedTblStatus',0,1
+	.word	208
+	.byte	2,35,0,7
+	.byte	'xIterator',0,1
+	.word	208
+	.byte	2,35,1,7
+	.byte	'xSchedTblNextExpiryPointTime',0,4
+	.word	305
+	.byte	2,35,2,7
+	.byte	'xSchedTblStartingTime',0,4
+	.word	305
+	.byte	2,35,6,7
+	.byte	'xAdjustDirection',0,1
+	.word	208
+	.byte	2,35,10,7
+	.byte	'xDeviation',0,4
+	.word	305
+	.byte	2,35,12,7
+	.byte	'xNextOrPrevScheduleTable',0,1
+	.word	208
+	.byte	2,35,16,7
+	.byte	'pxNextSchedTbl',0,1
+	.word	208
+	.byte	2,35,17,7
+	.byte	'pxPrevSchedTbl',0,1
+	.word	208
+	.byte	2,35,18,0,8
+	.byte	'OsScheduleTableType',0,1,176,1,2
+	.word	.L242-.L70
+.L242:
+	.byte	6,1,163,1,9,28,7
+	.byte	'xOsScheduleTableDuration',0,4
+	.word	305
+	.byte	2,35,0,7
+	.byte	'xOsScheduleTableRepeating',0,1
+	.word	208
+	.byte	2,35,4,7
+	.byte	'xOsScheduleTableAccessingApplication',0,1
+	.word	208
+	.byte	2,35,5,7
+	.byte	'xOsScheduleTableCounterRef',0,1
+	.word	208
+	.byte	2,35,6,7
+	.byte	'xOsScheduleTableAutostartable',0,1
+	.word	208
+	.byte	2,35,7,7
+	.byte	'xOsScheduleTableAutostartType',0,1
+	.word	208
+	.byte	2,35,8,7
+	.byte	'xOsScheduleTableAutostartValue',0,4
+	.word	305
+	.byte	2,35,10,7
+	.byte	'xOsScheduleTableSyncStrategy',0,1
+	.word	208
+	.byte	2,35,14,7
+	.byte	'xOsScheduleTableMaxAdvance',0,4
+	.word	305
+	.byte	2,35,16,7
+	.byte	'xOsScheduleTableMaxRetard',0,4
+	.word	305
+	.byte	2,35,20,7
+	.byte	'xOsScheduleTableExplicitPrecision',0,4
+	.word	305
+	.byte	2,35,24,0,8
+	.byte	'OsSchedTblCmdType',0,1,184,1,3
+	.word	.L243-.L70
+.L243:
+	.byte	6,1,180,1,9,8,7
+	.byte	'xOffset',0,4
+	.word	305
+	.byte	2,35,0,7
+	.byte	'pxOsSchedTblCmd',0,4
+	.word	1710
+	.byte	2,35,4,0,17
+	.byte	'OSCntAlmList',0,1,252,1,18
+	.word	.L244-.L70
+	.byte	1,1
+.L244:
+	.byte	18,1
+	.word	208
+	.byte	19,0,0,17
+	.byte	'OSCntCurValueTable',0,1,253,1,18
+	.word	.L245-.L70
+	.byte	1,1
+.L245:
+	.byte	18,4
+	.word	305
+	.byte	19,0,0,17
+	.byte	'OSAlmInUseTable',0,1,130,2,18
+	.word	.L246-.L70
+	.byte	1,1
+.L246:
+	.byte	18,3
+	.word	208
+	.byte	19,2,0,17
+	.byte	'OSAlarmTable',0,1,131,2,25
+	.word	.L247-.L70
+	.byte	1,1
+.L247:
+	.byte	18,36
+	.word	1911
+	.byte	19,2,0,17
+	.byte	'OSCounterBaseTable',0,8,12,28
+	.word	.L248-.L70
+	.byte	1,1
+.L248:
+	.byte	20
+	.word	.L249-.L70
+.L249:
+	.byte	18,12
+	.word	230
+	.byte	19,0,0,17
+	.byte	'OSAlarmClassTable',0,8,14,29
+	.word	.L250-.L70
+	.byte	1,1
+.L250:
+	.byte	20
+	.word	.L251-.L70
+.L251:
+	.byte	18,3
+	.word	208
+	.byte	19,2,0,17
+	.byte	'OSAlarmContainerTable',0,8,15,33
+	.word	.L252-.L70
+	.byte	1,1
+.L252:
+	.byte	20
+	.word	.L253-.L70
+.L253:
+	.byte	18,12
+	.word	1024
+	.byte	19,2,0,17
+	.byte	'OSAlarmOwnerTable',0,8,16,26
+	.word	.L254-.L70
+	.byte	1,1
+.L254:
+	.byte	20
+	.word	.L255-.L70
+.L255:
+	.byte	18,3
+	.word	208
+	.byte	19,2,0,0
+	.sdecl	'.debug_abbrev',debug
+	.sect	'.debug_abbrev'
+.L71:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,16,6,0,0,2,46,1,3,8,58,15,59,15,57,15,73,19,54,15,39,12,63,12,60
+	.byte	12,0,0,3,5,0,3,8,58,15,59,15,57,15,73,19,0,0,4,36,0,3,8,11,15,62,15,0,0,5,15,0,73,19,0,0,6,19,1,58,15
+	.byte	59,15,57,15,11,15,0,0,7,13,0,3,8,11,15,73,19,56,9,0,0,8,22,0,3,8,58,15,59,15,57,15,73,19,0,0,9,46,0,3
+	.byte	8,58,15,59,15,57,15,54,15,39,12,63,12,60,12,0,0,10,46,0,3,8,58,15,59,15,57,15,54,15,63,12,60,12,0,0,11
+	.byte	21,0,54,15,0,0,12,53,0,73,19,0,0,13,23,1,58,15,59,15,57,15,11,15,0,0,14,13,0,3,8,11,15,73,19,13,15,12
+	.byte	15,56,9,0,0,15,21,0,54,15,39,12,0,0,16,19,1,3,8,58,15,59,15,57,15,11,15,0,0,17,52,0,3,8,58,15,59,15,57
+	.byte	15,73,19,63,12,60,12,0,0,18,1,1,11,15,73,19,0,0,19,33,0,47,15,0,0,20,38,0,73,19,0,0,0
+	.sdecl	'.debug_line',debug
+	.sect	'.debug_line'
+.L72:
+	.word	.L257-.L256
+.L256:
+	.half	3
+	.word	.L259-.L258
+.L258:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Os.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Std_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\kernel\\Kernel.h',0,0,0,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0,0,0,0
+	.byte	'D:\\Program Files\\TASKING\\TriCore v3.5r1\\ctc\\include\\sfr\\regtc1797.sfr',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Bsp\\Cpu\\Platform_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\osek_test\\GaInOS_Studio\\Os_Cfg.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\osek_test\\GaInOS_Studio\\CfgObj.h',0,0,0,0,0
+.L259:
+.L257:
+	.sdecl	'.debug_info',debug,cluster('GetAlarmBase')
+	.sect	'.debug_info'
+.L73:
+	.word	259
+	.half	3
+	.word	.L74
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L76,.L75
+	.byte	2
+	.word	.L69
+	.byte	3
+	.byte	'GetAlarmBase',0,1,166,1,12
+	.word	.L118
+	.byte	1,1,1
+	.word	.L58,.L119,.L57
+	.byte	4
+	.byte	'xAlarmID',0,1,166,1,37
+	.word	.L118,.L120
+	.byte	4
+	.byte	'pxInfo',0,1,166,1,64
+	.word	.L121,.L122
+	.byte	5
+	.word	.L58,.L119
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('GetAlarmBase')
+	.sect	'.debug_abbrev'
+.L74:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('GetAlarmBase')
+	.sect	'.debug_line'
+.L75:
+	.word	.L261-.L260
+.L260:
+	.half	3
+	.word	.L263-.L262
+.L262:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0,0,0,0,0
+.L263:
+	.byte	5,41,7,0,5,2
+	.word	.L58
+	.byte	3,175,1,1,5,5,9
+	.half	.L264-.L58
+	.byte	3,15,1,5,1,9
+	.half	.L265-.L264
+	.byte	3,1,1,7,9
+	.half	.L77-.L265
+	.byte	0,1,1
+.L261:
+	.sdecl	'.debug_ranges',debug,cluster('GetAlarmBase')
+	.sect	'.debug_ranges'
+.L76:
+	.word	-1,.L58,0,.L77-.L58,0,0
+	.sdecl	'.debug_info',debug,cluster('GetAlarm')
+	.sect	'.debug_info'
+.L78:
+	.word	325
+	.half	3
+	.word	.L79
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L81,.L80
+	.byte	2
+	.word	.L69
+	.byte	3
+	.byte	'GetAlarm',0,1,215,1,12
+	.word	.L118
+	.byte	1,1,1
+	.word	.L60,.L123,.L59
+	.byte	4
+	.byte	'xAlarmID',0,1,215,1,33
+	.word	.L118,.L124
+	.byte	4
+	.byte	'pxTick',0,1,215,1,55
+	.word	.L125,.L126
+	.byte	5
+	.word	.L60,.L123
+	.byte	6
+	.byte	'xRet',0,1,217,1,16
+	.word	.L118,.L127
+	.byte	6
+	.byte	'xAlarmValue',0,1,218,1,14
+	.word	.L128,.L129
+	.byte	6
+	.byte	'xCntCurValue',0,1,219,1,14
+	.word	.L128,.L130
+	.byte	0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('GetAlarm')
+	.sect	'.debug_abbrev'
+.L79:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,1,17,1,18,1,0,0,6
+	.byte	52,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('GetAlarm')
+	.sect	'.debug_line'
+.L80:
+	.word	.L267-.L266
+.L266:
+	.half	3
+	.word	.L269-.L268
+.L268:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0,0,0,0,0
+.L269:
+	.byte	5,20,7,0,5,2
+	.word	.L60
+	.byte	3,216,1,1,5,5,3,10,1,5,27,9
+	.half	.L270-.L60
+	.byte	3,2,1,5,1,9
+	.half	.L271-.L270
+	.byte	3,28,1,5,45,7,9
+	.half	.L24-.L271
+	.byte	3,103,1,5,43,9
+	.half	.L176-.L24
+	.byte	3,2,1,5,48,9
+	.half	.L174-.L176
+	.byte	3,1,1,5,5,9
+	.half	.L178-.L174
+	.byte	3,1,1,5,45,7,9
+	.half	.L272-.L178
+	.byte	3,2,1,5,1,9
+	.half	.L177-.L272
+	.byte	3,19,1,5,78,7,9
+	.half	.L26-.L177
+	.byte	3,113,1,5,1,9
+	.half	.L273-.L26
+	.byte	3,15,1,7,9
+	.half	.L82-.L273
+	.byte	0,1,1
+.L267:
+	.sdecl	'.debug_ranges',debug,cluster('GetAlarm')
+	.sect	'.debug_ranges'
+.L81:
+	.word	-1,.L60,0,.L82-.L60,0,0
+	.sdecl	'.debug_info',debug,cluster('SetRelAlarm')
+	.sect	'.debug_info'
+.L83:
+	.word	355
+	.half	3
+	.word	.L84
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L86,.L85
+	.byte	2
+	.word	.L69
+	.byte	3
+	.byte	'SetRelAlarm',0,1,175,2,12
+	.word	.L118
+	.byte	1,1,1
+	.word	.L62,.L131,.L61
+	.byte	4
+	.byte	'xAlarmID',0,1,175,2,36
+	.word	.L118,.L132
+	.byte	4
+	.byte	'xIncrement',0,1,175,2,56
+	.word	.L128,.L133
+	.byte	4
+	.byte	'xCycle',0,1,175,2,77
+	.word	.L128,.L134
+	.byte	5
+	.word	.L62,.L131
+	.byte	6
+	.byte	'xRet',0,1,177,2,16
+	.word	.L118,.L135
+	.byte	6
+	.byte	'xCounterID',0,1,178,2,17
+	.word	.L118,.L136
+	.byte	6
+	.byte	'xMaxAllowedValue',0,1,179,2,14
+	.word	.L128,.L137
+	.byte	0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('SetRelAlarm')
+	.sect	'.debug_abbrev'
+.L84:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,1,17,1,18,1,0,0,6
+	.byte	52,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('SetRelAlarm')
+	.sect	'.debug_line'
+.L85:
+	.word	.L275-.L274
+.L274:
+	.half	3
+	.word	.L277-.L276
+.L276:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0,0,0,0,0
+.L277:
+	.byte	5,12,7,0,5,2
+	.word	.L62
+	.byte	3,174,2,1,5,21,9
+	.half	.L188-.L62
+	.byte	3,2,1,5,5,9
+	.half	.L190-.L188
+	.byte	3,13,1,5,26,7,9
+	.half	.L278-.L190
+	.byte	3,2,1,5,9,9
+	.half	.L279-.L278
+	.byte	3,1,1,5,5,9
+	.half	.L29-.L279
+	.byte	3,2,1,5,26,9
+	.half	.L280-.L29
+	.byte	3,2,1,5,9,9
+	.half	.L281-.L280
+	.byte	3,1,1,5,45,9
+	.half	.L31-.L281
+	.byte	3,2,1,5,55,9
+	.half	.L184-.L31
+	.byte	3,1,1,5,5,9
+	.half	.L282-.L184
+	.byte	3,11,1,5,55,3,117,1,5,5,9
+	.half	.L189-.L282
+	.byte	3,11,1,9
+	.half	.L283-.L189
+	.byte	3,1,1,5,85,9
+	.half	.L284-.L283
+	.byte	3,2,1,5,5,9
+	.half	.L285-.L284
+	.byte	3,126,1,5,85,9
+	.half	.L286-.L285
+	.byte	3,2,1,5,5,9
+	.half	.L186-.L286
+	.byte	3,1,1,5,24,9
+	.half	.L287-.L186
+	.byte	3,1,1,5,39,9
+	.half	.L187-.L287
+	.byte	3,2,1,5,23,9
+	.half	.L183-.L187
+	.byte	3,1,1,5,5,9
+	.half	.L32-.L183
+	.byte	3,14,1,5,1,9
+	.half	.L191-.L32
+	.byte	3,1,1,7,9
+	.half	.L87-.L191
+	.byte	0,1,1
+.L275:
+	.sdecl	'.debug_ranges',debug,cluster('SetRelAlarm')
+	.sect	'.debug_ranges'
+.L86:
+	.word	-1,.L62,0,.L87-.L62,0,0
+	.sdecl	'.debug_info',debug,cluster('SetAbsAlarm')
+	.sect	'.debug_info'
+.L88:
+	.word	297
+	.half	3
+	.word	.L89
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L91,.L90
+	.byte	2
+	.word	.L69
+	.byte	3
+	.byte	'SetAbsAlarm',0,1,155,3,12
+	.word	.L118
+	.byte	1,1,1
+	.word	.L64,.L138,.L63
+	.byte	4
+	.byte	'xAlarmID',0,1,155,3,36
+	.word	.L118,.L139
+	.byte	4
+	.byte	'xStart',0,1,155,3,56
+	.word	.L128,.L140
+	.byte	4
+	.byte	'xCycle',0,1,155,3,73
+	.word	.L128,.L141
+	.byte	5
+	.word	.L64,.L138
+	.byte	6
+	.byte	'xRet',0,1,157,3,16
+	.word	.L118,.L142
+	.byte	0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('SetAbsAlarm')
+	.sect	'.debug_abbrev'
+.L89:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,1,17,1,18,1,0,0,6
+	.byte	52,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('SetAbsAlarm')
+	.sect	'.debug_line'
+.L90:
+	.word	.L289-.L288
+.L288:
+	.half	3
+	.word	.L291-.L290
+.L290:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0,0,0,0,0
+.L291:
+	.byte	5,12,7,0,5,2
+	.word	.L64
+	.byte	3,154,3,1,5,5,3,14,1,5,21,9
+	.half	.L292-.L64
+	.byte	3,116,1,5,5,3,12,1,5,26,9
+	.half	.L293-.L292
+	.byte	3,2,1,5,9,9
+	.half	.L294-.L293
+	.byte	3,1,1,5,5,9
+	.half	.L34-.L294
+	.byte	3,14,1,9
+	.half	.L295-.L34
+	.byte	3,1,1,9
+	.half	.L296-.L295
+	.byte	3,1,1,5,24,9
+	.half	.L297-.L296
+	.byte	3,1,1,5,39,9
+	.half	.L193-.L297
+	.byte	3,2,1,5,23,9
+	.half	.L195-.L193
+	.byte	3,1,1,5,5,9
+	.half	.L35-.L195
+	.byte	3,14,1,5,1,9
+	.half	.L196-.L35
+	.byte	3,2,1,7,9
+	.half	.L92-.L196
+	.byte	0,1,1
+.L289:
+	.sdecl	'.debug_ranges',debug,cluster('SetAbsAlarm')
+	.sect	'.debug_ranges'
+.L91:
+	.word	-1,.L64,0,.L92-.L64,0,0
+	.sdecl	'.debug_info',debug,cluster('CancelAlarm')
+	.sect	'.debug_info'
+.L93:
+	.word	257
+	.half	3
+	.word	.L94
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L96,.L95
+	.byte	2
+	.word	.L69
+	.byte	3
+	.byte	'CancelAlarm',0,1,227,3,12
+	.word	.L118
+	.byte	1,1,1
+	.word	.L66,.L143,.L65
+	.byte	4
+	.byte	'xAlarmID',0,1,227,3,36
+	.word	.L118,.L144
+	.byte	5
+	.word	.L66,.L143
+	.byte	6
+	.byte	'xRet',0,1,229,3,16
+	.word	.L118,.L145
+	.byte	0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('CancelAlarm')
+	.sect	'.debug_abbrev'
+.L94:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,1,17,1,18,1,0,0,6
+	.byte	52,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('CancelAlarm')
+	.sect	'.debug_line'
+.L95:
+	.word	.L299-.L298
+.L298:
+	.half	3
+	.word	.L301-.L300
+.L300:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0,0,0,0,0
+.L301:
+	.byte	5,12,7,0,5,2
+	.word	.L66
+	.byte	3,226,3,1,5,10,3,10,1,5,21,9
+	.half	.L302-.L66
+	.byte	3,120,1,5,10,3,8,1,5,27,9
+	.half	.L303-.L302
+	.byte	3,2,1,5,9,9
+	.half	.L304-.L303
+	.byte	3,1,1,5,24,9
+	.half	.L37-.L304
+	.byte	3,2,1,5,57,9
+	.half	.L198-.L37
+	.byte	3,1,1,5,5,9
+	.half	.L200-.L198
+	.byte	3,1,1,5,23,9
+	.half	.L202-.L200
+	.byte	3,1,1,5,5,9
+	.half	.L38-.L202
+	.byte	3,12,1,5,1,9
+	.half	.L203-.L38
+	.byte	3,1,1,7,9
+	.half	.L97-.L203
+	.byte	0,1,1
+.L299:
+	.sdecl	'.debug_ranges',debug,cluster('CancelAlarm')
+	.sect	'.debug_ranges'
+.L96:
+	.word	-1,.L66,0,.L97-.L66,0,0
+	.sdecl	'.debug_info',debug,cluster('OSProcessAlarm')
+	.sect	'.debug_info'
+.L98:
+	.word	312
+	.half	3
+	.word	.L99
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L101,.L100
+	.byte	2
+	.word	.L69
+	.byte	3
+	.byte	'OSProcessAlarm',0,1,132,4,6,1,1,1
+	.word	.L68,.L146,.L67
+	.byte	4
+	.byte	'xCounterID',0,1,132,4,34
+	.word	.L118,.L147
+	.byte	5
+	.word	.L68,.L146
+	.byte	6
+	.byte	'xCntCurValue',0,1,134,4,14
+	.word	.L128,.L148
+	.byte	6
+	.byte	'xAlarmID',0,1,135,4,15
+	.word	.L118,.L149
+	.byte	6
+	.byte	'xNextAlarm',0,1,136,4,15
+	.word	.L118,.L150
+	.byte	0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('OSProcessAlarm')
+	.sect	'.debug_abbrev'
+.L99:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,1,17,1,18,1,0,0,6,52,0,3
+	.byte	8,58,15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('OSProcessAlarm')
+	.sect	'.debug_line'
+.L100:
+	.word	.L306-.L305
+.L305:
+	.half	3
+	.word	.L308-.L307
+.L307:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0,0,0,0,0
+.L308:
+	.byte	5,6,7,0,5,2
+	.word	.L68
+	.byte	3,131,4,1,5,51,3,5,1,5,24,9
+	.half	.L210-.L68
+	.byte	3,1,1,5,49,9
+	.half	.L215-.L210
+	.byte	3,1,1,5,34,9
+	.half	.L205-.L215
+	.byte	3,1,1,5,51,9
+	.half	.L309-.L205
+	.byte	3,125,1,5,34,9
+	.half	.L310-.L309
+	.byte	3,3,1,5,9,9
+	.half	.L41-.L310
+	.byte	3,2,1,5,13,9
+	.half	.L311-.L41
+	.byte	3,2,1,5,73,9
+	.half	.L43-.L311
+	.byte	3,3,1,5,21,9
+	.half	.L312-.L43
+	.byte	3,1,1,5,84,9
+	.half	.L44-.L312
+	.byte	3,2,1,5,21,9
+	.half	.L313-.L44
+	.byte	3,1,1,5,86,9
+	.half	.L45-.L313
+	.byte	3,4,1,5,47,9
+	.half	.L47-.L45
+	.byte	3,9,1,5,55,3,126,1,5,47,9
+	.half	.L214-.L47
+	.byte	3,2,1,5,13,9
+	.half	.L209-.L214
+	.byte	3,1,1,5,84,9
+	.half	.L314-.L209
+	.byte	3,3,1,5,52,9
+	.half	.L212-.L314
+	.byte	3,1,1,5,84,3,127,1,5,52,9
+	.half	.L216-.L212
+	.byte	3,1,1,5,84,9
+	.half	.L207-.L216
+	.byte	3,127,1,5,17,9
+	.half	.L49-.L207
+	.byte	3,4,1,5,32,9
+	.half	.L50-.L49
+	.byte	3,3,1,5,34,9
+	.half	.L40-.L50
+	.byte	3,93,1,5,23,9
+	.half	.L42-.L40
+	.byte	3,43,1,5,1,7,9
+	.half	.L102-.L42
+	.byte	3,1,0,1,1
+.L306:
+	.sdecl	'.debug_ranges',debug,cluster('OSProcessAlarm')
+	.sect	'.debug_ranges'
+.L101:
+	.word	-1,.L68,0,.L102-.L68,0,0
+	.sdecl	'.debug_info',debug,cluster('addAlarmTick')
+	.sect	'.debug_info'
+.L103:
+	.word	288
+	.half	3
+	.word	.L104
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L106,.L105
+	.byte	2
+	.word	.L69
+	.byte	3
+	.byte	'addAlarmTick',0,1,67,1
+	.word	.L128
+	.byte	1,1
+	.word	.L52,.L151,.L51
+	.byte	4
+	.byte	'xCntCurValue',0,1,67,23
+	.word	.L128,.L152
+	.byte	4
+	.byte	'xMaxAllowedValue',0,1,67,45
+	.word	.L128,.L153
+	.byte	4
+	.byte	'xTicks',0,1,67,72
+	.word	.L128,.L154
+	.byte	5
+	.word	.L52,.L151
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('addAlarmTick')
+	.sect	'.debug_abbrev'
+.L104:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,73,16
+	.byte	54,15,39,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('addAlarmTick')
+	.sect	'.debug_line'
+.L105:
+	.word	.L316-.L315
+.L315:
+	.half	3
+	.word	.L318-.L317
+.L317:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0,0,0,0,0
+.L318:
+	.byte	5,5,7,0,5,2
+	.word	.L52
+	.byte	3,196,0,1,5,9,9
+	.half	.L319-.L52
+	.byte	3,6,1,5,1,9
+	.half	.L320-.L319
+	.byte	3,2,1,7,9
+	.half	.L107-.L320
+	.byte	0,1,1
+.L316:
+	.sdecl	'.debug_ranges',debug,cluster('addAlarmTick')
+	.sect	'.debug_ranges'
+.L106:
+	.word	-1,.L52,0,.L107-.L52,0,0
+	.sdecl	'.debug_info',debug,cluster('listCntInsert')
+	.sect	'.debug_info'
+.L108:
+	.word	344
+	.half	3
+	.word	.L109
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L111,.L110
+	.byte	2
+	.word	.L69
+	.byte	3
+	.byte	'listCntInsert',0,1,84,13,1,1
+	.word	.L54,.L155,.L53
+	.byte	4
+	.byte	'xCounterID',0,1,84,39
+	.word	.L118,.L156
+	.byte	4
+	.byte	'xAlarmID',0,1,84,61
+	.word	.L118,.L157
+	.byte	5
+	.word	.L54,.L155
+	.byte	6
+	.byte	'pxNext',0,1,86,15
+	.word	.L118,.L158
+	.byte	6
+	.byte	'pxPrev',0,1,87,15
+	.word	.L118,.L159
+	.byte	6
+	.byte	'xAlarmValue',0,1,88,14
+	.word	.L128,.L160
+	.byte	6
+	.byte	'xCntCurValue',0,1,89,14
+	.word	.L128,.L161
+	.byte	0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('listCntInsert')
+	.sect	'.debug_abbrev'
+.L109:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,1,17,1,18,1,0,0,6,52,0,3,8,58
+	.byte	15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('listCntInsert')
+	.sect	'.debug_line'
+.L110:
+	.word	.L322-.L321
+.L321:
+	.half	3
+	.word	.L324-.L323
+.L323:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0,0,0,0,0
+.L324:
+	.byte	5,13,7,0,5,2
+	.word	.L54
+	.byte	3,211,0,1,5,51,3,8,1,5,46,9
+	.half	.L325-.L54
+	.byte	3,127,1,5,51,9
+	.half	.L326-.L325
+	.byte	3,1,1,5,48,9
+	.half	.L169-.L326
+	.byte	3,3,1,5,46,9
+	.half	.L327-.L169
+	.byte	3,124,1,5,48,9
+	.half	.L328-.L327
+	.byte	3,4,1,5,28,9
+	.half	.L329-.L328
+	.byte	3,127,1,5,46,3,125,1,5,48,9
+	.half	.L168-.L329
+	.byte	3,4,1,5,5,9
+	.half	.L167-.L168
+	.byte	3,2,1,5,58,7,9
+	.half	.L330-.L167
+	.byte	3,3,1,5,51,9
+	.half	.L7-.L330
+	.byte	3,3,1,5,28,9
+	.half	.L331-.L7
+	.byte	3,127,1,5,51,3,1,1,5,16,9
+	.half	.L6-.L331
+	.byte	3,124,1,5,42,9
+	.half	.L332-.L6
+	.byte	3,1,1,5,52,9
+	.half	.L333-.L332
+	.byte	3,8,1,5,47,9
+	.half	.L10-.L333
+	.byte	3,4,1,5,24,9
+	.half	.L334-.L10
+	.byte	3,127,1,5,47,3,1,1,5,12,9
+	.half	.L9-.L334
+	.byte	3,123,1,5,38,9
+	.half	.L335-.L9
+	.byte	3,1,1,5,5,9
+	.half	.L11-.L335
+	.byte	3,6,1,5,9,9
+	.half	.L336-.L11
+	.byte	3,2,1,5,1,9
+	.half	.L337-.L336
+	.byte	3,10,1,5,10,7,9
+	.half	.L12-.L337
+	.byte	3,120,1,5,9,9
+	.half	.L338-.L12
+	.byte	3,2,1,9
+	.half	.L15-.L338
+	.byte	3,4,1,5,1,9
+	.half	.L339-.L15
+	.byte	3,2,1,7,9
+	.half	.L112-.L339
+	.byte	0,1,1
+.L322:
+	.sdecl	'.debug_ranges',debug,cluster('listCntInsert')
+	.sect	'.debug_ranges'
+.L111:
+	.word	-1,.L54,0,.L112-.L54,0,0
+	.sdecl	'.debug_info',debug,cluster('listCntRemove')
+	.sect	'.debug_info'
+.L113:
+	.word	297
+	.half	3
+	.word	.L114
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L116,.L115
+	.byte	2
+	.word	.L69
+	.byte	3
+	.byte	'listCntRemove',0,1,127,13,1,1
+	.word	.L56,.L162,.L55
+	.byte	4
+	.byte	'xCounterID',0,1,127,39
+	.word	.L118,.L163
+	.byte	4
+	.byte	'xAlarmID',0,1,127,61
+	.word	.L118,.L164
+	.byte	5
+	.word	.L56,.L162
+	.byte	6
+	.byte	'pxNext',0,1,129,1,15
+	.word	.L118,.L165
+	.byte	6
+	.byte	'pxPrev',0,1,130,1,15
+	.word	.L118,.L166
+	.byte	0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('listCntRemove')
+	.sect	'.debug_abbrev'
+.L114:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,1,17,1,18,1,0,0,6,52,0,3,8,58
+	.byte	15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('listCntRemove')
+	.sect	'.debug_line'
+.L115:
+	.word	.L341-.L340
+.L340:
+	.half	3
+	.word	.L343-.L342
+.L342:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c',0,0,0,0,0
+.L343:
+	.byte	5,43,7,0,5,2
+	.word	.L56
+	.byte	3,130,1,1,5,5,9
+	.half	.L344-.L56
+	.byte	3,2,1,5,43,3,126,1,9
+	.half	.L172-.L344
+	.byte	3,1,1,5,5,9
+	.half	.L171-.L172
+	.byte	3,1,1,5,9,7,9
+	.half	.L345-.L171
+	.byte	3,2,1,5,1,9
+	.half	.L346-.L345
+	.byte	3,10,1,5,10,7,9
+	.half	.L17-.L346
+	.byte	3,120,1,5,9,9
+	.half	.L347-.L17
+	.byte	3,2,1,5,1,9
+	.half	.L348-.L347
+	.byte	3,6,1,5,9,7,9
+	.half	.L20-.L348
+	.byte	3,126,1,5,1,9
+	.half	.L349-.L20
+	.byte	3,2,1,7,9
+	.half	.L117-.L349
+	.byte	0,1,1
+.L341:
+	.sdecl	'.debug_ranges',debug,cluster('listCntRemove')
+	.sect	'.debug_ranges'
+.L116:
+	.word	-1,.L56,0,.L117-.L56,0,0
+	.sdecl	'.debug_loc',debug,cluster('CancelAlarm')
+	.sect	'.debug_loc'
+.L65:
+	.word	-1,.L66,.L66-.L66,.L143-.L66
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L144:
+	.word	-1,.L66,.L66-.L66,.L198-.L66
+	.half	5
+	.byte	144,34,157,32,0
+	.word	.L199-.L66,.L200-.L66
+	.half	5
+	.byte	144,34,157,32,32
+	.word	.L201-.L66,.L202-.L66
+	.half	5
+	.byte	144,39,157,32,32
+	.word	0,0
+.L145:
+	.word	-1,.L66,.L203-.L66,.L143-.L66
+	.half	5
+	.byte	144,33,157,32,0
+	.word	.L204-.L66,.L143-.L66
+	.half	5
+	.byte	144,36,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('GetAlarm')
+	.sect	'.debug_loc'
+.L59:
+	.word	-1,.L60,.L60-.L60,.L123-.L60
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L126:
+	.word	-1,.L60,.L60-.L60,.L123-.L60
+	.half	1
+	.byte	100
+	.word	0,0
+.L124:
+	.word	-1,.L60,.L174-.L60,.L175-.L60
+	.half	5
+	.byte	144,32,157,32,0
+	.word	.L60-.L60,.L174-.L60
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+.L129:
+	.word	-1,.L60,.L176-.L60,.L177-.L60
+	.half	5
+	.byte	144,39,157,32,32
+	.word	.L26-.L60,.L123-.L60
+	.half	5
+	.byte	144,39,157,32,32
+	.word	0,0
+.L130:
+	.word	-1,.L60,.L178-.L60,.L123-.L60
+	.half	5
+	.byte	144,32,157,32,32
+	.word	0,0
+.L127:
+	.word	-1,.L60,.L179-.L60,.L123-.L60
+	.half	5
+	.byte	144,33,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('GetAlarmBase')
+	.sect	'.debug_loc'
+.L57:
+	.word	-1,.L58,.L58-.L58,.L119-.L58
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L122:
+	.word	-1,.L58,.L58-.L58,.L119-.L58
+	.half	1
+	.byte	100
+	.word	0,0
+.L120:
+	.word	-1,.L58,.L58-.L58,.L119-.L58
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('OSProcessAlarm')
+	.sect	'.debug_loc'
+.L67:
+	.word	-1,.L68,.L68-.L68,.L146-.L68
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L149:
+	.word	-1,.L68,.L205-.L68,.L146-.L68
+	.half	5
+	.byte	144,37,157,32,0
+	.word	.L206-.L68,.L207-.L68
+	.half	5
+	.byte	144,34,157,32,32
+	.word	.L208-.L68,.L209-.L68
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+.L148:
+	.word	-1,.L68,.L210-.L68,.L146-.L68
+	.half	5
+	.byte	144,36,157,32,32
+	.word	.L211-.L68,.L212-.L68
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+.L147:
+	.word	-1,.L68,.L213-.L68,.L146-.L68
+	.half	5
+	.byte	144,36,157,32,0
+	.word	.L214-.L68,.L209-.L68
+	.half	5
+	.byte	144,34,157,32,0
+	.word	.L68-.L68,.L215-.L68
+	.half	5
+	.byte	144,34,157,32,0
+	.word	.L216-.L68,.L207-.L68
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+.L150:
+	.word	-1,.L68,.L214-.L68,.L40-.L68
+	.half	5
+	.byte	144,39,157,32,32
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('SetAbsAlarm')
+	.sect	'.debug_loc'
+.L63:
+	.word	-1,.L64,.L64-.L64,.L138-.L64
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L139:
+	.word	-1,.L64,.L192-.L64,.L138-.L64
+	.half	5
+	.byte	144,36,157,32,0
+	.word	.L64-.L64,.L193-.L64
+	.half	5
+	.byte	144,34,157,32,0
+	.word	.L194-.L64,.L195-.L64
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+.L141:
+	.word	-1,.L64,.L64-.L64,.L193-.L64
+	.half	5
+	.byte	144,35,157,32,0
+	.word	0,0
+.L142:
+	.word	-1,.L64,.L196-.L64,.L138-.L64
+	.half	5
+	.byte	144,33,157,32,0
+	.word	.L197-.L64,.L138-.L64
+	.half	5
+	.byte	144,36,157,32,32
+	.word	0,0
+.L140:
+	.word	-1,.L64,.L64-.L64,.L193-.L64
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('SetRelAlarm')
+	.sect	'.debug_loc'
+.L61:
+	.word	-1,.L62,.L62-.L62,.L131-.L62
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L132:
+	.word	-1,.L62,.L180-.L62,.L131-.L62
+	.half	5
+	.byte	144,36,157,32,0
+	.word	.L62-.L62,.L181-.L62
+	.half	5
+	.byte	144,34,157,32,0
+	.word	.L182-.L62,.L183-.L62
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+.L136:
+	.word	-1,.L62,.L184-.L62,.L32-.L62
+	.half	5
+	.byte	144,37,157,32,0
+	.word	.L185-.L62,.L183-.L62
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+.L134:
+	.word	-1,.L62,.L62-.L62,.L181-.L62
+	.half	5
+	.byte	144,35,157,32,0
+	.word	.L186-.L62,.L187-.L62
+	.half	5
+	.byte	144,33,157,32,0
+	.word	0,0
+.L133:
+	.word	-1,.L62,.L181-.L62,.L186-.L62
+	.half	5
+	.byte	144,35,157,32,0
+	.word	.L188-.L62,.L186-.L62
+	.half	5
+	.byte	144,32,157,32,0
+	.word	.L62-.L62,.L189-.L62
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+.L137:
+	.word	-1,.L62,.L189-.L62,.L186-.L62
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+.L135:
+	.word	-1,.L62,.L190-.L62,.L131-.L62
+	.half	5
+	.byte	144,36,157,32,32
+	.word	.L191-.L62,.L131-.L62
+	.half	5
+	.byte	144,33,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('addAlarmTick')
+	.sect	'.debug_loc'
+.L51:
+	.word	-1,.L52,.L52-.L52,.L151-.L52
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L152:
+	.word	-1,.L52,.L52-.L52,.L151-.L52
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+.L153:
+	.word	-1,.L52,.L52-.L52,.L151-.L52
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+.L154:
+	.word	-1,.L52,.L52-.L52,.L151-.L52
+	.half	5
+	.byte	144,35,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('listCntInsert')
+	.sect	'.debug_loc'
+.L53:
+	.word	-1,.L54,.L54-.L54,.L155-.L54
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L158:
+	.word	-1,.L54,.L167-.L54,.L155-.L54
+	.half	5
+	.byte	144,33,157,32,32
+	.word	0,0
+.L159:
+	.word	-1,.L54,.L168-.L54,.L155-.L54
+	.half	5
+	.byte	144,35,157,32,0
+	.word	0,0
+.L157:
+	.word	-1,.L54,.L54-.L54,.L155-.L54
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+.L160:
+	.word	-1,.L54,.L168-.L54,.L155-.L54
+	.half	5
+	.byte	144,32,157,32,0
+	.word	0,0
+.L161:
+	.word	-1,.L54,.L169-.L54,.L10-.L54
+	.half	5
+	.byte	144,32,157,32,32
+	.word	0,0
+.L156:
+	.word	-1,.L54,.L170-.L54,.L7-.L54
+	.half	5
+	.byte	144,39,157,32,32
+	.word	.L54-.L54,.L7-.L54
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('listCntRemove')
+	.sect	'.debug_loc'
+.L55:
+	.word	-1,.L56,.L56-.L56,.L162-.L56
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L165:
+	.word	-1,.L56,.L171-.L56,.L162-.L56
+	.half	5
+	.byte	144,32,157,32,32
+	.word	0,0
+.L166:
+	.word	-1,.L56,.L17-.L56,.L162-.L56
+	.half	5
+	.byte	144,32,157,32,0
+	.word	.L172-.L56,.L173-.L56
+	.half	5
+	.byte	144,32,157,32,0
+	.word	0,0
+.L164:
+	.word	-1,.L56,.L56-.L56,.L162-.L56
+	.half	5
+	.byte	144,34,157,32,32
+	.word	0,0
+.L163:
+	.word	-1,.L56,.L56-.L56,.L162-.L56
+	.half	5
+	.byte	144,34,157,32,0
+	.word	0,0
+	.sdecl	'.debug_frame',debug
+	.sect	'.debug_frame'
+.L350:
+	.word	48
+	.word	-1
+	.byte	3,0,2,1,27,12,26,0,8,26,8,27,8,28,8,29,8,30,8,31,8,16,8,17,8,24,8,25,8,32,8,33,8,34,8,35,8,36,8,37,8,38
+	.byte	8,39
+	.sdecl	'.debug_frame',debug,cluster('addAlarmTick')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L350,.L52,.L151-.L52
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('listCntInsert')
+	.sect	'.debug_frame'
+	.word	16
+	.word	.L350,.L54,.L155-.L54
+	.byte	8,19,8,23
+	.sdecl	'.debug_frame',debug,cluster('listCntRemove')
+	.sect	'.debug_frame'
+	.word	20
+	.word	.L350,.L56,.L162-.L56
+	.byte	8,19,8,22,8,23,0,0
+	.sdecl	'.debug_frame',debug,cluster('GetAlarmBase')
+	.sect	'.debug_frame'
+	.word	20
+	.word	.L350,.L58,.L119-.L58
+	.byte	8,19,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('GetAlarm')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L350,.L60,.L123-.L60
+	.byte	8,18,8,19,8,21,8,22,8,23,0,0
+	.sdecl	'.debug_frame',debug,cluster('SetRelAlarm')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L350,.L62,.L131-.L62
+	.sdecl	'.debug_frame',debug,cluster('SetAbsAlarm')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L350,.L64,.L138-.L64
+	.sdecl	'.debug_frame',debug,cluster('CancelAlarm')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L350,.L66,.L143-.L66
+	.sdecl	'.debug_frame',debug,cluster('OSProcessAlarm')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L350,.L68,.L146-.L68
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   568  }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   569  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   570  #endif  /* cfgOS_USE_ALARM*/
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   571  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   572  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   573  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   574  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   575   
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   576   
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   577  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c	   578  
+
+	; Module end

@@ -1,0 +1,36 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c"
+OBJ_FILES += "GaInOS_Studio\CfgObj.o"
+"GaInOS_Studio\CfgObj.o" : "F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c" "GaInOS_Studio\.CfgObj.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "GaInOS_Studio\.CfgObj.o.opt"
+
+"GaInOS_Studio\.CfgObj.o.opt" : .refresh
+	@argfile "GaInOS_Studio\.CfgObj.o.opt" -o "GaInOS_Studio\CfgObj.o" "F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="GaInOS_Studio\.CfgObj.o.d" -Wc--make-target="GaInOS_Studio\CfgObj.o"
+DEPENDENCY_FILES += "GaInOS_Studio\.CfgObj.o.d"
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c"
+OBJ_FILES += "GaInOS_Studio\CfgRdyQ.o"
+"GaInOS_Studio\CfgRdyQ.o" : "F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c" "GaInOS_Studio\.CfgRdyQ.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "GaInOS_Studio\.CfgRdyQ.o.opt"
+
+"GaInOS_Studio\.CfgRdyQ.o.opt" : .refresh
+	@argfile "GaInOS_Studio\.CfgRdyQ.o.opt" -o "GaInOS_Studio\CfgRdyQ.o" "F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgRdyQ.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="GaInOS_Studio\.CfgRdyQ.o.d" -Wc--make-target="GaInOS_Studio\CfgRdyQ.o"
+DEPENDENCY_FILES += "GaInOS_Studio\.CfgRdyQ.o.d"
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgSchedTbl.c"
+OBJ_FILES += "GaInOS_Studio\CfgSchedTbl.o"
+"GaInOS_Studio\CfgSchedTbl.o" : "F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgSchedTbl.c" "GaInOS_Studio\.CfgSchedTbl.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "GaInOS_Studio\.CfgSchedTbl.o.opt"
+
+"GaInOS_Studio\.CfgSchedTbl.o.opt" : .refresh
+	@argfile "GaInOS_Studio\.CfgSchedTbl.o.opt" -o "GaInOS_Studio\CfgSchedTbl.o" "F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgSchedTbl.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="GaInOS_Studio\.CfgSchedTbl.o.d" -Wc--make-target="GaInOS_Studio\CfgSchedTbl.o"
+DEPENDENCY_FILES += "GaInOS_Studio\.CfgSchedTbl.o.d"
+
+
+GENERATED_FILES += "GaInOS_Studio\CfgObj.o" "GaInOS_Studio\.CfgObj.o.opt" "GaInOS_Studio\.CfgObj.o.d" "GaInOS_Studio\CfgObj.src" "GaInOS_Studio\CfgObj.lst" "GaInOS_Studio\CfgRdyQ.o" "GaInOS_Studio\.CfgRdyQ.o.opt" "GaInOS_Studio\.CfgRdyQ.o.d" "GaInOS_Studio\CfgRdyQ.src" "GaInOS_Studio\CfgRdyQ.lst" "GaInOS_Studio\CfgSchedTbl.o" "GaInOS_Studio\.CfgSchedTbl.o.opt" "GaInOS_Studio\.CfgSchedTbl.o.d" "GaInOS_Studio\CfgSchedTbl.src" "GaInOS_Studio\CfgSchedTbl.lst"

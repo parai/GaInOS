@@ -1,0 +1,753 @@
+	; TASKING VX-toolset for TriCore: C compiler v3.5r1 Build 484.1.2
+	; Options: -f cc2756a -c99 --dep-file=kernel\.Resource.o.d -Ctc1797 --core=tc1.3.1 --fpu-present -F -IF:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio -IF:\parai@foxmail.com\nt\GaInOS\include -IF:\parai@foxmail.com\nt\GaInOS\kernel -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport -g --make-target=kernel\Resource.o -t4 --language=-gcc,-volatile,+strings --default-near-size=0 -O2 --default-a1-size=0 --default-a0-size=0 --source --align=0 --compact-max-size=200 --switch=auto --tasking-sfr -o kernel\Resource.src
+	; Module start
+	.name	"Resource"
+
+	
+$FPU
+$TC131
+	
+	.sdecl	'.debug_info',debug
+	.sect	'.debug_info'
+.L3:
+	.word	2632
+	.half	3
+	.word	.L4
+	.byte	4
+.L2:
+	.byte	1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L5
+	.byte	2
+	.byte	'__size_t',0,1,1,1
+	.word	.L6-.L3
+.L6:
+	.byte	3
+	.byte	'unsigned int',0,4,7,2
+	.byte	'__codeptr',0,1,1,1
+	.word	.L7-.L3
+.L7:
+	.byte	4
+	.word	.L8-.L3
+.L8:
+	.byte	5,1,2
+	.byte	'PCP_GPR6_type',0,2,158,19,3
+	.word	.L9-.L3
+.L9:
+	.byte	6
+	.word	.L10-.L3
+.L10:
+	.byte	7,2,145,19,18,4,8
+	.byte	'B',0,4
+	.word	.L11-.L3
+	.byte	2,35,0,8
+	.byte	'I',0,4
+	.word	.L12-.L3
+	.byte	2,35,0,8
+	.byte	'U',0,4
+	.word	184
+	.byte	2,35,0,0
+.L11:
+	.byte	9,2,147,19,2,4,10
+	.byte	'CNT1',0,4
+	.word	.L13-.L3
+	.byte	12,20,2,35,0,10
+	.byte	'.1.nn',0,4
+	.word	.L13-.L3
+	.byte	2,18,2,35,0,10
+	.byte	'TOS',0,4
+	.word	.L13-.L3
+	.byte	2,16,2,35,0,10
+	.byte	'SRPN',0,4
+	.word	.L13-.L3
+	.byte	8,8,2,35,0,10
+	.byte	'CPPN',0,4
+	.word	.L13-.L3
+	.byte	8,0,2,35,0,0
+.L13:
+	.byte	3
+	.byte	'unsigned int',0,4,7
+.L12:
+	.byte	3
+	.byte	'int',0,4,5,2
+	.byte	'PCP_GPR7_type',0,2,178,19,3
+	.word	.L14-.L3
+.L14:
+	.byte	6
+	.word	.L15-.L3
+.L15:
+	.byte	7,2,160,19,18,4,8
+	.byte	'B',0,4
+	.word	.L16-.L3
+	.byte	2,35,0,8
+	.byte	'I',0,4
+	.word	396
+	.byte	2,35,0,8
+	.byte	'U',0,4
+	.word	184
+	.byte	2,35,0,0
+.L16:
+	.byte	9,2,162,19,2,4,10
+	.byte	'Z',0,4
+	.word	380
+	.byte	1,31,2,35,0,10
+	.byte	'N',0,4
+	.word	380
+	.byte	1,30,2,35,0,10
+	.byte	'C',0,4
+	.word	380
+	.byte	1,29,2,35,0,10
+	.byte	'V',0,4
+	.word	380
+	.byte	1,28,2,35,0,10
+	.byte	'CNZ',0,4
+	.word	380
+	.byte	1,27,2,35,0,10
+	.byte	'IEN',0,4
+	.word	380
+	.byte	1,26,2,35,0,10
+	.byte	'CEN',0,4
+	.word	380
+	.byte	1,25,2,35,0,10
+	.byte	'.1.nn',0,4
+	.word	380
+	.byte	1,24,2,35,0,10
+	.byte	'DPTR',0,4
+	.word	380
+	.byte	8,16,2,35,0,10
+	.byte	'.2.nn',0,4
+	.word	380
+	.byte	16,0,2,35,0,0,2
+	.byte	'uint8_t',0,3,6,24
+	.word	.L17-.L3
+.L17:
+	.byte	3
+	.byte	'unsigned char',0,1,8,2
+	.byte	'uint16_t',0,3,8,24
+	.word	.L18-.L3
+.L18:
+	.byte	3
+	.byte	'unsigned short int',0,2,7,2
+	.byte	'uint32_t',0,3,10,24
+	.word	.L19-.L3
+.L19:
+	.byte	3
+	.byte	'unsigned long int',0,4,7,2
+	.byte	'ubase_t',0,3,14,24
+	.word	184
+	.byte	2
+	.byte	'void_t',0,3,17,24
+	.word	714
+	.byte	2
+	.byte	'BoolType',0,4,59,17
+	.word	641
+	.byte	2
+	.byte	'VoidType',0,4,60,16
+	.word	714
+	.byte	2
+	.byte	'TaskType',0,4,141,1,17
+	.word	641
+	.byte	2
+	.byte	'TaskRefType',0,4,143,1,19
+	.word	.L20-.L3
+.L20:
+	.byte	4
+	.word	641
+	.byte	2
+	.byte	'TaskStateType',0,4,145,1,19
+	.word	641
+	.byte	2
+	.byte	'TaskStateRefType',0,4,147,1,25
+	.word	.L21-.L3
+.L21:
+	.byte	4
+	.word	641
+	.byte	2
+	.byte	'TickType',0,4,149,1,17
+	.word	184
+	.byte	2
+	.byte	'TickRefType',0,4,151,1,19
+	.word	.L22-.L3
+.L22:
+	.byte	4
+	.word	184
+	.byte	2
+	.byte	'AlarmBaseType',0,4,163,1,2
+	.word	.L23-.L3
+.L23:
+	.byte	9,4,154,1,9,12,8
+	.byte	'xMaxAllowedValue',0,4
+	.word	184
+	.byte	2,35,0,8
+	.byte	'xTicksPerBase',0,4
+	.word	184
+	.byte	2,35,4,8
+	.byte	'xMinCycle',0,4
+	.word	184
+	.byte	2,35,8,0,2
+	.byte	'AlarmBaseRefType',0,4,165,1,25
+	.word	.L24-.L3
+.L24:
+	.byte	4
+	.word	965
+	.byte	2
+	.byte	'AlarmType',0,4,167,1,17
+	.word	641
+	.byte	2
+	.byte	'CounterType',0,4,169,1,17
+	.word	641
+	.byte	2
+	.byte	'EventMaskType',0,4,171,1,18
+	.word	675
+	.byte	2
+	.byte	'EventMaskRefType',0,4,173,1,24
+	.word	.L25-.L3
+.L25:
+	.byte	4
+	.word	675
+	.byte	2
+	.byte	'ResourceType',0,4,174,1,17
+	.word	641
+	.byte	2
+	.byte	'StatusType',0,4,175,1,17
+	.word	641
+	.byte	2
+	.byte	'AppModeType',0,4,176,1,17
+	.word	641
+	.byte	2
+	.byte	'ApplicationType',0,4,185,1,17
+	.word	641
+	.byte	2
+	.byte	'ScheduleTableType',0,4,214,1,17
+	.word	641
+	.byte	2
+	.byte	'ScheduleTableStatusType',0,4,230,1,17
+	.word	641
+	.byte	2
+	.byte	'OsScheduleTableAutostartType',0,4,255,1,17
+	.word	641
+	.byte	2
+	.byte	'OsScheduleTblSyncStrategyType',0,4,137,2,17
+	.word	641
+	.byte	2
+	.byte	'OsCpuIplType',0,5,43,17
+	.word	641
+	.byte	2
+	.byte	'TaskStackType',0,6,89,18
+	.word	714
+	.byte	2
+	.byte	'TaskStackRefType',0,6,96,3
+	.word	.L26-.L3
+.L26:
+	.byte	9,6,91,9,4,8
+	.byte	'pxStackTop',0,4
+	.word	.L27-.L3
+	.byte	2,35,0,0
+.L27:
+	.byte	4
+	.word	714
+	.byte	2
+	.byte	'PriorityType',0,6,98,17
+	.word	641
+	.byte	2
+	.byte	'TaskEntryType',0,6,100,16
+	.word	.L28-.L3
+.L28:
+	.byte	4
+	.word	.L29-.L3
+.L29:
+	.byte	11,1,1,2
+	.byte	'TcbType',0,6,112,2
+	.word	.L30-.L3
+.L30:
+	.byte	12
+	.byte	'_TaskControlBlockTag',0,6,101,16,8,8
+	.byte	'pxStack',0,4
+	.word	1484
+	.byte	2,35,0,8
+	.byte	'xPriority',0,1
+	.word	641
+	.byte	2,35,4,8
+	.byte	'xState',0,1
+	.word	641
+	.byte	2,35,5,8
+	.byte	'xActivateCount',0,1
+	.word	641
+	.byte	2,35,6,0,2
+	.byte	'AlarmClassType',0,6,117,17
+	.word	641
+	.byte	2
+	.byte	'AlarmContainerType',0,6,121,19
+	.word	714
+	.byte	2
+	.byte	'AlmCtrlBlkType',0,6,129,1,2
+	.word	.L31-.L3
+.L31:
+	.byte	12
+	.byte	'_AlmCtrlBlkTag',0,6,123,16,12,8
+	.byte	'xAlarmValue',0,4
+	.word	184
+	.byte	2,35,0,8
+	.byte	'xCycle',0,4
+	.word	184
+	.byte	2,35,4,8
+	.byte	'pxNext',0,1
+	.word	641
+	.byte	2,35,8,8
+	.byte	'pxPrev',0,1
+	.word	641
+	.byte	2,35,9,0,2
+	.byte	'OsSchedTblCtrlBlkType',0,6,162,1,2
+	.word	.L32-.L3
+.L32:
+	.byte	9,6,139,1,9,20,8
+	.byte	'xSchedTblStatus',0,1
+	.word	641
+	.byte	2,35,0,8
+	.byte	'xIterator',0,1
+	.word	641
+	.byte	2,35,1,8
+	.byte	'xSchedTblNextExpiryPointTime',0,4
+	.word	184
+	.byte	2,35,2,8
+	.byte	'xSchedTblStartingTime',0,4
+	.word	184
+	.byte	2,35,6,8
+	.byte	'xAdjustDirection',0,1
+	.word	641
+	.byte	2,35,10,8
+	.byte	'xDeviation',0,4
+	.word	184
+	.byte	2,35,12,8
+	.byte	'xNextOrPrevScheduleTable',0,1
+	.word	641
+	.byte	2,35,16,8
+	.byte	'pxNextSchedTbl',0,1
+	.word	641
+	.byte	2,35,17,8
+	.byte	'pxPrevSchedTbl',0,1
+	.word	641
+	.byte	2,35,18,0,2
+	.byte	'OsScheduleTableType',0,6,176,1,2
+	.word	.L33-.L3
+.L33:
+	.byte	9,6,163,1,9,28,8
+	.byte	'xOsScheduleTableDuration',0,4
+	.word	184
+	.byte	2,35,0,8
+	.byte	'xOsScheduleTableRepeating',0,1
+	.word	641
+	.byte	2,35,4,8
+	.byte	'xOsScheduleTableAccessingApplication',0,1
+	.word	641
+	.byte	2,35,5,8
+	.byte	'xOsScheduleTableCounterRef',0,1
+	.word	641
+	.byte	2,35,6,8
+	.byte	'xOsScheduleTableAutostartable',0,1
+	.word	641
+	.byte	2,35,7,8
+	.byte	'xOsScheduleTableAutostartType',0,1
+	.word	641
+	.byte	2,35,8,8
+	.byte	'xOsScheduleTableAutostartValue',0,4
+	.word	184
+	.byte	2,35,10,8
+	.byte	'xOsScheduleTableSyncStrategy',0,1
+	.word	641
+	.byte	2,35,14,8
+	.byte	'xOsScheduleTableMaxAdvance',0,4
+	.word	184
+	.byte	2,35,16,8
+	.byte	'xOsScheduleTableMaxRetard',0,4
+	.word	184
+	.byte	2,35,20,8
+	.byte	'xOsScheduleTableExplicitPrecision',0,4
+	.word	184
+	.byte	2,35,24,0,2
+	.byte	'OsSchedTblCmdType',0,6,184,1,3
+	.word	.L34-.L3
+.L34:
+	.byte	9,6,180,1,9,8,8
+	.byte	'xOffset',0,4
+	.word	184
+	.byte	2,35,0,8
+	.byte	'pxOsSchedTblCmd',0,4
+	.word	1532
+	.byte	2,35,4,0,0
+	.sdecl	'.debug_abbrev',debug
+	.sect	'.debug_abbrev'
+.L4:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,16,6,0,0,2,22,0,3,8,58,15,59,15,57,15,73,19,0,0,3,36,0,3,8,11,15
+	.byte	62,15,0,0,4,15,0,73,19,0,0,5,21,0,54,15,0,0,6,53,0,73,19,0,0,7,23,1,58,15,59,15,57,15,11,15,0,0,8,13,0
+	.byte	3,8,11,15,73,19,56,9,0,0,9,19,1,58,15,59,15,57,15,11,15,0,0,10,13,0,3,8,11,15,73,19,13,15,12,15,56,9,0
+	.byte	0,11,21,0,54,15,39,12,0,0,12,19,1,3,8,58,15,59,15,57,15,11,15,0,0,0
+	.sdecl	'.debug_line',debug
+	.sect	'.debug_line'
+.L5:
+	.word	.L36-.L35
+.L35:
+	.half	3
+	.word	.L38-.L37
+.L37:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c',0,0,0,0
+	.byte	'D:\\Program Files\\TASKING\\TriCore v3.5r1\\ctc\\include\\sfr\\regtc1797.sfr',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Bsp\\Cpu\\Platform_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Std_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\osek_test\\GaInOS_Studio\\Os_Cfg.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Os.h',0,0,0,0,0
+.L38:
+.L36:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	     1  /* Copyright 2012, Fan Wang(Parai)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	     2   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	     3   * This file is part of GaInOS.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	     4   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	     5   * GaInOS is free software: you can redistribute it and/or modify
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	     6   * it under the terms of the GNU General Public License as published by
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	     7   * the Free Software Foundation, either version 3 of the License, or
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	     8   * (at your option) any later version.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	     9   *             
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    10   * Linking GaInOS statically or dynamically with other modules is making a
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    11   * combined work based on GaInOS. Thus, the terms and conditions of the GNU
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    12   * General Public License cover the whole combination.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    13   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    14   * In addition, as a special exception, the copyright holders of GaInOS give
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    15   * you permission to combine GaInOS program with free software programs or
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    16   * libraries that are released under the GNU LGPL and with independent modules
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    17   * that communicate with GaInOS solely through the GaInOS defined interface. 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    18   * You may copy and distribute such a system following the terms of the GNU GPL
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    19   * for GaInOS and the licenses of the other code concerned, provided that you
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    20   * include the source code of that other code when and as the GNU GPL requires
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    21   * distribution of source code.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    22   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    23   * Note that people who make modified versions of GaInOS are not obligated to
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    24   * grant this special exception for their modified versions; it is their choice
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    25   * whether to do so. The GNU General Public License gives permission to release
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    26   * a modified version without this exception; this exception also makes it
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    27   * possible to release a modified version which carries forward this exception.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    28   * 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    29   * GaInOS is distributed in the hope that it will be useful,
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    30   * but WITHOUT ANY WARRANTY; without even the implied warranty of
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    31   * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    32   * GNU General Public License for more details.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    33   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    34   * You should have received a copy of the GNU General Public License
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    35   * along with GaInOS. If not, see <http://www.gnu.org/licenses/>.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    36   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    37   */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    38  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    39  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    40  /* | Author: | Wang Fan(parai)   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    41  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    42  /* | Email:  | parai@foxmail.com | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    43  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    44  /* | WorkOn: | Emacs23.3         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    45  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    46  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    47  #include "Kernel.h"
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    48  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    49  #if (cfgOS_USE_RESOURCE == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    50  /* |------------------+-----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    51  /* | Syntax:          | StatusType GetResource ( ResourceType <ResID> )           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    52  /* |------------------+-----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    53  /* | Parameter (In):  | ResID:Reference to resource                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    54  /* |------------------+-----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    55  /* | Parameter (Out): | none                                                      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    56  /* |------------------+-----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    57  /* | Description:     | This call serves to enter critical sections in the code   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    58  /* |                  | that are assigned to the resource referenced by <ResID>.  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    59  /* |                  | A critical section shall always be left using             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    60  /* |                  | ReleaseResource.                                          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    61  /* |------------------+-----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    62  /* | Particularities: | 1.The OSEK priority ceiling protocol for resource         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    63  /* |                  | management is described in chapter 8.5.                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    64  /* |                  | 2.Nested resource occupation is only allowed if the       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    65  /* |                  | inner critical sections are completely executed within    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    66  /* |                  | the surrounding critical section (strictly stacked,       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    67  /* |                  | see chapter 8.2, Restrictions when using resources).      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    68  /* |                  | Nested occupation of one and the same resource is         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    69  /* |                  | also forbidden!                                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    70  /* |                  | 3.It is recommended that corresponding calls to           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    71  /* |                  | GetResource and ReleaseResource appear within the         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    72  /* |                  | same function.                                            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    73  /* |                  | 4.It is not allowed to use services which are points      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    74  /* |                  | of rescheduling for non preemptable tasks (TerminateTask, | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    75  /* |                  | ChainTask, Schedule and WaitEvent, see chapter 4.6.2)     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    76  /* |                  | in critical sections. Additionally, critical sections     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    77  /* |                  | are to be left before completion of an interrupt service  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    78  /* |                  | routine.                                                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    79  /* |                  | 5.Generally speaking, critical sections should be short.  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    80  /* |                  | 6.The service may be called from an ISR and from task     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    81  /* |                  | level (see Figure 12-1).                                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    82  /* |------------------+-----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    83  /* | Status:          | Standard:1.No error, E_OK                                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    84  /* |                  | Extended:1.Resource <ResID> is invalid, E_OS_ID           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    85  /* |                  | 2.Attempt to get a resource which is already occupied     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    86  /* |                  | by any task or ISR, or the statically assigned priority   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    87  /* |                  | of the calling task or interrupt routine is higher than   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    88  /* |                  | the calculated ceiling priority, E_OS_ACCESS              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    89  /* |------------------+-----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    90  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    91  /* |------------------+-----------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    92  StatusType GetResource (ResourceType xResID)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    93  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    94      StatusType   xRet = E_OK;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    95      PriorityType xOldPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    96      PriorityType xNewPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    97  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    98  #if(cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	    99      if(xResID > (cfgOS_RESOURCE_NUM-1)){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   100          xRet = E_OS_ID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   101          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   102      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   103      if( tableResIsInUse(xResID)){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   104          xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   105          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   106      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   107  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   108  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   109      xNewPriority = tableGetResCeilPrio(xResID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   110  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   111  #if(cfgOS_ISR_USE_RES == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   112      if(OSGetContextLevel() == TASK_LEVEL)      /* TASK_LEVEL */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   113      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   114  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   115          xOldPriority = OSCurTcb->xPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   116  #if(cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   117          if(xOldPriority > xNewPriority)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   118          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   119              xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   120              goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   121          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   122  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   123          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   124  #if(cfgOS_ISR_USE_RES == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   125          if(xNewPriority > cfgOS_MAX_PRIORITY)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   126          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   127              OSSetIpl(xNewPriority - cfgOS_MAX_PRIORITY);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   128          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   129          else
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   130          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   131  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   132              /* User Must Make Sure No Tasks Was Configured in xNewPriority,
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   133               * That MEANS no Task could run in xNewPriority, Except these Tasks 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   134               * Witch will use the Resource<xResID>*/
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   135              OS_ASSERT(listTskRdyIsEmpty(xNewPriority));
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   136              doChangeTskPrioFromTo(xOldPriority,xNewPriority);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   137  #if(cfgOS_ISR_USE_RES == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   138          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   139  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   140          tableSetResSavedPrio(xResID, xOldPriority);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   141          tableSetResPrevResID(xResID, OSCurTcb->xCurResID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   142          OSCurTcb->xCurResID = xResID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   143          if(xNewPriority > OSHighRdyPrio)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   144          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   145              OSHighRdyPrio = xNewPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   146              OSHighRdyTsk  = OSCurTsk;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   147              OSHighRdyTcb  = OSCurTcb;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   148          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   149          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   150  #if(cfgOS_ISR_USE_RES == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   151      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   152      else                        /* ISR2_LEVEL */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   153      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   154          xOldPriority = cfgOS_MAX_PRIORITY + OSGetIpl();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   155  #   if(cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   156          if(xOldPriority > xNewPriority)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   157          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   158              xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   159              goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   160          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   161  #   endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   162          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   163          OSSetIpl(xNewPriority - cfgOS_MAX_PRIORITY);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   164          tableSetResSavedPrio(xResID, xOldPriority);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   165          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   166      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   167  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   168  #if(cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   169    Error_Exit:
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   170  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   171  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   172      if(xRet != E_OK)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   173      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   174          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   175          OSErrorSetServiceId(OSServiceId_GetResource);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   176          OSErrorSetParam1(xResID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   177          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   178          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   179      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   180  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   181      return xRet;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   182  }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   183  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   184  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   185  /* | Syntax:          | StatusType ReleaseResource ( ResourceType <ResID> )        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   186  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   187  /* | Parameter (In):  | ResID:Reference to resource                                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   188  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   189  /* | Parameter (Out): | none                                                       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   190  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   191  /* | Description:     | ReleaseResource is the counterpart of GetResource and      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   192  /* |                  | serves to leave critical sections in the code that are     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   193  /* |                  | assigned to the resource referenced by <ResID>.            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   194  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   195  /* | Particularities: | For information on nesting conditions, see particularities | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   196  /* |                  | of GetResource.                                            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   197  /* |                  | The service may be called from an ISR and from task level  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   198  /* |                  | (see Figure 12-1).                                         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   199  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   200  /* | Status:          | Standard: No error, E_OK                                   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   201  /* |                  | Extended: Resource <ResID> is invalid, E_OS_ID             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   202  /* |                  | Attempt to release a resource which is not occupied by     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   203  /* |                  | any task or ISR, or another resource shall be released     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   204  /* |                  | before, E_OS_NOFUNC                                        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   205  /* |                  | Attempt to release a resource which has a lower ceiling    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   206  /* |                  | priority than the statically assigned priority of the      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   207  /* |                  | calling task or interrupt routine, E_OS_ACCESS             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   208  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   209  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   210  /* |------------------+------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   211  StatusType ReleaseResource ( ResourceType xResID )
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   212  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   213      PriorityType xOldPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   214      PriorityType xNewPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   215      StatusType   xRet=E_OK;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   216      xOldPriority = tableGetResCeilPrio(xResID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   217      xNewPriority = tableGetResSavedPrio(xResID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   218  #if(cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   219      if(xResID > (cfgOS_RESOURCE_NUM-1)){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   220          xRet = E_OS_ID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   221          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   222      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   223      if( tableResIsInUse(xResID)==STD_FALSE ){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   224          xRet = E_OS_NOFUNC;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   225          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   226      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   227      if(xNewPriority > xOldPriority) {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   228          xRet = E_OS_ACCESS;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   229          goto Error_Exit;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   230      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   231  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   232  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   233  #if(cfgOS_ISR_USE_RES == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   234      if(OSGetContextLevel() == TASK_LEVEL)      /* TASK_LEVEL */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   235      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   236  #endif       
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   237          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   238          if(xOldPriority > cfgOS_MAX_PRIORITY)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   239          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   240              OSSetIpl(0);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   241          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   242          else
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   243          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   244              doChangeTskPrioFromTo(xOldPriority , xNewPriority);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   245              OS_ASSERT(listTskRdyIsEmpty(xOldPriority));
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   246          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   247          OSCurTcb->xCurResID = tableGetResPrevResID(xResID);    
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   248          tableSetResSavedPrio(xResID,INVALID_PRIORITY); /* Release Resource */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   249          if(xOldPriority == OSHighRdyPrio)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   250          {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   251              OSHighRdyPrio = tableRdyMapFindHighPriority();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   252              OSHighRdyTsk  = listGetRdyTsk(OSHighRdyPrio);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   253              OSHighRdyTcb  = &OSTcbTable[OSHighRdyTsk];
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   254          }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   255          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   256  #if(cfgOS_ISR_USE_RES == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   257      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   258      else                        /* Called ISR2 LEVEL */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   259      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   260          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   261          OSSetIpl(xNewPriority - cfgOS_MAX_PRIORITY);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   262          tableSetResSavedPrio(xResID, INVALID_PRIORITY);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   263          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   264      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   265  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   266  #if(cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   267    Error_Exit:
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   268  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   269  #if(cfgOS_ERROR_HOOK == 1)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   270      if(xRet != E_OK)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   271      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   272          OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   273          OSErrorSetServiceId(OSServiceId_GetResource);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   274          OSErrorSetParam1(xResID);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   275          ErrorHook(xRet);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   276          OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   277      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   278  #endif
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   279      return xRet;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   280  }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   281  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   282  #endif  /* cfgOS_USE_RESOURCE */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   283  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   284  #if (cfgOS_USE_INTERNAL_RESOURCE == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   285  /* For Internal Resource */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   286  /* Hint:Internal Resource is really Special,So cann't treate it as normal resource Which 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   287     can be got or released by task with the calling of GetResource() or ReleaseResource().
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   288     Only some tasks may have one and only one internal resource,So When Configure,These Task's 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   289     xTaskID should be sequencial from 0 to cfgOS_TASK_WITH_IN_RES, cfgOS_TASK_WITH_IN_RES_NUM
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   290     is a macro define that indicates how many tasks use internal resource.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   291     So The implementation will be easier.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   292  */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   293  void GetInResource(void)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   294  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   295      ResourceType xResID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   296      PriorityType xOldPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   297      PriorityType xNewPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   298      xResID = OSTskInResIdTable[OSCurTsk];
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   299      /* When A Task with an internal translates into running state
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   300         The Internal Resource must has been releasd*/
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   301      OS_ASSERT(OSInResSavedPrioTable[xResID] == INVALID_PRIORITY);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   302  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   303      xOldPriority = OSCurTcb->xPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   304      xNewPriority = OSInResCeilPrioTable[xResID];
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   305  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   306      OS_ASSERT(xNewPriority > xOldPriority);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   307      OS_ASSERT(listTskRdyIsEmpty(xNewPriority));
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   308  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   309      OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   310      OSInResSavedPrioTable[xResID] = OSCurTcb->xPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   311      doChangeTskPrioFromTo(xOldPriority,xNewPriority);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   312  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   313      if(xNewPriority > OSHighRdyPrio)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   314      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   315          OSHighRdyPrio = xNewPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   316          OSHighRdyTsk  = OSCurTsk;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   317          OSHighRdyTcb  = OSCurTcb;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   318      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   319      OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   320  }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   321  void ReleaseInResource(void)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   322  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   323      ResourceType xResID;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   324      PriorityType xOldPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   325      PriorityType xNewPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   326  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   327      xResID = OSTskInResIdTable[OSCurTsk];
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   328   
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   329      xOldPriority = OSCurTcb->xPriority;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   330      xNewPriority = OSInResSavedPrioTable[xResID];
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   331      
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   332      OS_ASSERT(xNewPriority < xOldPriority);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   333  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   334      OS_ENTER_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   335      doChangeTskPrioFromTo(xOldPriority,xNewPriority);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   336      OS_ASSERT(listTskRdyIsEmpty(xOldPriority));
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   337      OSInResSavedPrioTable[xResID]=INVALID_PRIORITY; /* Release */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   338      if(xOldPriority == OSHighRdyPrio)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   339      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   340          OSHighRdyPrio = tableRdyMapFindHighPriority();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   341          OSHighRdyTsk  = listGetRdyTsk(OSHighRdyPrio);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   342          OSHighRdyTcb  = &OSTcbTable[OSHighRdyTsk];
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   343      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   344      OS_EXIT_CRITICAL();
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   345  }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   346  #endif  /* End  of Internal Resource */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c	   347  
+
+	; Module end

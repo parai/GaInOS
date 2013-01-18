@@ -1,0 +1,6 @@
+Bsp\Cpu\Cpu.o :	"F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/Bsp/Cpu/Cpu.c"
+"F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/Bsp/Cpu/Cpu.c" :	
+Bsp\Cpu\Cpu.o :	"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\sfr\regtc1797.sfr"
+"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\sfr\regtc1797.sfr" :	
+Bsp\Cpu\Cpu.o :	"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu\Cpu.h"
+"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu\Cpu.h" :	

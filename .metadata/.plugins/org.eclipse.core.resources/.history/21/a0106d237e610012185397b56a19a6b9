@@ -1,0 +1,86 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c"
+OBJ_FILES += "kernel\Alarm.o"
+"kernel\Alarm.o" : "F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c" "kernel\.Alarm.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "kernel\.Alarm.o.opt"
+
+"kernel\.Alarm.o.opt" : .refresh
+	@argfile "kernel\.Alarm.o.opt" -o "kernel\Alarm.o" "F:/parai@foxmail.com/nt/GaInOS/kernel/Alarm.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="kernel\.Alarm.o.d" -Wc--make-target="kernel\Alarm.o"
+DEPENDENCY_FILES += "kernel\.Alarm.o.d"
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/kernel/Autosar.c"
+OBJ_FILES += "kernel\Autosar.o"
+"kernel\Autosar.o" : "F:/parai@foxmail.com/nt/GaInOS/kernel/Autosar.c" "kernel\.Autosar.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "kernel\.Autosar.o.opt"
+
+"kernel\.Autosar.o.opt" : .refresh
+	@argfile "kernel\.Autosar.o.opt" -o "kernel\Autosar.o" "F:/parai@foxmail.com/nt/GaInOS/kernel/Autosar.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="kernel\.Autosar.o.d" -Wc--make-target="kernel\Autosar.o"
+DEPENDENCY_FILES += "kernel\.Autosar.o.d"
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c"
+OBJ_FILES += "kernel\Event.o"
+"kernel\Event.o" : "F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c" "kernel\.Event.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "kernel\.Event.o.opt"
+
+"kernel\.Event.o.opt" : .refresh
+	@argfile "kernel\.Event.o.opt" -o "kernel\Event.o" "F:/parai@foxmail.com/nt/GaInOS/kernel/Event.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="kernel\.Event.o.d" -Wc--make-target="kernel\Event.o"
+DEPENDENCY_FILES += "kernel\.Event.o.d"
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/kernel/Hooks.c"
+OBJ_FILES += "kernel\Hooks.o"
+"kernel\Hooks.o" : "F:/parai@foxmail.com/nt/GaInOS/kernel/Hooks.c" "kernel\.Hooks.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "kernel\.Hooks.o.opt"
+
+"kernel\.Hooks.o.opt" : .refresh
+	@argfile "kernel\.Hooks.o.opt" -o "kernel\Hooks.o" "F:/parai@foxmail.com/nt/GaInOS/kernel/Hooks.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="kernel\.Hooks.o.d" -Wc--make-target="kernel\Hooks.o"
+DEPENDENCY_FILES += "kernel\.Hooks.o.d"
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c"
+OBJ_FILES += "kernel\Interrupt.o"
+"kernel\Interrupt.o" : "F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c" "kernel\.Interrupt.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "kernel\.Interrupt.o.opt"
+
+"kernel\.Interrupt.o.opt" : .refresh
+	@argfile "kernel\.Interrupt.o.opt" -o "kernel\Interrupt.o" "F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="kernel\.Interrupt.o.d" -Wc--make-target="kernel\Interrupt.o"
+DEPENDENCY_FILES += "kernel\.Interrupt.o.d"
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/kernel/Osctrl.c"
+OBJ_FILES += "kernel\Osctrl.o"
+"kernel\Osctrl.o" : "F:/parai@foxmail.com/nt/GaInOS/kernel/Osctrl.c" "kernel\.Osctrl.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "kernel\.Osctrl.o.opt"
+
+"kernel\.Osctrl.o.opt" : .refresh
+	@argfile "kernel\.Osctrl.o.opt" -o "kernel\Osctrl.o" "F:/parai@foxmail.com/nt/GaInOS/kernel/Osctrl.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="kernel\.Osctrl.o.d" -Wc--make-target="kernel\Osctrl.o"
+DEPENDENCY_FILES += "kernel\.Osctrl.o.d"
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c"
+OBJ_FILES += "kernel\Resource.o"
+"kernel\Resource.o" : "F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c" "kernel\.Resource.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "kernel\.Resource.o.opt"
+
+"kernel\.Resource.o.opt" : .refresh
+	@argfile "kernel\.Resource.o.opt" -o "kernel\Resource.o" "F:/parai@foxmail.com/nt/GaInOS/kernel/Resource.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="kernel\.Resource.o.d" -Wc--make-target="kernel\Resource.o"
+DEPENDENCY_FILES += "kernel\.Resource.o.d"
+
+C_FILES += "F:/parai@foxmail.com/nt/GaInOS/kernel/Task.c"
+OBJ_FILES += "kernel\Task.o"
+"kernel\Task.o" : "F:/parai@foxmail.com/nt/GaInOS/kernel/Task.c" "kernel\.Task.o.opt"
+	@echo Compiling ${<F}
+	@"D:\Program Files\TASKING\TriCore v3.5r1\ctc\bin\cctc" -f "kernel\.Task.o.opt"
+
+"kernel\.Task.o.opt" : .refresh
+	@argfile "kernel\.Task.o.opt" -o "kernel\Task.o" "F:/parai@foxmail.com/nt/GaInOS/kernel/Task.c" -C"TC1797" -t -I"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio" -I"F:\parai@foxmail.com\nt\GaInOS\include" -I"F:\parai@foxmail.com\nt\GaInOS\kernel" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial" -I"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport" -Wa-gAHLs --emit-locals=-equ,-symbols -Wa-Ogs -Wa--error-limit=42 --iso=99 --language=-gcc,-volatile,+strings --switch=auto --align=0 --default-near-size=0 --default-a0-size=0 --default-a1-size=0 -O2 --tradeoff=4 --compact-max-size=200 -g --source --tasking-sfr -c --dep-file="kernel\.Task.o.d" -Wc--make-target="kernel\Task.o"
+DEPENDENCY_FILES += "kernel\.Task.o.d"
+
+
+GENERATED_FILES += "kernel\Alarm.o" "kernel\.Alarm.o.opt" "kernel\.Alarm.o.d" "kernel\Alarm.src" "kernel\Alarm.lst" "kernel\Autosar.o" "kernel\.Autosar.o.opt" "kernel\.Autosar.o.d" "kernel\Autosar.src" "kernel\Autosar.lst" "kernel\Event.o" "kernel\.Event.o.opt" "kernel\.Event.o.d" "kernel\Event.src" "kernel\Event.lst" "kernel\Hooks.o" "kernel\.Hooks.o.opt" "kernel\.Hooks.o.d" "kernel\Hooks.src" "kernel\Hooks.lst" "kernel\Interrupt.o" "kernel\.Interrupt.o.opt" "kernel\.Interrupt.o.d" "kernel\Interrupt.src" "kernel\Interrupt.lst" "kernel\Osctrl.o" "kernel\.Osctrl.o.opt" "kernel\.Osctrl.o.d" "kernel\Osctrl.src" "kernel\Osctrl.lst" "kernel\Resource.o" "kernel\.Resource.o.opt" "kernel\.Resource.o.d" "kernel\Resource.src" "kernel\Resource.lst" "kernel\Task.o" "kernel\.Task.o.opt" "kernel\.Task.o.d" "kernel\Task.src" "kernel\Task.lst"

@@ -1,0 +1,24 @@
+kernel\Hooks.o :	"F:/parai@foxmail.com/nt/GaInOS/kernel/Hooks.c"
+"F:/parai@foxmail.com/nt/GaInOS/kernel/Hooks.c" :	
+kernel\Hooks.o :	"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\sfr\regtc1797.sfr"
+"D:\Program Files\TASKING\TriCore v3.5r1\ctc\include\sfr\regtc1797.sfr" :	
+kernel\Hooks.o :	"F:\parai@foxmail.com\nt\GaInOS\include\Os.h"
+"F:\parai@foxmail.com\nt\GaInOS\include\Os.h" :	
+kernel\Hooks.o :	"F:\parai@foxmail.com\nt\GaInOS\include\Std_Types.h"
+"F:\parai@foxmail.com\nt\GaInOS\include\Std_Types.h" :	
+kernel\Hooks.o :	"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu\Platform_Types.h"
+"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu\Platform_Types.h" :	
+kernel\Hooks.o :	"F:\parai@foxmail.com\nt\GaInOS\include\MemMap.h"
+"F:\parai@foxmail.com\nt\GaInOS\include\MemMap.h" :	
+kernel\Hooks.o :	"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio\Os_Cfg.h"
+"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio\Os_Cfg.h" :	
+kernel\Hooks.o :	"F:\parai@foxmail.com\nt\GaInOS\include\Os.h"
+"F:\parai@foxmail.com\nt\GaInOS\include\Os.h" :	
+kernel\Hooks.o :	"F:\parai@foxmail.com\nt\GaInOS\kernel\OsCfgChk.h"
+"F:\parai@foxmail.com\nt\GaInOS\kernel\OsCfgChk.h" :	
+kernel\Hooks.o :	"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort\vPort.h"
+"F:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort\vPort.h" :	
+kernel\Hooks.o :	"F:\parai@foxmail.com\nt\GaInOS\kernel\Interrupt.h"
+"F:\parai@foxmail.com\nt\GaInOS\kernel\Interrupt.h" :	
+kernel\Hooks.o :	"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio\CfgObj.h"
+"F:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio\CfgObj.h" :	

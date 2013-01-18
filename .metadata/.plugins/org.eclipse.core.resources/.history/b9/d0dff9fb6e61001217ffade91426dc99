@@ -1,0 +1,1503 @@
+	; TASKING VX-toolset for TriCore: C compiler v3.5r1 Build 484.1.2
+	; Options: -f cc5172a -c99 --dep-file=kernel\.Interrupt.o.d -Ctc1797 --core=tc1.3.1 --fpu-present -F -IF:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio -IF:\parai@foxmail.com\nt\GaInOS\include -IF:\parai@foxmail.com\nt\GaInOS\kernel -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport -g --make-target=kernel\Interrupt.o -t4 --language=-gcc,-volatile,+strings --default-near-size=0 -O2 --default-a1-size=0 --default-a0-size=0 --source --align=0 --compact-max-size=200 --switch=auto --tasking-sfr -o kernel\Interrupt.src
+	; Module start
+	.name	"Interrupt"
+
+	
+$FPU
+$TC131
+	
+	.sdecl	'.text.Interrupt.EnableAllInterrupts',code,cluster('EnableAllInterrupts')
+	.sect	'.text.Interrupt.EnableAllInterrupts'
+	.align	2
+	
+	.global	EnableAllInterrupts
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	     1  /* Copyright 2012, Fan Wang(Parai)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	     2   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	     3   * This file is part of GaInOS.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	     4   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	     5   * GaInOS is free software: you can redistribute it and/or modify
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	     6   * it under the terms of the GNU General Public License as published by
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	     7   * the Free Software Foundation, either version 3 of the License, or
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	     8   * (at your option) any later version.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	     9   *             
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    10   * Linking GaInOS statically or dynamically with other modules is making a
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    11   * combined work based on GaInOS. Thus, the terms and conditions of the GNU
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    12   * General Public License cover the whole combination.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    13   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    14   * In addition, as a special exception, the copyright holders of GaInOS give
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    15   * you permission to combine GaInOS program with free software programs or
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    16   * libraries that are released under the GNU LGPL and with independent modules
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    17   * that communicate with GaInOS solely through the GaInOS defined interface. 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    18   * You may copy and distribute such a system following the terms of the GNU GPL
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    19   * for GaInOS and the licenses of the other code concerned, provided that you
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    20   * include the source code of that other code when and as the GNU GPL requires
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    21   * distribution of source code.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    22   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    23   * Note that people who make modified versions of GaInOS are not obligated to
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    24   * grant this special exception for their modified versions; it is their choice
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    25   * whether to do so. The GNU General Public License gives permission to release
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    26   * a modified version without this exception; this exception also makes it
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    27   * possible to release a modified version which carries forward this exception.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    28   * 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    29   * GaInOS is distributed in the hope that it will be useful,
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    30   * but WITHOUT ANY WARRANTY; without even the implied warranty of
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    31   * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    32   * GNU General Public License for more details.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    33   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    34   * You should have received a copy of the GNU General Public License
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    35   * along with GaInOS. If not, see <http://www.gnu.org/licenses/>.
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    36   *
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    37   */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    38  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    39  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    40  /* | Author: | Wang Fan(parai)   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    41  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    42  /* | Email:  | parai@foxmail.com | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    43  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    44  /* | WorkOn: | Emacs23.3         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    45  /* |---------+-------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    46  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    47  /* |--------------------------------------+----------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    48  /* | History:                             | Year-Month-Day | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    49  /* |--------------------------------------+----------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    50  /* | Creat this file and decide to Design |      2012-9-27 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    51  /* | the AutoSAR OS.                      |                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    52  /* |--------------------------------------+----------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    53  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    54  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    55  /* |-------------------+----------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    56  /* | File-name:        | Interrupt.c                                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    57  /* |-------------------+----------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    58  /* | Reference Manual: | (1)Specification of Operating System(V3.0.2) | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    59  /* |                   | AUTOSAR_SWS_OS.PDF                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    60  /* |                   |                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    61  /* |                   | (2)Operating SystemSpecification 2.2.3(OSEK) | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    62  /* |                   | os223.doc                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    63  /* |-------------------+----------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    64  #include "Kernel.h"
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    65  /* Machine State Register of Cpu For EnableAllInterrupts()/DisableAllInterrupts()*/ 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    66  static OsCpuSrType  _Sr;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    67  /* Machine State Register of Cpu For SuspendAllInterrupts()/ResumeAllInterrupts()*/ 
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    68  static OsCpuSrType  _CpuSr;                                         
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    69  static uint8_t      _EnDeIntNest  =0x00u; /* Interrupt call Enable and Disable Nest*/
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    70  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    71  /* Machine State Register of Cpu For SuspendOSInterrupts()/ResumeOSInterrupts()*/
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    72  static OsCpuSrType  _OSCpuSr;    
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    73  static uint8_t      _OSEnDeIntNest=0x00u; /* OS Interrupt call Enable and Disable Nest*/
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    74  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    75  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    76  /* | Syntax:          | void EnableAllInterrupts ( void )                                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    77  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    78  /* | Parameter (In):  | none                                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    79  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    80  /* | Parameter (Out): | none                                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    81  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    82  /* | Description:     | This service restores the state saved by DisableAllInterrupts.    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    83  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    84  /* | Particularities: | The service may be called from an ISR category 1 and category     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    85  /* |                  | 2 and from the task level, but not from hook routines.            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    86  /* |                  | This service is a counterpart of DisableAllInterrupts service,    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    87  /* |                  | which has to be called before, and its aim is the completion of   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    88  /* |                  | the critical section of code. No API service calls are allowed    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    89  /* |                  | within this critical section.                                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    90  /* |                  | The implementation should adapt this service to the target        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    91  /* |                  | hardware providing a minimum overhead. Usually, this service      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    92  /* |                  | enables recognition of interrupts by the central processing unit. | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    93  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    94  /* | Status:          | Standard:none                                                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    95  /* |                  | Extended:none                                                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    96  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    97  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    98  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	    99  void EnableAllInterrupts( void )
+; Function EnableAllInterrupts
+.L3:
+EnableAllInterrupts:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   100  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   101      vPortRestoreMsr(_Sr);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   102  }
+	ret
+.L69:
+	
+__EnableAllInterrupts_function_end:
+	.size	EnableAllInterrupts,__EnableAllInterrupts_function_end-EnableAllInterrupts
+.L31:
+	; End of function
+	
+	.sdecl	'.text.Interrupt.DisableAllInterrupts',code,cluster('DisableAllInterrupts')
+	.sect	'.text.Interrupt.DisableAllInterrupts'
+	.align	2
+	
+	.global	DisableAllInterrupts
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   103  /* |------------------+--------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   104  /* | Syntax:          | void DisableAllInterrupts ( void )                                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   105  /* |------------------+--------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   106  /* | Parameter (In):  | none                                                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   107  /* |------------------+--------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   108  /* | Parameter (Out): | none                                                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   109  /* |------------------+--------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   110  /* | Description:     | This service disables all interrupts for which the hardware        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   111  /* |                  | supports disabling. The state before is saved for the              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   112  /* |                  | EnableAllInterrupts call.                                          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   113  /* |------------------+--------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   114  /* | Particularities: | The service may be called from an ISR category 1 and category      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   115  /* |                  | 2 and from the task level, but not from hook routines.             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   116  /* |                  | This service is intended to start a critical section of the code.  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   117  /* |                  | This section shall be finished by calling the EnableAllInterrupts  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   118  /* |                  | service. No API service calls are allowed within this critical     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   119  /* |                  | section.                                                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   120  /* |                  | The implementation should adapt this service to the target         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   121  /* |                  | hardware providing a minimum overhead. Usually, this service       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   122  /* |                  | disables recognition of interrupts by the central processing unit. | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   123  /* |                  | Note that this service does not support nesting. If nesting is     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   124  /* |                  | needed for critical sections e.g. for libraries                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   125  /* |                  | SuspendOSInterrupts/ResumeOSInterrupts or                          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   126  /* |                  | SuspendAllInterrupt/ResumeAllInterrupts should be used.            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   127  /* |------------------+--------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   128  /* | Status:          | Standard:none                                                      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   129  /* |                  | Extended:none                                                      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   130  /* |------------------+--------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   131  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   132  /* |------------------+--------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   133  void DisableAllInterrupts(void)
+; Function DisableAllInterrupts
+.L5:
+DisableAllInterrupts:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   134  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   135      vPortSaveMsrAndDisableInterrupt(_Sr);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   136  }
+	ret
+.L68:
+	
+__DisableAllInterrupts_function_end:
+	.size	DisableAllInterrupts,__DisableAllInterrupts_function_end-DisableAllInterrupts
+.L26:
+	; End of function
+	
+	.sdecl	'.text.Interrupt.ResumeAllInterrupts',code,cluster('ResumeAllInterrupts')
+	.sect	'.text.Interrupt.ResumeAllInterrupts'
+	.align	2
+	
+	.global	ResumeAllInterrupts
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   137  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   138  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   139  /* | Syntax:          | void ResumeAllInterrupts ( void )                                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   140  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   141  /* | Parameter (In):  | none                                                             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   142  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   143  /* | Parameter (Out): | none                                                             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   144  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   145  /* | Description:     | This service restores the recognition status of all interrupts   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   146  /* |                  | saved by the SuspendAllInterrupts service.                       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   147  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   148  /* | Particularities: | The service may be called from an ISR category 1 and category    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   149  /* |                  | 2, from alarm-callbacks and from the task level, but not from    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   150  /* |                  | all hook routines.                                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   151  /* |                  | This service is the counterpart of SuspendAllInterrupts service, | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   152  /* |                  | which has to have been called before, and its aim is the         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   153  /* |                  | completion of the critical section of code. No API service       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   154  /* |                  | calls beside SuspendAllInterrupts/ResumeAllInterrupts pairs      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   155  /* |                  | and SuspendOSInterrupts/ResumeOSInterrupts pairs are allowed     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   156  /* |                  | within this critical section.                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   157  /* |                  | The implementation should adapt this service to the target       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   158  /* |                  | hardware providing a minimum overhead.                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   159  /* |                  | SuspendAllInterrupts/ResumeAllInterrupts can be nested. In       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   160  /* |                  | case of nesting pairs of the calls SuspendAllInterrupts and      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   161  /* |                  | ResumeAllInterrupts the interrupt recognition status saved by    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   162  /* |                  | the first call of SuspendAllInterrupts is restored by the last   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   163  /* |                  | call of the ResumeAllInterrupts service.                         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   164  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   165  /* | Status:          | Standard:none                                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   166  /* |                  | Extended:none                                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   167  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   168  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   169  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   170  void ResumeAllInterrupts ( void )
+; Function ResumeAllInterrupts
+.L7:
+ResumeAllInterrupts:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   171  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   172  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   173      if(_EnDeIntNest > 0)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   174      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   175          _EnDeIntNest--;
+	movh.a	a15,#@his(_EnDeIntNest)
+	mov	d0,#0
+	lea	a15,[a15]@los(_EnDeIntNest)
+	ld.bu	d15,[a15]
+	lt.u	d0,d0,d15
+	sub	d15,d0
+	st.b	[a15],d15
+.L126:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   176      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   177  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   178      if(0x00u == _EnDeIntNest)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   179      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   180          vPortRestoreMsr(_CpuSr);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   181      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   182  }
+	ret
+.L71:
+	
+__ResumeAllInterrupts_function_end:
+	.size	ResumeAllInterrupts,__ResumeAllInterrupts_function_end-ResumeAllInterrupts
+.L41:
+	; End of function
+	
+	.sdecl	'.text.Interrupt.SuspendAllInterrupts',code,cluster('SuspendAllInterrupts')
+	.sect	'.text.Interrupt.SuspendAllInterrupts'
+	.align	2
+	
+	.global	SuspendAllInterrupts
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   183  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   184  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   185  /* | Syntax:          | void SuspendAllInterrupts ( void )                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   186  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   187  /* | Parameter (In):  | none                                                             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   188  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   189  /* | Parameter (Out): | none                                                             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   190  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   191  /* | Description:     | This service saves the recognition status of all interrupts and  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   192  /* |                  | disables all interrupts for which the hardware supports          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   193  /* |                  | disabling.                                                       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   194  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   195  /* | Particularities: | 1.The service may be called from an ISR category 1               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   196  /* |                  | and category 2, from alarm-callbacks and from the task level,    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   197  /* |                  | but not from all hook routines.                                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   198  /* |                  | 2.This service is intended to protect a critical section of code | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   199  /* |                  | from interruptions of any kind.                                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   200  /* |                  | 3.This section shall be finished by calling the                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   201  /* |                  | ResumeAllInterrupts service. No API service calls beside         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   202  /* |                  | SuspendAllInterrupts/ResumeAllInterrupts pairs and               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   203  /* |                  | SuspendOSInterrupts/ResumeOSInterrupts pairs are allowed         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   204  /* |                  | within this critical section.                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   205  /* |                  | 4.The implementation should adapt this service to the target     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   206  /* |                  | hardware providing a minimum overhead.                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   207  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   208  /* | Status:          | Standard:none                                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   209  /* |                  | Extended:none                                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   210  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   211  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   212  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   213  void SuspendAllInterrupts( void )
+; Function SuspendAllInterrupts
+.L9:
+SuspendAllInterrupts:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   214  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   215      if(0 == _EnDeIntNest)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   216      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   217          vPortSaveMsrAndDisableInterrupt(_CpuSr);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   218          _EnDeIntNest++;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   219      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   220      else if(_EnDeIntNest < 0xFF){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   221          _EnDeIntNest++;
+	movh.a	a15,#@his(_EnDeIntNest)
+	lea	a15,[a15]@los(_EnDeIntNest)
+	ld.bu	d15,[a15]
+	lt.u	d0,d15,#255
+	add	d15,d0
+	st.b	[a15],d15
+.L121:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   222      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   223  }
+	ret
+.L70:
+	
+__SuspendAllInterrupts_function_end:
+	.size	SuspendAllInterrupts,__SuspendAllInterrupts_function_end-SuspendAllInterrupts
+.L36:
+	; End of function
+	
+	.sdecl	'.text.Interrupt.SuspendOSInterrupts',code,cluster('SuspendOSInterrupts')
+	.sect	'.text.Interrupt.SuspendOSInterrupts'
+	.align	2
+	
+	.global	SuspendOSInterrupts
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   224  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   225  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   226  /* | Syntax:          | void ResumeOSInterrupts ( void )                                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   227  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   228  /* | Parameter (In):  | none                                                             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   229  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   230  /* | Parameter (Out): | none                                                             | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   231  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   232  /* | Description:     |                                                                  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   233  /* |                  | This service restores the recognition status of interrupts       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   234  /* |                  | saved by the SuspendOSInterrupts service.                        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   235  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   236  /* | Particularities: | The service may be called from an ISR category 1 and category    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   237  /* |                  | 2 and from the task level, but not from hook routines.           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   238  /* |                  | This service is the counterpart of SuspendOSInterrupts service,  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   239  /* |                  | which has to have been called before, and its aim is the         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   240  /* |                  | completion of the critical section of code. No API service calls | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   241  /* |                  | beside SuspendAllInterrupts/ResumeAllInterrupts pairs and        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   242  /* |                  | SuspendOSInterrupts/ResumeOSInterrupts pairs are allowed         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   243  /* |                  | within this critical section.                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   244  /* |                  | The implementation should adapt this service to the target       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   245  /* |                  | hardware providing a minimum overhead.                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   246  /* |                  | SuspendOSInterrupts/ResumeOSInterrupts can be nested. In         | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   247  /* |                  | case of nesting pairs of the calls SuspendOSInterrupts and       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   248  /* |                  | ResumeOSInterrupts the interrupt recognition status saved by     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   249  /* |                  | the first call of SuspendOSInterrupts is restored by the last    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   250  /* |                  | call of the ResumeOSInterrupts service.                          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   251  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   252  /* | Status:          | Standard:none                                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   253  /* |                  | Extended:none                                                    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   254  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   255  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                           | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   256  /* |------------------+------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   257  void SuspendOSInterrupts( void )
+; Function SuspendOSInterrupts
+.L11:
+SuspendOSInterrupts:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   258  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   259      if(0 == _OSEnDeIntNest)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   260      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   261          vPortSaveMsrAndDisableInterrupt(_OSCpuSr);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   262      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   263  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   264      if(_OSEnDeIntNest < 0xFF){
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   265          _OSEnDeIntNest++;
+	movh.a	a15,#@his(_OSEnDeIntNest)
+	lea	a15,[a15]@los(_OSEnDeIntNest)
+	ld.bu	d15,[a15]
+	lt.u	d0,d15,#255
+	add	d15,d0
+	st.b	[a15],d15
+.L131:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   266      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   267  }
+	ret
+.L72:
+	
+__SuspendOSInterrupts_function_end:
+	.size	SuspendOSInterrupts,__SuspendOSInterrupts_function_end-SuspendOSInterrupts
+.L46:
+	; End of function
+	
+	.sdecl	'.text.Interrupt.ResumeOSInterrupts',code,cluster('ResumeOSInterrupts')
+	.sect	'.text.Interrupt.ResumeOSInterrupts'
+	.align	2
+	
+	.global	ResumeOSInterrupts
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   268  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   269  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   270  /* | Syntax:          | void SuspendOSInterrupts ( void )                                 | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   271  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   272  /* | Parameter (In):  | none                                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   273  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   274  /* | Parameter (Out): | none                                                              | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   275  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   276  /* | Description:     | This service saves the recognition status of interrupts of        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   277  /* |                  | category 2 and disables the recognition of these interrupts.      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   278  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   279  /* | Particularities: | The service may be called from an ISR and from the task level,    | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   280  /* |                  | but not from hook routines.                                       | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   281  /* |                  | This service is intended to protect a critical section of code.   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   282  /* |                  | This section shall be finished by calling the ResumeOSInterrupts  | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   283  /* |                  | service.No API service calls beside                               | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   284  /* |                  | SuspendAllInterrupts/ResumeAllInterrupts pairs and                | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   285  /* |                  | SuspendOSInterrupts/ResumeOSInterrupts pairs are allowed          | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   286  /* |                  | within this critical section.                                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   287  /* |                  | The implementation should adapt this service to the target        | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   288  /* |                  | hardware providing a minimum overhead.                            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   289  /* |                  | It is intended only to disable interrupts of category 2. However, | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   290  /* |                  | if this is not possible in an efficient way more interrupts may   | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   291  /* |                  | be disabled.                                                      | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   292  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   293  /* | Status:          | Standard:none                                                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   294  /* |                  | Extended:none                                                     | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   295  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   296  /* | Conformance:     | BCC1, BCC2, ECC1, ECC2                                            | */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   297  /* |------------------+-------------------------------------------------------------------| */
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   298  void ResumeOSInterrupts( void )
+; Function ResumeOSInterrupts
+.L13:
+ResumeOSInterrupts:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   299  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   300      if(_OSEnDeIntNest > 0)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   301      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   302          _OSEnDeIntNest--;
+	movh.a	a15,#@his(_OSEnDeIntNest)
+	mov	d0,#0
+	lea	a15,[a15]@los(_OSEnDeIntNest)
+	ld.bu	d15,[a15]
+	lt.u	d0,d0,d15
+	sub	d15,d0
+	st.b	[a15],d15
+.L136:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   303      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   304  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   305      if(0x00u == _OSEnDeIntNest)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   306      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   307          vPortRestoreMsr(_OSCpuSr);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   308      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   309  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   310  }
+	ret
+.L73:
+	
+__ResumeOSInterrupts_function_end:
+	.size	ResumeOSInterrupts,__ResumeOSInterrupts_function_end-ResumeOSInterrupts
+.L51:
+	; End of function
+	
+	.sdecl	'.text.Interrupt.OS_ENTER_CRITICAL',code,cluster('OS_ENTER_CRITICAL')
+	.sect	'.text.Interrupt.OS_ENTER_CRITICAL'
+	.align	2
+	
+	.global	OS_ENTER_CRITICAL
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   311  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   312  static uint8_t OSCritialNest = 0x00u;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   313  static OsCpuSrType OSCriticalSR = 0x00u;
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   314  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   315  void OS_ENTER_CRITICAL(void)
+; Function OS_ENTER_CRITICAL
+.L15:
+OS_ENTER_CRITICAL:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   316  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   317      if(OSCritialNest == 0)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   318      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   319          vPortSaveMsrAndDisableInterrupt(OSCriticalSR);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   320      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   321      if(OSCritialNest < 0xFF)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   322      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   323          OSCritialNest++;
+	movh.a	a15,#@his(OSCritialNest)
+	lea	a15,[a15]@los(OSCritialNest)
+	ld.bu	d15,[a15]
+	lt.u	d0,d15,#255
+	add	d15,d0
+	st.b	[a15],d15
+.L141:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   324      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   325  }
+	ret
+.L74:
+	
+__OS_ENTER_CRITICAL_function_end:
+	.size	OS_ENTER_CRITICAL,__OS_ENTER_CRITICAL_function_end-OS_ENTER_CRITICAL
+.L56:
+	; End of function
+	
+	.sdecl	'.text.Interrupt.OS_EXIT_CRITICAL',code,cluster('OS_EXIT_CRITICAL')
+	.sect	'.text.Interrupt.OS_EXIT_CRITICAL'
+	.align	2
+	
+	.global	OS_EXIT_CRITICAL
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   326  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   327  void OS_EXIT_CRITICAL(void)
+; Function OS_EXIT_CRITICAL
+.L17:
+OS_EXIT_CRITICAL:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   328  {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   329      if(OSCritialNest > 0)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   330      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   331          OSCritialNest--;
+	movh.a	a15,#@his(OSCritialNest)
+	mov	d0,#0
+	lea	a15,[a15]@los(OSCritialNest)
+	ld.bu	d15,[a15]
+	lt.u	d0,d0,d15
+	sub	d15,d0
+	st.b	[a15],d15
+.L146:
+
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   332      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   333  
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   334      if(OSCritialNest == 0)
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   335      {
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   336          vPortRestoreMsr(OSCriticalSR);
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   337      }
+; F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c	   338  }
+	ret
+.L75:
+	
+__OS_EXIT_CRITICAL_function_end:
+	.size	OS_EXIT_CRITICAL,__OS_EXIT_CRITICAL_function_end-OS_EXIT_CRITICAL
+.L61:
+	; End of function
+	
+	.sdecl	'.data.Interrupt._EnDeIntNest',data,cluster('_EnDeIntNest')
+	.sect	'.data.Interrupt._EnDeIntNest'
+_EnDeIntNest:	.type	object
+	.size	_EnDeIntNest,1
+	.space	1
+	.sdecl	'.data.Interrupt._OSEnDeIntNest',data,cluster('_OSEnDeIntNest')
+	.sect	'.data.Interrupt._OSEnDeIntNest'
+_OSEnDeIntNest:	.type	object
+	.size	_OSEnDeIntNest,1
+	.space	1
+	.sdecl	'.data.Interrupt.OSCritialNest',data,cluster('OSCritialNest')
+	.sect	'.data.Interrupt.OSCritialNest'
+OSCritialNest:	.type	object
+	.size	OSCritialNest,1
+	.space	1
+	.calls	'EnableAllInterrupts','',0
+	.calls	'DisableAllInterrupts','',0
+	.calls	'ResumeAllInterrupts','',0
+	.calls	'SuspendAllInterrupts','',0
+	.calls	'SuspendOSInterrupts','',0
+	.calls	'ResumeOSInterrupts','',0
+	.calls	'OS_ENTER_CRITICAL','',0
+	.calls	'OS_EXIT_CRITICAL','',0
+	.sdecl	'.debug_info',debug
+	.sect	'.debug_info'
+.L19:
+	.word	2653
+	.half	3
+	.word	.L20
+	.byte	4
+.L18:
+	.byte	1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L21
+	.byte	2
+	.byte	'__size_t',0,1,1,1
+	.word	.L77-.L19
+.L77:
+	.byte	3
+	.byte	'unsigned int',0,4,7,2
+	.byte	'__codeptr',0,1,1,1
+	.word	.L78-.L19
+.L78:
+	.byte	4
+	.word	.L79-.L19
+.L79:
+	.byte	5,1,2
+	.byte	'PCP_GPR6_type',0,2,158,19,3
+	.word	.L80-.L19
+.L80:
+	.byte	6
+	.word	.L81-.L19
+.L81:
+	.byte	7,2,145,19,18,4,8
+	.byte	'B',0,4
+	.word	.L82-.L19
+	.byte	2,35,0,8
+	.byte	'I',0,4
+	.word	.L83-.L19
+	.byte	2,35,0,8
+	.byte	'U',0,4
+	.word	185
+	.byte	2,35,0,0
+.L82:
+	.byte	9,2,147,19,2,4,10
+	.byte	'CNT1',0,4
+	.word	.L84-.L19
+	.byte	12,20,2,35,0,10
+	.byte	'.1.nn',0,4
+	.word	.L84-.L19
+	.byte	2,18,2,35,0,10
+	.byte	'TOS',0,4
+	.word	.L84-.L19
+	.byte	2,16,2,35,0,10
+	.byte	'SRPN',0,4
+	.word	.L84-.L19
+	.byte	8,8,2,35,0,10
+	.byte	'CPPN',0,4
+	.word	.L84-.L19
+	.byte	8,0,2,35,0,0
+.L84:
+	.byte	3
+	.byte	'unsigned int',0,4,7
+.L83:
+	.byte	3
+	.byte	'int',0,4,5,2
+	.byte	'PCP_GPR7_type',0,2,178,19,3
+	.word	.L85-.L19
+.L85:
+	.byte	6
+	.word	.L86-.L19
+.L86:
+	.byte	7,2,160,19,18,4,8
+	.byte	'B',0,4
+	.word	.L87-.L19
+	.byte	2,35,0,8
+	.byte	'I',0,4
+	.word	397
+	.byte	2,35,0,8
+	.byte	'U',0,4
+	.word	185
+	.byte	2,35,0,0
+.L87:
+	.byte	9,2,162,19,2,4,10
+	.byte	'Z',0,4
+	.word	381
+	.byte	1,31,2,35,0,10
+	.byte	'N',0,4
+	.word	381
+	.byte	1,30,2,35,0,10
+	.byte	'C',0,4
+	.word	381
+	.byte	1,29,2,35,0,10
+	.byte	'V',0,4
+	.word	381
+	.byte	1,28,2,35,0,10
+	.byte	'CNZ',0,4
+	.word	381
+	.byte	1,27,2,35,0,10
+	.byte	'IEN',0,4
+	.word	381
+	.byte	1,26,2,35,0,10
+	.byte	'CEN',0,4
+	.word	381
+	.byte	1,25,2,35,0,10
+	.byte	'.1.nn',0,4
+	.word	381
+	.byte	1,24,2,35,0,10
+	.byte	'DPTR',0,4
+	.word	381
+	.byte	8,16,2,35,0,10
+	.byte	'.2.nn',0,4
+	.word	381
+	.byte	16,0,2,35,0,0,2
+	.byte	'uint8_t',0,3,6,24
+	.word	.L76-.L19
+.L76:
+	.byte	3
+	.byte	'unsigned char',0,1,8,2
+	.byte	'uint16_t',0,3,8,24
+	.word	.L88-.L19
+.L88:
+	.byte	3
+	.byte	'unsigned short int',0,2,7,2
+	.byte	'uint32_t',0,3,10,24
+	.word	.L89-.L19
+.L89:
+	.byte	3
+	.byte	'unsigned long int',0,4,7,2
+	.byte	'ubase_t',0,3,14,24
+	.word	185
+	.byte	2
+	.byte	'void_t',0,3,17,24
+	.word	715
+	.byte	2
+	.byte	'BoolType',0,4,59,17
+	.word	642
+	.byte	2
+	.byte	'VoidType',0,4,60,16
+	.word	715
+	.byte	2
+	.byte	'TaskType',0,4,141,1,17
+	.word	642
+	.byte	2
+	.byte	'TaskRefType',0,4,143,1,19
+	.word	.L90-.L19
+.L90:
+	.byte	4
+	.word	642
+	.byte	2
+	.byte	'TaskStateType',0,4,145,1,19
+	.word	642
+	.byte	2
+	.byte	'TaskStateRefType',0,4,147,1,25
+	.word	.L91-.L19
+.L91:
+	.byte	4
+	.word	642
+	.byte	2
+	.byte	'TickType',0,4,149,1,17
+	.word	185
+	.byte	2
+	.byte	'TickRefType',0,4,151,1,19
+	.word	.L92-.L19
+.L92:
+	.byte	4
+	.word	185
+	.byte	2
+	.byte	'AlarmBaseType',0,4,163,1,2
+	.word	.L93-.L19
+.L93:
+	.byte	9,4,154,1,9,12,8
+	.byte	'xMaxAllowedValue',0,4
+	.word	185
+	.byte	2,35,0,8
+	.byte	'xTicksPerBase',0,4
+	.word	185
+	.byte	2,35,4,8
+	.byte	'xMinCycle',0,4
+	.word	185
+	.byte	2,35,8,0,2
+	.byte	'AlarmBaseRefType',0,4,165,1,25
+	.word	.L94-.L19
+.L94:
+	.byte	4
+	.word	966
+	.byte	2
+	.byte	'AlarmType',0,4,167,1,17
+	.word	642
+	.byte	2
+	.byte	'CounterType',0,4,169,1,17
+	.word	642
+	.byte	2
+	.byte	'EventMaskType',0,4,171,1,18
+	.word	676
+	.byte	2
+	.byte	'EventMaskRefType',0,4,173,1,24
+	.word	.L95-.L19
+.L95:
+	.byte	4
+	.word	676
+	.byte	2
+	.byte	'ResourceType',0,4,174,1,17
+	.word	642
+	.byte	2
+	.byte	'StatusType',0,4,175,1,17
+	.word	642
+	.byte	2
+	.byte	'AppModeType',0,4,176,1,17
+	.word	642
+	.byte	2
+	.byte	'ApplicationType',0,4,185,1,17
+	.word	642
+	.byte	2
+	.byte	'ScheduleTableType',0,4,214,1,17
+	.word	642
+	.byte	2
+	.byte	'ScheduleTableStatusType',0,4,230,1,17
+	.word	642
+	.byte	2
+	.byte	'OsScheduleTableAutostartType',0,4,255,1,17
+	.word	642
+	.byte	2
+	.byte	'OsScheduleTblSyncStrategyType',0,4,137,2,17
+	.word	642
+	.byte	2
+	.byte	'OsCpuSrType',0,5,42,17
+	.word	642
+	.byte	2
+	.byte	'OsCpuIplType',0,5,43,17
+	.word	642
+	.byte	2
+	.byte	'TaskStackType',0,6,89,18
+	.word	715
+	.byte	2
+	.byte	'TaskStackRefType',0,6,96,3
+	.word	.L96-.L19
+.L96:
+	.byte	9,6,91,9,4,8
+	.byte	'pxStackTop',0,4
+	.word	.L97-.L19
+	.byte	2,35,0,0
+.L97:
+	.byte	4
+	.word	715
+	.byte	2
+	.byte	'PriorityType',0,6,98,17
+	.word	642
+	.byte	2
+	.byte	'TaskEntryType',0,6,100,16
+	.word	.L98-.L19
+.L98:
+	.byte	4
+	.word	.L99-.L19
+.L99:
+	.byte	11,1,1,2
+	.byte	'TcbType',0,6,112,2
+	.word	.L100-.L19
+.L100:
+	.byte	12
+	.byte	'_TaskControlBlockTag',0,6,101,16,8,8
+	.byte	'pxStack',0,4
+	.word	1505
+	.byte	2,35,0,8
+	.byte	'xPriority',0,1
+	.word	642
+	.byte	2,35,4,8
+	.byte	'xState',0,1
+	.word	642
+	.byte	2,35,5,8
+	.byte	'xActivateCount',0,1
+	.word	642
+	.byte	2,35,6,0,2
+	.byte	'AlarmClassType',0,6,117,17
+	.word	642
+	.byte	2
+	.byte	'AlarmContainerType',0,6,121,19
+	.word	715
+	.byte	2
+	.byte	'AlmCtrlBlkType',0,6,129,1,2
+	.word	.L101-.L19
+.L101:
+	.byte	12
+	.byte	'_AlmCtrlBlkTag',0,6,123,16,12,8
+	.byte	'xAlarmValue',0,4
+	.word	185
+	.byte	2,35,0,8
+	.byte	'xCycle',0,4
+	.word	185
+	.byte	2,35,4,8
+	.byte	'pxNext',0,1
+	.word	642
+	.byte	2,35,8,8
+	.byte	'pxPrev',0,1
+	.word	642
+	.byte	2,35,9,0,2
+	.byte	'OsSchedTblCtrlBlkType',0,6,162,1,2
+	.word	.L102-.L19
+.L102:
+	.byte	9,6,139,1,9,20,8
+	.byte	'xSchedTblStatus',0,1
+	.word	642
+	.byte	2,35,0,8
+	.byte	'xIterator',0,1
+	.word	642
+	.byte	2,35,1,8
+	.byte	'xSchedTblNextExpiryPointTime',0,4
+	.word	185
+	.byte	2,35,2,8
+	.byte	'xSchedTblStartingTime',0,4
+	.word	185
+	.byte	2,35,6,8
+	.byte	'xAdjustDirection',0,1
+	.word	642
+	.byte	2,35,10,8
+	.byte	'xDeviation',0,4
+	.word	185
+	.byte	2,35,12,8
+	.byte	'xNextOrPrevScheduleTable',0,1
+	.word	642
+	.byte	2,35,16,8
+	.byte	'pxNextSchedTbl',0,1
+	.word	642
+	.byte	2,35,17,8
+	.byte	'pxPrevSchedTbl',0,1
+	.word	642
+	.byte	2,35,18,0,2
+	.byte	'OsScheduleTableType',0,6,176,1,2
+	.word	.L103-.L19
+.L103:
+	.byte	9,6,163,1,9,28,8
+	.byte	'xOsScheduleTableDuration',0,4
+	.word	185
+	.byte	2,35,0,8
+	.byte	'xOsScheduleTableRepeating',0,1
+	.word	642
+	.byte	2,35,4,8
+	.byte	'xOsScheduleTableAccessingApplication',0,1
+	.word	642
+	.byte	2,35,5,8
+	.byte	'xOsScheduleTableCounterRef',0,1
+	.word	642
+	.byte	2,35,6,8
+	.byte	'xOsScheduleTableAutostartable',0,1
+	.word	642
+	.byte	2,35,7,8
+	.byte	'xOsScheduleTableAutostartType',0,1
+	.word	642
+	.byte	2,35,8,8
+	.byte	'xOsScheduleTableAutostartValue',0,4
+	.word	185
+	.byte	2,35,10,8
+	.byte	'xOsScheduleTableSyncStrategy',0,1
+	.word	642
+	.byte	2,35,14,8
+	.byte	'xOsScheduleTableMaxAdvance',0,4
+	.word	185
+	.byte	2,35,16,8
+	.byte	'xOsScheduleTableMaxRetard',0,4
+	.word	185
+	.byte	2,35,20,8
+	.byte	'xOsScheduleTableExplicitPrecision',0,4
+	.word	185
+	.byte	2,35,24,0,2
+	.byte	'OsSchedTblCmdType',0,6,184,1,3
+	.word	.L104-.L19
+.L104:
+	.byte	9,6,180,1,9,8,8
+	.byte	'xOffset',0,4
+	.word	185
+	.byte	2,35,0,8
+	.byte	'pxOsSchedTblCmd',0,4
+	.word	1553
+	.byte	2,35,4,0,0
+	.sdecl	'.debug_abbrev',debug
+	.sect	'.debug_abbrev'
+.L20:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,16,6,0,0,2,22,0,3,8,58,15,59,15,57,15,73,19,0,0,3,36,0,3,8,11,15
+	.byte	62,15,0,0,4,15,0,73,19,0,0,5,21,0,54,15,0,0,6,53,0,73,19,0,0,7,23,1,58,15,59,15,57,15,11,15,0,0,8,13,0
+	.byte	3,8,11,15,73,19,56,9,0,0,9,19,1,58,15,59,15,57,15,11,15,0,0,10,13,0,3,8,11,15,73,19,13,15,12,15,56,9,0
+	.byte	0,11,21,0,54,15,39,12,0,0,12,19,1,3,8,58,15,59,15,57,15,11,15,0,0,0
+	.sdecl	'.debug_line',debug
+	.sect	'.debug_line'
+.L21:
+	.word	.L106-.L105
+.L105:
+	.half	3
+	.word	.L108-.L107
+.L107:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0,0,0,0
+	.byte	'D:\\Program Files\\TASKING\\TriCore v3.5r1\\ctc\\include\\sfr\\regtc1797.sfr',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Bsp\\Cpu\\Platform_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Std_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\osek_test\\GaInOS_Studio\\Os_Cfg.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Os.h',0,0,0,0,0
+.L108:
+.L106:
+	.sdecl	'.debug_info',debug,cluster('DisableAllInterrupts')
+	.sect	'.debug_info'
+.L22:
+	.word	225
+	.half	3
+	.word	.L23
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L25,.L24
+	.byte	2
+	.word	.L18
+	.byte	3
+	.byte	'DisableAllInterrupts',0,1,133,1,6,1,1,1
+	.word	.L5,.L68,.L4
+	.byte	4
+	.word	.L5,.L68
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('DisableAllInterrupts')
+	.sect	'.debug_abbrev'
+.L23:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('DisableAllInterrupts')
+	.sect	'.debug_line'
+.L24:
+	.word	.L110-.L109
+.L109:
+	.half	3
+	.word	.L112-.L111
+.L111:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0,0,0,0,0
+.L112:
+	.byte	5,1,7,0,5,2
+	.word	.L5
+	.byte	3,135,1,1,7,9
+	.half	.L26-.L5
+	.byte	0,1,1
+.L110:
+	.sdecl	'.debug_ranges',debug,cluster('DisableAllInterrupts')
+	.sect	'.debug_ranges'
+.L25:
+	.word	-1,.L5,0,.L26-.L5,0,0
+	.sdecl	'.debug_info',debug,cluster('EnableAllInterrupts')
+	.sect	'.debug_info'
+.L27:
+	.word	223
+	.half	3
+	.word	.L28
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L30,.L29
+	.byte	2
+	.word	.L18
+	.byte	3
+	.byte	'EnableAllInterrupts',0,1,99,6,1,1,1
+	.word	.L3,.L69,.L2
+	.byte	4
+	.word	.L3,.L69
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('EnableAllInterrupts')
+	.sect	'.debug_abbrev'
+.L28:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('EnableAllInterrupts')
+	.sect	'.debug_line'
+.L29:
+	.word	.L114-.L113
+.L113:
+	.half	3
+	.word	.L116-.L115
+.L115:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0,0,0,0,0
+.L116:
+	.byte	5,1,7,0,5,2
+	.word	.L3
+	.byte	3,229,0,1,7,9
+	.half	.L31-.L3
+	.byte	0,1,1
+.L114:
+	.sdecl	'.debug_ranges',debug,cluster('EnableAllInterrupts')
+	.sect	'.debug_ranges'
+.L30:
+	.word	-1,.L3,0,.L31-.L3,0,0
+	.sdecl	'.debug_info',debug,cluster('SuspendAllInterrupts')
+	.sect	'.debug_info'
+.L32:
+	.word	225
+	.half	3
+	.word	.L33
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L35,.L34
+	.byte	2
+	.word	.L18
+	.byte	3
+	.byte	'SuspendAllInterrupts',0,1,213,1,6,1,1,1
+	.word	.L9,.L70,.L8
+	.byte	4
+	.word	.L9,.L70
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('SuspendAllInterrupts')
+	.sect	'.debug_abbrev'
+.L33:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('SuspendAllInterrupts')
+	.sect	'.debug_line'
+.L34:
+	.word	.L118-.L117
+.L117:
+	.half	3
+	.word	.L120-.L119
+.L119:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0,0,0,0,0
+.L120:
+	.byte	5,23,7,0,5,2
+	.word	.L9
+	.byte	3,220,1,1,5,1,9
+	.half	.L121-.L9
+	.byte	3,2,1,7,9
+	.half	.L36-.L121
+	.byte	0,1,1
+.L118:
+	.sdecl	'.debug_ranges',debug,cluster('SuspendAllInterrupts')
+	.sect	'.debug_ranges'
+.L35:
+	.word	-1,.L9,0,.L36-.L9,0,0
+	.sdecl	'.debug_info',debug,cluster('ResumeAllInterrupts')
+	.sect	'.debug_info'
+.L37:
+	.word	224
+	.half	3
+	.word	.L38
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L40,.L39
+	.byte	2
+	.word	.L18
+	.byte	3
+	.byte	'ResumeAllInterrupts',0,1,170,1,6,1,1,1
+	.word	.L7,.L71,.L6
+	.byte	4
+	.word	.L7,.L71
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('ResumeAllInterrupts')
+	.sect	'.debug_abbrev'
+.L38:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('ResumeAllInterrupts')
+	.sect	'.debug_line'
+.L39:
+	.word	.L123-.L122
+.L122:
+	.half	3
+	.word	.L125-.L124
+.L124:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0,0,0,0,0
+.L125:
+	.byte	5,23,7,0,5,2
+	.word	.L7
+	.byte	3,174,1,1,5,1,9
+	.half	.L126-.L7
+	.byte	3,7,1,7,9
+	.half	.L41-.L126
+	.byte	0,1,1
+.L123:
+	.sdecl	'.debug_ranges',debug,cluster('ResumeAllInterrupts')
+	.sect	'.debug_ranges'
+.L40:
+	.word	-1,.L7,0,.L41-.L7,0,0
+	.sdecl	'.debug_info',debug,cluster('SuspendOSInterrupts')
+	.sect	'.debug_info'
+.L42:
+	.word	224
+	.half	3
+	.word	.L43
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L45,.L44
+	.byte	2
+	.word	.L18
+	.byte	3
+	.byte	'SuspendOSInterrupts',0,1,129,2,6,1,1,1
+	.word	.L11,.L72,.L10
+	.byte	4
+	.word	.L11,.L72
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('SuspendOSInterrupts')
+	.sect	'.debug_abbrev'
+.L43:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('SuspendOSInterrupts')
+	.sect	'.debug_line'
+.L44:
+	.word	.L128-.L127
+.L127:
+	.half	3
+	.word	.L130-.L129
+.L129:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0,0,0,0,0
+.L130:
+	.byte	5,25,7,0,5,2
+	.word	.L11
+	.byte	3,136,2,1,5,1,9
+	.half	.L131-.L11
+	.byte	3,2,1,7,9
+	.half	.L46-.L131
+	.byte	0,1,1
+.L128:
+	.sdecl	'.debug_ranges',debug,cluster('SuspendOSInterrupts')
+	.sect	'.debug_ranges'
+.L45:
+	.word	-1,.L11,0,.L46-.L11,0,0
+	.sdecl	'.debug_info',debug,cluster('ResumeOSInterrupts')
+	.sect	'.debug_info'
+.L47:
+	.word	223
+	.half	3
+	.word	.L48
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L50,.L49
+	.byte	2
+	.word	.L18
+	.byte	3
+	.byte	'ResumeOSInterrupts',0,1,170,2,6,1,1,1
+	.word	.L13,.L73,.L12
+	.byte	4
+	.word	.L13,.L73
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('ResumeOSInterrupts')
+	.sect	'.debug_abbrev'
+.L48:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('ResumeOSInterrupts')
+	.sect	'.debug_line'
+.L49:
+	.word	.L133-.L132
+.L132:
+	.half	3
+	.word	.L135-.L134
+.L134:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0,0,0,0,0
+.L135:
+	.byte	5,25,7,0,5,2
+	.word	.L13
+	.byte	3,173,2,1,5,1,9
+	.half	.L136-.L13
+	.byte	3,8,1,7,9
+	.half	.L51-.L136
+	.byte	0,1,1
+.L133:
+	.sdecl	'.debug_ranges',debug,cluster('ResumeOSInterrupts')
+	.sect	'.debug_ranges'
+.L50:
+	.word	-1,.L13,0,.L51-.L13,0,0
+	.sdecl	'.debug_info',debug,cluster('OS_ENTER_CRITICAL')
+	.sect	'.debug_info'
+.L52:
+	.word	222
+	.half	3
+	.word	.L53
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L55,.L54
+	.byte	2
+	.word	.L18
+	.byte	3
+	.byte	'OS_ENTER_CRITICAL',0,1,187,2,6,1,1,1
+	.word	.L15,.L74,.L14
+	.byte	4
+	.word	.L15,.L74
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('OS_ENTER_CRITICAL')
+	.sect	'.debug_abbrev'
+.L53:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('OS_ENTER_CRITICAL')
+	.sect	'.debug_line'
+.L54:
+	.word	.L138-.L137
+.L137:
+	.half	3
+	.word	.L140-.L139
+.L139:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0,0,0,0,0
+.L140:
+	.byte	5,24,7,0,5,2
+	.word	.L15
+	.byte	3,194,2,1,5,1,9
+	.half	.L141-.L15
+	.byte	3,2,1,7,9
+	.half	.L56-.L141
+	.byte	0,1,1
+.L138:
+	.sdecl	'.debug_ranges',debug,cluster('OS_ENTER_CRITICAL')
+	.sect	'.debug_ranges'
+.L55:
+	.word	-1,.L15,0,.L56-.L15,0,0
+	.sdecl	'.debug_info',debug,cluster('OS_EXIT_CRITICAL')
+	.sect	'.debug_info'
+.L57:
+	.word	221
+	.half	3
+	.word	.L58
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L60,.L59
+	.byte	2
+	.word	.L18
+	.byte	3
+	.byte	'OS_EXIT_CRITICAL',0,1,199,2,6,1,1,1
+	.word	.L17,.L75,.L16
+	.byte	4
+	.word	.L17,.L75
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('OS_EXIT_CRITICAL')
+	.sect	'.debug_abbrev'
+.L58:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('OS_EXIT_CRITICAL')
+	.sect	'.debug_line'
+.L59:
+	.word	.L143-.L142
+.L142:
+	.half	3
+	.word	.L145-.L144
+.L144:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0,0,0,0,0
+.L145:
+	.byte	5,24,7,0,5,2
+	.word	.L17
+	.byte	3,202,2,1,5,1,9
+	.half	.L146-.L17
+	.byte	3,7,1,7,9
+	.half	.L61-.L146
+	.byte	0,1,1
+.L143:
+	.sdecl	'.debug_ranges',debug,cluster('OS_EXIT_CRITICAL')
+	.sect	'.debug_ranges'
+.L60:
+	.word	-1,.L17,0,.L61-.L17,0,0
+	.sdecl	'.debug_info',debug,cluster('_EnDeIntNest')
+	.sect	'.debug_info'
+.L62:
+	.word	193
+	.half	3
+	.word	.L63
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L18
+	.byte	3
+	.byte	'_EnDeIntNest',0,1,69,21
+	.word	.L76
+	.byte	5,3
+	.word	_EnDeIntNest
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('_EnDeIntNest')
+	.sect	'.debug_abbrev'
+.L63:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('_OSEnDeIntNest')
+	.sect	'.debug_info'
+.L64:
+	.word	195
+	.half	3
+	.word	.L65
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L18
+	.byte	3
+	.byte	'_OSEnDeIntNest',0,1,73,21
+	.word	.L76
+	.byte	5,3
+	.word	_OSEnDeIntNest
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('_OSEnDeIntNest')
+	.sect	'.debug_abbrev'
+.L65:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSCritialNest')
+	.sect	'.debug_info'
+.L66:
+	.word	195
+	.half	3
+	.word	.L67
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/kernel/Interrupt.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L18
+	.byte	3
+	.byte	'OSCritialNest',0,1,184,2,16
+	.word	.L76
+	.byte	5,3
+	.word	OSCritialNest
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSCritialNest')
+	.sect	'.debug_abbrev'
+.L67:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_loc',debug,cluster('DisableAllInterrupts')
+	.sect	'.debug_loc'
+.L4:
+	.word	-1,.L5,.L5-.L5,.L68-.L5
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('EnableAllInterrupts')
+	.sect	'.debug_loc'
+.L2:
+	.word	-1,.L3,.L3-.L3,.L69-.L3
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('OS_ENTER_CRITICAL')
+	.sect	'.debug_loc'
+.L14:
+	.word	-1,.L15,.L15-.L15,.L74-.L15
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('OS_EXIT_CRITICAL')
+	.sect	'.debug_loc'
+.L16:
+	.word	-1,.L17,.L17-.L17,.L75-.L17
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('ResumeAllInterrupts')
+	.sect	'.debug_loc'
+.L6:
+	.word	-1,.L7,.L7-.L7,.L71-.L7
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('ResumeOSInterrupts')
+	.sect	'.debug_loc'
+.L12:
+	.word	-1,.L13,.L13-.L13,.L73-.L13
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('SuspendAllInterrupts')
+	.sect	'.debug_loc'
+.L8:
+	.word	-1,.L9,.L9-.L9,.L70-.L9
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('SuspendOSInterrupts')
+	.sect	'.debug_loc'
+.L10:
+	.word	-1,.L11,.L11-.L11,.L72-.L11
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_frame',debug
+	.sect	'.debug_frame'
+.L147:
+	.word	48
+	.word	-1
+	.byte	3,0,2,1,27,12,26,0,8,26,8,27,8,28,8,29,8,30,8,31,8,16,8,17,8,24,8,25,8,32,8,33,8,34,8,35,8,36,8,37,8,38
+	.byte	8,39
+	.sdecl	'.debug_frame',debug,cluster('EnableAllInterrupts')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L147,.L3,.L69-.L3
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('DisableAllInterrupts')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L147,.L5,.L68-.L5
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('ResumeAllInterrupts')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L147,.L7,.L71-.L7
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('SuspendAllInterrupts')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L147,.L9,.L70-.L9
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('SuspendOSInterrupts')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L147,.L11,.L72-.L11
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('ResumeOSInterrupts')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L147,.L13,.L73-.L13
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('OS_ENTER_CRITICAL')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L147,.L15,.L74-.L15
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+	.sdecl	'.debug_frame',debug,cluster('OS_EXIT_CRITICAL')
+	.sect	'.debug_frame'
+	.word	24
+	.word	.L147,.L17,.L75-.L17
+	.byte	8,18,8,19,8,20,8,21,8,22,8,23
+
+
+	; Module end

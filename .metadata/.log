@@ -1,0 +1,321 @@
+!SESSION 2013-01-18 19:22:39.576 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_37
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.equinox.app 0 0 2013-01-18 19:22:49.096
+!MESSAGE Product com.tasking.ctc.ide could not be found.
+
+!ENTRY org.eclipse.ui 4 4 2013-01-18 19:24:20.016
+!MESSAGE Unable to find Action Set: org.eclipse.cdt.managedbuilder.ui.buildConfigActionSet
+
+!ENTRY com.tasking.util 4 0 2013-01-18 19:25:06.006
+!MESSAGE Error: class org.eclipse.core.runtime.CoreException org.eclipse.core.runtime.CoreException: Must specify a URI scheme:
+
+!ENTRY com.tasking.util 4 0 2013-01-18 19:25:06.346
+!MESSAGE Error: class org.eclipse.core.runtime.CoreException org.eclipse.core.runtime.CoreException: Must specify a URI scheme:
+
+!ENTRY com.tasking.util 4 0 2013-01-18 19:25:06.626
+!MESSAGE Error: class org.eclipse.core.runtime.CoreException org.eclipse.core.runtime.CoreException: Must specify a URI scheme:
+
+!ENTRY com.tasking.util 4 0 2013-01-18 19:25:06.956
+!MESSAGE Error: class org.eclipse.core.runtime.CoreException org.eclipse.core.runtime.CoreException: Must specify a URI scheme:
+
+!ENTRY com.tasking.util 4 0 2013-01-18 19:25:07.256
+!MESSAGE Error: class org.eclipse.core.runtime.CoreException org.eclipse.core.runtime.CoreException: Must specify a URI scheme:
+
+!ENTRY com.tasking.util 4 0 2013-01-18 19:25:07.606
+!MESSAGE Error: class org.eclipse.core.runtime.CoreException org.eclipse.core.runtime.CoreException: Must specify a URI scheme:
+
+!ENTRY com.tasking.util 4 0 2013-01-18 19:25:07.916
+!MESSAGE Error: class org.eclipse.core.runtime.CoreException org.eclipse.core.runtime.CoreException: Must specify a URI scheme:
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-01-18 19:25:50.396
+!MESSAGE Indexed 'Project' (2 sources, 9 headers) in 1.55 sec: 58 declarations; 238 references; 11 unresolved inclusions; 3 syntax errors; 34 unresolved names (10.30%)
+
+!ENTRY org.eclipse.ui.workbench 2 0 2013-01-18 19:25:52.326
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2013-01-18 19:25:52.326
+!MESSAGE Conflict for 'org.eclipse.cdt.debug.ui.localCShortcut.run':
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.run,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@1f5f379,
+	expression=,sourcePriority=0)
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.run,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@43cc83,
+	expression=,sourcePriority=0)
+
+!ENTRY org.eclipse.ui.workbench 2 0 2013-01-18 19:25:52.336
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2013-01-18 19:25:52.336
+!MESSAGE Conflict for 'org.eclipse.cdt.debug.ui.localCShortcut.debug':
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.debug,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@1c47573,
+	expression=,sourcePriority=0)
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.debug,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@fae256,
+	expression=,sourcePriority=0)
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-01-18 19:31:36.677
+!MESSAGE Indexed 'Project' (16 sources, 29 headers) in 1.13 sec: 8,504 declarations; 3,749 references; 7 unresolved inclusions; 10 syntax errors; 182 unresolved names (1.46%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-01-18 19:37:55.598
+!MESSAGE Indexed 'Project' (18 sources, 33 headers) in 0.98 sec: 8,703 declarations; 3,982 references; 7 unresolved inclusions; 43 syntax errors; 137 unresolved names (1.07%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-01-18 19:38:11.478
+!MESSAGE Indexed 'Project' (18 sources, 33 headers) in 1.01 sec: 8,703 declarations; 3,982 references; 7 unresolved inclusions; 43 syntax errors; 137 unresolved names (1.07%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-01-18 19:39:01.848
+!MESSAGE Indexed 'Project' (18 sources, 33 headers) in 1.24 sec: 8,703 declarations; 3,982 references; 7 unresolved inclusions; 43 syntax errors; 137 unresolved names (1.07%)
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 19:39:36.241
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 19:39:36.251
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 19:39:36.251
+!MESSAGE 
+
+!ENTRY org.eclipse.ui 4 4 2013-01-18 19:47:13.109
+!MESSAGE Unable to find Action Set: com.tasking.managedbuilder.launchActionSet
+
+!ENTRY org.eclipse.cdt.debug.core 4 1000 2013-01-18 20:00:07.495
+!MESSAGE Internal error logged from CDI Debug: 
+!STACK 1
+org.eclipse.debug.core.DebugException: Binary file is missing
+	at com.tasking.debug.cdt.core.DarwinDebugModel$1.run(DarwinDebugModel.java:195)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1800)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1782)
+	at com.tasking.debug.cdt.core.DarwinDebugModel.newDebugTarget(DarwinDebugModel.java:240)
+	at com.tasking.cdt.launch.internal.LocalRunLaunchDelegate.launch(LocalRunLaunchDelegate.java:131)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:853)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:703)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:866)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1069)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SUBENTRY 1 com.tasking.debug.cdt.core 4 10000 2013-01-18 20:00:07.495
+!MESSAGE Binary file is missing
+!SESSION 2013-01-18 20:00:46.833 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_37
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2013-01-18 20:01:32.888
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2013-01-18 20:01:35.878
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 org.eclipse.ui 0 0 2013-01-18 20:01:35.878
+!MESSAGE 
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2013-01-18 20:01:35.878
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2013-01-18 20:01:35.878
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2013-01-18 20:01:35.878
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2013-01-18 20:01:35.879
+!MESSAGE Unable to restore perspective: Workspace - TASKING Debug.
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 20:01:35.879
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 4 0 2013-01-18 20:01:35.879
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2013-01-18 20:01:35.879
+!MESSAGE OK
+
+!ENTRY org.eclipse.ui.workbench 2 0 2013-01-18 20:01:35.958
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2013-01-18 20:01:35.958
+!MESSAGE Conflict for 'org.eclipse.cdt.debug.ui.localCShortcut.run':
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.run,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@a32604,
+	expression=,sourcePriority=0)
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.run,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@1150b68,
+	expression=,sourcePriority=0)
+
+!ENTRY org.eclipse.ui.workbench 2 0 2013-01-18 20:01:35.959
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2013-01-18 20:01:35.959
+!MESSAGE Conflict for 'org.eclipse.cdt.debug.ui.localCShortcut.debug':
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.debug,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@161116f,
+	expression=,sourcePriority=0)
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.debug,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@1bfa3a2,
+	expression=,sourcePriority=0)
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:07:34.672
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:07:34.679
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:07:34.695
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:07:34.711
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:07:34.719
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:44:58.192
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:44:58.195
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:44:58.227
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:44:58.251
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:44:58.267
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2013-01-18 20:44:58.275
+!MESSAGE 
+
+!ENTRY org.eclipse.jface 2 0 2013-01-18 20:47:35.040
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2013-01-18 20:47:35.040
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.command.gotoaddress,Go to Address,
+		Go to Address,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.memory.abstractasynctablerendering,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Find Declaration,
+		Find Declaration,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		LegacyHandlerWrapper(ActionHandler(action=org.eclipse.cdt.internal.ui.search.actions.FindDeclarationsAction@aae79c)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+!SESSION 2013-01-18 22:38:07.221 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_37
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2013-01-18 22:38:31.144
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2013-01-18 22:38:33.626
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 org.eclipse.ui 0 0 2013-01-18 22:38:33.626
+!MESSAGE 
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2013-01-18 22:38:33.626
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2013-01-18 22:38:33.626
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2013-01-18 22:38:33.626
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2013-01-18 22:38:33.626
+!MESSAGE Unable to restore perspective: Workspace - TASKING C/C++.
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 22:38:33.626
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2013-01-18 22:38:33.627
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 22:38:33.627
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 22:38:33.627
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 22:38:33.627
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 22:38:33.627
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 22:38:33.627
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 22:38:33.627
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 22:38:33.627
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-01-18 22:38:33.627
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 4 0 2013-01-18 22:38:33.627
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2013-01-18 22:38:33.627
+!MESSAGE OK
+
+!ENTRY org.eclipse.ui.workbench 2 0 2013-01-18 22:45:40.969
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2013-01-18 22:45:40.969
+!MESSAGE Conflict for 'org.eclipse.cdt.debug.ui.localCShortcut.run':
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.run,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@76e500,
+	expression=,sourcePriority=0)
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.run,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@1b47ff6,
+	expression=,sourcePriority=0)
+
+!ENTRY org.eclipse.ui.workbench 2 0 2013-01-18 22:45:40.969
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2013-01-18 22:45:40.969
+!MESSAGE Conflict for 'org.eclipse.cdt.debug.ui.localCShortcut.debug':
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.debug,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@1234f41,
+	expression=,sourcePriority=0)
+HandlerActivation(commandId=org.eclipse.cdt.debug.ui.localCShortcut.debug,
+	handler=org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler@128621f,
+	expression=,sourcePriority=0)
+
+!ENTRY org.eclipse.debug.core 4 2 2013-01-18 23:32:52.628
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.debug.core".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.debug.internal.core.CGlobalVariableManager.getDescriptors(CGlobalVariableManager.java:285)
+	at org.eclipse.cdt.debug.internal.ui.actions.RemoveAllGlobalsActionDelegate.update(RemoveAllGlobalsActionDelegate.java:101)
+	at org.eclipse.cdt.debug.internal.ui.actions.RemoveAllGlobalsActionDelegate.handleDebugEvents(RemoveAllGlobalsActionDelegate.java:124)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1081)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1115)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:382)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.debug.core 4 125 2013-01-18 23:32:52.676
+!MESSAGE An exception occurred while dispatching debug events.
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.debug.internal.core.CGlobalVariableManager.getDescriptors(CGlobalVariableManager.java:285)
+	at org.eclipse.cdt.debug.internal.ui.actions.RemoveAllGlobalsActionDelegate.update(RemoveAllGlobalsActionDelegate.java:101)
+	at org.eclipse.cdt.debug.internal.ui.actions.RemoveAllGlobalsActionDelegate.handleDebugEvents(RemoveAllGlobalsActionDelegate.java:124)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1081)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1115)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:382)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)

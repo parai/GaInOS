@@ -1,0 +1,1860 @@
+	; TASKING VX-toolset for TriCore: C compiler v3.5r1 Build 484.1.2
+	; Options: -f cc5272a -c99 --dep-file=GaInOS_Studio\.CfgObj.o.d -Ctc1797 --core=tc1.3.1 --fpu-present -F -IF:\parai@foxmail.com\nt\GaInOS\osek_test\GaInOS_Studio -IF:\parai@foxmail.com\nt\GaInOS\include -IF:\parai@foxmail.com\nt\GaInOS\kernel -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\vPort -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Cpu -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\Serial -IF:\parai@foxmail.com\nt\GaInOS\Bsp\tc1797\Bsp\DaveSupport -g --make-target=GaInOS_Studio\CfgObj.o -t4 --language=-gcc,-volatile,+strings --default-near-size=0 -O2 --default-a1-size=0 --default-a0-size=0 --source --align=0 --compact-max-size=200 --switch=auto --tasking-sfr -o GaInOS_Studio\CfgObj.src
+	; Module start
+	.name	"CfgObj"
+
+	
+$FPU
+$TC131
+	
+	.sdecl	'.text.CfgObj.TaskMainvTask1',code,cluster('TaskMainvTask1')
+	.sect	'.text.CfgObj.TaskMainvTask1'
+	.align	2
+	
+	.global	TaskMainvTask1
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	     1  #include "CfgObj.h"
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	     2  #include "Serial.h"
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	     3  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	     4  /* GaInOS Counter And Alarm Configuration */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	     5  const AlarmBaseType OSCounterBaseTable[cfgOS_COUNTER_NUM]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	     6  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	     7  	{	/* vCounter1 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	     8  		1000,		/* xMaxAllowedValue */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	     9  		1,		/* xTicksPerBase */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    10  		1		/* xMinCycle */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    11  	},
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    12  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    13  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    14  #if(cfgOS_USE_ALARM==STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    15  const AlarmClassType OSAlarmClassTable[cfgOS_ALARM_NUM]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    16  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    17  	ALARM_TASK,		/* vAlarm1 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    18  	ALARM_TASK,		/* vAlarm2 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    19  	ALARM_TASK,		/* vAlarm3 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    20  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    21  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    22  const CounterType OSAlarmOwnerTable[cfgOS_ALARM_NUM]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    23  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    24  	vCounter1,		/* vAlarm1 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    25  	vCounter1,		/* vAlarm2 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    26  	vCounter1,		/* vAlarm3 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    27  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    28  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    29  const AlarmContainerType OSAlarmContainerTable[cfgOS_ALARM_NUM]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    30  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    31  	(VoidType) vTask4,		/* vAlarm1 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    32  	(VoidType) vTask5,		/* vAlarm2 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    33  	(VoidType) vTask6,		/* vAlarm3 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    34  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    35  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    36  #endif/* GaInOS Task Configuration */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    37  static TaskStackType g_vTask1Stack[512/4];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    38  static TaskStackType g_vTask2Stack[512/4];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    39  static TaskStackType g_vTask3Stack[512/4];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    40  static TaskStackType g_vTask4Stack[512/4];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    41  static TaskStackType g_vTask5Stack[512/4];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    42  static TaskStackType g_vTask6Stack[512/4];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    43  static TaskStackType g_vTaskStartStack[512/4];
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    44  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    45  const TaskStackRefType OSTaskStackTable[cfgOS_TASK_NUM]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    46  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    47  	{&g_vTask1Stack[512/4 -1]},
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    48  	{&g_vTask2Stack[512/4 -1]},
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    49  	{&g_vTask3Stack[512/4 -1]},
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    50  	{&g_vTask4Stack[512/4 -1]},
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    51  	{&g_vTask5Stack[512/4 -1]},
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    52  	{&g_vTask6Stack[512/4 -1]},
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    53  	{&g_vTaskStartStack[512/4 -1]},
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    54  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    55  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    56  const PriorityType OSTaskInitPriorityTable[cfgOS_TASK_NUM]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    57  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    58  	1,		/* vTask1 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    59  	1,		/* vTask2 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    60  	1,		/* vTask3 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    61  	1,		/* vTask4 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    62  	1,		/* vTask5 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    63  	1,		/* vTask6 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    64  	0,		/* vTaskStart */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    65  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    66  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    67  const BoolType OSTaskAutoActivateTable[cfgOS_TASK_NUM]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    68  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    69  	STD_FALSE,		/* vTask1 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    70  	STD_FALSE,		/* vTask2 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    71  	STD_FALSE,		/* vTask3 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    72  	STD_FALSE,		/* vTask4 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    73  	STD_FALSE,		/* vTask5 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    74  	STD_FALSE,		/* vTask6 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    75  	STD_TRUE,		/* vTaskStart */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    76  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    77  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    78  #if (cfgOS_MULTIPLY_ACTIVATE == STD_TRUE)
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    79  const uint8_t OSMaxActivateCountTable[cfgOS_TASK_NUM]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    80  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    81  	1,		/* vTask1 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    82  	1,		/* vTask2 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    83  	1,		/* vTask3 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    84  	1,		/* vTask4 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    85  	1,		/* vTask5 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    86  	1,		/* vTask6 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    87  	1,		/* vTaskStart */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    88  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    89  #endif
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    90  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    91  #if (cfgOS_SCHEDULE_POLICY == MIXED_PREEMPTIVE_SCHEDULE)
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    92  const BoolType OSTaskPreemtableTable[cfgOS_TASK_NUM]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    93  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    94  	STD_TRUE,		/* vTask1 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    95  	STD_TRUE,		/* vTask2 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    96  	STD_TRUE,		/* vTask3 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    97  	STD_TRUE,		/* vTask4 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    98  	STD_TRUE,		/* vTask5 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	    99  	STD_TRUE,		/* vTask6 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   100  	STD_TRUE,		/* vTaskStart */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   101  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   102  #endif
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   103  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   104  #if (cfgOS_CONFORMANCE_CLASS == ECC2 || cfgOS_CONFORMANCE_CLASS == ECC1)
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   105  const uint8_t OSTskClsTypeTable[cfgOS_TASK_NUM] =
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   106  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   107  	BASIC_TASK, 		/* vTask1 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   108  	BASIC_TASK, 		/* vTask2 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   109  	BASIC_TASK, 		/* vTask3 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   110  	BASIC_TASK, 		/* vTask4 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   111  	BASIC_TASK, 		/* vTask5 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   112  	BASIC_TASK, 		/* vTask6 */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   113  	BASIC_TASK, 		/* vTaskStart */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   114  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   115  #endif
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   116  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   117  const TaskEntryType OSTaskEntryTable[cfgOS_TASK_NUM]=
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   118  {
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   119  	TaskEntry(vTask1),
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   120  	TaskEntry(vTask2),
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   121  	TaskEntry(vTask3),
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   122  	TaskEntry(vTask4),
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   123  	TaskEntry(vTask5),
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   124  	TaskEntry(vTask6),
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   125  	TaskEntry(vTaskStart),
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   126  };
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   127  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   128  TASK(vTask1){
+; Function TaskMainvTask1
+.L3:
+TaskMainvTask1:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   129  /* Add Your Task Code Here. */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   130  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   131  	printk("vTask1 is running.\n");
+	movh.a	a4,#@his(.1.str)
+	lea	a4,[a4]@los(.1.str)
+	call	printf
+.L158:
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   132  	(void)TerminateTask();
+	j	TerminateTask
+.L89:
+	
+__TaskMainvTask1_function_end:
+	.size	TaskMainvTask1,__TaskMainvTask1_function_end-TaskMainvTask1
+.L24:
+	; End of function
+	
+	.sdecl	'.text.CfgObj.TaskMainvTask2',code,cluster('TaskMainvTask2')
+	.sect	'.text.CfgObj.TaskMainvTask2'
+	.align	2
+	
+	.global	TaskMainvTask2
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   133  }
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   134  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   135  TASK(vTask2){
+; Function TaskMainvTask2
+.L5:
+TaskMainvTask2:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   136  /* Add Your Task Code Here. */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   137      //(void)StartScheduleTableSynchron(vSchedTbl2);
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   138  	printk("vTask2 is running.\n");
+	movh.a	a4,#@his(.2.str)
+	lea	a4,[a4]@los(.2.str)
+	call	printf
+.L163:
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   139  	(void)TerminateTask();
+	j	TerminateTask
+.L90:
+	
+__TaskMainvTask2_function_end:
+	.size	TaskMainvTask2,__TaskMainvTask2_function_end-TaskMainvTask2
+.L29:
+	; End of function
+	
+	.sdecl	'.text.CfgObj.TaskMainvTask3',code,cluster('TaskMainvTask3')
+	.sect	'.text.CfgObj.TaskMainvTask3'
+	.align	2
+	
+	.global	TaskMainvTask3
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   140  }
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   141  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   142  TASK(vTask3){
+; Function TaskMainvTask3
+.L7:
+TaskMainvTask3:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   143  /* Add Your Task Code Here. */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   144      //(void)NextScheduleTable(vSchedTbl1,vSchedTbl2);
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   145      //(void)SyncScheduleTable(vSchedTbl2,0);
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   146  	printk("vTask3 is running.\n");
+	movh.a	a4,#@his(.3.str)
+	lea	a4,[a4]@los(.3.str)
+	call	printf
+.L168:
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   147  	(void)TerminateTask();
+	j	TerminateTask
+.L91:
+	
+__TaskMainvTask3_function_end:
+	.size	TaskMainvTask3,__TaskMainvTask3_function_end-TaskMainvTask3
+.L34:
+	; End of function
+	
+	.sdecl	'.text.CfgObj.TaskMainvTask4',code,cluster('TaskMainvTask4')
+	.sect	'.text.CfgObj.TaskMainvTask4'
+	.align	2
+	
+	.global	TaskMainvTask4
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   148  }
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   149  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   150  TASK(vTask4){
+; Function TaskMainvTask4
+.L9:
+TaskMainvTask4:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   151  /* Add Your Task Code Here. */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   152  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   153  	printk("vTask4 is running.\n");
+	movh.a	a4,#@his(.4.str)
+	lea	a4,[a4]@los(.4.str)
+	call	printf
+.L173:
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   154  	(void)TerminateTask();
+	j	TerminateTask
+.L92:
+	
+__TaskMainvTask4_function_end:
+	.size	TaskMainvTask4,__TaskMainvTask4_function_end-TaskMainvTask4
+.L39:
+	; End of function
+	
+	.sdecl	'.text.CfgObj.TaskMainvTask5',code,cluster('TaskMainvTask5')
+	.sect	'.text.CfgObj.TaskMainvTask5'
+	.align	2
+	
+	.global	TaskMainvTask5
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   155  }
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   156  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   157  TASK(vTask5){
+; Function TaskMainvTask5
+.L11:
+TaskMainvTask5:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   158  /* Add Your Task Code Here. */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   159  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   160  	printk("vTask5 is running.\n");
+	movh.a	a4,#@his(.5.str)
+	lea	a4,[a4]@los(.5.str)
+	call	printf
+.L178:
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   161  	(void)TerminateTask();
+	j	TerminateTask
+.L93:
+	
+__TaskMainvTask5_function_end:
+	.size	TaskMainvTask5,__TaskMainvTask5_function_end-TaskMainvTask5
+.L44:
+	; End of function
+	
+	.sdecl	'.text.CfgObj.TaskMainvTask6',code,cluster('TaskMainvTask6')
+	.sect	'.text.CfgObj.TaskMainvTask6'
+	.align	2
+	
+	.global	TaskMainvTask6
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   162  }
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   163  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   164  TASK(vTask6){
+; Function TaskMainvTask6
+.L13:
+TaskMainvTask6:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   165  /* Add Your Task Code Here. */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   166      //(void)NextScheduleTable(vSchedTbl2,vSchedTbl1);
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   167  	printk("vTask6 is running.\n");
+	movh.a	a4,#@his(.6.str)
+	lea	a4,[a4]@los(.6.str)
+	call	printf
+.L183:
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   168  	(void)TerminateTask();
+	j	TerminateTask
+.L94:
+	
+__TaskMainvTask6_function_end:
+	.size	TaskMainvTask6,__TaskMainvTask6_function_end-TaskMainvTask6
+.L49:
+	; End of function
+	
+	.sdecl	'.text.CfgObj.TaskMainvTaskStart',code,cluster('TaskMainvTaskStart')
+	.sect	'.text.CfgObj.TaskMainvTaskStart'
+	.align	2
+	
+	.global	TaskMainvTaskStart
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   169  }
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   170  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   171  TASK(vTaskStart){
+; Function TaskMainvTaskStart
+.L15:
+TaskMainvTaskStart:	.type	func
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   172  /* Add Your Task Code Here. */
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   173  
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   174  	printk("vTaskStart is running.\n");
+	movh.a	a4,#@his(.7.str)
+	lea	a4,[a4]@los(.7.str)
+	call	printf
+.L188:
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   175  	(void)TerminateTask();
+	j	TerminateTask
+.L95:
+	
+__TaskMainvTaskStart_function_end:
+	.size	TaskMainvTaskStart,__TaskMainvTaskStart_function_end-TaskMainvTaskStart
+.L54:
+	; End of function
+	
+	.sdecl	'.rodata.CfgObj.OSCounterBaseTable',data,rom,cluster('OSCounterBaseTable')
+	.sect	'.rodata.CfgObj.OSCounterBaseTable'
+	.global	OSCounterBaseTable
+	.align	4
+OSCounterBaseTable:	.type	object
+	.size	OSCounterBaseTable,12
+	.word	1000,1,1
+	.sdecl	'.rodata.CfgObj.OSAlarmClassTable',data,rom,cluster('OSAlarmClassTable')
+	.sect	'.rodata.CfgObj.OSAlarmClassTable'
+	.global	OSAlarmClassTable
+OSAlarmClassTable:	.type	object
+	.size	OSAlarmClassTable,3
+	.byte	1,1,1
+	.sdecl	'.rodata.CfgObj.OSAlarmOwnerTable',data,rom,cluster('OSAlarmOwnerTable')
+	.sect	'.rodata.CfgObj.OSAlarmOwnerTable'
+	.global	OSAlarmOwnerTable
+OSAlarmOwnerTable:	.type	object
+	.size	OSAlarmOwnerTable,3
+	.space	3
+	.sdecl	'.rodata.CfgObj.OSAlarmContainerTable',data,rom,cluster('OSAlarmContainerTable')
+	.sect	'.rodata.CfgObj.OSAlarmContainerTable'
+	.global	OSAlarmContainerTable
+	.align	2
+OSAlarmContainerTable:	.type	object
+	.size	OSAlarmContainerTable,12
+	.word	3,4,5
+	.sdecl	'.bss.CfgObj.g_vTask1Stack',data,cluster('g_vTask1Stack')
+	.sect	'.bss.CfgObj.g_vTask1Stack'
+	.align	2
+g_vTask1Stack:	.type	object
+	.size	g_vTask1Stack,512
+	.space	512
+	.sdecl	'.bss.CfgObj.g_vTask2Stack',data,cluster('g_vTask2Stack')
+	.sect	'.bss.CfgObj.g_vTask2Stack'
+	.align	2
+g_vTask2Stack:	.type	object
+	.size	g_vTask2Stack,512
+	.space	512
+	.sdecl	'.bss.CfgObj.g_vTask3Stack',data,cluster('g_vTask3Stack')
+	.sect	'.bss.CfgObj.g_vTask3Stack'
+	.align	2
+g_vTask3Stack:	.type	object
+	.size	g_vTask3Stack,512
+	.space	512
+	.sdecl	'.bss.CfgObj.g_vTask4Stack',data,cluster('g_vTask4Stack')
+	.sect	'.bss.CfgObj.g_vTask4Stack'
+	.align	2
+g_vTask4Stack:	.type	object
+	.size	g_vTask4Stack,512
+	.space	512
+	.sdecl	'.bss.CfgObj.g_vTask5Stack',data,cluster('g_vTask5Stack')
+	.sect	'.bss.CfgObj.g_vTask5Stack'
+	.align	2
+g_vTask5Stack:	.type	object
+	.size	g_vTask5Stack,512
+	.space	512
+	.sdecl	'.bss.CfgObj.g_vTask6Stack',data,cluster('g_vTask6Stack')
+	.sect	'.bss.CfgObj.g_vTask6Stack'
+	.align	2
+g_vTask6Stack:	.type	object
+	.size	g_vTask6Stack,512
+	.space	512
+	.sdecl	'.bss.CfgObj.g_vTaskStartStack',data,cluster('g_vTaskStartStack')
+	.sect	'.bss.CfgObj.g_vTaskStartStack'
+	.align	2
+g_vTaskStartStack:	.type	object
+	.size	g_vTaskStartStack,512
+	.space	512
+	.sdecl	'.rodata.CfgObj.OSTaskStackTable',data,rom,cluster('OSTaskStackTable')
+	.sect	'.rodata.CfgObj.OSTaskStackTable'
+	.global	OSTaskStackTable
+	.align	4
+OSTaskStackTable:	.type	object
+	.size	OSTaskStackTable,28
+	.word	g_vTask1Stack+508,g_vTask2Stack+508,g_vTask3Stack+508,g_vTask4Stack+508
+	.word	g_vTask5Stack+508,g_vTask6Stack+508,g_vTaskStartStack+508
+	.sdecl	'.rodata.CfgObj.OSTaskInitPriorityTable',data,rom,cluster('OSTaskInitPriorityTable')
+	.sect	'.rodata.CfgObj.OSTaskInitPriorityTable'
+	.global	OSTaskInitPriorityTable
+OSTaskInitPriorityTable:	.type	object
+	.size	OSTaskInitPriorityTable,7
+	.byte	1,1,1,1
+	.byte	1,1
+	.space	1
+	.sdecl	'.rodata.CfgObj.OSTaskAutoActivateTable',data,rom,cluster('OSTaskAutoActivateTable')
+	.sect	'.rodata.CfgObj.OSTaskAutoActivateTable'
+	.global	OSTaskAutoActivateTable
+OSTaskAutoActivateTable:	.type	object
+	.size	OSTaskAutoActivateTable,7
+	.space	6
+	.byte	1
+	.sdecl	'.rodata.CfgObj.OSMaxActivateCountTable',data,rom,cluster('OSMaxActivateCountTable')
+	.sect	'.rodata.CfgObj.OSMaxActivateCountTable'
+	.global	OSMaxActivateCountTable
+OSMaxActivateCountTable:	.type	object
+	.size	OSMaxActivateCountTable,7
+	.byte	1,1,1,1
+	.byte	1,1,1
+	.sdecl	'.rodata.CfgObj.OSTskClsTypeTable',data,rom,cluster('OSTskClsTypeTable')
+	.sect	'.rodata.CfgObj.OSTskClsTypeTable'
+	.global	OSTskClsTypeTable
+OSTskClsTypeTable:	.type	object
+	.size	OSTskClsTypeTable,7
+	.byte	1,1,1,1
+	.byte	1,1,1
+	.sdecl	'.rodata.CfgObj.OSTaskEntryTable',data,rom,cluster('OSTaskEntryTable')
+	.sect	'.rodata.CfgObj.OSTaskEntryTable'
+	.global	OSTaskEntryTable
+	.align	4
+OSTaskEntryTable:	.type	object
+	.size	OSTaskEntryTable,28
+	.word	TaskMainvTask1,TaskMainvTask2,TaskMainvTask3,TaskMainvTask4
+	.word	TaskMainvTask5,TaskMainvTask6,TaskMainvTaskStart
+	.sdecl	'.rodata.CfgObj..1.str',data,rom
+	.sect	'.rodata.CfgObj..1.str'
+.1.str:	.type	object
+	.size	.1.str,20
+	.byte	118,84,97,115,107,49,32,105
+	.byte	115,32,114,117,110,110,105,110
+	.byte	103,46,10
+	.space	1
+	.sdecl	'.rodata.CfgObj..2.str',data,rom
+	.sect	'.rodata.CfgObj..2.str'
+.2.str:	.type	object
+	.size	.2.str,20
+	.byte	118,84,97,115,107,50,32,105
+	.byte	115,32,114,117,110,110,105,110
+	.byte	103,46,10
+	.space	1
+	.sdecl	'.rodata.CfgObj..3.str',data,rom
+	.sect	'.rodata.CfgObj..3.str'
+.3.str:	.type	object
+	.size	.3.str,20
+	.byte	118,84,97,115,107,51,32,105
+	.byte	115,32,114,117,110,110,105,110
+	.byte	103,46,10
+	.space	1
+	.sdecl	'.rodata.CfgObj..4.str',data,rom
+	.sect	'.rodata.CfgObj..4.str'
+.4.str:	.type	object
+	.size	.4.str,20
+	.byte	118,84,97,115,107,52,32,105
+	.byte	115,32,114,117,110,110,105,110
+	.byte	103,46,10
+	.space	1
+	.sdecl	'.rodata.CfgObj..5.str',data,rom
+	.sect	'.rodata.CfgObj..5.str'
+.5.str:	.type	object
+	.size	.5.str,20
+	.byte	118,84,97,115,107,53,32,105
+	.byte	115,32,114,117,110,110,105,110
+	.byte	103,46,10
+	.space	1
+	.sdecl	'.rodata.CfgObj..6.str',data,rom
+	.sect	'.rodata.CfgObj..6.str'
+.6.str:	.type	object
+	.size	.6.str,20
+	.byte	118,84,97,115,107,54,32,105
+	.byte	115,32,114,117,110,110,105,110
+	.byte	103,46,10
+	.space	1
+	.sdecl	'.rodata.CfgObj..7.str',data,rom
+	.sect	'.rodata.CfgObj..7.str'
+.7.str:	.type	object
+	.size	.7.str,24
+	.byte	118,84,97,115,107,83,116,97
+	.byte	114,116,32,105,115,32,114,117
+	.byte	110,110,105,110
+	.byte	103,46,10
+	.space	1
+	.calls	'__INDIRECT__','TaskMainvTask1'
+	.calls	'__INDIRECT__','TaskMainvTask2'
+	.calls	'__INDIRECT__','TaskMainvTask3'
+	.calls	'__INDIRECT__','TaskMainvTask4'
+	.calls	'__INDIRECT__','TaskMainvTask5'
+	.calls	'__INDIRECT__','TaskMainvTask6'
+	.calls	'__INDIRECT__','TaskMainvTaskStart'
+	.calls	'TaskMainvTask1','printf'
+	.calls	'TaskMainvTask1','TerminateTask'
+	.calls	'TaskMainvTask2','printf'
+	.calls	'TaskMainvTask2','TerminateTask'
+	.calls	'TaskMainvTask3','printf'
+	.calls	'TaskMainvTask3','TerminateTask'
+	.calls	'TaskMainvTask4','printf'
+	.calls	'TaskMainvTask4','TerminateTask'
+	.calls	'TaskMainvTask5','printf'
+	.calls	'TaskMainvTask5','TerminateTask'
+	.calls	'TaskMainvTask6','printf'
+	.calls	'TaskMainvTask6','TerminateTask'
+	.calls	'TaskMainvTaskStart','printf'
+	.calls	'TaskMainvTaskStart','TerminateTask'
+	.calls	'TaskMainvTask1','',0
+	.calls	'TaskMainvTask2','',0
+	.calls	'TaskMainvTask3','',0
+	.calls	'TaskMainvTask4','',0
+	.calls	'TaskMainvTask5','',0
+	.calls	'TaskMainvTask6','',0
+	.extern	TerminateTask
+	.extern	printf
+	.extern	__printf_noarg
+	.extern	__INDIRECT__
+	.calls	'TaskMainvTaskStart','',0
+	.sdecl	'.debug_info',debug
+	.sect	'.debug_info'
+.L17:
+	.word	3080
+	.half	3
+	.word	.L18
+	.byte	4
+.L16:
+	.byte	1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L19
+	.byte	2
+	.byte	'TerminateTask',0,1,242,2,12
+	.word	.L107-.L17
+	.byte	1,1,1,1
+.L107:
+	.byte	3
+	.byte	'unsigned char',0,1,8,4
+	.byte	'printf',0,2,140,1,16
+	.word	.L108-.L17
+	.byte	1,1,1,1,5,2,140,1,38
+	.word	.L109-.L17
+	.byte	6,2,140,1,50,0
+.L108:
+	.byte	3
+	.byte	'int',0,4,5
+.L109:
+	.byte	7
+	.word	.L110-.L17
+.L110:
+	.byte	8
+	.word	.L111-.L17
+.L111:
+	.byte	3
+	.byte	'char',0,1,6,9
+	.byte	'__INDIRECT__',0,3,1,1,1,1,1,10
+	.byte	'__size_t',0,3,1,1
+	.word	.L112-.L17
+.L112:
+	.byte	3
+	.byte	'unsigned int',0,4,7,10
+	.byte	'__codeptr',0,3,1,1
+	.word	.L113-.L17
+.L113:
+	.byte	7
+	.word	.L114-.L17
+.L114:
+	.byte	11,1,10
+	.byte	'PCP_GPR6_type',0,4,158,19,3
+	.word	.L115-.L17
+.L115:
+	.byte	12
+	.word	.L116-.L17
+.L116:
+	.byte	13,4,145,19,18,4,14
+	.byte	'B',0,4
+	.word	.L117-.L17
+	.byte	2,35,0,14
+	.byte	'I',0,4
+	.word	261
+	.byte	2,35,0,14
+	.byte	'U',0,4
+	.word	323
+	.byte	2,35,0,0
+.L117:
+	.byte	15,4,147,19,2,4,16
+	.byte	'CNT1',0,4
+	.word	.L118-.L17
+	.byte	12,20,2,35,0,16
+	.byte	'.1.nn',0,4
+	.word	.L118-.L17
+	.byte	2,18,2,35,0,16
+	.byte	'TOS',0,4
+	.word	.L118-.L17
+	.byte	2,16,2,35,0,16
+	.byte	'SRPN',0,4
+	.word	.L118-.L17
+	.byte	8,8,2,35,0,16
+	.byte	'CPPN',0,4
+	.word	.L118-.L17
+	.byte	8,0,2,35,0,0
+.L118:
+	.byte	3
+	.byte	'unsigned int',0,4,7,10
+	.byte	'PCP_GPR7_type',0,4,178,19,3
+	.word	.L119-.L17
+.L119:
+	.byte	12
+	.word	.L120-.L17
+.L120:
+	.byte	13,4,160,19,18,4,14
+	.byte	'B',0,4
+	.word	.L121-.L17
+	.byte	2,35,0,14
+	.byte	'I',0,4
+	.word	261
+	.byte	2,35,0,14
+	.byte	'U',0,4
+	.word	323
+	.byte	2,35,0,0
+.L121:
+	.byte	15,4,162,19,2,4,16
+	.byte	'Z',0,4
+	.word	519
+	.byte	1,31,2,35,0,16
+	.byte	'N',0,4
+	.word	519
+	.byte	1,30,2,35,0,16
+	.byte	'C',0,4
+	.word	519
+	.byte	1,29,2,35,0,16
+	.byte	'V',0,4
+	.word	519
+	.byte	1,28,2,35,0,16
+	.byte	'CNZ',0,4
+	.word	519
+	.byte	1,27,2,35,0,16
+	.byte	'IEN',0,4
+	.word	519
+	.byte	1,26,2,35,0,16
+	.byte	'CEN',0,4
+	.word	519
+	.byte	1,25,2,35,0,16
+	.byte	'.1.nn',0,4
+	.word	519
+	.byte	1,24,2,35,0,16
+	.byte	'DPTR',0,4
+	.word	519
+	.byte	8,16,2,35,0,16
+	.byte	'.2.nn',0,4
+	.word	519
+	.byte	16,0,2,35,0,0,10
+	.byte	'uint8_t',0,5,6,24
+	.word	209
+	.byte	10
+	.byte	'uint16_t',0,5,8,24
+	.word	.L122-.L17
+.L122:
+	.byte	3
+	.byte	'unsigned short int',0,2,7,10
+	.byte	'uint32_t',0,5,10,24
+	.word	.L123-.L17
+.L123:
+	.byte	3
+	.byte	'unsigned long int',0,4,7,10
+	.byte	'ubase_t',0,5,14,24
+	.word	323
+	.byte	10
+	.byte	'void_t',0,5,17,24
+	.word	829
+	.byte	10
+	.byte	'BoolType',0,6,59,17
+	.word	209
+	.byte	10
+	.byte	'VoidType',0,6,60,16
+	.word	829
+	.byte	10
+	.byte	'TaskType',0,6,141,1,17
+	.word	209
+	.byte	10
+	.byte	'TaskRefType',0,6,143,1,19
+	.word	.L124-.L17
+.L124:
+	.byte	7
+	.word	209
+	.byte	10
+	.byte	'TaskStateType',0,6,145,1,19
+	.word	209
+	.byte	10
+	.byte	'TaskStateRefType',0,6,147,1,25
+	.word	.L125-.L17
+.L125:
+	.byte	7
+	.word	209
+	.byte	10
+	.byte	'TickType',0,6,149,1,17
+	.word	323
+	.byte	10
+	.byte	'TickRefType',0,6,151,1,19
+	.word	.L126-.L17
+.L126:
+	.byte	7
+	.word	323
+	.byte	10
+	.byte	'AlarmBaseType',0,6,163,1,2
+	.word	.L127-.L17
+.L127:
+	.byte	15,6,154,1,9,12,14
+	.byte	'xMaxAllowedValue',0,4
+	.word	323
+	.byte	2,35,0,14
+	.byte	'xTicksPerBase',0,4
+	.word	323
+	.byte	2,35,4,14
+	.byte	'xMinCycle',0,4
+	.word	323
+	.byte	2,35,8,0,10
+	.byte	'AlarmBaseRefType',0,6,165,1,25
+	.word	.L128-.L17
+.L128:
+	.byte	7
+	.word	1080
+	.byte	10
+	.byte	'AlarmType',0,6,167,1,17
+	.word	209
+	.byte	10
+	.byte	'CounterType',0,6,169,1,17
+	.word	209
+	.byte	10
+	.byte	'EventMaskType',0,6,171,1,18
+	.word	790
+	.byte	10
+	.byte	'EventMaskRefType',0,6,173,1,24
+	.word	.L129-.L17
+.L129:
+	.byte	7
+	.word	790
+	.byte	10
+	.byte	'ResourceType',0,6,174,1,17
+	.word	209
+	.byte	10
+	.byte	'StatusType',0,6,175,1,17
+	.word	209
+	.byte	10
+	.byte	'AppModeType',0,6,176,1,17
+	.word	209
+	.byte	10
+	.byte	'ApplicationType',0,6,185,1,17
+	.word	209
+	.byte	10
+	.byte	'ScheduleTableType',0,6,214,1,17
+	.word	209
+	.byte	10
+	.byte	'ScheduleTableStatusType',0,6,230,1,17
+	.word	209
+	.byte	10
+	.byte	'OsScheduleTableAutostartType',0,6,255,1,17
+	.word	209
+	.byte	10
+	.byte	'OsScheduleTblSyncStrategyType',0,6,137,2,17
+	.word	209
+	.byte	10
+	.byte	'OsCpuIplType',0,7,43,17
+	.word	209
+	.byte	10
+	.byte	'TaskStackType',0,1,89,18
+	.word	829
+	.byte	10
+	.byte	'TaskStackRefType',0,1,96,3
+	.word	.L130-.L17
+.L130:
+	.byte	15,1,91,9,4,14
+	.byte	'pxStackTop',0,4
+	.word	.L131-.L17
+	.byte	2,35,0,0
+.L131:
+	.byte	7
+	.word	829
+	.byte	10
+	.byte	'PriorityType',0,1,98,17
+	.word	209
+	.byte	10
+	.byte	'TaskEntryType',0,1,100,16
+	.word	.L132-.L17
+.L132:
+	.byte	7
+	.word	.L133-.L17
+.L133:
+	.byte	17,1,1,10
+	.byte	'TcbType',0,1,112,2
+	.word	.L134-.L17
+.L134:
+	.byte	18
+	.byte	'_TaskControlBlockTag',0,1,101,16,8,14
+	.byte	'pxStack',0,4
+	.word	1599
+	.byte	2,35,0,14
+	.byte	'xPriority',0,1
+	.word	209
+	.byte	2,35,4,14
+	.byte	'xState',0,1
+	.word	209
+	.byte	2,35,5,14
+	.byte	'xActivateCount',0,1
+	.word	209
+	.byte	2,35,6,0,10
+	.byte	'AlarmClassType',0,1,117,17
+	.word	209
+	.byte	10
+	.byte	'AlarmContainerType',0,1,121,19
+	.word	829
+	.byte	10
+	.byte	'AlmCtrlBlkType',0,1,129,1,2
+	.word	.L135-.L17
+.L135:
+	.byte	18
+	.byte	'_AlmCtrlBlkTag',0,1,123,16,12,14
+	.byte	'xAlarmValue',0,4
+	.word	323
+	.byte	2,35,0,14
+	.byte	'xCycle',0,4
+	.word	323
+	.byte	2,35,4,14
+	.byte	'pxNext',0,1
+	.word	209
+	.byte	2,35,8,14
+	.byte	'pxPrev',0,1
+	.word	209
+	.byte	2,35,9,0,10
+	.byte	'OsSchedTblCtrlBlkType',0,1,162,1,2
+	.word	.L136-.L17
+.L136:
+	.byte	15,1,139,1,9,20,14
+	.byte	'xSchedTblStatus',0,1
+	.word	209
+	.byte	2,35,0,14
+	.byte	'xIterator',0,1
+	.word	209
+	.byte	2,35,1,14
+	.byte	'xSchedTblNextExpiryPointTime',0,4
+	.word	323
+	.byte	2,35,2,14
+	.byte	'xSchedTblStartingTime',0,4
+	.word	323
+	.byte	2,35,6,14
+	.byte	'xAdjustDirection',0,1
+	.word	209
+	.byte	2,35,10,14
+	.byte	'xDeviation',0,4
+	.word	323
+	.byte	2,35,12,14
+	.byte	'xNextOrPrevScheduleTable',0,1
+	.word	209
+	.byte	2,35,16,14
+	.byte	'pxNextSchedTbl',0,1
+	.word	209
+	.byte	2,35,17,14
+	.byte	'pxPrevSchedTbl',0,1
+	.word	209
+	.byte	2,35,18,0,10
+	.byte	'OsScheduleTableType',0,1,176,1,2
+	.word	.L137-.L17
+.L137:
+	.byte	15,1,163,1,9,28,14
+	.byte	'xOsScheduleTableDuration',0,4
+	.word	323
+	.byte	2,35,0,14
+	.byte	'xOsScheduleTableRepeating',0,1
+	.word	209
+	.byte	2,35,4,14
+	.byte	'xOsScheduleTableAccessingApplication',0,1
+	.word	209
+	.byte	2,35,5,14
+	.byte	'xOsScheduleTableCounterRef',0,1
+	.word	209
+	.byte	2,35,6,14
+	.byte	'xOsScheduleTableAutostartable',0,1
+	.word	209
+	.byte	2,35,7,14
+	.byte	'xOsScheduleTableAutostartType',0,1
+	.word	209
+	.byte	2,35,8,14
+	.byte	'xOsScheduleTableAutostartValue',0,4
+	.word	323
+	.byte	2,35,10,14
+	.byte	'xOsScheduleTableSyncStrategy',0,1
+	.word	209
+	.byte	2,35,14,14
+	.byte	'xOsScheduleTableMaxAdvance',0,4
+	.word	323
+	.byte	2,35,16,14
+	.byte	'xOsScheduleTableMaxRetard',0,4
+	.word	323
+	.byte	2,35,20,14
+	.byte	'xOsScheduleTableExplicitPrecision',0,4
+	.word	323
+	.byte	2,35,24,0,10
+	.byte	'OsSchedTblCmdType',0,1,184,1,3
+	.word	.L138-.L17
+.L138:
+	.byte	15,1,180,1,9,8,14
+	.byte	'xOffset',0,4
+	.word	323
+	.byte	2,35,0,14
+	.byte	'pxOsSchedTblCmd',0,4
+	.word	1647
+	.byte	2,35,4,0
+.L96:
+	.byte	8
+	.word	.L139-.L17
+.L139:
+	.byte	19,12
+	.word	1080
+	.byte	20,0,0
+.L97:
+	.byte	8
+	.word	.L140-.L17
+.L140:
+	.byte	19,3
+	.word	209
+	.byte	20,2,0
+.L98:
+	.byte	8
+	.word	.L141-.L17
+.L141:
+	.byte	19,12
+	.word	829
+	.byte	20,2,0
+.L99:
+	.byte	8
+	.word	.L142-.L17
+.L142:
+	.byte	19,3
+	.word	209
+	.byte	20,2,0
+.L100:
+	.byte	8
+	.word	.L143-.L17
+.L143:
+	.byte	19,28
+	.word	1573
+	.byte	20,6,0
+.L101:
+	.byte	8
+	.word	.L144-.L17
+.L144:
+	.byte	19,7
+	.word	209
+	.byte	20,6,0
+.L102:
+	.byte	8
+	.word	.L145-.L17
+.L145:
+	.byte	19,28
+	.word	1625
+	.byte	20,6,0,7
+	.word	1652
+.L103:
+	.byte	8
+	.word	.L146-.L17
+.L146:
+	.byte	19,7
+	.word	209
+	.byte	20,6,0
+.L104:
+	.byte	8
+	.word	.L147-.L17
+.L147:
+	.byte	19,7
+	.word	209
+	.byte	20,6,0
+.L105:
+	.byte	8
+	.word	2872
+	.byte	10
+	.byte	'va_list',0,8,15,16
+	.word	.L148-.L17
+.L148:
+	.byte	7
+	.word	278
+	.byte	10
+	.byte	'size_t',0,2,24,25
+	.word	323
+	.byte	10
+	.byte	'fpos_t',0,2,64,25
+	.word	829
+	.byte	10
+	.byte	'_iob_flag_t',0,2,75,25
+	.word	790
+	.byte	10
+	.byte	'FILE',0,2,89,25
+	.word	.L149-.L17
+.L149:
+	.byte	18
+	.byte	'_iobuf',0,2,78,8,20,14
+	.byte	'_ptr',0,4
+	.word	2902
+	.byte	2,35,0,14
+	.byte	'_base',0,4
+	.word	2902
+	.byte	2,35,4,14
+	.byte	'_cnt',0,4
+	.word	261
+	.byte	2,35,8,14
+	.byte	'_bufsiz',0,4
+	.word	261
+	.byte	2,35,12,14
+	.byte	'_flag',0,2
+	.word	790
+	.byte	2,35,16,14
+	.byte	'_file',0,1
+	.word	209
+	.byte	2,35,18,0
+.L106:
+	.byte	19,128,4
+	.word	829
+	.byte	20,127,0,0
+	.sdecl	'.debug_abbrev',debug
+	.sect	'.debug_abbrev'
+.L18:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,16,6,0,0,2,46,0,3,8,58,15,59,15,57,15,73,19,54,15,39,12,63,12,60
+	.byte	12,0,0,3,36,0,3,8,11,15,62,15,0,0,4,46,1,3,8,58,15,59,15,57,15,73,19,54,15,39,12,63,12,60,12,0,0,5,5,0
+	.byte	58,15,59,15,57,15,73,19,0,0,6,24,0,58,15,59,15,57,15,0,0,7,15,0,73,19,0,0,8,38,0,73,19,0,0,9,46,0,3,8
+	.byte	58,15,59,15,57,15,54,15,63,12,60,12,0,0,10,22,0,3,8,58,15,59,15,57,15,73,19,0,0,11,21,0,54,15,0,0,12,53
+	.byte	0,73,19,0,0,13,23,1,58,15,59,15,57,15,11,15,0,0,14,13,0,3,8,11,15,73,19,56,9,0,0,15,19,1,58,15,59,15,57
+	.byte	15,11,15,0,0,16,13,0,3,8,11,15,73,19,13,15,12,15,56,9,0,0,17,21,0,54,15,39,12,0,0,18,19,1,3,8,58,15,59
+	.byte	15,57,15,11,15,0,0,19,1,1,11,15,73,19,0,0,20,33,0,47,15,0,0,0
+	.sdecl	'.debug_line',debug
+	.sect	'.debug_line'
+.L19:
+	.word	.L151-.L150
+.L150:
+	.half	3
+	.word	.L153-.L152
+.L152:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Os.h',0,0,0,0
+	.byte	'D:\\Program Files\\TASKING\\TriCore v3.5r1\\ctc\\include\\stdio.h',0,0,0,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0,0,0,0
+	.byte	'D:\\Program Files\\TASKING\\TriCore v3.5r1\\ctc\\include\\sfr\\regtc1797.sfr',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Bsp\\Cpu\\Platform_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\include\\Std_Types.h',0,0,0,0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\osek_test\\GaInOS_Studio\\Os_Cfg.h',0,0,0,0
+	.byte	'D:\\Program Files\\TASKING\\TriCore v3.5r1\\ctc\\include\\stdarg.h',0,0,0,0,0
+.L153:
+.L151:
+	.sdecl	'.debug_info',debug,cluster('TaskMainvTask1')
+	.sect	'.debug_info'
+.L20:
+	.word	233
+	.half	3
+	.word	.L21
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L23,.L22
+	.byte	2
+	.word	.L16
+	.byte	3
+	.byte	'TaskMainvTask1',0,1,128,1,1,1,1,1
+	.word	.L3,.L89,.L2
+	.byte	4
+	.word	.L3,.L89
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('TaskMainvTask1')
+	.sect	'.debug_abbrev'
+.L21:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('TaskMainvTask1')
+	.sect	'.debug_line'
+.L22:
+	.word	.L155-.L154
+.L154:
+	.half	3
+	.word	.L157-.L156
+.L156:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0,0,0,0,0
+.L157:
+	.byte	5,32,7,0,5,2
+	.word	.L3
+	.byte	3,130,1,1,5,23,9
+	.half	.L158-.L3
+	.byte	3,1,1,5,1,7,9
+	.half	.L24-.L158
+	.byte	3,1,0,1,1
+.L155:
+	.sdecl	'.debug_ranges',debug,cluster('TaskMainvTask1')
+	.sect	'.debug_ranges'
+.L23:
+	.word	-1,.L3,0,.L24-.L3,0,0
+	.sdecl	'.debug_info',debug,cluster('TaskMainvTask2')
+	.sect	'.debug_info'
+.L25:
+	.word	233
+	.half	3
+	.word	.L26
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L28,.L27
+	.byte	2
+	.word	.L16
+	.byte	3
+	.byte	'TaskMainvTask2',0,1,135,1,1,1,1,1
+	.word	.L5,.L90,.L4
+	.byte	4
+	.word	.L5,.L90
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('TaskMainvTask2')
+	.sect	'.debug_abbrev'
+.L26:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('TaskMainvTask2')
+	.sect	'.debug_line'
+.L27:
+	.word	.L160-.L159
+.L159:
+	.half	3
+	.word	.L162-.L161
+.L161:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0,0,0,0,0
+.L162:
+	.byte	5,32,7,0,5,2
+	.word	.L5
+	.byte	3,137,1,1,5,23,9
+	.half	.L163-.L5
+	.byte	3,1,1,5,1,7,9
+	.half	.L29-.L163
+	.byte	3,1,0,1,1
+.L160:
+	.sdecl	'.debug_ranges',debug,cluster('TaskMainvTask2')
+	.sect	'.debug_ranges'
+.L28:
+	.word	-1,.L5,0,.L29-.L5,0,0
+	.sdecl	'.debug_info',debug,cluster('TaskMainvTask3')
+	.sect	'.debug_info'
+.L30:
+	.word	233
+	.half	3
+	.word	.L31
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L33,.L32
+	.byte	2
+	.word	.L16
+	.byte	3
+	.byte	'TaskMainvTask3',0,1,142,1,1,1,1,1
+	.word	.L7,.L91,.L6
+	.byte	4
+	.word	.L7,.L91
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('TaskMainvTask3')
+	.sect	'.debug_abbrev'
+.L31:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('TaskMainvTask3')
+	.sect	'.debug_line'
+.L32:
+	.word	.L165-.L164
+.L164:
+	.half	3
+	.word	.L167-.L166
+.L166:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0,0,0,0,0
+.L167:
+	.byte	5,32,7,0,5,2
+	.word	.L7
+	.byte	3,145,1,1,5,23,9
+	.half	.L168-.L7
+	.byte	3,1,1,5,1,7,9
+	.half	.L34-.L168
+	.byte	3,1,0,1,1
+.L165:
+	.sdecl	'.debug_ranges',debug,cluster('TaskMainvTask3')
+	.sect	'.debug_ranges'
+.L33:
+	.word	-1,.L7,0,.L34-.L7,0,0
+	.sdecl	'.debug_info',debug,cluster('TaskMainvTask4')
+	.sect	'.debug_info'
+.L35:
+	.word	233
+	.half	3
+	.word	.L36
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L38,.L37
+	.byte	2
+	.word	.L16
+	.byte	3
+	.byte	'TaskMainvTask4',0,1,150,1,1,1,1,1
+	.word	.L9,.L92,.L8
+	.byte	4
+	.word	.L9,.L92
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('TaskMainvTask4')
+	.sect	'.debug_abbrev'
+.L36:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('TaskMainvTask4')
+	.sect	'.debug_line'
+.L37:
+	.word	.L170-.L169
+.L169:
+	.half	3
+	.word	.L172-.L171
+.L171:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0,0,0,0,0
+.L172:
+	.byte	5,32,7,0,5,2
+	.word	.L9
+	.byte	3,152,1,1,5,23,9
+	.half	.L173-.L9
+	.byte	3,1,1,5,1,7,9
+	.half	.L39-.L173
+	.byte	3,1,0,1,1
+.L170:
+	.sdecl	'.debug_ranges',debug,cluster('TaskMainvTask4')
+	.sect	'.debug_ranges'
+.L38:
+	.word	-1,.L9,0,.L39-.L9,0,0
+	.sdecl	'.debug_info',debug,cluster('TaskMainvTask5')
+	.sect	'.debug_info'
+.L40:
+	.word	233
+	.half	3
+	.word	.L41
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L43,.L42
+	.byte	2
+	.word	.L16
+	.byte	3
+	.byte	'TaskMainvTask5',0,1,157,1,1,1,1,1
+	.word	.L11,.L93,.L10
+	.byte	4
+	.word	.L11,.L93
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('TaskMainvTask5')
+	.sect	'.debug_abbrev'
+.L41:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('TaskMainvTask5')
+	.sect	'.debug_line'
+.L42:
+	.word	.L175-.L174
+.L174:
+	.half	3
+	.word	.L177-.L176
+.L176:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0,0,0,0,0
+.L177:
+	.byte	5,32,7,0,5,2
+	.word	.L11
+	.byte	3,159,1,1,5,23,9
+	.half	.L178-.L11
+	.byte	3,1,1,5,1,7,9
+	.half	.L44-.L178
+	.byte	3,1,0,1,1
+.L175:
+	.sdecl	'.debug_ranges',debug,cluster('TaskMainvTask5')
+	.sect	'.debug_ranges'
+.L43:
+	.word	-1,.L11,0,.L44-.L11,0,0
+	.sdecl	'.debug_info',debug,cluster('TaskMainvTask6')
+	.sect	'.debug_info'
+.L45:
+	.word	233
+	.half	3
+	.word	.L46
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L48,.L47
+	.byte	2
+	.word	.L16
+	.byte	3
+	.byte	'TaskMainvTask6',0,1,164,1,1,1,1,1
+	.word	.L13,.L94,.L12
+	.byte	4
+	.word	.L13,.L94
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('TaskMainvTask6')
+	.sect	'.debug_abbrev'
+.L46:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('TaskMainvTask6')
+	.sect	'.debug_line'
+.L47:
+	.word	.L180-.L179
+.L179:
+	.half	3
+	.word	.L182-.L181
+.L181:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0,0,0,0,0
+.L182:
+	.byte	5,32,7,0,5,2
+	.word	.L13
+	.byte	3,166,1,1,5,23,9
+	.half	.L183-.L13
+	.byte	3,1,1,5,1,7,9
+	.half	.L49-.L183
+	.byte	3,1,0,1,1
+.L180:
+	.sdecl	'.debug_ranges',debug,cluster('TaskMainvTask6')
+	.sect	'.debug_ranges'
+.L48:
+	.word	-1,.L13,0,.L49-.L13,0,0
+	.sdecl	'.debug_info',debug,cluster('TaskMainvTaskStart')
+	.sect	'.debug_info'
+.L50:
+	.word	237
+	.half	3
+	.word	.L51
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1
+	.word	.L53,.L52
+	.byte	2
+	.word	.L16
+	.byte	3
+	.byte	'TaskMainvTaskStart',0,1,171,1,1,1,1,1
+	.word	.L15,.L95,.L14
+	.byte	4
+	.word	.L15,.L95
+	.byte	0,0
+	.sdecl	'.debug_abbrev',debug,cluster('TaskMainvTaskStart')
+	.sect	'.debug_abbrev'
+.L51:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,11,0,17,1,18,1,0,0,0
+	.sdecl	'.debug_line',debug,cluster('TaskMainvTaskStart')
+	.sect	'.debug_line'
+.L52:
+	.word	.L185-.L184
+.L184:
+	.half	3
+	.word	.L187-.L186
+.L186:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0,0,0,0,0
+.L187:
+	.byte	5,36,7,0,5,2
+	.word	.L15
+	.byte	3,173,1,1,5,23,9
+	.half	.L188-.L15
+	.byte	3,1,1,5,1,7,9
+	.half	.L54-.L188
+	.byte	3,1,0,1,1
+.L185:
+	.sdecl	'.debug_ranges',debug,cluster('TaskMainvTaskStart')
+	.sect	'.debug_ranges'
+.L53:
+	.word	-1,.L15,0,.L54-.L15,0,0
+	.sdecl	'.debug_info',debug,cluster('OSCounterBaseTable')
+	.sect	'.debug_info'
+.L55:
+	.word	214
+	.half	3
+	.word	.L56
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'OSCounterBaseTable',0,3,5,21
+	.word	.L96
+	.byte	1,5,3
+	.word	OSCounterBaseTable
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSCounterBaseTable')
+	.sect	'.debug_abbrev'
+.L56:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSAlarmClassTable')
+	.sect	'.debug_info'
+.L57:
+	.word	213
+	.half	3
+	.word	.L58
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'OSAlarmClassTable',0,3,15,22
+	.word	.L97
+	.byte	1,5,3
+	.word	OSAlarmClassTable
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSAlarmClassTable')
+	.sect	'.debug_abbrev'
+.L58:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSAlarmContainerTable')
+	.sect	'.debug_info'
+.L59:
+	.word	217
+	.half	3
+	.word	.L60
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'OSAlarmContainerTable',0,3,29,26
+	.word	.L98
+	.byte	1,5,3
+	.word	OSAlarmContainerTable
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSAlarmContainerTable')
+	.sect	'.debug_abbrev'
+.L60:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSAlarmOwnerTable')
+	.sect	'.debug_info'
+.L61:
+	.word	213
+	.half	3
+	.word	.L62
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'OSAlarmOwnerTable',0,3,22,19
+	.word	.L99
+	.byte	1,5,3
+	.word	OSAlarmOwnerTable
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSAlarmOwnerTable')
+	.sect	'.debug_abbrev'
+.L62:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSTaskStackTable')
+	.sect	'.debug_info'
+.L63:
+	.word	212
+	.half	3
+	.word	.L64
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'OSTaskStackTable',0,3,45,24
+	.word	.L100
+	.byte	1,5,3
+	.word	OSTaskStackTable
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSTaskStackTable')
+	.sect	'.debug_abbrev'
+.L64:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSTaskInitPriorityTable')
+	.sect	'.debug_info'
+.L65:
+	.word	219
+	.half	3
+	.word	.L66
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'OSTaskInitPriorityTable',0,3,56,20
+	.word	.L101
+	.byte	1,5,3
+	.word	OSTaskInitPriorityTable
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSTaskInitPriorityTable')
+	.sect	'.debug_abbrev'
+.L66:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSTaskEntryTable')
+	.sect	'.debug_info'
+.L67:
+	.word	212
+	.half	3
+	.word	.L68
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'OSTaskEntryTable',0,3,117,21
+	.word	.L102
+	.byte	1,5,3
+	.word	OSTaskEntryTable
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSTaskEntryTable')
+	.sect	'.debug_abbrev'
+.L68:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSTaskAutoActivateTable')
+	.sect	'.debug_info'
+.L69:
+	.word	219
+	.half	3
+	.word	.L70
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'OSTaskAutoActivateTable',0,3,67,16
+	.word	.L103
+	.byte	1,5,3
+	.word	OSTaskAutoActivateTable
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSTaskAutoActivateTable')
+	.sect	'.debug_abbrev'
+.L70:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSMaxActivateCountTable')
+	.sect	'.debug_info'
+.L71:
+	.word	219
+	.half	3
+	.word	.L72
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'OSMaxActivateCountTable',0,3,79,15
+	.word	.L104
+	.byte	1,5,3
+	.word	OSMaxActivateCountTable
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSMaxActivateCountTable')
+	.sect	'.debug_abbrev'
+.L72:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('OSTskClsTypeTable')
+	.sect	'.debug_info'
+.L73:
+	.word	213
+	.half	3
+	.word	.L74
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'OSTskClsTypeTable',0,3,105,15
+	.word	.L105
+	.byte	1,5,3
+	.word	OSTskClsTypeTable
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('OSTskClsTypeTable')
+	.sect	'.debug_abbrev'
+.L74:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,63,12,2,9
+	.byte	0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_vTask1Stack')
+	.sect	'.debug_info'
+.L75:
+	.word	208
+	.half	3
+	.word	.L76
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'g_vTask1Stack',0,3,37,22
+	.word	.L106
+	.byte	5,3
+	.word	g_vTask1Stack
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_vTask1Stack')
+	.sect	'.debug_abbrev'
+.L76:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_vTask2Stack')
+	.sect	'.debug_info'
+.L77:
+	.word	208
+	.half	3
+	.word	.L78
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'g_vTask2Stack',0,3,38,22
+	.word	.L106
+	.byte	5,3
+	.word	g_vTask2Stack
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_vTask2Stack')
+	.sect	'.debug_abbrev'
+.L78:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_vTask3Stack')
+	.sect	'.debug_info'
+.L79:
+	.word	208
+	.half	3
+	.word	.L80
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'g_vTask3Stack',0,3,39,22
+	.word	.L106
+	.byte	5,3
+	.word	g_vTask3Stack
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_vTask3Stack')
+	.sect	'.debug_abbrev'
+.L80:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_vTask4Stack')
+	.sect	'.debug_info'
+.L81:
+	.word	208
+	.half	3
+	.word	.L82
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'g_vTask4Stack',0,3,40,22
+	.word	.L106
+	.byte	5,3
+	.word	g_vTask4Stack
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_vTask4Stack')
+	.sect	'.debug_abbrev'
+.L82:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_vTask5Stack')
+	.sect	'.debug_info'
+.L83:
+	.word	208
+	.half	3
+	.word	.L84
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'g_vTask5Stack',0,3,41,22
+	.word	.L106
+	.byte	5,3
+	.word	g_vTask5Stack
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_vTask5Stack')
+	.sect	'.debug_abbrev'
+.L84:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_vTask6Stack')
+	.sect	'.debug_info'
+.L85:
+	.word	208
+	.half	3
+	.word	.L86
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'g_vTask6Stack',0,3,42,22
+	.word	.L106
+	.byte	5,3
+	.word	g_vTask6Stack
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_vTask6Stack')
+	.sect	'.debug_abbrev'
+.L86:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_info',debug,cluster('g_vTaskStartStack')
+	.sect	'.debug_info'
+.L87:
+	.word	212
+	.half	3
+	.word	.L88
+	.byte	4,1
+	.byte	'F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c',0
+	.byte	'TASKING VX-toolset for TriCore: C compiler',0
+	.byte	'F:\\parai@foxmail.com\\nt\\GaInOS\\Bsp\\tc1797\\Project\\Debug\\',0,12,1,2
+	.word	.L16
+	.byte	3
+	.byte	'g_vTaskStartStack',0,3,43,22
+	.word	.L106
+	.byte	5,3
+	.word	g_vTaskStartStack
+	.byte	0
+	.sdecl	'.debug_abbrev',debug,cluster('g_vTaskStartStack')
+	.sect	'.debug_abbrev'
+.L88:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,73,16,2,9,0,0,0
+	.sdecl	'.debug_loc',debug,cluster('TaskMainvTask1')
+	.sect	'.debug_loc'
+.L2:
+	.word	-1,.L3,.L3-.L3,.L89-.L3
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('TaskMainvTask2')
+	.sect	'.debug_loc'
+.L4:
+	.word	-1,.L5,.L5-.L5,.L90-.L5
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('TaskMainvTask3')
+	.sect	'.debug_loc'
+.L6:
+	.word	-1,.L7,.L7-.L7,.L91-.L7
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('TaskMainvTask4')
+	.sect	'.debug_loc'
+.L8:
+	.word	-1,.L9,.L9-.L9,.L92-.L9
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('TaskMainvTask5')
+	.sect	'.debug_loc'
+.L10:
+	.word	-1,.L11,.L11-.L11,.L93-.L11
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('TaskMainvTask6')
+	.sect	'.debug_loc'
+.L12:
+	.word	-1,.L13,.L13-.L13,.L94-.L13
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('TaskMainvTaskStart')
+	.sect	'.debug_loc'
+.L14:
+	.word	-1,.L15,.L15-.L15,.L95-.L15
+	.half	2
+	.byte	138,0
+	.word	0,0
+	.sdecl	'.debug_frame',debug
+	.sect	'.debug_frame'
+.L189:
+	.word	48
+	.word	-1
+	.byte	3,0,2,1,27,12,26,0,8,26,8,27,8,28,8,29,8,30,8,31,8,16,8,17,8,24,8,25,8,32,8,33,8,34,8,35,8,36,8,37,8,38
+	.byte	8,39
+	.sdecl	'.debug_frame',debug,cluster('TaskMainvTask1')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L189,.L3,.L89-.L3
+	.sdecl	'.debug_frame',debug,cluster('TaskMainvTask2')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L189,.L5,.L90-.L5
+	.sdecl	'.debug_frame',debug,cluster('TaskMainvTask3')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L189,.L7,.L91-.L7
+	.sdecl	'.debug_frame',debug,cluster('TaskMainvTask4')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L189,.L9,.L92-.L9
+	.sdecl	'.debug_frame',debug,cluster('TaskMainvTask5')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L189,.L11,.L93-.L11
+	.sdecl	'.debug_frame',debug,cluster('TaskMainvTask6')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L189,.L13,.L94-.L13
+	.sdecl	'.debug_frame',debug,cluster('TaskMainvTaskStart')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L189,.L15,.L95-.L15
+
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   176  }
+; F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio/CfgObj.c	   177  
+
+	; Module end
