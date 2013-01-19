@@ -77,3 +77,7 @@ section_layout ::linear
 }
 
 
+section_layout ::linear
+{
+    group stack "ustack"( size = 1k );
+}

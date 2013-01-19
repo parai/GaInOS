@@ -7,7 +7,7 @@
 \par \plain\f4\fs22\cf0 Controller: \tab\tab\b TC1797
 \par \plain\f4\fs22\cf0 Compiler: \tab\tab\b Tasking 3.1
 \par 
-\par \plain\f4\fs22\cf0 Date: \tab\tab\tab\b 2013/1/18 20:03:55
+\par \plain\f4\fs22\cf0 Date: \tab\tab\tab\b 2013/1/19 11:12:12
 \par 
 \par 
 \par \plain\f4\fs22\cf2\b Please read this document carefully and note
@@ -21,6 +21,8 @@
 \plain\f4\fs20\cf0\b
 \par \tab\tab\tab DAVE.H
 \par \tab\tab\tab MAIN.C
+\par \tab\tab\tab INT.H
+\par \tab\tab\tab INT.C
 \par \tab\tab\tab STM.H
 \par \tab\tab\tab STM.C
 \par 
@@ -218,6 +220,57 @@
 \par 
 
 \par \plain\f4\fs20\cf0
+\par \plain\f4\fs28\cf0\ul Interrupt System (INT)
+\par
+\par \plain\f4\fs24\cf0 Macros:\f4\fs20\cf0
+\par \plain\f4\fs24\cf0 Functions:\f4\fs20\cf0
+\par
+\par \plain\f4\fs20\cf0 \tab Function:
+\par \plain\f4\fs20\cf0\b \tab \tab void INT_vInit(void)\plain\f4\fs20\cf0
+\par \tab Description:
+\par \plain\f4\fs20\cf0\i
+\tab \tab This is the initialization function of the INT function
+
+\par \tab \tab library. It is assumed that the SFRs used by this library
+
+\par \tab \tab are in their reset state.
+
+\par \plain\f4\fs20\cf0 \tab Returnvalue:
+\par \tab \tab \plain\f4\fs20\cf0\b None\plain\f4\fs20\cf0
+\par \plain\f4\fs20\cf0 \tab Parameters:
+\par \plain\f4\fs20\cf0\b 
+\tab \tab None
+
+\par
+\par \plain\f4\fs20\cf0 \tab Function:
+\par \plain\f4\fs20\cf0\b \tab \tab void INT_viCPU0(void)\plain\f4\fs20\cf0
+\par \tab Description:
+\par \plain\f4\fs20\cf0\i
+\tab \tab This is the interrupt service routine for the software
+
+\par \tab \tab interrupt 0.
+
+\par \tab \tab Please note that you have to add application specific code
+
+\par \tab \tab to this function.
+
+\par \plain\f4\fs20\cf0 \tab Returnvalue:
+\par \tab \tab \plain\f4\fs20\cf0\b None\plain\f4\fs20\cf0
+\par \plain\f4\fs20\cf0 \tab Parameters:
+\par \plain\f4\fs20\cf0\b 
+\tab \tab None
+
+\par
+\par \plain\f4\fs24\cf0 Initialization:
+\par \plain\f4\fs20\cf0\b
+\par
+\tab Configuration of the used CPU Interrupts:\par 
+\tab - CPU0 service request node configuration:\par 
+\tab - CPU0 interrupt priority level (SRPN) = 15\par 
+\tab - CPU0 CPU interrupt is selected\par 
+\par 
+
+\par \plain\f4\fs20\cf0
 \par \plain\f4\fs28\cf0\ul System Timer (STM)
 \par
 \par \plain\f4\fs24\cf0 Macros:\f4\fs20\cf0
@@ -245,6 +298,25 @@
 \par \tab Description:
 \par \plain\f4\fs20\cf0\i
 \tab \tab This is the interrupt service routine 0 of STM. It is
+
+\par \tab \tab called if the selected compare match is pending.
+
+\par \tab \tab Please note that you have to add application specific code
+
+\par \tab \tab to this function.
+
+\par \plain\f4\fs20\cf0 \tab Returnvalue:
+\par \tab \tab \plain\f4\fs20\cf0\b None\plain\f4\fs20\cf0
+\par \plain\f4\fs20\cf0 \tab Parameters:
+\par \plain\f4\fs20\cf0\b 
+\tab \tab None
+
+\par
+\par \plain\f4\fs20\cf0 \tab Function:
+\par \plain\f4\fs20\cf0\b \tab \tab void STM_viSRN1(void)\plain\f4\fs20\cf0
+\par \tab Description:
+\par \plain\f4\fs20\cf0\i
+\tab \tab This is the interrupt service routine 1 of STM. It is
 
 \par \tab \tab called if the selected compare match is pending.
 
@@ -309,16 +381,21 @@
 \tab - request on compare match with CMP0 is enabled and located to STMIR0\par 
 \par 
 \tab STM Compare 1 configuration:\par 
-\tab - lowest bit number of STM which is compared with CMP1 is 0\par 
-\tab - 1 bit(s) in register CMP1 are used for the compare operation with STM\par 
-\tab - required compare value of CMP1 is 0x00000000\par 
-\tab - real compare value of CMP1 is 0x00000000\par 
-\tab - request on compare match with CMP1 is not enabled\par 
+\tab - lowest bit number of STM which is compared with CMP1 is 7\par 
+\tab - 10 bit(s) in register CMP1 are used for the compare operation with\par 
+\tab STM\par 
+\tab - required compare value of CMP1 is 0x000003E8\par 
+\tab - real compare value of CMP1 is 0x000003E8\par 
+\tab - request on compare match with CMP1 is enabled and located to STMIR1\par 
 \par 
 \tab Configuration of the used STM Interrupts:\par 
 \tab - SRN0 service request node configuration:\par 
 \tab - SRN0 interrupt priority level (SRPN) = 1\par 
 \tab - SRN0 CPU interrupt is selected\par 
+\par 
+\tab - SRN1 service request node configuration:\par 
+\tab - SRN1 interrupt priority level (SRPN) = 2\par 
+\tab - SRN1 CPU interrupt is selected\par 
 \par 
 
 }

@@ -4,7 +4,7 @@
 		<GaInOsCpuType>MC9S12(X)</GaInOsCpuType>
 		<GaInOsMaxIpl>7</GaInOsMaxIpl>
 		<GaInOsMaxPriority>63</GaInOsMaxPriority>
-		<GaInOsConfCls>ECC2</GaInOsConfCls>
+		<GaInOsConfCls>BCC1</GaInOsConfCls>
 		<GaInOsSchedPolicy>FULL_PREEMPTIVE_SCHEDULE</GaInOsSchedPolicy>
 		<GaInOsStatusLevel>OS_STATUS_STANDARD</GaInOsStatusLevel>
 		<GaInOsUseAlarm>True</GaInOsUseAlarm>
@@ -30,7 +30,7 @@
 		<GaInOsTask>
 			<TaskName>vTask2</TaskName>
 			<TaskType>BASIC_TASK</TaskType>
-			<TaskPriority>1</TaskPriority>
+			<TaskPriority>2</TaskPriority>
 			<TaskStackSize>512</TaskStackSize>
 			<TaskMaxActCnt>1</TaskMaxActCnt>
 			<TaskAutoStart>False</TaskAutoStart>
@@ -43,7 +43,7 @@
 		<GaInOsTask>
 			<TaskName>vTask3</TaskName>
 			<TaskType>BASIC_TASK</TaskType>
-			<TaskPriority>1</TaskPriority>
+			<TaskPriority>3</TaskPriority>
 			<TaskStackSize>512</TaskStackSize>
 			<TaskMaxActCnt>1</TaskMaxActCnt>
 			<TaskAutoStart>False</TaskAutoStart>
@@ -56,7 +56,7 @@
 		<GaInOsTask>
 			<TaskName>vTask4</TaskName>
 			<TaskType>BASIC_TASK</TaskType>
-			<TaskPriority>1</TaskPriority>
+			<TaskPriority>4</TaskPriority>
 			<TaskStackSize>512</TaskStackSize>
 			<TaskMaxActCnt>1</TaskMaxActCnt>
 			<TaskAutoStart>False</TaskAutoStart>
@@ -69,7 +69,7 @@
 		<GaInOsTask>
 			<TaskName>vTask5</TaskName>
 			<TaskType>BASIC_TASK</TaskType>
-			<TaskPriority>1</TaskPriority>
+			<TaskPriority>5</TaskPriority>
 			<TaskStackSize>512</TaskStackSize>
 			<TaskMaxActCnt>1</TaskMaxActCnt>
 			<TaskAutoStart>False</TaskAutoStart>
@@ -82,7 +82,7 @@
 		<GaInOsTask>
 			<TaskName>vTask6</TaskName>
 			<TaskType>BASIC_TASK</TaskType>
-			<TaskPriority>1</TaskPriority>
+			<TaskPriority>6</TaskPriority>
 			<TaskStackSize>512</TaskStackSize>
 			<TaskMaxActCnt>1</TaskMaxActCnt>
 			<TaskAutoStart>False</TaskAutoStart>

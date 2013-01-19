@@ -123,25 +123,116 @@ void __vPortSwitch2Task(void)
     }
 }
 
+/*
+ * When a task is deleted, it is yielded permanently until the IDLE task
+ * has an opportunity to reclaim the memory that that task was using.
+ * Typically, the memory used by a task is the TCB and Stack but in the
+ * TriCore this includes the CSAs that were consumed as part of the Call
+ * Stack. These CSAs can only be returned to the Globally Free Pool when
+ * they are not part of the current Call Stack, hence, delaying the
+ * reclamation until the IDLE task is freeing the task's other resources.
+ * This function uses the head of the linked list of CSAs (from when the
+ * task yielded for the last time) and finds the tail (the very bottom of
+ * the call stack) and inserts this list at the head of the Free list,
+ * attaching the existing Free List to the tail of the reclaimed call stack.
+ *
+ * NOTE: the IDLE task needs processing time to complete this function
+ * and in heavily loaded systems, the Free CSAs may be consumed faster
+ * than they can be freed assuming that tasks are being spawned and
+ * deleted frequently.
+ */
+void vPortReclaimCSA( unsigned long pxHeadCSA )
+{
+unsigned long  pxTailCSA, pxFreeCSA;
+unsigned long *pulNextCSA;
+
+	pxHeadCSA = pxHeadCSA & vPortCSA_FCX_MASK;
+
+	/* Mask off everything in the CSA link field other than the address.  If
+	the	address is NULL, then the CSA is not linking anywhere and there is
+	nothing	to do. */
+	pxTailCSA = pxHeadCSA;
+
+	/* Convert the link value to contain just a raw address and store this
+	in a local variable. */
+	pulNextCSA = vPortCSA_TO_ADDRESS( pxTailCSA );
+
+	/* Iterate over the CSAs that were consumed as part of the task.  The
+	first field in the CSA is the pointer to then next CSA.  Mask off
+	everything in the pointer to the next CSA, other than the link address.
+	If this is NULL, then the CSA currently being pointed to is the last in
+	the chain. */
+	while( 0UL != ( pulNextCSA[ 0 ] & vPortCSA_FCX_MASK ) )
+	{
+		/* Clear all bits of the pointer to the next in the chain, other
+		than the address bits themselves. */
+		pulNextCSA[ 0 ] = pulNextCSA[ 0 ] & vPortCSA_FCX_MASK;
+
+		/* Move the pointer to point to the next CSA in the list. */
+		pxTailCSA = pulNextCSA[ 0 ];
+
+		/* Update the local pointer to the CSA. */
+		pulNextCSA = vPortCSA_TO_ADDRESS( pxTailCSA );
+	}
+
+	{
+		/* Look up the current free CSA head. */
+		__dsync();
+		pxFreeCSA = __mfcr( FCX );
+
+		/* Join the current Free onto the Tail of what is being reclaimed. */
+		pulNextCSA[ 0 ] = pxFreeCSA;
+
+		/* Move the head of the reclaimed into the Free. */
+		__dsync();
+		__mtcr( FCX, pxHeadCSA );
+		__isync();
+	}
+	/* Here When return,the link info in PCXI is of no use.
+	 * It has been put to FCX*/
+}
+//__interrupt(vPort_CPU0INT)
 void vPortDispatcher(void)
 {
+	__disable();
     if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
     {
         vPortSaveContext();
         vPortSaveSP();
     }
+	else
+	{
+		/* Free the csa used by task OSCurTsk or maybe the preIdle */
+		vPortReclaimCSA(__mfcr(PCXI));
+	}
+    /* As the link info in PCXI maybe invalid caused by vPortReclaimCSA()
+       or already saved by OSCurTsk.So Should Clear It */
+	__mtcr(PCXI,0);
+    /* Don't consume CSA.So just Jump*/
     __asm("j __vPortSwitch2Task");
 }
-  
-void OSTickISR(void)
-{  
-    vPortEnterISR();
+#if 1
+void __interrupt(vPort_STM_INT0) OSTickISR0(void)
+{
+	vPortEnterISR();
 
-#if(cfgOS_COUNTER_NUM >0)    
-    (void)IncrementCounter(0);		/* Process the first counter,Default as system counter */
-#endif
-    vPortTickIsrClear();
+	#if(cfgOS_COUNTER_NUM >0)
+		(void)IncrementCounter(0);		/* Process the first counter,Default as system counter */
+	#endif
+	vPortTickIsr0Clear();
 
-    vPortLeaveISR();
+	vPortLeaveISR();
 }
+void __interrupt(vPort_STM_INT1) OSTickISR1(void)
+{
+	vPortEnterISR();
+
+	#if(cfgOS_COUNTER_NUM >1)
+		(void)IncrementCounter(1);		/* Process the first counter,Default as system counter */
+	#endif
+	vPortTickIsr1Clear();
+
+	vPortLeaveISR();
+}
+#endif
 

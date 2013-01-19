@@ -59,11 +59,9 @@
 
 /* use the software interrupt to dispatch the high priority task */
 #define vPortDispatch() vPortDispatcher()
+//__syscall(0)
 #define vPortEnableInterrupt()  __enable()
 #define vPortDisableInterrupt() __disable()
-
-#define INIT_IPL = 0;
-#define INIT_CCR = 0;
 
 #define vPortSaveMsrAndDisableInterrupt(xMSR)
 
@@ -93,12 +91,14 @@
         __asm( "rfe" );                         \
     }
 
-
-#define vPortTickIsrClear()
+#define vPort_STM_INT0 0x01
+#define vPort_STM_INT1 0x02
+#define vPort_CPU0INT    0x0F
+#define vPortTickIsr0Clear() STM_ISRR.B.CMP0IRR = 1
+#define vPortTickIsr1Clear() STM_ISRR.B.CMP1IRR = 1
 
 #define vPortEnterISR()                                                 \
     vPortSaveContext();                                                 \
-                                                                        \
     if(0x00u == OSIsr2Nesting)                                          \
     {                                                                   \
         if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)  \
@@ -109,7 +109,7 @@
     OSEnterISR()
 
 #define vPortLeaveISR()                         \
-    OSExitISR();                               \
+    OSExitISR();                                \
     vPortRestoreContext()
 
 

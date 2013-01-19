@@ -12,7 +12,7 @@
 // @Description   This file contains functions that use the STM module.
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/18 20:03:55
+// @Date          2013/1/19 11:12:12
 //
 //****************************************************************************
 
@@ -112,7 +112,7 @@
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/18
+// @Date          2013/1/19
 //
 //****************************************************************************
 
@@ -188,16 +188,17 @@ void STM_vInit(void)
   ///  -----------------------------------------------------------------------
   ///  STM Compare 1 configuration:
   ///  -----------------------------------------------------------------------
-  ///  - lowest bit number of STM which is compared with CMP1 is 0
-  ///  - 1 bit(s) in register CMP1 are used for the compare operation with STM
-  ///  - required compare value of CMP1 is 0x00000000
-  ///  - real compare value of CMP1 is 0x00000000
-  ///  - request on compare match with CMP1 is not enabled
+  ///  - lowest bit number of STM which is compared with CMP1 is 7
+  ///  - 10 bit(s) in register CMP1 are used for the compare operation with 
+  ///    STM
+  ///  - required compare value of CMP1 is 0x000003E8
+  ///  - real compare value of CMP1 is 0x000003E8
+  ///  - request on compare match with CMP1 is enabled and located to STMIR1
 
-  STM_CMP1.U     = 0x00000000;   // load compare register 1
+  STM_CMP1.U     = 0x000003E8;   // load compare register 1
 
-  STM_CMCON.U    = 0x00000709;   // load compare match control register
-  STM_ICR.U      = 0x00000001;   // load interrupt control register
+  STM_CMCON.U    = 0x07090709;   // load compare match control register
+  STM_ICR.U      = 0x00000051;   // load interrupt control register
 
   ///  -----------------------------------------------------------------------
   ///  Configuration of the used STM Interrupts:
@@ -207,6 +208,12 @@ void STM_vInit(void)
   ///  - SRN0 CPU interrupt is selected
 
   STM_SRC0.U     = 0x00001001;   // set service request control register
+
+  ///  - SRN1 service request node configuration:
+  ///  - SRN1 interrupt priority level (SRPN) = 2
+  ///  - SRN1 CPU interrupt is selected
+
+  STM_SRC1.U     = 0x00001002;   // set service request control register
 
 
   // USER CODE BEGIN (Init,3)
@@ -232,12 +239,12 @@ void STM_vInit(void)
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/18
+// @Date          2013/1/19
 //
 //****************************************************************************
 
 // USER CODE BEGIN (SRN0,1)
-
+#if 0
 // USER CODE END
 
 void INTERRUPT (STM_INT0) STM_viSRN0(void)
@@ -255,15 +262,6 @@ void INTERRUPT (STM_INT0) STM_viSRN0(void)
     STM_ISRR.B.CMP0IRR = 1;  // clear request bit of CMP0
   }
 
-  if(STM_ICR.B.CMP1IR == 1)   // if compare match of CMP1 is pending
-  {
-    // USER CODE BEGIN (SRN0,4)
-
-    // USER CODE END
-
-    STM_ISRR.B.CMP1IRR = 1;  // clear request bit of CMP1
-  }
-
   // USER CODE BEGIN (SRN0,5)
 
   // USER CODE END
@@ -271,8 +269,54 @@ void INTERRUPT (STM_INT0) STM_viSRN0(void)
 } //  End of function STM_viSRN0
 
 
+//****************************************************************************
+// @Function      void STM_viSRN1(void) 
+//
+//----------------------------------------------------------------------------
+// @Description   This is the interrupt service routine 1 of STM. It is 
+//                called if the selected compare match is pending.
+//                Please note that you have to add application specific code 
+//                to this function.
+//
+//----------------------------------------------------------------------------
+// @Returnvalue   None
+//
+//----------------------------------------------------------------------------
+// @Parameters    None
+//
+//----------------------------------------------------------------------------
+// @Date          2013/1/19
+//
+//****************************************************************************
+
+// USER CODE BEGIN (SRN1,1)
+
+// USER CODE END
+
+void INTERRUPT (STM_INT1) STM_viSRN1(void)
+{
+  // USER CODE BEGIN (SRN1,2)
+
+  // USER CODE END
+
+  if(STM_ICR.B.CMP1IR == 1)   // if compare match of CMP1 is pending
+  {
+    // USER CODE BEGIN (SRN1,4)
+
+    // USER CODE END
+
+    STM_ISRR.B.CMP1IRR = 1;  // clear request bit of CMP1
+  }
+
+  // USER CODE BEGIN (SRN1,5)
+
+  // USER CODE END
+
+} //  End of function STM_viSRN1
+
+
 
 // USER CODE BEGIN (STM_General,10)
-
+#endif
 // USER CODE END
 

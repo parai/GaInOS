@@ -56,11 +56,11 @@ const TaskStackRefType OSTaskStackTable[cfgOS_TASK_NUM]=
 const PriorityType OSTaskInitPriorityTable[cfgOS_TASK_NUM]=
 {
 	1,		/* vTask1 */
-	1,		/* vTask2 */
-	1,		/* vTask3 */
-	1,		/* vTask4 */
-	1,		/* vTask5 */
-	1,		/* vTask6 */
+	2,		/* vTask2 */
+	3,		/* vTask3 */
+	4,		/* vTask4 */
+	5,		/* vTask5 */
+	6,		/* vTask6 */
 	0,		/* vTaskStart */
 };
 
@@ -134,15 +134,14 @@ TASK(vTask1){
 
 TASK(vTask2){
 /* Add Your Task Code Here. */
-    //(void)StartScheduleTableSynchron(vSchedTbl2);
+
 	printk("vTask2 is running.\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask3){
 /* Add Your Task Code Here. */
-    //(void)NextScheduleTable(vSchedTbl1,vSchedTbl2);
-    //(void)SyncScheduleTable(vSchedTbl2,0);
+
 	printk("vTask3 is running.\n");
 	(void)TerminateTask();
 }
@@ -163,14 +162,19 @@ TASK(vTask5){
 
 TASK(vTask6){
 /* Add Your Task Code Here. */
-    //(void)NextScheduleTable(vSchedTbl2,vSchedTbl1);
+
 	printk("vTask6 is running.\n");
 	(void)TerminateTask();
 }
 
 TASK(vTaskStart){
 /* Add Your Task Code Here. */
-
+	(void)ActivateTask(vTask6);
+	(void)ActivateTask(vTask5);
+	(void)ActivateTask(vTask4);
+	(void)ActivateTask(vTask3);
+	(void)ActivateTask(vTask2);
+	(void)ActivateTask(vTask1);
 	printk("vTaskStart is running.\n");
 	(void)TerminateTask();
 }
