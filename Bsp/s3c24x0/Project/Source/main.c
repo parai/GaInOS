@@ -9,7 +9,7 @@ void dely(uint32_t tt)
    }
 }
 int main(void) {
-    
+#if 0      
    GPBCON = 0x00555555;
    GPBDAT = 0x0000;
    GPBDAT = 0x0ffffff;
@@ -22,7 +22,7 @@ int main(void) {
      GPBDAT = 0x0ffffff;
      dely(120);
    }
-#if 0  
+#else
     StartOS(OSDEFAULTAPPMODE);
     for(;;) {
     }
