@@ -51,8 +51,16 @@ static void vPortTaskIdle(void)
     /* Wait Untill a task was in ready state */
     vPortEnableInterrupt();
     /* vPortSetIpl(0); */
-    while(OSCurTsk == INVALID_TASK);
-    vPortDispatch();
+    for(;;)
+    {
+        if(OSHighRdyTsk != INVALID_TASK)
+        {
+            OSCurTsk = OSHighRdyTsk;
+            break;
+        }
+    }
+    vPortDisableInterrupt();
+    /* If NONE_PREEMPTIVE,just return to vPortSwitch2Task() */
 }
 
 void vPortPreActivateTask(void)
@@ -95,7 +103,7 @@ OsCpuIplType vPortGetIpl(void)
 void vPortSwitch2Task(void)
 {
     OSCurTsk = OSHighRdyTsk;
-    if(OSCurTsk == INVALID_TASK)
+    while(OSCurTsk == INVALID_TASK)
     {
         vPortTaskIdle();
     }
@@ -113,7 +121,7 @@ void vPortSwitch2Task(void)
       vPortRestoreContext();
     }
 }
-
+/* vector ( id = 1, fill = "_vPortDispatcher"); */
 void vPortDispatcher(void)
 {
 	vPortSaveContext();
@@ -143,7 +151,7 @@ void OSTickISR(void)
 {  
     vPortEnterISR();
 #if(cfgOS_COUNTER_NUM > 0)
-    OSProcessCounter(0u);  /* System Counter */
+    (void)IncrementCounter(0u);  /* System Counter */
 #endif
     vPortTickIsrClear();
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Project</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.tasking.c166.TskManagedBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>com.tasking.c166.target</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Bsp</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/Bsp/xc2364/Bsp</locationURI>
+		</link>
+		<link>
+			<name>GaInOS_Studio</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/osek_test/GaInOS_Studio</locationURI>
+		</link>
+		<link>
+			<name>include</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/include</locationURI>
+		</link>
+		<link>
+			<name>kernel</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/kernel</locationURI>
+		</link>
+		<link>
+			<name>vPort</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/Bsp/xc2364/vPort</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

@@ -51,8 +51,16 @@ static void vPortTaskIdle(void)
     /* Wait Untill a task was in ready state */
     vPortEnableInterrupt();
     /* vPortSetIpl(0); */
-    while(OSCurTsk == INVALID_TASK);
-    vPortDispatch();
+    for(;;)
+    {
+        if(OSHighRdyTsk != INVALID_TASK)
+        {
+            OSCurTsk = OSHighRdyTsk;
+            break;
+        }
+    }
+    vPortDisableInterrupt();
+    /* If NONE_PREEMPTIVE,just return to vPortSwitch2Task() */
 }
 
 OsCpuIplType vPortGetIpl(void)
@@ -111,7 +119,7 @@ interrupt VectorNumber_Vtrap void vPortIntGetIpl(void)
 void vPortSwitch2Task(void)
 {
     OSCurTsk = OSHighRdyTsk;
-    if(OSCurTsk == INVALID_TASK)
+    while(OSCurTsk == INVALID_TASK)
     {
         vPortTaskIdle();
     }
@@ -142,11 +150,18 @@ void vPortSwitch2Task(void)
 /* |----------------+----------------------------------------------| */
 interrupt 4 void vPortDispatcher(void)
 {
-    if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
-    {
-        vPortSaveContext();
-        vPortSaveSP();
-    }
+    /* Without the need to judge OSCurTsk.
+       As OSCurTcb is always should be comsistent with OSCurTsk.
+       That is to say when OSCurTsk is INVALID_TASK,the OSCurTcb->xState 
+       is SUSPENDED.*/
+    /* if(INVALID_TASK != OSCurTsk) */
+    /* { */
+        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+        {
+            vPortSaveContext();
+            vPortSaveSP();
+        }
+    /* } */
     vPortSwitch2Task();
 }
   

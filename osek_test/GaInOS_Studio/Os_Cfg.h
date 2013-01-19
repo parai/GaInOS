@@ -37,7 +37,9 @@
 #define cfgOS_PRE_TASK_HOOK 0
 #define cfgOS_POST_TASK_HOOK 0
 
-/* For MC9S12(X) */
-typedef uint8_t OsCpuSrType;
-typedef uint8_t OsCpuIplType;
+/* For C166 */
+typedef uint16_t OsCpuSrType;
+typedef uint16_t OsCpuIplType;
 #endif /* _OS_CFG_H_ */
+
+

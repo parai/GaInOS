@@ -169,12 +169,7 @@ TASK(vTask6){
 
 TASK(vTaskStart){
 /* Add Your Task Code Here. */
-	(void)ActivateTask(vTask6);
-	(void)ActivateTask(vTask5);
-	(void)ActivateTask(vTask4);
-	(void)ActivateTask(vTask3);
-	(void)ActivateTask(vTask2);
-	(void)ActivateTask(vTask1);
+
 	printk("vTaskStart is running.\n");
 	(void)TerminateTask();
 }

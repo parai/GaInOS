@@ -67,7 +67,11 @@ static void vPortTaskIdle(void)
     /* Wait Untill a task was in ready state */
     vPortEnableInterrupt();
     /* vPortSetIpl(0); */
-    while(OSCurTsk == INVALID_TASK);
+    while(OSCurTsk == INVALID_TASK)
+	{
+    	__nop();
+    	__nop();
+	}
     vPortDispatch();
 }
 
@@ -91,6 +95,7 @@ void vPortPreActivateTask(void)
     PreTaskHook();
     OS_EXIT_CRITICAL();
 #endif
+    __enable();
     OSTaskEntryTable[OSCurTsk]();
     OS_ASSERT(STD_FALSE);
 }
@@ -214,25 +219,53 @@ void vPortDispatcher(void)
 #if 1
 void __interrupt(vPort_STM_INT0) OSTickISR0(void)
 {
-	vPortEnterISR();
+	//vPortEnterISR();
+    //vPortSaveContext();
+    if(0x00u == OSIsr2Nesting)
+    {
+        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+        {
+            vPortSaveSP();
+        }
+    }
+    OSEnterISR();
 
 	#if(cfgOS_COUNTER_NUM >0)
 		(void)IncrementCounter(0);		/* Process the first counter,Default as system counter */
 	#endif
 	vPortTickIsr0Clear();
 
-	vPortLeaveISR();
+	//vPortLeaveISR();
+	OSExitISR();
+    __nop();
+    __rslcx();
+    __nop();
+    __asm( "rfe" );
 }
 void __interrupt(vPort_STM_INT1) OSTickISR1(void)
 {
-	vPortEnterISR();
+	//vPortEnterISR();
+    //vPortSaveContext();
+    if(0x00u == OSIsr2Nesting)
+    {
+        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+        {
+            vPortSaveSP();
+        }
+    }
+    OSEnterISR();
 
 	#if(cfgOS_COUNTER_NUM >1)
 		(void)IncrementCounter(1);		/* Process the first counter,Default as system counter */
 	#endif
 	vPortTickIsr1Clear();
 
-	vPortLeaveISR();
+	//vPortLeaveISR();
+	OSExitISR();
+    __nop();
+    __rslcx();
+    __nop();
+    __asm( "rfe" );
 }
 #endif
 
