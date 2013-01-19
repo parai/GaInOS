@@ -49,7 +49,8 @@ vPortSwitch2Task
 	LDRB	R0, [R0]
 	LDR     R1, =OSCurTsk
 	STRB	R0, [R1]
-    ;;if(OSCurTsk == INVALID_TASK)
+return_from_vPortTaskIdle
+    ;;while(OSCurTsk == INVALID_TASK)
 	LDR		R1, =G_INVALID_TASK
 	LDRB	R1, [R1]
 	CMP		R0,R1
@@ -59,6 +60,7 @@ invalid_task
     ;;    vPortTaskIdle();
 	LDR		R0, =vPortTaskIdle
 	BX		R0
+	BAL return_from_vPortTaskIdle
     ;;}
 not_invalid_task	
     ;;OSCurTcb = OSHighRdyTcb;

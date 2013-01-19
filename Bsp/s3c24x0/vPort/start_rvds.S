@@ -79,7 +79,7 @@ Stack_Top
 ;//   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF>
 ;// </h>
 
-Heap_Size       EQU     0x00000000
+Heap_Size       EQU     0x00004000
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base
@@ -210,7 +210,7 @@ CAMDIVN_OFS     EQU     0x18            ; Camera Clock Divider Register  Offset
 ;//       <i> Divider is used only if CAMCLK_SEL = 1
 ;//   </h>
 ;// </e> Clock Setup
-CLOCK_SETUP     EQU     1
+CLOCK_SETUP     EQU     0
 LOCKTIME_Val    EQU     0x0FFF0FFF
 MPLLCON_Val     EQU     0x00043011
 UPLLCON_Val     EQU     0x00038021

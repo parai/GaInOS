@@ -1,5 +1,6 @@
 #include "Os.h"
-#include "s3c2440.h"
+#include "Cpu.h"
+#include "Serial.h"
 void dely(uint32_t tt)
 {
    uint32_t i;
@@ -23,6 +24,9 @@ int main(void) {
      dely(120);
    }
 #else
+    CpuFrequencyInit();
+    Sci_Init();
+    printk("Start GaInOS,Welcome!\r\n");
     StartOS(OSDEFAULTAPPMODE);
     for(;;) {
     }

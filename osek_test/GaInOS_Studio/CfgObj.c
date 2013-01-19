@@ -130,49 +130,54 @@ const TaskEntryType OSTaskEntryTable[cfgOS_TASK_NUM]=
 TASK(vTask1){
 /* Add Your Task Code Here. */
 
-	printk("vTask1 is running.\n");
+	printk("vTask1 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask2){
 /* Add Your Task Code Here. */
 
-	printk("vTask2 is running.\n");
+	printk("vTask2 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask3){
 /* Add Your Task Code Here. */
 
-	printk("vTask3 is running.\n");
+	printk("vTask3 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask4){
 /* Add Your Task Code Here. */
 
-	printk("vTask4 is running.\n");
+	printk("vTask4 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask5){
 /* Add Your Task Code Here. */
 
-	printk("vTask5 is running.\n");
+	printk("vTask5 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask6){
 /* Add Your Task Code Here. */
 
-	printk("vTask6 is running.\n");
+	printk("vTask6 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTaskStart){
 /* Add Your Task Code Here. */
-
-	printk("vTaskStart is running.\n");
+    (void)ActivateTask(vTask6);
+    (void)ActivateTask(vTask5);
+    (void)ActivateTask(vTask4);
+    (void)ActivateTask(vTask3);
+    (void)ActivateTask(vTask2);
+    (void)ActivateTask(vTask1);
+	printk("vTaskStart is running.\r\n");
 	(void)TerminateTask();
 }
 

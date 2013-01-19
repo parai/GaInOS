@@ -51,8 +51,16 @@ void vPortTaskIdle(void)
     /* Wait Untill a task was in ready state */
     vPortEnableInterrupt();
     /* vPortSetIpl(0); */
-    while(OSCurTsk == INVALID_TASK);
-    vPortDispatch();
+    for(;;)
+    {
+        if(OSHighRdyTsk != INVALID_TASK)
+        {
+            OSCurTsk = OSHighRdyTsk;
+            break;
+        }
+    }
+    vPortDisableInterrupt();
+    /* If NONE_PREEMPTIVE,just return to vPortSwitch2Task() */
 }
 
 OsCpuIplType vPortGetIpl(void)
