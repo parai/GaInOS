@@ -58,14 +58,18 @@
     }
 
 /* use the software interrupt to dispatch the high priority task */
-#define vPortDispatch() vPortDispatcher()
-//__syscall(0)
+#define vPortDispatch() __syscall(0)
 #define vPortEnableInterrupt()  __enable()
 #define vPortDisableInterrupt() __disable()
 
-#define vPortSaveMsrAndDisableInterrupt(xMSR)
+#define vPortSaveMsrAndDisableInterrupt(xMSR) \
+	xMSR = (OsCpuSrType)__mfcr(ICR);__disable()
 
-#define vPortRestoreMsr(xMSR)
+#define vPortRestoreMsr(xMSR) __mtcr(ICR,xMSR)
+
+#define vPortGetIpl() (OsCpuIplType)(__mfcr(ICR)&0xFF)
+
+#define vPortSetIpl(xIpl) __mtcr(ICR,((__mfcr(ICR)&(0xFFFFFF00))|xIpl))
 /* CSA Manipulation. */
 #define vPortCSA_TO_ADDRESS( pCSA )			( ( unsigned long * )( ( ( ( pCSA ) & 0x000F0000 ) << 12 ) | ( ( ( pCSA ) & 0x0000FFFF ) << 6 ) ) )
 #define vPortADDRESS_TO_CSA( pAddress )		( ( unsigned long )( ( ( ( (unsigned long)( pAddress ) ) & 0xF0000000 ) >> 12 ) | ( ( ( unsigned long )( pAddress ) & 0x003FFFC0 ) >> 6 ) ) )
@@ -98,7 +102,7 @@
 #define vPortTickIsr1Clear() STM_ISRR.B.CMP1IRR = 1
 
 #define vPortEnterISR()                                                 \
-    /* vPortSaveContext(); */                                           \
+    /*vPortSaveContext();*/                                             \
     if(0x00u == OSIsr2Nesting)                                          \
     {                                                                   \
         if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)  \
@@ -159,9 +163,9 @@ void vPortMallocCSAandStartCurRdyTsk(void);
         __asm volatile( "ret" );                                        \
     }
 #endif
-OsCpuIplType vPortGetIpl(void);
+
 void vPortDispatcher(void);
 void __vPortSwitch2Task(void);
-void vPortSetIpl(uint8_t xIpl);
+
 
 #endif /* _VPORT_H_ */

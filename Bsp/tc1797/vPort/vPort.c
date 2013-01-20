@@ -79,11 +79,6 @@ static void vPortTaskIdle(void)
 	/* If NONE_PREEMPTIVE,just return to vPortSwitch2Task() */
 }
 
-OsCpuIplType vPortGetIpl(void)
-{
-
-    return 0;                   /* Ommit The Compile Warning */
-}
 void vPortMallocCSAandStartCurRdyTsk(void)
 {
 	unsigned long *pulCSA = STD_NULL;
@@ -118,14 +113,6 @@ void vPortPreActivateTask(void)
     __enable();
     OSTaskEntryTable[OSCurTsk]();
     OS_ASSERT(STD_FALSE);
-}
-
-void vPortSetIpl(uint8_t xIpl)
-{
-}
-void vPortIntGetIpl(void)
-{
-
 }
 void __vPortSwitch2Task(void)
 {
@@ -217,10 +204,10 @@ unsigned long *pulNextCSA;
 	/* Here When return,the link info in PCXI is of no use.
 	 * It has been put to FCX*/
 }
-//__interrupt(vPort_CPU0INT)
+
+__trap(6)
 void vPortDispatcher(void)
 {
-	__disable();
     if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
     {
         vPortSaveContext();
@@ -237,37 +224,27 @@ void vPortDispatcher(void)
     /* Don't consume CSA.So just Jump*/
     __asm("j __vPortSwitch2Task");
 }
-#if 1
-void __interrupt(vPort_STM_INT0) OSTickISR0(void)
-{
-	//vPortEnterISR();
-    //vPortSaveContext();
-    if(0x00u == OSIsr2Nesting)
-    {
-        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
-        {
-            vPortSaveSP();
-        }
-    }
-    OSEnterISR();
 
+#if 1
+/* Add "vector ( id = 1, fill="OSTickISR0" );" in Project.lsl*/
+__interrupt(vPort_STM_INT0)
+void OSTickISR0(void)
+{
+	vPortEnterISR();
+	(void)ActivateTask(vTask4);
 	#if(cfgOS_COUNTER_NUM >0)
 		(void)IncrementCounter(0);		/* Process the first counter,Default as system counter */
 	#endif
 	vPortTickIsr0Clear();
 
-	//vPortLeaveISR();
-	OSExitISR();
-    __nop();
-    __rslcx();
-    __nop();
-    __asm( "rfe" );
+	vPortLeaveISR();
 }
-void __interrupt(vPort_STM_INT1) OSTickISR1(void)
+/* Add "vector ( id = 2, fill="OSTickISR1" );" in Project.lsl*/
+__interrupt(vPort_STM_INT1)
+void OSTickISR1(void)
 {
 	vPortEnterISR();
-
-    (void)ActivateTask(vTask6);
+	(void)ActivateTask(vTask5);
 	#if(cfgOS_COUNTER_NUM >1)
 		(void)IncrementCounter(1);		/* Process the first counter,Default as system counter */
 	#endif

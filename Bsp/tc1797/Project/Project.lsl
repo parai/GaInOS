@@ -81,3 +81,13 @@ section_layout ::linear
 {
     group stack "ustack"( size = 1k );
 }
+section_setup spe:tc:linear
+{
+//    vector_table "vectab" ( vector_size = 4, size=128, run_addr=0,
+//                              template="__vector_template", template_symbol="__lc_vector_target",
+//                              vector_prefix=".vector.", fill = loop)
+//    {
+//        vector ( id = 1, fill="OSTickISR0" );
+//        vector ( id = 2, fill="OSTickISR1" );
+//    }
+}

@@ -38,7 +38,7 @@
 
 /* For Tri-Core */
 typedef uint32_t OsCpuSrType;
-typedef uint32_t OsCpuIplType;
+typedef uint8_t OsCpuIplType;
 #endif /* _OS_CFG_H_ */
 
 

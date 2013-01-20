@@ -381,6 +381,7 @@ void MAIN_vWriteWDTCON0(uword uwValue)
 //****************************************************************************
 
 // USER CODE BEGIN (Main,1)
+OsCpuIplType g_ipl=0;
 // USER CODE END
 
 sword main(void)
@@ -441,7 +442,6 @@ sword main(void)
 
 
          // USER CODE BEGIN (Main,7)
-	__disable();
 	StartOS(OSDEFAULTAPPMODE);
 	for(;;) {
 		;

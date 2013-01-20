@@ -154,6 +154,7 @@ TASK(vTaskIdle){
 /* Add Your Task Code Here. */
 
 	printk("vTaskIdle is running.\n");
+	(void)ActivateTask(vTask6);
 	for(;;);
 	printk("vTaskIdle wrong fault.\n");
 	ShutdownOS(E_OK);
