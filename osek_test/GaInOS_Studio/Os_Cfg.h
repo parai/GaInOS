@@ -22,10 +22,9 @@
 
 #define cfgOS_ISR_USE_RES STD_FALSE
 
-/* GaInOS Counter And Alarm Configuration */
-#define cfgOS_USE_ALARM STD_TRUE
-#define cfgOS_COUNTER_NUM 1
-#define cfgOS_ALARM_NUM 3
+#define cfgOS_USE_ALARM STD_FALSE
+#define cfgOS_COUNTER_NUM 2
+#define cfgOS_ALARM_NUM 0
 #define cfgOS_SCHEDULE_TABLE_NUM 2
 
 /*Default Macro Defines Which You Can Change form 0 to 1 to include the Hooks or Stack Usage Check for GaInOS*/
@@ -37,7 +36,9 @@
 #define cfgOS_PRE_TASK_HOOK 0
 #define cfgOS_POST_TASK_HOOK 0
 
-/* For ARM */
+/* For Tri-Core */
 typedef uint32_t OsCpuSrType;
 typedef uint32_t OsCpuIplType;
 #endif /* _OS_CFG_H_ */
+
+

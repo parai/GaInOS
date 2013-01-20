@@ -98,7 +98,7 @@
 #define vPortTickIsr1Clear() STM_ISRR.B.CMP1IRR = 1
 
 #define vPortEnterISR()                                                 \
-    vPortSaveContext();                                                 \
+    /* vPortSaveContext(); */                                           \
     if(0x00u == OSIsr2Nesting)                                          \
     {                                                                   \
         if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)  \
@@ -113,7 +113,15 @@
     vPortRestoreContext()
 
 
-
+#if 1
+void vPortMallocCSAandStartCurRdyTsk(void);
+/* use instruction call to malloc csa for Current ready task.more fast.*/
+#define vPortStartCurRdyTsk()                           \
+	{	                                                \
+		__asm("call vPortMallocCSAandStartCurRdyTsk");	\
+	}
+#else
+/* This Method is copyed from FreeRTOS,but not effective.*/
 #define vPortStartCurRdyTsk()                                           \
     {                                                                   \
         unsigned long *pulUpperCSA = STD_NULL;                          \
@@ -150,7 +158,7 @@
         /* Return to the first task selected to execute. */             \
         __asm volatile( "ret" );                                        \
     }
-
+#endif
 OsCpuIplType vPortGetIpl(void);
 void vPortDispatcher(void);
 void __vPortSwitch2Task(void);

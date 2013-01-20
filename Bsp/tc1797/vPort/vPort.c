@@ -47,7 +47,7 @@
 #include "Kernel.h"
 
 /* System register Definitions. */
-#define vPortSYSTEM_PROGRAM_STATUS_WORD					( 0x000008FFUL ) /* Supervisor Mode, MPU Register Set 0 and Call Depth Counting disabled. */
+#define vPortSYSTEM_PROGRAM_STATUS_WORD					( 0x0000087FUL ) /* Supervisor Mode, MPU Register Set 0 and Call Depth Counting disabled. */
 #define vPortINITIAL_PRIVILEGED_PROGRAM_STATUS_WORD		( 0x000014FFUL ) /* IO Level 1, MPU Register Set 1 and Call Depth Counting disabled. */
 #define vPortINITIAL_UNPRIVILEGED_PROGRAM_STATUS_WORD	( 0x000010FFUL ) /* IO Level 0, MPU Register Set 1 and Call Depth Counting disabled. */
 #define vPortINITIAL_PCXI_UPPER_CONTEXT_WORD				( 0x00C00000UL ) /* The lower 20 bits identify the CSA address. */
@@ -64,15 +64,19 @@
 #define vPortNUM_WORDS_IN_CSA				( 16 )
 static void vPortTaskIdle(void)
 {
-    /* Wait Untill a task was in ready state */
-    vPortEnableInterrupt();
-    /* vPortSetIpl(0); */
-    while(OSCurTsk == INVALID_TASK)
+	 /* Wait Untill a task was in ready state */
+	vPortEnableInterrupt();
+	/* vPortSetIpl(0); */
+	for(;;)
 	{
-    	__nop();
-    	__nop();
+		if(OSHighRdyTsk != INVALID_TASK)
+		{
+			OSCurTsk = OSHighRdyTsk;
+			break;
+		}
 	}
-    vPortDispatch();
+	vPortDisableInterrupt();
+	/* If NONE_PREEMPTIVE,just return to vPortSwitch2Task() */
 }
 
 OsCpuIplType vPortGetIpl(void)
@@ -80,7 +84,23 @@ OsCpuIplType vPortGetIpl(void)
 
     return 0;                   /* Ommit The Compile Warning */
 }
-
+void vPortMallocCSAandStartCurRdyTsk(void)
+{
+	unsigned long *pulCSA = STD_NULL;
+	pulCSA=vPortCSA_TO_ADDRESS(__mfcr(PCXI));
+	/* Clear Its Link Info,Make it to be tail*/
+	pulCSA[ 0 ]=0;
+	/* Upper Context. */
+	pulCSA[ 2 ] = ( unsigned long )OSCurTcb->pxStack;		/* A10;	Stack Return aka Stack Pointer */
+	pulCSA[ 1 ] = vPortSYSTEM_PROGRAM_STATUS_WORD;		    /* PSW	*/
+	/* Prepare To Satrt The Task */
+	__asm("movh.a	a11,#@his(vPortPreActivateTask)");
+	__asm("lea	a11,[a11]@los(vPortPreActivateTask)");
+	__isync();
+	__nop();
+	/* Return to the first task selected to execute. */
+	__asm volatile( "ret" );
+}
 void vPortPreActivateTask(void)
 {
 #if(cfgOS_USE_INTERNAL_RESOURCE == STD_TRUE)
@@ -109,11 +129,12 @@ void vPortIntGetIpl(void)
 }
 void __vPortSwitch2Task(void)
 {
+	__disable();
     OSCurTsk = OSHighRdyTsk;
-    if(OSCurTsk == INVALID_TASK)
-    {
-        vPortTaskIdle();
-    }
+    while(OSCurTsk == INVALID_TASK)
+	{
+	   vPortTaskIdle();
+	}
     OSCurTcb = OSHighRdyTcb;
 
     if(READY == OSCurTcb->xState)
@@ -124,7 +145,7 @@ void __vPortSwitch2Task(void)
     else
     {
       vPortRestoreSP();
-      vPortRestoreContext()  
+      vPortRestoreContext();
     }
 }
 
@@ -244,28 +265,15 @@ void __interrupt(vPort_STM_INT0) OSTickISR0(void)
 }
 void __interrupt(vPort_STM_INT1) OSTickISR1(void)
 {
-	//vPortEnterISR();
-    //vPortSaveContext();
-    if(0x00u == OSIsr2Nesting)
-    {
-        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
-        {
-            vPortSaveSP();
-        }
-    }
-    OSEnterISR();
+	vPortEnterISR();
 
+    (void)ActivateTask(vTask6);
 	#if(cfgOS_COUNTER_NUM >1)
 		(void)IncrementCounter(1);		/* Process the first counter,Default as system counter */
 	#endif
 	vPortTickIsr1Clear();
 
-	//vPortLeaveISR();
-	OSExitISR();
-    __nop();
-    __rslcx();
-    __nop();
-    __asm( "rfe" );
+	vPortLeaveISR();
 }
 #endif
 

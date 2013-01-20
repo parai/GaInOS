@@ -21,32 +21,27 @@
 		<link>
 			<name>Bsp</name>
 			<type>2</type>
-			<location>F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/Bsp</location>
-		</link>
-		<link>
-			<name>DaveSupport</name>
-			<type>2</type>
-			<location>F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/Bsp/DaveSupport</location>
+			<locationURI>WOLK_LOC/Bsp/tc1797/Bsp</locationURI>
 		</link>
 		<link>
 			<name>GaInOS_Studio</name>
 			<type>2</type>
-			<location>F:/parai@foxmail.com/nt/GaInOS/osek_test/GaInOS_Studio</location>
+			<locationURI>WOLK_LOC/osek_test/GaInOS_Studio</locationURI>
 		</link>
 		<link>
 			<name>include</name>
 			<type>2</type>
-			<locationURI>include</locationURI>
+			<locationURI>WOLK_LOC/include</locationURI>
 		</link>
 		<link>
 			<name>kernel</name>
 			<type>2</type>
-			<location>F:/parai@foxmail.com/nt/GaInOS/kernel</location>
+			<locationURI>WOLK_LOC/kernel</locationURI>
 		</link>
 		<link>
 			<name>vPort</name>
 			<type>2</type>
-			<location>F:/parai@foxmail.com/nt/GaInOS/Bsp/tc1797/vPort</location>
+			<locationURI>WOLK_LOC/Bsp/tc1797/vPort</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

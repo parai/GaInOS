@@ -12,7 +12,7 @@
 // @Description   This file contains the project initialization function.
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/19 11:12:12
+// @Date          2013/1/20 09:34:57
 //
 //****************************************************************************
 
@@ -116,7 +116,7 @@ volatile unsigned int DummyToForceRead;
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/19
+// @Date          2013/1/20
 //
 //****************************************************************************
 
@@ -209,7 +209,7 @@ void MAIN_vInit(void)
       MAIN_vResetENDINIT();
       SCU_CCUCON0.U  = 0x00000001; // set FPI,LMB and PCP dividers
       SCU_PLLCON0.B.VCOBYP  = 1; // set VCO bypass (goto Prescaler Mode)
-     // while (!SCU_PLLSTAT.B.VCOBYST);// wait for prescaler mode
+      //while (!SCU_PLLSTAT.B.VCOBYST);// wait for prescaler mode
       SCU_PLLCON0.U  = 0x01058E21; // set P,N divider, connect OSC
       SCU_PLLCON1.U  = 0x00020003; // set K1,K2 divider
       MAIN_vSetENDINIT();
@@ -293,8 +293,8 @@ void MAIN_vInit(void)
   ///  System Start Conditions:
   ///  -----------------------------------------------------------------------
 
-  ///  - the CPU interrupt system is globally enabled
-  ENABLE();
+  //// - the CPU interrupt system is globally disabled
+  DISABLE();
 
   //// - the PCP interrupt system is globally disabled
 
@@ -321,7 +321,7 @@ void MAIN_vInit(void)
 //                Value for the WDTCON0 register
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/19
+// @Date          2013/1/20
 //
 //****************************************************************************
 
@@ -376,7 +376,7 @@ void MAIN_vWriteWDTCON0(uword uwValue)
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/19
+// @Date          2013/1/20
 //
 //****************************************************************************
 
@@ -441,6 +441,7 @@ sword main(void)
 
 
          // USER CODE BEGIN (Main,7)
+	__disable();
 	StartOS(OSDEFAULTAPPMODE);
 	for(;;) {
 		;

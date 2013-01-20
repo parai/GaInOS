@@ -6,9 +6,7 @@
 
 /* GaInOS Counter And Alarm Configuration */
 #define vCounter1 0
-#define vAlarm1 0
-#define vAlarm2 1
-#define vAlarm3 2
+#define vCounter2 1
 extern const AlarmBaseType OSCounterBaseTable[cfgOS_COUNTER_NUM];
 #if(cfgOS_USE_ALARM == STD_TRUE)
 extern const AlarmClassType OSAlarmClassTable[cfgOS_ALARM_NUM];
@@ -50,8 +48,8 @@ extern TASK( vTask4 );
 extern TASK( vTask5 );
 #define vTask6 5
 extern TASK( vTask6 );
-#define vTaskStart 6
-extern TASK( vTaskStart );
+#define vTaskIdle 6
+extern TASK( vTaskIdle );
 #if(cfgOS_SCHEDULE_TABLE_NUM > 0)
 extern const OsSchedTblCmdType* OSScheduleTable[cfgOS_SCHEDULE_TABLE_NUM];
 extern const OsScheduleTableType OSScheduleTableInfo[cfgOS_SCHEDULE_TABLE_NUM];

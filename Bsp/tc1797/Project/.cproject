@@ -22,7 +22,7 @@
 <builder buildPath="${workspace_loc:/Project/Debug}" id="com.tasking.ctc.builder.abs.debug.1382308046" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="TASKING TriCore Makefile generator" parallelBuildOn="true" parallelizationNumber="-1" superClass="com.tasking.ctc.builder.abs.debug"/>
 <tool id="com.tasking.ctc.cc.abs.debug.481361666" name="C/C++ Compiler" superClass="com.tasking.ctc.cc.abs.debug">
 <option id="com.tasking.ctc.cc.pr36858.1044067832" name="workaround for PR36858" superClass="com.tasking.ctc.cc.pr36858" value="true" valueType="string"/>
-<option id="com.tasking.ctc.cc.additionalOptions.349092151" superClass="com.tasking.ctc.cc.additionalOptions" value="--tasking-sfr" valueType="string"/>
+<option id="com.tasking.ctc.cc.additionalOptions.349092151" name="Additional options:" superClass="com.tasking.ctc.cc.additionalOptions" value="--tasking-sfr" valueType="string"/>
 <inputType id="com.tasking.ctc.cppInputType.1264278700" name="C++" superClass="com.tasking.ctc.cppInputType"/>
 <inputType id="com.tasking.ctc.cpp.cInputType.2075472423" name="C" superClass="com.tasking.ctc.cpp.cInputType"/>
 <inputType id="com.tasking.ctc.cc.msInputType.1357547843" name="MS" superClass="com.tasking.ctc.cc.msInputType"/>
@@ -47,11 +47,11 @@
 </folderInfo>
 <sourceEntries>
 <entry excluding="Bsp|vPort|DaveSupport|GaInOS_Studio|kernel|include" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Bsp"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="vPort"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="kernel"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="GaInOS_Studio"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="vPort"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Bsp"/>
 </sourceEntries>
 </configuration>
 </storageModule>
