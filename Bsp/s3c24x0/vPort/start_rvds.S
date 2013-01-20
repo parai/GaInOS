@@ -59,10 +59,10 @@ F_Bit           EQU     0x40            ; when F bit is set, FIQ is disabled
 ;// </h>
 
 UND_Stack_Size  EQU     0x00000000
-SVC_Stack_Size  EQU     0x00000008
+SVC_Stack_Size  EQU     0x00000400
 ABT_Stack_Size  EQU     0x00000000
 FIQ_Stack_Size  EQU     0x00000000
-IRQ_Stack_Size  EQU     0x00000080
+IRQ_Stack_Size  EQU     0x00000400
 USR_Stack_Size  EQU     0x00000400
 
 ISR_Stack_Size  EQU     (UND_Stack_Size + SVC_Stack_Size + ABT_Stack_Size + \
@@ -847,7 +847,7 @@ GPJUP_Val       EQU     0x00000000
 ;  Mapped to Address 0.
 ;  Absolute addressing mode must be used.
 ;  Dummy Handlers are implemented as infinite loops which can be modified.
-		IMPORT vPortDispatcher
+		IMPORT vPortSystemCall
 Vectors         LDR     PC, Reset_Addr         
                 LDR     PC, Undef_Addr
                 LDR     PC, SWI_Addr
@@ -870,7 +870,7 @@ Vectors         LDR     PC, Reset_Addr
 
 Reset_Addr      DCD     Reset_Handler
 Undef_Addr      DCD     Undef_Handler
-SWI_Addr        DCD     vPortDispatcher ;;SWI_Handler
+SWI_Addr        DCD     vPortSystemCall ;;SWI_Handler
 PAbt_Addr       DCD     PAbt_Handler
 DAbt_Addr       DCD     DAbt_Handler
                 DCD     0                   ; Reserved Address 

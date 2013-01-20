@@ -1,6 +1,8 @@
 #include "CfgObj.h"
 #include "Serial.h"
 
+const TaskType G_INVALID_TASK=INVALID_TASK;
+
 /* GaInOS Counter And Alarm Configuration */
 const AlarmBaseType OSCounterBaseTable[cfgOS_COUNTER_NUM]=
 {
@@ -111,53 +113,49 @@ const TaskEntryType OSTaskEntryTable[cfgOS_TASK_NUM]=
 TASK(vTask1){
 /* Add Your Task Code Here. */
 
-	printk("vTask1 is running.\n");
+	printk("vTask1 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask2){
 /* Add Your Task Code Here. */
 
-	printk("vTask2 is running.\n");
+	printk("vTask2 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask3){
 /* Add Your Task Code Here. */
 
-	printk("vTask3 is running.\n");
+	printk("vTask3 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask4){
 /* Add Your Task Code Here. */
 
-	printk("vTask4 is running.\n");
+	printk("vTask4 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask5){
 /* Add Your Task Code Here. */
 
-	printk("vTask5 is running.\n");
+	printk("vTask5 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask6){
 /* Add Your Task Code Here. */
 
-	printk("vTask6 is running.\n");
+	printk("vTask6 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTaskIdle){
 /* Add Your Task Code Here. */
 
-	printk("vTaskIdle is running.\n");
-	(void)ActivateTask(vTask6);
-	for(;;);
-	printk("vTaskIdle wrong fault.\n");
-	ShutdownOS(E_OK);
-	//(void)TerminateTask();
+	printk("vTaskIdle is running.\r\n");
+	(void)TerminateTask();
 }
 

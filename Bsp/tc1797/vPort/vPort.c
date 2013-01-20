@@ -205,6 +205,13 @@ unsigned long *pulNextCSA;
 	 * It has been put to FCX*/
 }
 
+__trap(3)
+void vPortContextTrap(void)
+{
+	/* If Context Error, Deadloop. */
+	for(;;);
+}
+
 __trap(6)
 void vPortDispatcher(void)
 {
@@ -231,7 +238,6 @@ __interrupt(vPort_STM_INT0)
 void OSTickISR0(void)
 {
 	vPortEnterISR();
-	(void)ActivateTask(vTask4);
 	#if(cfgOS_COUNTER_NUM >0)
 		(void)IncrementCounter(0);		/* Process the first counter,Default as system counter */
 	#endif

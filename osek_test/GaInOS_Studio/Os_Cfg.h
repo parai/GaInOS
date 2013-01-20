@@ -36,9 +36,7 @@
 #define cfgOS_PRE_TASK_HOOK 0
 #define cfgOS_POST_TASK_HOOK 0
 
-/* For Tri-Core */
+/* For ARM920T */
 typedef uint32_t OsCpuSrType;
-typedef uint8_t OsCpuIplType;
+typedef uint32_t OsCpuIplType;
 #endif /* _OS_CFG_H_ */
-
-

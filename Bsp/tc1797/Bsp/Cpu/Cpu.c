@@ -9,5 +9,5 @@ void CpuFrequencyInit(void)
 
 void CpuInitOsTick(void) 
 {
-	STM_vInit();
+	//STM_vInit();
 }
