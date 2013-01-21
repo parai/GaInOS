@@ -1,4 +1,4 @@
-#include "Serial.h"
+ï»¿#include "Serial.h"
 #include "Cpu.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,19 +7,19 @@
 
 #define cfgBAUDRATE 38400                     
 
-#define TXD0READY   (1<<2)  /* ·¢ËÍÊý¾Ý×´Ì¬OK */
-#define RXD0READY   (1)     /* ½ÓÊÕÊý¾Ý×´Ì¬OK */
+#define TXD0READY   (1<<2)  /* å‘é€æ•°æ®çŠ¶æ€OK */
+#define RXD0READY   (1)     /* æŽ¥æ”¶æ•°æ®çŠ¶æ€OK */
 
 void Sci_Init(void)
 {
 	GPHCON |= 0xa0;    /* GPH2,GPH3 used as TXD0,RXD0 */
-	GPHUP     = 0x0;   /* GPH2,GPH3ÄÚ²¿ÉÏÀ­ */
+	GPHUP     = 0x0;   /* GPH2,GPH3å†…éƒ¨ä¸Šæ‹‰ */
 	ULCON0  = 0x03;    /* 8N1         */
-	UCON0     = 0x05;  /* ²éÑ¯·½Ê½ÎªÂÖÑ¯»òÖÐ¶Ï;Ê±ÖÓÑ¡ÔñÎªPCLK */
-	UFCON0 = 0x00;     /* ²»Ê¹ÓÃFIFO */
-	UMCON0 = 0x00;     /* ²»Ê¹ÓÃÁ÷¿Ø */
+	UCON0     = 0x05;  /* æŸ¥è¯¢æ–¹å¼ä¸ºè½®è¯¢æˆ–ä¸­æ–­;æ—¶é’Ÿé€‰æ‹©ä¸ºPCLK */
+	UFCON0 = 0x00;     /* ä¸ä½¿ç”¨FIFO */
+	UMCON0 = 0x00;     /* ä¸ä½¿ç”¨æµæŽ§ */
     /* UBRDIVn=(int)(UART clock)/(baud rate*16)-1*/
-	UBRDIV0 = (vPCLK_OUT*10000)/(cfgBAUDRATE*16)-1;      /* ²¨ÌØÂÊÎª57600,PCLK=12Mhz */
+	UBRDIV0 = (vPCLK_OUT*10000)/(cfgBAUDRATE*16)-1;      /* æ³¢ç‰¹çŽ‡ä¸º57600,PCLK=12Mhz */
 }
 void Sci_Send(unsigned char chr)
 {
@@ -39,7 +39,7 @@ void printk(char* fmt,...)
 	va_start(args,fmt);
 #if 0	
 	buf=malloc(64);
-    if(NULL==buf)return;		/* ·ÖÅäÄÚ´æÊ§°Ü£¬Ö±½Ó·µ»Ø */
+    if(NULL==buf)return;		/* åˆ†é…å†…å­˜å¤±è´¥ï¼Œç›´æŽ¥è¿”å›ž */
 #endif	
 	len = vsprintf((char*)buf,(char *)fmt,args)+1;
 	while('\0'!=buf[i]&&i<len)  Sci_Send(buf[i++]) ;

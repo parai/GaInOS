@@ -7,7 +7,7 @@
 \par \plain\f4\fs22\cf0 Controller: \tab\tab\b TC1797
 \par \plain\f4\fs22\cf0 Compiler: \tab\tab\b Tasking 3.1
 \par 
-\par \plain\f4\fs22\cf0 Date: \tab\tab\tab\b 2013/1/20 09:34:57
+\par \plain\f4\fs22\cf0 Date: \tab\tab\tab\b 2013/1/21 20:15:00
 \par 
 \par 
 \par \plain\f4\fs22\cf2\b Please read this document carefully and note
@@ -266,7 +266,7 @@
 \par
 \tab Configuration of the used CPU Interrupts:\par 
 \tab - CPU0 service request node configuration:\par 
-\tab - CPU0 interrupt priority level (SRPN) = 15\par 
+\tab - CPU0 interrupt priority level (SRPN) = 254\par 
 \tab - CPU0 CPU interrupt is selected\par 
 \par 
 
@@ -374,27 +374,25 @@
 \par 
 \tab STM Compare 0 configuration:\par 
 \tab - lowest bit number of STM which is compared with CMP0 is 7\par 
-\tab - 10 bit(s) in register CMP0 are used for the compare operation with\par 
-\tab STM\par 
-\tab - required compare value of CMP0 is 0x000003E8\par 
-\tab - real compare value of CMP0 is 0x000003E8\par 
+\tab - 4 bit(s) in register CMP0 are used for the compare operation with STM\par 
+\tab - required compare value of CMP0 is 0x0000000A\par 
+\tab - real compare value of CMP0 is 0x0000000A\par 
 \tab - request on compare match with CMP0 is enabled and located to STMIR0\par 
 \par 
 \tab STM Compare 1 configuration:\par 
 \tab - lowest bit number of STM which is compared with CMP1 is 7\par 
-\tab - 10 bit(s) in register CMP1 are used for the compare operation with\par 
-\tab STM\par 
-\tab - required compare value of CMP1 is 0x000003E8\par 
-\tab - real compare value of CMP1 is 0x000003E8\par 
+\tab - 4 bit(s) in register CMP1 are used for the compare operation with STM\par 
+\tab - required compare value of CMP1 is 0x0000000A\par 
+\tab - real compare value of CMP1 is 0x0000000A\par 
 \tab - request on compare match with CMP1 is enabled and located to STMIR1\par 
 \par 
 \tab Configuration of the used STM Interrupts:\par 
 \tab - SRN0 service request node configuration:\par 
-\tab - SRN0 interrupt priority level (SRPN) = 1\par 
+\tab - SRN0 interrupt priority level (SRPN) = 253\par 
 \tab - SRN0 CPU interrupt is selected\par 
 \par 
 \tab - SRN1 service request node configuration:\par 
-\tab - SRN1 interrupt priority level (SRPN) = 2\par 
+\tab - SRN1 interrupt priority level (SRPN) = 252\par 
 \tab - SRN1 CPU interrupt is selected\par 
 \par 
 

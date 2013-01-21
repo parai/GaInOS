@@ -46,12 +46,6 @@
 /* |---------+-------------------| */
 #include "Kernel.h"
 
-/* System register Definitions. */
-#define vPortSYSTEM_PROGRAM_STATUS_WORD					( 0x0000087FUL ) /* Supervisor Mode, MPU Register Set 0 and Call Depth Counting disabled. */
-#define vPortINITIAL_PRIVILEGED_PROGRAM_STATUS_WORD		( 0x000014FFUL ) /* IO Level 1, MPU Register Set 1 and Call Depth Counting disabled. */
-#define vPortINITIAL_UNPRIVILEGED_PROGRAM_STATUS_WORD	( 0x000010FFUL ) /* IO Level 0, MPU Register Set 1 and Call Depth Counting disabled. */
-#define vPortINITIAL_PCXI_UPPER_CONTEXT_WORD				( 0x00C00000UL ) /* The lower 20 bits identify the CSA address. */
-#define vPortINITIAL_SYSCON								( 0x00000000UL ) /* MPU Disable. */
 
 /* CSA manipulation macros. */
 #define vPortCSA_FCX_MASK					( 0x000FFFFFUL )
@@ -64,7 +58,7 @@
 #define vPortNUM_WORDS_IN_CSA				( 16 )
 static void vPortTaskIdle(void)
 {
-	 /* Wait Untill a task was in ready state */
+    /* Wait Untill a task was in ready state */
 	vPortEnableInterrupt();
 	/* vPortSetIpl(0); */
 	for(;;)
@@ -79,23 +73,6 @@ static void vPortTaskIdle(void)
 	/* If NONE_PREEMPTIVE,just return to vPortSwitch2Task() */
 }
 
-void vPortMallocCSAandStartCurRdyTsk(void)
-{
-	unsigned long *pulCSA = STD_NULL;
-	pulCSA=vPortCSA_TO_ADDRESS(__mfcr(PCXI));
-	/* Clear Its Link Info,Make it to be tail*/
-	pulCSA[ 0 ]=0;
-	/* Upper Context. */
-	pulCSA[ 2 ] = ( unsigned long )OSCurTcb->pxStack;		/* A10;	Stack Return aka Stack Pointer */
-	pulCSA[ 1 ] = vPortSYSTEM_PROGRAM_STATUS_WORD;		    /* PSW	*/
-	/* Prepare To Satrt The Task */
-	__asm("movh.a	a11,#@his(vPortPreActivateTask)");
-	__asm("lea	a11,[a11]@los(vPortPreActivateTask)");
-	__isync();
-	__nop();
-	/* Return to the first task selected to execute. */
-	__asm volatile( "ret" );
-}
 void vPortPreActivateTask(void)
 {
 #if(cfgOS_USE_INTERNAL_RESOURCE == STD_TRUE)
@@ -114,13 +91,14 @@ void vPortPreActivateTask(void)
     OSTaskEntryTable[OSCurTsk]();
     OS_ASSERT(STD_FALSE);
 }
+
 void __vPortSwitch2Task(void)
 {
 	__disable();
     OSCurTsk = OSHighRdyTsk;
     while(OSCurTsk == INVALID_TASK)
 	{
-	   vPortTaskIdle();
+        vPortTaskIdle();
 	}
     OSCurTcb = OSHighRdyTcb;
 
@@ -131,8 +109,8 @@ void __vPortSwitch2Task(void)
     }
     else
     {
-      vPortRestoreSP();
-      vPortRestoreContext();
+        vPortRestoreSP();
+        vPortRestoreContext();
     }
 }
 
@@ -154,31 +132,32 @@ void __vPortSwitch2Task(void)
  * than they can be freed assuming that tasks are being spawned and
  * deleted frequently.
  */
+/* In FreeRTOS,This API is called when in idle task.*/
 void vPortReclaimCSA( unsigned long pxHeadCSA )
 {
-unsigned long  pxTailCSA, pxFreeCSA;
-unsigned long *pulNextCSA;
+    unsigned long  pxTailCSA, pxFreeCSA;
+    unsigned long *pulNextCSA;
 
 	pxHeadCSA = pxHeadCSA & vPortCSA_FCX_MASK;
 
 	/* Mask off everything in the CSA link field other than the address.  If
-	the	address is NULL, then the CSA is not linking anywhere and there is
-	nothing	to do. */
+       the	address is NULL, then the CSA is not linking anywhere and there is
+       nothing	to do. */
 	pxTailCSA = pxHeadCSA;
 
 	/* Convert the link value to contain just a raw address and store this
-	in a local variable. */
+       in a local variable. */
 	pulNextCSA = vPortCSA_TO_ADDRESS( pxTailCSA );
 
 	/* Iterate over the CSAs that were consumed as part of the task.  The
-	first field in the CSA is the pointer to then next CSA.  Mask off
-	everything in the pointer to the next CSA, other than the link address.
-	If this is NULL, then the CSA currently being pointed to is the last in
-	the chain. */
+       first field in the CSA is the pointer to then next CSA.  Mask off
+       everything in the pointer to the next CSA, other than the link address.
+       If this is NULL, then the CSA currently being pointed to is the last in
+       the chain. */
 	while( 0UL != ( pulNextCSA[ 0 ] & vPortCSA_FCX_MASK ) )
 	{
 		/* Clear all bits of the pointer to the next in the chain, other
-		than the address bits themselves. */
+           than the address bits themselves. */
 		pulNextCSA[ 0 ] = pulNextCSA[ 0 ] & vPortCSA_FCX_MASK;
 
 		/* Move the pointer to point to the next CSA in the list. */
@@ -205,15 +184,13 @@ unsigned long *pulNextCSA;
 	 * It has been put to FCX*/
 }
 
-__trap(3)
-void vPortContextTrap(void)
+__trap(3) void vPortContextTrap(void)
 {
 	/* If Context Error, Deadloop. */
 	for(;;);
 }
 
-__trap(6)
-void vPortDispatcher(void)
+__trap(vPortSYSCALL_TRAP) void vPortDispatcher(void)
 {
     if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
     {
@@ -225,9 +202,6 @@ void vPortDispatcher(void)
 		/* Free the csa used by task OSCurTsk or maybe the preIdle */
 		vPortReclaimCSA(__mfcr(PCXI));
 	}
-    /* As the link info in PCXI maybe invalid caused by vPortReclaimCSA()
-       or already saved by OSCurTsk.So Should Clear It */
-	__mtcr(PCXI,0);
     /* Don't consume CSA.So just Jump*/
     __asm("j __vPortSwitch2Task");
 }
@@ -238,9 +212,9 @@ __interrupt(vPort_STM_INT0)
 void OSTickISR0(void)
 {
 	vPortEnterISR();
-	#if(cfgOS_COUNTER_NUM >0)
-		(void)IncrementCounter(0);		/* Process the first counter,Default as system counter */
-	#endif
+#if(cfgOS_COUNTER_NUM >0)
+    (void)IncrementCounter(0);		/* Process the first counter,Default as system counter */
+#endif
 	vPortTickIsr0Clear();
 
 	vPortLeaveISR();
@@ -250,10 +224,9 @@ __interrupt(vPort_STM_INT1)
 void OSTickISR1(void)
 {
 	vPortEnterISR();
-	(void)ActivateTask(vTask5);
-	#if(cfgOS_COUNTER_NUM >1)
-		(void)IncrementCounter(1);		/* Process the first counter,Default as system counter */
-	#endif
+#if(cfgOS_COUNTER_NUM >1)
+    (void)IncrementCounter(1);		/* Process the first counter,Default as system counter */
+#endif
 	vPortTickIsr1Clear();
 
 	vPortLeaveISR();

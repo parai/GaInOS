@@ -39,30 +39,28 @@
 #define _VPORT_H_
 
 #include "Os_Cfg.h"
-/* Free the csa consumed by StartOS,and goto __vPortSwitch2Task.
-   MayBe The main() also consumed some csa,but ignoe and waste them.*/
-#define vPortStartHighRdy()                                             \
-    {                                                                   \
-        __asm("movh.a	a11,#@his(__vPortSwitch2Task)");                \
-        __asm("lea	a11,[a11]@los(__vPortSwitch2Task)");                \
-        __nop();                                                        \
-        __asm( "ret" );                                                 \
+/* Free the csa consumed by StartOS or OSExitISR(),and goto __vPortSwitch2Task. */
+#define vPortSwitch2Task()                                  \
+    {                                                       \
+        __asm("movh.a	a11,#@his(__vPortSwitch2Task)");    \
+        __asm("lea	a11,[a11]@los(__vPortSwitch2Task)");    \
+        __nop();                                            \
+        __asm( "ret" );                                     \
     }
 
-#define vPortSwitch2Task()                      \
-    {                                                                   \
-        __asm("movh.a	a11,#@his(__vPortSwitch2Task)");                \
-        __asm("lea	a11,[a11]@los(__vPortSwitch2Task)");                \
-        __nop();                                                        \
-        __asm( "ret" );                                                 \
-    }
+#if 1
+/* Some problem with this method */
+#define vPortStartHighRdy()  vPortSwitch2Task()
+#else
+#define vPortStartHighRdy() __enable();CPU_SRC0.U |= 0x8000
+#endif
 
 /* use the software interrupt to dispatch the high priority task */
 #define vPortDispatch() __syscall(0)
 #define vPortEnableInterrupt()  __enable()
 #define vPortDisableInterrupt() __disable()
 
-#define vPortSaveMsrAndDisableInterrupt(xMSR) \
+#define vPortSaveMsrAndDisableInterrupt(xMSR)   \
 	xMSR = (OsCpuSrType)__mfcr(ICR);__disable()
 
 #define vPortRestoreMsr(xMSR) __mtcr(ICR,xMSR)
@@ -77,7 +75,7 @@
 
 
 #define vPortSaveContext()  __svlcx()
-#define vPortSaveSP()                           \
+#define vPortSaveSP()                               \
     OSCurTcb->pxStack=(TaskStackType*)__mfcr(PCXI)
 
 #define vPortRestoreSP()                                \
@@ -95,9 +93,9 @@
         __asm( "rfe" );                         \
     }
 
-#define vPort_STM_INT0 0x01
-#define vPort_STM_INT1 0x02
-#define vPort_CPU0INT    0x0F
+#define vPort_STM_INT0   0xFD
+#define vPort_STM_INT1   0xFC
+#define vPort_CPU0INT    0xFE
 #define vPortTickIsr0Clear() STM_ISRR.B.CMP0IRR = 1
 #define vPortTickIsr1Clear() STM_ISRR.B.CMP1IRR = 1
 
@@ -116,53 +114,16 @@
     OSExitISR();                                \
     vPortRestoreContext()
 
-
-#if 1
-void vPortMallocCSAandStartCurRdyTsk(void);
-/* use instruction call to malloc csa for Current ready task.more fast.*/
-#define vPortStartCurRdyTsk()                           \
-	{	                                                \
-		__asm("call vPortMallocCSAandStartCurRdyTsk");	\
-	}
-#else
-/* This Method is copyed from FreeRTOS,but not effective.*/
 #define vPortStartCurRdyTsk()                                           \
     {                                                                   \
-        unsigned long *pulUpperCSA = STD_NULL;                          \
-        __disable();                                                    \
-        /* DSync to ensure that buffering is not a problem. */          \
-        __dsync();                                                      \
-        /* Consume one free CSAs. */                                    \
-        pulUpperCSA = vPortCSA_TO_ADDRESS( __mfcr( FCX ) );             \
-        /* Check that we have successfully reserved two CSAs. */        \
-        if(STD_NULL != pulUpperCSA)                                     \
-        {                                                               \
-            /* Remove the one consumed CSAs from the free CSA list. */  \
-            __dsync();                                                  \
-            __mtcr( FCX, pulUpperCSA[ 0 ] );                            \
-            __isync();                                                  \
-        }                                                               \
-        else                                                            \
-        {                                                               \
-            /* Simply trigger a context list depletion trap. */         \
-            __svlcx();                                                  \
-        }                                                               \
-        /* Clear Its Link Info,Make it to be tail*/                     \
-        pulUpperCSA[ 0 ]=0;                                             \
-        /* Upper Context. */                                            \
-        pulUpperCSA[ 2 ] = ( unsigned long )OSCurTcb->pxStack;		/* A10;	Stack Return aka Stack Pointer */ \
-        pulUpperCSA[ 1 ] = vPortSYSTEM_PROGRAM_STATUS_WORD;		    /* PSW	*/ \
-        __dsync();                                                      \
-        __mtcr( PCXI, vPortINITIAL_PCXI_UPPER_CONTEXT_WORD | vPortADDRESS_TO_CSA( pulUpperCSA ) ); \
-        /* Prepare To Satrt The Task */                                 \
-        __asm("movh.a	a11,#@his(vPortPreActivateTask)");              \
-        __asm("lea	a11,[a11]@los(vPortPreActivateTask)");              \
+        vPortSetIpl(0);                                                 \
+	    /* As the link info in PCXI maybe invalid caused by vPortReclaimCSA() \
+           or already saved by OSCurTsk.So Should Clear It */           \
+        __mtcr(PCXI,0);                                                 \
         __isync();                                                      \
-        __nop();                                                        \
-        /* Return to the first task selected to execute. */             \
-        __asm volatile( "ret" );                                        \
+        vPortPreActivateTask();                                         \
     }
-#endif
+
 
 void vPortDispatcher(void);
 void __vPortSwitch2Task(void);

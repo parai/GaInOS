@@ -12,7 +12,7 @@
 // @Description   This file contains functions that use the INT module.
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/20 09:34:57
+// @Date          2013/1/21 20:15:00
 //
 //****************************************************************************
 
@@ -111,7 +111,7 @@
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/20
+// @Date          2013/1/21
 //
 //****************************************************************************
 
@@ -129,10 +129,10 @@ void INT_vInit(void)
   ///  Configuration of the used CPU Interrupts:
   ///  -----------------------------------------------------------------------
   ///  - CPU0 service request node configuration:
-  ///  - CPU0 interrupt priority level (SRPN) = 15
+  ///  - CPU0 interrupt priority level (SRPN) = 254
   ///  - CPU0 CPU interrupt is selected
 
-  CPU_SRC0.U     = 0x0000100F;   // set service request control register
+  CPU_SRC0.U     = 0x000010FE;   // set service request control register
 
 
 
@@ -159,7 +159,7 @@ void INT_vInit(void)
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/20
+// @Date          2013/1/21
 //
 //****************************************************************************
 

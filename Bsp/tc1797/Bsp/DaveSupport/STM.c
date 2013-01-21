@@ -12,7 +12,7 @@
 // @Description   This file contains functions that use the STM module.
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/20 09:34:57
+// @Date          2013/1/21 20:15:00
 //
 //****************************************************************************
 
@@ -112,7 +112,7 @@
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/20
+// @Date          2013/1/21
 //
 //****************************************************************************
 
@@ -177,43 +177,41 @@ void STM_vInit(void)
   ///  STM Compare 0 configuration:
   ///  -----------------------------------------------------------------------
   ///  - lowest bit number of STM which is compared with CMP0 is 7
-  ///  - 10 bit(s) in register CMP0 are used for the compare operation with 
-  ///    STM
-  ///  - required compare value of CMP0 is 0x000003E8
-  ///  - real compare value of CMP0 is 0x000003E8
+  ///  - 4 bit(s) in register CMP0 are used for the compare operation with STM
+  ///  - required compare value of CMP0 is 0x0000000A
+  ///  - real compare value of CMP0 is 0x0000000A
   ///  - request on compare match with CMP0 is enabled and located to STMIR0
 
-  STM_CMP0.U     = 0x000003E8;   // load compare register 0
+  STM_CMP0.U     = 0x0000000A;   // load compare register 0
 
   ///  -----------------------------------------------------------------------
   ///  STM Compare 1 configuration:
   ///  -----------------------------------------------------------------------
   ///  - lowest bit number of STM which is compared with CMP1 is 7
-  ///  - 10 bit(s) in register CMP1 are used for the compare operation with 
-  ///    STM
-  ///  - required compare value of CMP1 is 0x000003E8
-  ///  - real compare value of CMP1 is 0x000003E8
+  ///  - 4 bit(s) in register CMP1 are used for the compare operation with STM
+  ///  - required compare value of CMP1 is 0x0000000A
+  ///  - real compare value of CMP1 is 0x0000000A
   ///  - request on compare match with CMP1 is enabled and located to STMIR1
 
-  STM_CMP1.U     = 0x000003E8;   // load compare register 1
+  STM_CMP1.U     = 0x0000000A;   // load compare register 1
 
-  STM_CMCON.U    = 0x07090709;   // load compare match control register
+  STM_CMCON.U    = 0x07030703;   // load compare match control register
   STM_ICR.U      = 0x00000051;   // load interrupt control register
 
   ///  -----------------------------------------------------------------------
   ///  Configuration of the used STM Interrupts:
   ///  -----------------------------------------------------------------------
   ///  - SRN0 service request node configuration:
-  ///  - SRN0 interrupt priority level (SRPN) = 1
+  ///  - SRN0 interrupt priority level (SRPN) = 253
   ///  - SRN0 CPU interrupt is selected
 
-  STM_SRC0.U     = 0x00001001;   // set service request control register
+  STM_SRC0.U     = 0x000010FD;   // set service request control register
 
   ///  - SRN1 service request node configuration:
-  ///  - SRN1 interrupt priority level (SRPN) = 2
+  ///  - SRN1 interrupt priority level (SRPN) = 252
   ///  - SRN1 CPU interrupt is selected
 
-  STM_SRC1.U     = 0x00001002;   // set service request control register
+  STM_SRC1.U     = 0x000010FC;   // set service request control register
 
 
   // USER CODE BEGIN (Init,3)
@@ -239,7 +237,7 @@ void STM_vInit(void)
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/20
+// @Date          2013/1/21
 //
 //****************************************************************************
 
@@ -285,7 +283,7 @@ void INTERRUPT (STM_INT0) STM_viSRN0(void)
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/20
+// @Date          2013/1/21
 //
 //****************************************************************************
 
