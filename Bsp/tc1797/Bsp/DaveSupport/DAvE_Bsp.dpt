@@ -9,7 +9,7 @@
 '                PLEASE DO NOT MODIFY THIS FILE !
 '
 '----------------------------------------------------------------------------
-; Date          2013/1/21 20:15:00
+; Date          2013/1/21 20:40:31
 '
 '****************************************************************************
 
@@ -24968,7 +24968,7 @@ STM_CLC_DISR=0
 STM_CLC_DISS=0
 STM_CLC_EDIS=0
 STM_CLC_FSOE=0
-STM_CLC_RMC=7
+STM_CLC_RMC=2
 STM_CLC_SBWE=0
 STM_CLC_SPEN=0
 STM_CMCON_MSIZE0=3

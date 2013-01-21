@@ -142,7 +142,7 @@
 				<Action>ActivateTask(vTask3)</Action>
 			</ExpiryPoint>
 		</GaInOsScheduleTable>
-		<GaInOsScheduleTable name='vSchedTbl2' repeatable='True' counter='vCounter2' autostartable='True' autostarttype='ABSOLUTE' absrelvalue='100' finaldelay='150' strategy='EXPLICIT' max_advance='1' max_retard='4' precision='2'>
+		<GaInOsScheduleTable name='vSchedTbl2' repeatable='True' counter='vCounter1' autostartable='True' autostarttype='ABSOLUTE' absrelvalue='100' finaldelay='150' strategy='EXPLICIT' max_advance='1' max_retard='4' precision='2'>
 			<ExpiryPoint offset='300'>
 				<Action>ActivateTask(vTask4)</Action>
 			</ExpiryPoint>

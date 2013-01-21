@@ -40,20 +40,16 @@
 
 #include "Os_Cfg.h"
 /* Free the csa consumed by StartOS or OSExitISR(),and goto __vPortSwitch2Task. */
-#define vPortSwitch2Task()                                  \
-    {                                                       \
-        __asm("movh.a	a11,#@his(__vPortSwitch2Task)");    \
-        __asm("lea	a11,[a11]@los(__vPortSwitch2Task)");    \
-        __nop();                                            \
-        __asm( "ret" );                                     \
+#define vPortSwitch2Task()                                          \
+    {                                                               \
+        __asm volatile("movh.a	a11,#@his(__vPortSwitch2Task)");    \
+        __asm volatile("lea	a11,[a11]@los(__vPortSwitch2Task)");    \
+        __nop();                                                    \
+        __asm volatile( "ret" );                                    \
     }
 
-#if 1
 /* Some problem with this method */
 #define vPortStartHighRdy()  vPortSwitch2Task()
-#else
-#define vPortStartHighRdy() __enable();CPU_SRC0.U |= 0x8000
-#endif
 
 /* use the software interrupt to dispatch the high priority task */
 #define vPortDispatch() __syscall(0)
@@ -90,12 +86,11 @@
         __nop();                                \
         __rslcx();                              \
         __nop();                                \
-        __asm( "rfe" );                         \
+        __asm volatile( "rfe" );                \
     }
 
 #define vPort_STM_INT0   0xFD
 #define vPort_STM_INT1   0xFC
-#define vPort_CPU0INT    0xFE
 #define vPortTickIsr0Clear() STM_ISRR.B.CMP0IRR = 1
 #define vPortTickIsr1Clear() STM_ISRR.B.CMP1IRR = 1
 
@@ -116,9 +111,13 @@
 
 #define vPortStartCurRdyTsk()                                           \
     {                                                                   \
+        /* load task's stack */                                         \
+        __asm volatile("movh.a	a10,#@his(OSCurTcb)");                  \
+        __asm volatile("ld.a	a10,[a10]@los(OSCurTcb)");              \
+        __asm volatile("ld.a	a10,[a10]");                            \
         vPortSetIpl(0);                                                 \
-	    /* As the link info in PCXI maybe invalid caused by vPortReclaimCSA() \
-           or already saved by OSCurTsk.So Should Clear It */           \
+/* As the link info in PCXI maybe invalid caused by vPortReclaimCSA()   \
+   or already saved by OSCurTsk.So Should Clear It */                   \
         __mtcr(PCXI,0);                                                 \
         __isync();                                                      \
         vPortPreActivateTask();                                         \

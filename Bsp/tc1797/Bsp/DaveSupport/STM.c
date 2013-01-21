@@ -12,7 +12,7 @@
 // @Description   This file contains functions that use the STM module.
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/21 20:15:00
+// @Date          2013/1/21 20:40:31
 //
 //****************************************************************************
 
@@ -131,10 +131,10 @@ void STM_vInit(void)
   ///  -----------------------------------------------------------------------
   ///  - enable the STM module
   ///  - Application Reset resets the STM module
-  ///  - STM clock is System clock / 7 (= 12.86 MHz; 77.78 ns )
+  ///  - STM clock is System clock / 2 (= 45.00 MHz; 22.22 ns )
 
   MAIN_vResetENDINIT();
-  STM_CLC.U      = 0x00000700;   // load clock control register
+  STM_CLC.U      = 0x00000200;   // load clock control register
   MAIN_vSetENDINIT();
 
 
@@ -142,36 +142,36 @@ void STM_vInit(void)
   ///  STM Resolution And Range:
   ///  -----------------------------------------------------------------------
   ///  STM_TIMER_0     bits 0 ... 31 :
-  ///  - resolution = 0.08 us
-  ///  - range = 5.57 min
+  ///  - resolution = 0.02 us
+  ///  - range = 1.59 min
 
   ///  STM_TIMER_1     bits 4 ... 35 :
-  ///  - resolution = 1.24 us
-  ///  - range = 1.48 h
+  ///  - resolution = 0.36 us
+  ///  - range = 25.45 min
 
   ///  STM_TIMER_2     bits 8 ... 39 :
-  ///  - resolution = 19.91 us
-  ///  - range = 23.75 h
+  ///  - resolution = 5.69 us
+  ///  - range = 6.79 h
 
   ///  STM_TIMER_3     bits 12 ... 43 :
-  ///  - resolution = 318.58 us
-  ///  - range = 15.84 days
+  ///  - resolution = 91.02 us
+  ///  - range = 4.52 days
 
   ///  STM_TIMER_4     bits 16 ... 47 :
-  ///  - resolution = 5.10 ms
-  ///  - range = 253.39 days
+  ///  - resolution = 1.46 ms
+  ///  - range = 72.40 days
 
   ///  STM_TIMER_5     bits 20 ... 51 :
-  ///  - resolution = 81.56 ms
-  ///  - range = 11.11 years
+  ///  - resolution = 23.30 ms
+  ///  - range = 3.17 years
 
   ///  STM_TIMER_6     bits 32 ... 55 :
-  ///  - resolution = 5.57 min
-  ///  - range = 177.72 years
+  ///  - resolution = 1.59 min
+  ///  - range = 50.78 years
 
   ///  STM_TIMER_7     bits 32 ... 55 :
-  ///  - resolution = 5.57 min
-  ///  - range = 177.72 years
+  ///  - resolution = 1.59 min
+  ///  - range = 50.78 years
 
   ///  -----------------------------------------------------------------------
   ///  STM Compare 0 configuration:

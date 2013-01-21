@@ -12,7 +12,7 @@
 // @Description   This file contains the project initialization function.
 //
 //----------------------------------------------------------------------------
-// @Date          2013/1/21 20:15:00
+// @Date          2013/1/21 20:40:31
 //
 //****************************************************************************
 
@@ -381,7 +381,7 @@ void MAIN_vWriteWDTCON0(uword uwValue)
 //****************************************************************************
 
 // USER CODE BEGIN (Main,1)
-OsCpuIplType g_ipl=0;
+
 // USER CODE END
 
 sword main(void)
@@ -441,7 +441,7 @@ sword main(void)
   }
 
 
-         // USER CODE BEGIN (Main,7)
+         // USER CODE BEGIN (Main,7)s
 	StartOS(OSDEFAULTAPPMODE);
 	for(;;) {
 		;
