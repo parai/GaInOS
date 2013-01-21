@@ -150,18 +150,14 @@ void vPortSwitch2Task(void)
 /* |----------------+----------------------------------------------| */
 interrupt 4 void vPortDispatcher(void)
 {
-    /* Without the need to judge OSCurTsk.
-       As OSCurTcb is always should be comsistent with OSCurTsk.
-       That is to say when OSCurTsk is INVALID_TASK,the OSCurTcb->xState 
-       is SUSPENDED.*/
-    /* if(INVALID_TASK != OSCurTsk) */
-    /* { */
+    if(INVALID_TASK != OSCurTsk)
+    { 
         if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
         {
             vPortSaveContext();
             vPortSaveSP();
         }
-    /* } */
+    }
     vPortSwitch2Task();
 }
   

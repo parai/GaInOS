@@ -125,9 +125,12 @@ void vPortSwitch2Task(void)
 void vPortDispatcher(void)
 {
 	vPortSaveContext();
-    if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
-    {
-        vPortSaveSP();
+    if(INVALID_TASK != OSCurTsk)                                        
+    { 
+        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+        {
+            vPortSaveSP();
+        }
     }
     vPortSwitch2Task();
 }

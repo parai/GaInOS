@@ -4,16 +4,15 @@
 
 #define cfgOS_MAX_IPL 7
 #define cfgOS_MAX_PRIORITY 63
-#define cfgOS_CONFORMANCE_CLASS BCC1
+#define cfgOS_CONFORMANCE_CLASS ECC1
 #define cfgOS_STATUS_LEVEL OS_STATUS_STANDARD
 #define cfgOS_SCHEDULE_POLICY FULL_PREEMPTIVE_SCHEDULE
 #define cfgOS_TASK_NUM 7
 
 
 /* GaInOS Resource Configuration */
-#define cfgOS_USE_RESOURCE STD_FALSE
-#define cfgOS_RESOURCE_NUM 0
-
+#define cfgOS_USE_RESOURCE STD_TRUE
+#define cfgOS_RESOURCE_NUM 2
 
 /* GaInOS Internal Resource Configuration */
 #define cfgOS_USE_INTERNAL_RESOURCE STD_FALSE

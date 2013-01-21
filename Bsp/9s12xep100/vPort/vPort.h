@@ -54,10 +54,10 @@
 #define INIT_IPL = 0;
 #define INIT_CCR = 0;
 
-#define vPortSaveMsrAndDisableInterrupt(xMSR) \
+#define vPortSaveMsrAndDisableInterrupt(xMSR)   \
     asm tpa; asm sei;asm staa xMSR
 
-#define vPortRestoreMsr(xMSR)             \
+#define vPortRestoreMsr(xMSR)                   \
     asm ldaa xMSR; asm tap
 
 #define vxPPAGE $15				/* The address of register PPAGE */
@@ -100,17 +100,20 @@
 #define vPortEnterISR()                                                 \
     vPortSaveContext();                                                 \
                                                                         \
-    if(0x00u == OSIsr2Nesting)                                          \
+    if(INVALID_TASK != OSCurTsk)                                        \
     {                                                                   \
-        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)  \
+        if(0x00u == OSIsr2Nesting)                                      \
         {                                                               \
-            vPortSaveSP();                                              \
+            if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState) \
+            {                                                           \
+                vPortSaveSP();                                          \
+            }                                                           \
         }                                                               \
     }                                                                   \
     OSEnterISR()
 
 #define vPortLeaveISR()                         \
-    OSExitISR();                               \
+    OSExitISR();                                \
     vPortRestoreContext()
 
 

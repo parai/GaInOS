@@ -116,11 +116,14 @@ void vPortRestoreMsr(OsCpuSrType xMSR);
 #define vPortEnterISR()                                                 \
     vPortSaveContext();                                                 \
                                                                         \
-    if(0x00u == OSIsr2Nesting)                                          \
+    if(INVALID_TASK != OSCurTsk)                                        \
     {                                                                   \
-        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)  \
+        if(0x00u == OSIsr2Nesting)                                      \
         {                                                               \
-            vPortSaveSP();                                              \
+            if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState) \
+            {                                                           \
+                vPortSaveSP();                                          \
+            }                                                           \
         }                                                               \
     }                                                                   \
     OSEnterISR()

@@ -60,7 +60,7 @@ static void vPortTaskIdle(void)
 {
     /* Wait Untill a task was in ready state */
 	vPortEnableInterrupt();
-	/* vPortSetIpl(0); */
+	vPortSetIpl(0);
 	for(;;)
 	{
 		if(OSHighRdyTsk != INVALID_TASK)
@@ -192,16 +192,19 @@ __trap(3) void vPortContextTrap(void)
 
 __trap(vPortSYSCALL_TRAP) void vPortDispatcher(void)
 {
-    if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
-    {
-        vPortSaveContext();
-        vPortSaveSP();
+    if(INVALID_TASK != OSCurTsk)                                        \
+    { 
+        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+        {
+            vPortSaveContext();
+            vPortSaveSP();
+        }
+        else
+        {
+            /* Free the csa used by task OSCurTsk or maybe the preIdle */
+            vPortReclaimCSA(__mfcr(PCXI));
+        }
     }
-	else
-	{
-		/* Free the csa used by task OSCurTsk or maybe the preIdle */
-		vPortReclaimCSA(__mfcr(PCXI));
-	}
     /* Don't consume CSA.So just Jump*/
     __asm("j __vPortSwitch2Task");
 }

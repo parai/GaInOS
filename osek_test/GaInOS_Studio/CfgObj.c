@@ -1,6 +1,14 @@
 #include "CfgObj.h"
 #include "Serial.h"
 
+
+/* GaInOS Resource Configuration */
+const PriorityType OSResCeilPrioTable[cfgOS_RESOURCE_NUM]=
+{
+	cfgOS_MAX_PRIORITY,		 /* RES_SCHEDULER */
+	25,		/* vRes1 */
+};
+
 /* GaInOS Counter And Alarm Configuration */
 const AlarmBaseType OSCounterBaseTable[cfgOS_COUNTER_NUM]=
 {
@@ -38,7 +46,7 @@ const TaskStackRefType OSTaskStackTable[cfgOS_TASK_NUM]=
 
 const PriorityType OSTaskInitPriorityTable[cfgOS_TASK_NUM]=
 {
-	1,		/* vTask1 */
+	7,		/* vTask1 */
 	2,		/* vTask2 */
 	3,		/* vTask3 */
 	4,		/* vTask4 */
@@ -87,7 +95,7 @@ const BoolType OSTaskPreemtableTable[cfgOS_TASK_NUM]=
 #if (cfgOS_CONFORMANCE_CLASS == ECC2 || cfgOS_CONFORMANCE_CLASS == ECC1)
 const uint8_t OSTskClsTypeTable[cfgOS_TASK_NUM] =
 {
-	BASIC_TASK, 		/* vTask1 */
+	EXTEND_TASK, 		/* vTask1 */
 	BASIC_TASK, 		/* vTask2 */
 	BASIC_TASK, 		/* vTask3 */
 	BASIC_TASK, 		/* vTask4 */
@@ -110,7 +118,8 @@ const TaskEntryType OSTaskEntryTable[cfgOS_TASK_NUM]=
 
 TASK(vTask1){
 /* Add Your Task Code Here. */
-
+	WaitEvent(vTask1Event1);
+	ClearEvent(vTask1Event1);
 	printk("vTask1 is running.\r\n");
 	(void)TerminateTask();
 }
@@ -131,15 +140,17 @@ TASK(vTask3){
 
 TASK(vTask4){
 /* Add Your Task Code Here. */
-	(void)NextScheduleTable(vSchedTbl2,vSchedTbl1);
+
 	printk("vTask4 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask5){
 /* Add Your Task Code Here. */
-
+	GetResource(vRes1);
+	SetEvent(vTask1,vTask1Event1);
 	printk("vTask5 is running.\r\n");
+	ReleaseResource(vRes1);
 	(void)TerminateTask();
 }
 
@@ -154,10 +165,7 @@ TASK(vTaskIdle){
 /* Add Your Task Code Here. */
 
 	printk("vTaskIdle is running.\r\n");
-	for(;;)
-	{
-		//(void)NextScheduleTable(vSchedTbl1,vSchedTbl2);
-	}
+	for(;;);
 	(void)TerminateTask();
 }
 

@@ -4,6 +4,10 @@
 #include "Os.h"
 
 
+/* GaInOS Resource Configuration */
+#define vRes1 1
+extern const PriorityType OSResCeilPrioTable[cfgOS_RESOURCE_NUM];
+
 /* GaInOS Counter And Alarm Configuration */
 #define vCounter1 0
 #define vCounter2 1
@@ -37,6 +41,7 @@ extern const uint8_t OSTskClsTypeTable[cfgOS_TASK_NUM];
 #endif
 
 #define vTask1 0
+#define vTask1Event1 0x1
 extern TASK( vTask1 );
 #define vTask2 1
 extern TASK( vTask2 );
