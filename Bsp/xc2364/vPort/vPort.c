@@ -125,13 +125,11 @@ void vPortSwitch2Task(void)
 void vPortDispatcher(void)
 {
 	vPortSaveContext();
-    if(INVALID_TASK != OSCurTsk)                                        
-    { 
-        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
-        {
-            vPortSaveSP();
-        }
+    if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+    {
+        vPortSaveSP();
     }
+
     vPortSwitch2Task();
 }
 #include "Serial.h"

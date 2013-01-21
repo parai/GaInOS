@@ -150,13 +150,11 @@ void vPortSwitch2Task(void)
 /* |----------------+----------------------------------------------| */
 interrupt 4 void vPortDispatcher(void)
 {
-    if(INVALID_TASK != OSCurTsk)
-    { 
-        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
-        {
-            vPortSaveContext();
-            vPortSaveSP();
-        }
+
+    if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+    {
+        vPortSaveContext();
+        vPortSaveSP();
     }
     vPortSwitch2Task();
 }
