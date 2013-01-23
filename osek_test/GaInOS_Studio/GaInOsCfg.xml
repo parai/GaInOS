@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GaInOsCfg>
 	<GaInOsGeneralCfg>
-		<GaInOsCpuType>Tri-Core</GaInOsCpuType>
+		<GaInOsCpuType>MC9S12(X)</GaInOsCpuType>
 		<GaInOsMaxIpl>7</GaInOsMaxIpl>
 		<GaInOsMaxPriority>63</GaInOsMaxPriority>
 		<GaInOsConfCls>ECC1</GaInOsConfCls>
 		<GaInOsSchedPolicy>FULL_PREEMPTIVE_SCHEDULE</GaInOsSchedPolicy>
 		<GaInOsStatusLevel>OS_STATUS_STANDARD</GaInOsStatusLevel>
-		<GaInOsUseAlarm>False</GaInOsUseAlarm>
+		<GaInOsUseAlarm>True</GaInOsUseAlarm>
 		<GaInOsUseInRes>False</GaInOsUseInRes>
 		<GaInOsUseRes>True</GaInOsUseRes>
 		<GaInOsIsr2UseRes>False</GaInOsIsr2UseRes>
@@ -130,6 +130,22 @@
 	</GaInOsCounterCfg>
 
 	<GaInOsAlarmCfg>
+		<GaInOsAlarm>
+			<AlarmName>vAlarm1</AlarmName>
+			<AlarmOwner>vCounter1</AlarmOwner>
+			<AlarmType>ALARM_CALLBACK</AlarmType>
+			<AlarmCbk>vAlarm1_Cbk</AlarmCbk>
+			<AlarmTask>None</AlarmTask>
+			<AlarmEvent>None</AlarmEvent>
+		</GaInOsAlarm>
+		<GaInOsAlarm>
+			<AlarmName>vAlarm2</AlarmName>
+			<AlarmOwner>vCounter1</AlarmOwner>
+			<AlarmType>ALARM_CALLBACK</AlarmType>
+			<AlarmCbk>vAlarm2_Cbk</AlarmCbk>
+			<AlarmTask>None</AlarmTask>
+			<AlarmEvent>None</AlarmEvent>
+		</GaInOsAlarm>
 	</GaInOsAlarmCfg>
 
 	<GaInOsScheduleTableCfg>

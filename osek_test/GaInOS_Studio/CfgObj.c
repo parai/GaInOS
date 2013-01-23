@@ -24,7 +24,26 @@ const AlarmBaseType OSCounterBaseTable[cfgOS_COUNTER_NUM]=
 	},
 };
 
-/* GaInOS Task Configuration */
+#if(cfgOS_USE_ALARM==STD_TRUE)
+const AlarmClassType OSAlarmClassTable[cfgOS_ALARM_NUM]=
+{
+	ALARM_CALLBACK,		/* vAlarm1 */
+	ALARM_CALLBACK,		/* vAlarm2 */
+};
+
+const CounterType OSAlarmOwnerTable[cfgOS_ALARM_NUM]=
+{
+	vCounter1,		/* vAlarm1 */
+	vCounter1,		/* vAlarm2 */
+};
+
+const AlarmContainerType OSAlarmContainerTable[cfgOS_ALARM_NUM]=
+{
+	(VoidType) AlarmCallBackEntry(vAlarm1_Cbk),		/* vAlarm1 */
+	(VoidType) AlarmCallBackEntry(vAlarm2_Cbk),		/* vAlarm2 */
+};
+
+#endif/* GaInOS Task Configuration */
 static TaskStackType g_vTask1Stack[512/4];
 static TaskStackType g_vTask2Stack[512/4];
 static TaskStackType g_vTask3Stack[512/4];
@@ -116,10 +135,19 @@ const TaskEntryType OSTaskEntryTable[cfgOS_TASK_NUM]=
 	TaskEntry(vTaskIdle),
 };
 
+ALARMCALLBACK(vAlarm1_Cbk){
+/* Add Your Alarm Callback Code Here.*/
+
+printk("In vAlarm1_Cbk().\n");
+}
+ALARMCALLBACK(vAlarm2_Cbk){
+/* Add Your Alarm Callback Code Here.*/
+
+printk("In vAlarm2_Cbk().\n");
+}
 TASK(vTask1){
 /* Add Your Task Code Here. */
-	WaitEvent(vTask1Event1);
-	ClearEvent(vTask1Event1);
+
 	printk("vTask1 is running.\r\n");
 	(void)TerminateTask();
 }
@@ -147,10 +175,8 @@ TASK(vTask4){
 
 TASK(vTask5){
 /* Add Your Task Code Here. */
-	GetResource(vRes1);
-	SetEvent(vTask1,vTask1Event1);
+
 	printk("vTask5 is running.\r\n");
-	ReleaseResource(vRes1);
 	(void)TerminateTask();
 }
 
@@ -165,7 +191,6 @@ TASK(vTaskIdle){
 /* Add Your Task Code Here. */
 
 	printk("vTaskIdle is running.\r\n");
-	for(;;);
 	(void)TerminateTask();
 }
 

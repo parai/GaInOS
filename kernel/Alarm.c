@@ -62,19 +62,7 @@
 /* |                   | os223.doc                                    | */
 /* |-------------------+----------------------------------------------| */
 #include "Kernel.h"
-#if (cfgOS_USE_ALARM==STD_TRUE)
-static TickType
-addAlarmTick(TickType xCntCurValue,TickType xMaxAllowedValue ,TickType xTicks)
-{
-    if( xTicks < (xMaxAllowedValue - xCntCurValue) )
-    {
-        return (xCntCurValue + xTicks);
-    }
-    else
-    {
-        return (xCntCurValue + xTicks -xMaxAllowedValue);
-    }
-}
+#if (cfgOS_ALARM_NUM >0)
 /* listCntInsert():
  * Will Insert xAlarmID to the place according to xAlarmValue,
  * The situation That an overflow of xAlarmValue should be considered.
@@ -340,7 +328,7 @@ StatusType SetRelAlarm ( AlarmType xAlarmID , TickType xIncrement ,TickType xCyc
     DoUseAlm(xAlarmID) ; /* No check Error, use it */
     tableSetAlmCycle(xAlarmID,xCycle); /* Set Its xCycle */
     /* As xCycle has already been stored, So use it as temp */
-    xCycle=addAlarmTick(tableGetCntCurValue(xCounterID),xMaxAllowedValue,xIncrement);
+    xCycle=vDoAddCounterTick(tableGetCntCurValue(xCounterID),xMaxAllowedValue,xIncrement);
     tableSetAlmValue(xAlarmID,xCycle); /* Set Its xAlarmValue */
     OS_ENTER_CRITICAL();
     /* Insert xAlarmID to proper place accordint to xAlarmValue */
@@ -547,7 +535,7 @@ void OSProcessAlarm( CounterType xCounterID )
             /* then,Alarm Post Process */
             listCntRemove(xCounterID,xAlarmID);
             if(tableGetAlmCycle(xAlarmID) != 0){
-                tableGetAlmValue(xAlarmID)=addAlarmTick(xCntCurValue,
+                tableGetAlmValue(xAlarmID)=vDoAddCounterTick(xCntCurValue,
                                                         tableGetCntMaxAllowed(xCounterID),
                                                         tableGetAlmCycle(xAlarmID));
                 listCntInsert(xCounterID ,xAlarmID);
@@ -567,7 +555,7 @@ void OSProcessAlarm( CounterType xCounterID )
     OS_EXIT_CRITICAL();
 }
 
-#endif  /* cfgOS_USE_ALARM*/
+#endif  /* cfgOS_ALARM_NUM*/
 
 
 

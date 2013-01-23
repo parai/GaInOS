@@ -11,6 +11,10 @@ extern const PriorityType OSResCeilPrioTable[cfgOS_RESOURCE_NUM];
 /* GaInOS Counter And Alarm Configuration */
 #define vCounter1 0
 #define vCounter2 1
+#define vAlarm1 0
+extern ALARMCALLBACK(vAlarm1_Cbk);		/* vAlarm1 */
+#define vAlarm2 1
+extern ALARMCALLBACK(vAlarm2_Cbk);		/* vAlarm2 */
 extern const AlarmBaseType OSCounterBaseTable[cfgOS_COUNTER_NUM];
 #if(cfgOS_USE_ALARM == STD_TRUE)
 extern const AlarmClassType OSAlarmClassTable[cfgOS_ALARM_NUM];

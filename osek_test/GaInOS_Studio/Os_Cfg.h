@@ -5,7 +5,7 @@
 #define cfgOS_MAX_IPL 7
 #define cfgOS_MAX_PRIORITY 63
 #define cfgOS_CONFORMANCE_CLASS ECC1
-#define cfgOS_STATUS_LEVEL OS_STATUS_STANDARD
+#define cfgOS_STATUS_LEVEL OS_STATUS_EXTEND
 #define cfgOS_SCHEDULE_POLICY FULL_PREEMPTIVE_SCHEDULE
 #define cfgOS_TASK_NUM 7
 
@@ -21,9 +21,10 @@
 
 #define cfgOS_ISR_USE_RES STD_FALSE
 
-#define cfgOS_USE_ALARM STD_FALSE
+/* GaInOS Counter And Alarm Configuration */
+#define cfgOS_USE_ALARM STD_TRUE
 #define cfgOS_COUNTER_NUM 2
-#define cfgOS_ALARM_NUM 0
+#define cfgOS_ALARM_NUM 2
 #define cfgOS_SCHEDULE_TABLE_NUM 2
 
 /*Default Macro Defines Which You Can Change form 0 to 1 to include the Hooks or Stack Usage Check for GaInOS*/
@@ -35,9 +36,7 @@
 #define cfgOS_PRE_TASK_HOOK 0
 #define cfgOS_POST_TASK_HOOK 0
 
-/* For Tri-Core */
-typedef uint32_t OsCpuSrType;
-typedef uint8_t  OsCpuIplType;
+/* For MC9S12(X) */
+typedef uint8_t OsCpuSrType;
+typedef uint8_t OsCpuIplType;
 #endif /* _OS_CFG_H_ */
-
-

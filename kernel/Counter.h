@@ -43,30 +43,31 @@
 /* |---------+-------------------| */
 /* | WorkOn: | Emacs23.3         | */
 /* |---------+-------------------| */
-#ifndef _KERNEL_H_
-#define _KERNEL_H_
-#include "Os.h"
-#include "Osctrl.h"
-#include "Task.h"
-#include "Alarm.h"
-#include "Event.h"
-#include "Resource.h"
-#include "Autosar.h"
-#include "Counter.h"
-#include "SchedTbl.h"
+#ifndef _COUNTER_H_
+#define _COUNTER_H_
+/* Get xMaxAllowedValue of the xCounterID,It's Stored in type AlarmBaseType */
+#define tableGetCntMaxAllowed(xCounterID)                   \
+    ( OSCounterBaseTable[(xCounterID)].xMaxAllowedValue )
 
-/* Maybe Its IPL is not 0 if GetResource() share with ISR2 */
-#define TASK_LEVEL  0u
-/* Its IPL not equals 0, and OSIsr2Nesting is 0 */
-#define ISR1_LEVEL  1u
-/* Its IPL not equals 0, and also OSIsr2Nesting */
-#define ISR2_LEVEL  2u
-/* No matter What, When OSIsr2Nesting is 0,It's in Task Level 
-   But There is no Way to judge Whether it is an ISR1_LEVEL,
-   As If A Task has called GetResource(),Its IPL may changed*/
-#define OSGetContextLevel() (OSIsr2Nesting)
-void OS_ENTER_CRITICAL(void);
-void OS_EXIT_CRITICAL(void);
+/*  Get xMinCycle of  the xCounterID,It's Stored in type AlarmBaseType*/
+#define tableGetCntMinCycle(xCounterID)             \
+    ( OSCounterBaseTable[(xCounterID)].xMinCycle )
 
-#endif /* _KERNEL_H_ */
+/* Do the Increment of the xCounterID's Current Value by one  */
+#define tableIncCntCurValue(xCounterID)                         \
+    do{                                                         \
+        OSCntCurValueTable[(xCounterID)] += 1;                  \
+        if(tableGetCntMaxAllowed(xCounterID)                    \
+           < OSCntCurValueTable[(xCounterID)])                  \
+        {                                                       \
+            OSCntCurValueTable[(xCounterID)] = 0;               \
+        }                                                       \
+    }while(0)
 
+/* Get Current Value of xCounterID */
+#define tableGetCntCurValue(xCounterID)         \
+    (OSCntCurValueTable[(xCounterID)])
+
+
+TickType vDoAddCounterTick(TickType xCntCurValue,TickType xMaxAllowedValue ,TickType xTicks);
+#endif /* _COUNTER_H_ */

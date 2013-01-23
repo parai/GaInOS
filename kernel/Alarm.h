@@ -71,14 +71,6 @@
 #define listGetAlarmBase(xAlarmID)                      \
     (OSCounterBaseTable[tableGetCounterID(xAlarmID)])
 
-/* Get xMaxAllowedValue of  the xCounterID,It's Stored in type AlarmBaseType */
-#define tableGetCntMaxAllowed(xCounterID)                   \
-    ( OSCounterBaseTable[(xCounterID)].xMaxAllowedValue )
-
-/*  Get xMinCycle of  the xCounterID,It's Stored in type AlarmBaseType*/
-#define tableGetCntMinCycle(xCounterID)             \
-    ( OSCounterBaseTable[(xCounterID)].xMinCycle )
-
 /* Set The data area xCycle of xAlarmID,Container Type is  AlmCtrlBlkType */
 #define tableSetAlmCycle(xAlarmID,xCyc)         \
     do{                                         \
@@ -98,21 +90,6 @@
 /* Set The data area xAlmValue of xAlarmID,Container Type is  AlmCtrlBlkType */
 #define tableGetAlmValue(xAlarmID)              \
     ( OSAlarmTable[(xAlarmID)].xAlarmValue )
-
-/* Do the Increment of the xCounterID's Current Value by one  */
-#define tableIncCntCurValue(xCounterID)                         \
-    do{                                                         \
-        OSCntCurValueTable[(xCounterID)] += 1;                  \
-        if(tableGetCntMaxAllowed(xCounterID)                    \
-           < OSCntCurValueTable[(xCounterID)])                  \
-        {                                                       \
-            OSCntCurValueTable[(xCounterID)] = 0;               \
-        }                                                       \
-    }while(0)
-
-/* Get Current Value of xCounterID */
-#define tableGetCntCurValue(xCounterID)         \
-    (OSCntCurValueTable[(xCounterID)])
 
 /* Do judge whether there is no xAlarmID in use which is assigned to xCounterID.
  * TRUE: NO xAlarmID assigned to xCounterID in use
