@@ -1,6 +1,8 @@
 #include "CfgObj.h"
 #include "Serial.h"
 
+const TaskType G_INVALID_TASK=INVALID_TASK;
+
 
 /* GaInOS Resource Configuration */
 const PriorityType OSResCeilPrioTable[cfgOS_RESOURCE_NUM]=

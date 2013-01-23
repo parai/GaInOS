@@ -1,211 +1,267 @@
 Dependencies for Project 'GaInOS', Target 'GaInOS': (DO NOT MODIFY !)
 F (..\vPort\start_rvds.S)(0x50FBD725)(--cpu ARM920T -g --apcs=interwork --pd "__MICROLIB SETA 1" -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung --list ".\obj\start_rvds.lst" --xref -o ".\obj\start_rvds.o" --depend ".\obj\start_rvds.d")
 F (..\vPort\vPort.c)(0x50FBEC59)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\vport.o" --omf_browse ".\obj\vport.crf" --depend ".\obj\vport.d")
-I (..\..\..\kernel\Kernel.h)(0x50D9AEDB)
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
 I (..\..\..\kernel\Task.h)(0x508FDBB2)
-I (..\..\..\kernel\Alarm.h)(0x50E14430)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
 I (..\..\..\kernel\Event.h)(0x50C736DD)
 I (..\..\..\kernel\Resource.h)(0x50A74763)
-I (..\..\..\kernel\Autosar.h)(0x50F80439)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)
 I (..\Bsp\Serial\Serial.h)(0x50FA9900)
 F (..\vPort\vPort_Rvds.S)(0x50FA9E85)(--cpu ARM920T -g --apcs=interwork --pd "__MICROLIB SETA 1" -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung --list ".\obj\vPort_Rvds.lst" --xref -o ".\obj\vPort_Rvds.o" --depend ".\obj\vPort_Rvds.d")
-F (..\..\..\kernel\Alarm.c)(0x50F24ED8)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\alarm.o" --omf_browse ".\obj\alarm.crf" --depend ".\obj\alarm.d")
-I (..\..\..\kernel\Kernel.h)(0x50D9AEDB)
-I (..\..\..\include\Os.h)(0x50F6B064)
+F (..\..\..\kernel\Alarm.c)(0x50FFCEBA)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\alarm.o" --omf_browse ".\obj\alarm.crf" --depend ".\obj\alarm.d")
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
 I (..\..\..\kernel\Task.h)(0x508FDBB2)
-I (..\..\..\kernel\Alarm.h)(0x50E14430)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
 I (..\..\..\kernel\Event.h)(0x50C736DD)
 I (..\..\..\kernel\Resource.h)(0x50A74763)
-I (..\..\..\kernel\Autosar.h)(0x50F80439)
-F (..\..\..\kernel\Autosar.c)(0x50F80579)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\autosar.o" --omf_browse ".\obj\autosar.crf" --depend ".\obj\autosar.d")
-I (..\..\..\kernel\Kernel.h)(0x50D9AEDB)
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)
+F (..\..\..\kernel\Autosar.c)(0x50FFC8ED)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\autosar.o" --omf_browse ".\obj\autosar.crf" --depend ".\obj\autosar.d")
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
 I (..\..\..\kernel\Task.h)(0x508FDBB2)
-I (..\..\..\kernel\Alarm.h)(0x50E14430)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
 I (..\..\..\kernel\Event.h)(0x50C736DD)
 I (..\..\..\kernel\Resource.h)(0x50A74763)
-I (..\..\..\kernel\Autosar.h)(0x50F80439)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)
 F (..\..\..\kernel\Event.c)(0x50C736DD)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\event.o" --omf_browse ".\obj\event.crf" --depend ".\obj\event.d")
-I (..\..\..\kernel\Kernel.h)(0x50D9AEDB)
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
 I (..\..\..\kernel\Task.h)(0x508FDBB2)
-I (..\..\..\kernel\Alarm.h)(0x50E14430)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
 I (..\..\..\kernel\Event.h)(0x50C736DD)
 I (..\..\..\kernel\Resource.h)(0x50A74763)
-I (..\..\..\kernel\Autosar.h)(0x50F80439)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)
 F (..\..\..\kernel\Hooks.c)(0x508AA1DF)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\hooks.o" --omf_browse ".\obj\hooks.crf" --depend ".\obj\hooks.d")
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 F (..\..\..\kernel\Interrupt.c)(0x50C2EFD6)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\interrupt.o" --omf_browse ".\obj\interrupt.crf" --depend ".\obj\interrupt.d")
-I (..\..\..\kernel\Kernel.h)(0x50D9AEDB)
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
 I (..\..\..\kernel\Task.h)(0x508FDBB2)
-I (..\..\..\kernel\Alarm.h)(0x50E14430)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
 I (..\..\..\kernel\Event.h)(0x50C736DD)
 I (..\..\..\kernel\Resource.h)(0x50A74763)
-I (..\..\..\kernel\Autosar.h)(0x50F80439)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)
 F (..\..\..\kernel\Osctrl.c)(0x50F6AC3F)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\osctrl.o" --omf_browse ".\obj\osctrl.crf" --depend ".\obj\osctrl.d")
-I (..\..\..\kernel\Kernel.h)(0x50D9AEDB)
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
 I (..\..\..\kernel\Task.h)(0x508FDBB2)
-I (..\..\..\kernel\Alarm.h)(0x50E14430)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
 I (..\..\..\kernel\Event.h)(0x50C736DD)
 I (..\..\..\kernel\Resource.h)(0x50A74763)
-I (..\..\..\kernel\Autosar.h)(0x50F80439)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)
 F (..\..\..\kernel\Resource.c)(0x50C88D0A)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\resource.o" --omf_browse ".\obj\resource.crf" --depend ".\obj\resource.d")
-I (..\..\..\kernel\Kernel.h)(0x50D9AEDB)
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
 I (..\..\..\kernel\Task.h)(0x508FDBB2)
-I (..\..\..\kernel\Alarm.h)(0x50E14430)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
 I (..\..\..\kernel\Event.h)(0x50C736DD)
 I (..\..\..\kernel\Resource.h)(0x50A74763)
-I (..\..\..\kernel\Autosar.h)(0x50F80439)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)
 F (..\..\..\kernel\Task.c)(0x50FA9D18)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\task.o" --omf_browse ".\obj\task.crf" --depend ".\obj\task.d")
-I (..\..\..\kernel\Kernel.h)(0x50D9AEDB)
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
 I (..\..\..\kernel\Task.h)(0x508FDBB2)
-I (..\..\..\kernel\Alarm.h)(0x50E14430)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
 I (..\..\..\kernel\Event.h)(0x50C736DD)
 I (..\..\..\kernel\Resource.h)(0x50A74763)
-I (..\..\..\kernel\Autosar.h)(0x50F80439)
-F (.\Source\main.c)(0x50FBEC3C)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\main.o" --omf_browse ".\obj\main.crf" --depend ".\obj\main.d")
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)
+F (..\..\..\kernel\Counter.c)(0x50FFEF2E)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\counter.o" --omf_browse ".\obj\counter.crf" --depend ".\obj\counter.d")
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
+I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
+I (..\..\..\kernel\Task.h)(0x508FDBB2)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
+I (..\..\..\kernel\Event.h)(0x50C736DD)
+I (..\..\..\kernel\Resource.h)(0x50A74763)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)
+F (..\..\..\kernel\SchedTbl.c)(0x50FFEF57)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\schedtbl.o" --omf_browse ".\obj\schedtbl.crf" --depend ".\obj\schedtbl.d")
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
+I (..\..\..\include\Std_Types.h)(0x50E28323)
+I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
+I (..\..\..\include\MemMap.h)(0x508AA1DE)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
+I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
+I (..\vPort\vPort.h)(0x50F2797E)
+I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
+I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
+I (..\..\..\kernel\Task.h)(0x508FDBB2)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
+I (..\..\..\kernel\Event.h)(0x50C736DD)
+I (..\..\..\kernel\Resource.h)(0x50A74763)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)
+F (.\Source\main.c)(0x50FBEC3C)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\main.o" --omf_browse ".\obj\main.crf" --depend ".\obj\main.d")
+I (..\..\..\include\Os.h)(0x50FFF0BF)
+I (..\..\..\include\Std_Types.h)(0x50E28323)
+I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
+I (..\..\..\include\MemMap.h)(0x508AA1DE)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
+I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
+I (..\vPort\vPort.h)(0x50F2797E)
+I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 I (..\Bsp\Cpu\Cpu.h)(0x50FA9BAA)
 I (..\vPort\s3c2440.h)(0x50C73A12)
 I (..\Bsp\Serial\Serial.h)(0x50FA9900)
 F (..\Bsp\Cpu\Cpu.c)(0x50FA9C20)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\cpu.o" --omf_browse ".\obj\cpu.crf" --depend ".\obj\cpu.d")
 I (..\Bsp\Cpu\Cpu.h)(0x50FA9BAA)
 I (..\vPort\s3c2440.h)(0x50C73A12)
-F (..\Bsp\Serial\Serial.c)(0x50FA9D2C)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\serial.o" --omf_browse ".\obj\serial.crf" --depend ".\obj\serial.d")
+F (..\Bsp\Serial\Serial.c)(0x50FC00E2)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\serial.o" --omf_browse ".\obj\serial.crf" --depend ".\obj\serial.d")
 I (..\Bsp\Serial\Serial.h)(0x50FA9900)
 I (..\Bsp\Cpu\Cpu.h)(0x50FA9BAA)
 I (..\vPort\s3c2440.h)(0x50C73A12)
 I (D:\usr\opt\keil\ARM\ARMCC\include\stdio.h)(0x4EB0D286)
 I (D:\usr\opt\keil\ARM\ARMCC\include\stdlib.h)(0x4EB0D284)
 I (D:\usr\opt\keil\ARM\ARMCC\include\stdarg.h)(0x4EB0D27C)
-F (..\..\..\osek_test\GaInOS_Studio\CfgObj.c)(0x50FBD87D)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\cfgobj.o" --omf_browse ".\obj\cfgobj.crf" --depend ".\obj\cfgobj.d")
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
-I (..\..\..\include\Os.h)(0x50F6B064)
+F (..\..\..\osek_test\GaInOS_Studio\CfgObj.c)(0x50FFF0C4)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\cfgobj.o" --omf_browse ".\obj\cfgobj.crf" --depend ".\obj\cfgobj.d")
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
 I (..\Bsp\Serial\Serial.h)(0x50FA9900)
 F (..\..\..\osek_test\GaInOS_Studio\CfgRdyQ.c)(0x50F804F1)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\cfgrdyq.o" --omf_browse ".\obj\cfgrdyq.crf" --depend ".\obj\cfgrdyq.d")
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
-F (..\..\..\osek_test\GaInOS_Studio\CfgSchedTbl.c)(0x50FBD875)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\cfgschedtbl.o" --omf_browse ".\obj\cfgschedtbl.crf" --depend ".\obj\cfgschedtbl.d")
-I (..\..\..\kernel\Kernel.h)(0x50D9AEDB)
-I (..\..\..\include\Os.h)(0x50F6B064)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
+F (..\..\..\osek_test\GaInOS_Studio\CfgSchedTbl.c)(0x50FFEE01)(-c --cpu ARM920T -D__MICROLIB -g -O2 -Otime --apcs=interwork -I..\Bsp\Cpu -I..\Bsp\Serial -I..\vPort -I..\..\..\include -I..\..\..\kernel -I..\..\..\osek_test\GaInOS_Studio -ID:\usr\opt\keil\ARM\ARMCC\include -I D:\usr\opt\keil\ARM\RV31\INC -I D:\usr\opt\keil\ARM\CMSIS\Include -I D:\usr\opt\keil\ARM\Inc\Samsung -o ".\obj\cfgschedtbl.o" --omf_browse ".\obj\cfgschedtbl.crf" --depend ".\obj\cfgschedtbl.d")
+I (..\..\..\kernel\Kernel.h)(0x50FFC9CD)
+I (..\..\..\include\Os.h)(0x50FFF0BF)
 I (..\..\..\include\Std_Types.h)(0x50E28323)
 I (..\Bsp\Cpu\Platform_Types.h)(0x50C73A12)
 I (..\..\..\include\MemMap.h)(0x508AA1DE)
-I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\Os_Cfg.h)(0x50FFEE01)
 I (..\..\..\kernel\OsCfgChk.h)(0x50A4F7C6)
 I (..\vPort\vPort.h)(0x50F2797E)
 I (..\..\..\kernel\Interrupt.h)(0x508AAA09)
-I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FBD875)
+I (..\..\..\osek_test\GaInOS_Studio\CfgObj.h)(0x50FFEE01)
 I (..\..\..\kernel\Osctrl.h)(0x508AA1DF)
 I (..\..\..\kernel\Task.h)(0x508FDBB2)
-I (..\..\..\kernel\Alarm.h)(0x50E14430)
+I (..\..\..\kernel\Alarm.h)(0x50FFCA41)
 I (..\..\..\kernel\Event.h)(0x50C736DD)
 I (..\..\..\kernel\Resource.h)(0x50A74763)
-I (..\..\..\kernel\Autosar.h)(0x50F80439)
+I (..\..\..\kernel\Autosar.h)(0x50FFC872)
+I (..\..\..\kernel\Counter.h)(0x50FFCBA7)
+I (..\..\..\kernel\SchedTbl.h)(0x50FFD0DA)

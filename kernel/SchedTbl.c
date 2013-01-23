@@ -941,7 +941,9 @@ StatusType GetScheduleTableStatus(ScheduleTableType ScheduleTableID,
     }
 #endif
     *ScheduleStatus=tableGetSchedTblStatus(ScheduleTableID);
+#if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )    
   Error_Exit:
+#endif    
     return xRet;
 }
 

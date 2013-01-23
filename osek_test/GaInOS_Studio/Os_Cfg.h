@@ -5,7 +5,7 @@
 #define cfgOS_MAX_IPL 7
 #define cfgOS_MAX_PRIORITY 63
 #define cfgOS_CONFORMANCE_CLASS ECC1
-#define cfgOS_STATUS_LEVEL OS_STATUS_EXTEND
+#define cfgOS_STATUS_LEVEL OS_STATUS_STANDARD
 #define cfgOS_SCHEDULE_POLICY FULL_PREEMPTIVE_SCHEDULE
 #define cfgOS_TASK_NUM 7
 
@@ -36,7 +36,7 @@
 #define cfgOS_PRE_TASK_HOOK 0
 #define cfgOS_POST_TASK_HOOK 0
 
-/* For MC9S12(X) */
-typedef uint8_t OsCpuSrType;
-typedef uint8_t OsCpuIplType;
+/* For ARM920T */
+typedef uint32_t OsCpuSrType;
+typedef uint32_t OsCpuIplType;
 #endif /* _OS_CFG_H_ */

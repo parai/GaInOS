@@ -158,7 +158,9 @@ StatusType GetCounterValue(CounterType CounterID,TickRefType pxValue)
     }
 #endif
     *pxValue = tableGetCntCurValue(CounterID);
+#if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )    
   Error_Exit:
+#endif    
     return xRet;
 }
 /* |-------------------+-------------------------------------------------------------------| */
@@ -218,7 +220,9 @@ StatusType GetElapsedCounterValue(CounterType CounterID,
     {
         *ElapsedValue = (tableGetCntMaxAllowed(CounterID) - *Value)+tableGetCntCurValue(CounterID);
     }
+#if (cfgOS_STATUS_LEVEL == OS_STATUS_EXTEND )    
   Error_Exit:
+#endif    
     return xRet;
 }
 
