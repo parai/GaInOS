@@ -378,7 +378,7 @@
             <useFile>0</useFile>
             <TextAddressRange>0x30000000</TextAddressRange>
             <DataAddressRange>0x40000000</DataAddressRange>
-            <ScatterFile>.\obj\GaInOS.sct</ScatterFile>
+            <ScatterFile>.\GaInOS.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -450,6 +450,16 @@
               <FileName>Task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\kernel\Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>Counter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\kernel\Counter.c</FilePath>
+            </File>
+            <File>
+              <FileName>SchedTbl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\kernel\SchedTbl.c</FilePath>
             </File>
           </Files>
         </Group>

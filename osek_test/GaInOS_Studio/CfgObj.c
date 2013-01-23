@@ -30,19 +30,22 @@ const AlarmBaseType OSCounterBaseTable[cfgOS_COUNTER_NUM]=
 const AlarmClassType OSAlarmClassTable[cfgOS_ALARM_NUM]=
 {
 	ALARM_CALLBACK,		/* vAlarm1 */
-	ALARM_CALLBACK,		/* vAlarm2 */
+	ALARM_TASK,		/* vAlarm2 */
+	ALARM_EVENT,		/* vAlarm3 */
 };
 
 const CounterType OSAlarmOwnerTable[cfgOS_ALARM_NUM]=
 {
 	vCounter1,		/* vAlarm1 */
 	vCounter1,		/* vAlarm2 */
+	vCounter1,		/* vAlarm3 */
 };
 
 const AlarmContainerType OSAlarmContainerTable[cfgOS_ALARM_NUM]=
 {
 	(VoidType) AlarmCallBackEntry(vAlarm1_Cbk),		/* vAlarm1 */
-	(VoidType) AlarmCallBackEntry(vAlarm2_Cbk),		/* vAlarm2 */
+	(VoidType) vTask4,		/* vAlarm2 */
+	(VoidType)((VoidType)vTask1<<16U)|((VoidType)vTask1Event1),		/* vAlarm3 */
 };
 
 #endif/* GaInOS Task Configuration */
@@ -141,11 +144,6 @@ ALARMCALLBACK(vAlarm1_Cbk){
 /* Add Your Alarm Callback Code Here.*/
 
 printk("In vAlarm1_Cbk().\n");
-}
-ALARMCALLBACK(vAlarm2_Cbk){
-/* Add Your Alarm Callback Code Here.*/
-
-printk("In vAlarm2_Cbk().\n");
 }
 TASK(vTask1){
 /* Add Your Task Code Here. */

@@ -523,8 +523,8 @@ void OSProcessAlarm( CounterType xCounterID )
                     break;
 #if(cfgOS_CONFORMANCE_CLASS == ECC1 || cfgOS_CONFORMANCE_CLASS == ECC2)
                 case ALARM_EVENT :
-                    (void)SetEvent((TaskType)(OSAlarmContainerTable[xAlarmID]>>16),
-                             (EventMaskType)(OSAlarmContainerTable[xAlarmID]&0x00FF));
+                    (void)SetEvent((TaskType)(((uint32_t)OSAlarmContainerTable[xAlarmID])>>16),
+                              (EventMaskType)(((uint32_t)OSAlarmContainerTable[xAlarmID])&0x00FF));
                     break;
 #endif
                 default:

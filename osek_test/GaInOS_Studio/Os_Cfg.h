@@ -24,7 +24,7 @@
 /* GaInOS Counter And Alarm Configuration */
 #define cfgOS_USE_ALARM STD_TRUE
 #define cfgOS_COUNTER_NUM 2
-#define cfgOS_ALARM_NUM 2
+#define cfgOS_ALARM_NUM 3
 #define cfgOS_SCHEDULE_TABLE_NUM 2
 
 /*Default Macro Defines Which You Can Change form 0 to 1 to include the Hooks or Stack Usage Check for GaInOS*/

@@ -22,17 +22,17 @@
 ### List of Objects: adding '".\obj\cfgschedtbl.o"'
 ### ADS-LD Command completed:
 --cpu ARM920T ".\obj\start_rvds.o" ".\obj\vport.o" ".\obj\vport_rvds.o" ".\obj\alarm.o" ".\obj\autosar.o" ".\obj\event.o" ".\obj\hooks.o" ".\obj\interrupt.o" ".\obj\osctrl.o" ".\obj\resource.o" ".\obj\task.o" ".\obj\counter.o" ".\obj\schedtbl.o" ".\obj\main.o" ".\obj\cpu.o" ".\obj\serial.o" ".\obj\cfgobj.o" ".\obj\cfgrdyq.o" ".\obj\cfgschedtbl.o" 
---library_type=microlib --strict --scatter ".\obj\GaInOS.sct" 
+--library_type=microlib --strict --scatter ".\GaInOS.sct" 
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
 --info sizes --info totals --info unused --info veneers 
  --list ".\obj\GaInOS.map" -o .\obj\GaInOS.axf### Preparing Environment (PrepEnvAds)
 ### ADS-LD Output File: '.\obj\GaInOS.axf'
 ### ADS-LD Command File: '.\obj\GaInOS.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '.\obj\GaInOS.lnp', Handle=0x000005B0
+### Creating CmdFile '.\obj\GaInOS.lnp', Handle=0x0000066C
 ### Writing '.lnp' file
 ### ADS-LD Command file '.\obj\GaInOS.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.
-### ADS-LD: executed with 1 errors
+### ADS-LD: executed with 0 errors
 ### Updating obj list
 ### LDADS_file() completed.

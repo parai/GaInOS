@@ -141,10 +141,18 @@
 		<GaInOsAlarm>
 			<AlarmName>vAlarm2</AlarmName>
 			<AlarmOwner>vCounter1</AlarmOwner>
-			<AlarmType>ALARM_CALLBACK</AlarmType>
+			<AlarmType>ALARM_TASK</AlarmType>
 			<AlarmCbk>vAlarm2_Cbk</AlarmCbk>
-			<AlarmTask>None</AlarmTask>
+			<AlarmTask>vTask4</AlarmTask>
 			<AlarmEvent>None</AlarmEvent>
+		</GaInOsAlarm>
+		<GaInOsAlarm>
+			<AlarmName>vAlarm3</AlarmName>
+			<AlarmOwner>vCounter1</AlarmOwner>
+			<AlarmType>ALARM_EVENT</AlarmType>
+			<AlarmCbk>vAlarm3_Cbk</AlarmCbk>
+			<AlarmTask>vTask1</AlarmTask>
+			<AlarmEvent>vTask1Event1</AlarmEvent>
 		</GaInOsAlarm>
 	</GaInOsAlarmCfg>
 
