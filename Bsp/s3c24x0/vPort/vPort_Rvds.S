@@ -6,6 +6,7 @@
 		EXPORT vPortSwitch2Task
 		EXPORT vPortSaveMsrAndDisableIrq
 		EXPORT vPortRestoreMsr
+		EXPORT vPortIrqHandler
 		;;GLOBAL FUNCTION
 		IMPORT vPortTaskIdle
 		IMPORT vPortPreActivateTask
@@ -134,6 +135,26 @@ not_in_waiting_state
 		;; }
 		LDR		R0, =vPortSwitch2Task
 		BX		R0	
+
+vPortIrqHandler
+	;if(OSCurTsk != INVALID_TASK)
+    ;{
+    ;    if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+    ;    {
+    ;        save context
+	LDR	 	R0, =OSCurTsk
+	LDR 	R0, [R0]
+	LDR		R1, =G_INVALID_TASK
+	LDRB	R1, [R1]
+	CMP		R0,R1
+	BNE		not_invalid_task2
+invalid_task2
+	
+	
+not_invalid_task2
+    ;    }
+    ;}	
+		nop
 		
 		END
 		

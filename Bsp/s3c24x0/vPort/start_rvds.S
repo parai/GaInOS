@@ -59,11 +59,11 @@ F_Bit           EQU     0x40            ; when F bit is set, FIQ is disabled
 ;// </h>
 
 UND_Stack_Size  EQU     0x00000000
-SVC_Stack_Size  EQU     0x00000400
+SVC_Stack_Size  EQU     0x00000000
 ABT_Stack_Size  EQU     0x00000000
 FIQ_Stack_Size  EQU     0x00000000
-IRQ_Stack_Size  EQU     0x00000400
-USR_Stack_Size  EQU     0x00000400
+IRQ_Stack_Size  EQU     0x00000000
+USR_Stack_Size  EQU     0x00000000
 
 ISR_Stack_Size  EQU     (UND_Stack_Size + SVC_Stack_Size + ABT_Stack_Size + \
                          FIQ_Stack_Size + IRQ_Stack_Size)
@@ -74,12 +74,27 @@ Stack_Mem       SPACE   USR_Stack_Size
 __initial_sp    SPACE   ISR_Stack_Size
 Stack_Top
 
+cfgUND_Stack_Size  EQU     0x00000000
+cfgSVC_Stack_Size  EQU     0x00000400
+cfgABT_Stack_Size  EQU     0x00000000
+cfgFIQ_Stack_Size  EQU     0x00000000
+cfgIRQ_Stack_Size  EQU     0x00000400
+cfgUSR_Stack_Size  EQU     0x00000400
+
+cfgStackTop       EQU     0x34000000
+cfgUND_StackTop   EQU     cfgStackTop
+cfgSVC_StackTop   EQU     cfgUND_StackTop - cfgUND_Stack_Size
+cfgABT_StackTop   EQU     cfgSVC_StackTop - cfgSVC_Stack_Size
+cfgFIQ_StackTop   EQU     cfgABT_StackTop - cfgABT_Stack_Size
+cfgIRQ_StackTop   EQU     cfgFIQ_StackTop - cfgFIQ_Stack_Size
+cfgUSR_StackTop   EQU     cfgIRQ_StackTop - cfgUSR_Stack_Size
+
 
 ;// <h> Heap Configuration
 ;//   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF>
 ;// </h>
 
-Heap_Size       EQU     0x00004000
+Heap_Size       EQU     0x00000000
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base
@@ -1058,37 +1073,37 @@ Reset_Handler
                 
 ; Setup Stack for each mode ----------------------------------------------------
 
-                LDR     R0, =Stack_Top
+                LDR     R0, =cfgStackTop
 
 ;  Enter Undefined Instruction Mode and set its Stack Pointer
                 MSR     CPSR_c, #Mode_UND:OR:I_Bit:OR:F_Bit
                 MOV     SP, R0
-                SUB     R0, R0, #UND_Stack_Size
+                SUB     R0, R0, #cfgUND_Stack_Size
 
 ;  Enter Abort Mode and set its Stack Pointer
                 MSR     CPSR_c, #Mode_ABT:OR:I_Bit:OR:F_Bit
                 MOV     SP, R0
-                SUB     R0, R0, #ABT_Stack_Size
+                SUB     R0, R0, #cfgABT_Stack_Size
 
 ;  Enter FIQ Mode and set its Stack Pointer
                 MSR     CPSR_c, #Mode_FIQ:OR:I_Bit:OR:F_Bit
                 MOV     SP, R0
-                SUB     R0, R0, #FIQ_Stack_Size
+                SUB     R0, R0, #cfgFIQ_Stack_Size
 
 ;  Enter IRQ Mode and set its Stack Pointer
                 MSR     CPSR_c, #Mode_IRQ:OR:I_Bit:OR:F_Bit
                 MOV     SP, R0
-                SUB     R0, R0, #IRQ_Stack_Size
+                SUB     R0, R0, #cfgIRQ_Stack_Size
 
 ;  Enter Supervisor Mode and set its Stack Pointer
                 MSR     CPSR_c, #Mode_SVC:OR:I_Bit:OR:F_Bit
                 MOV     SP, R0
-                SUB     R0, R0, #SVC_Stack_Size
+                SUB     R0, R0, #cfgSVC_Stack_Size
 
 ;  Enter User Mode and set its Stack Pointer
                 MSR     CPSR_c, #Mode_USR
                 MOV     SP, R0
-                SUB     SL, SP, #USR_Stack_Size
+                SUB     SL, SP, #cfgUSR_Stack_Size
 
 ;  Enter User Mode and set its Stack Pointer
                 MSR     CPSR_c, #Mode_USR

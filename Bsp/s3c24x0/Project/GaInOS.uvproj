@@ -73,9 +73,9 @@
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
           </BeforeMake>
           <AfterMake>
-            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
+            <UserProg1Name>fromelf.exe --bin -o @p.bin obj/@p.axf</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -129,7 +129,7 @@
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
-            <LoadApplicationAtStartup>0</LoadApplicationAtStartup>
+            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
             <RestoreWatchpoints>1</RestoreWatchpoints>
@@ -152,7 +152,7 @@
             <CpuDllArguments></CpuDllArguments>
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile>.\Ext_RAM.ini</InitializationFile>
+            <InitializationFile></InitializationFile>
             <Driver>Segger\JLTAgdi.dll</Driver>
           </TargetDlls>
         </DebugOption>
@@ -211,7 +211,7 @@
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>1</StupSel>
-            <useUlib>1</useUlib>
+            <useUlib>0</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <RoSelD>0</RoSelD>
@@ -281,7 +281,7 @@
               </XRAM>
               <OCR_RVCT1>
                 <Type>1</Type>
-                <StartAddress>0x30000000</StartAddress>
+                <StartAddress>0x0</StartAddress>
                 <Size>0x1000000</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
@@ -307,7 +307,7 @@
               <OCR_RVCT6>
                 <Type>0</Type>
                 <StartAddress>0x31000000</StartAddress>
-                <Size>0x1000000</Size>
+                <Size>0x4000000</Size>
               </OCR_RVCT6>
               <OCR_RVCT7>
                 <Type>0</Type>
@@ -366,7 +366,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>..\vPort\vBoot</IncludePath>
             </VariousControls>
           </Aads>
           <LDads>
@@ -376,9 +376,9 @@
             <noStLib>0</noStLib>
             <RepFail>1</RepFail>
             <useFile>0</useFile>
-            <TextAddressRange>0x30000000</TextAddressRange>
-            <DataAddressRange>0x40000000</DataAddressRange>
-            <ScatterFile>.\GaInOS.sct</ScatterFile>
+            <TextAddressRange>0x00000000</TextAddressRange>
+            <DataAddressRange>0x30000000</DataAddressRange>
+            <ScatterFile>.\script\runinFlash.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -389,22 +389,17 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>boot</GroupName>
+          <GroupName>vBoot</GroupName>
           <Files>
             <File>
-              <FileName>start_rvds.S</FileName>
+              <FileName>2440init.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\vPort\start_rvds.S</FilePath>
+              <FilePath>..\vPort\vBoot\2440init.s</FilePath>
             </File>
             <File>
-              <FileName>vPort.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\vPort\vPort.c</FilePath>
-            </File>
-            <File>
-              <FileName>vPort_Rvds.S</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\vPort\vPort_Rvds.S</FilePath>
+              <FileName>Option.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\vPort\vBoot\Option.inc</FilePath>
             </File>
           </Files>
         </Group>
@@ -505,6 +500,21 @@
               <FileName>CfgSchedTbl.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\osek_test\GaInOS_Studio\CfgSchedTbl.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>vPort</GroupName>
+          <Files>
+            <File>
+              <FileName>vPort.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\vPort\vPort.c</FilePath>
+            </File>
+            <File>
+              <FileName>vPort_Rvds.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\vPort\vPort_Rvds.S</FilePath>
             </File>
           </Files>
         </Group>

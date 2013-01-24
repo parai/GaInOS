@@ -1,5 +1,5 @@
---cpu ARM920T ".\obj\start_rvds.o" ".\obj\vport.o" ".\obj\vport_rvds.o" ".\obj\alarm.o" ".\obj\autosar.o" ".\obj\event.o" ".\obj\hooks.o" ".\obj\interrupt.o" ".\obj\osctrl.o" ".\obj\resource.o" ".\obj\task.o" ".\obj\counter.o" ".\obj\schedtbl.o" ".\obj\main.o" ".\obj\cpu.o" ".\obj\serial.o" ".\obj\cfgobj.o" ".\obj\cfgrdyq.o" ".\obj\cfgschedtbl.o" 
---library_type=microlib --strict --scatter ".\obj\GaInOS.sct" 
+--cpu ARM920T ".\obj\2440init.o" ".\obj\alarm.o" ".\obj\autosar.o" ".\obj\event.o" ".\obj\hooks.o" ".\obj\interrupt.o" ".\obj\osctrl.o" ".\obj\resource.o" ".\obj\task.o" ".\obj\counter.o" ".\obj\schedtbl.o" ".\obj\main.o" ".\obj\cpu.o" ".\obj\serial.o" ".\obj\cfgobj.o" ".\obj\cfgrdyq.o" ".\obj\cfgschedtbl.o" ".\obj\vport.o" ".\obj\vport_rvds.o" 
+--strict --scatter ".\script\runinFlash.sct" 
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
 --info sizes --info totals --info unused --info veneers 
  --list ".\obj\GaInOS.map" -o .\obj\GaInOS.axf
