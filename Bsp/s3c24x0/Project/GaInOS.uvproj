@@ -129,8 +129,8 @@
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
+            <LoadApplicationAtStartup>0</LoadApplicationAtStartup>
+            <RunToMain>0</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
             <RestoreWatchpoints>1</RestoreWatchpoints>
             <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
@@ -152,7 +152,7 @@
             <CpuDllArguments></CpuDllArguments>
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
+            <InitializationFile>.\script\Ext_RAM.ini</InitializationFile>
             <Driver>Segger\JLTAgdi.dll</Driver>
           </TargetDlls>
         </DebugOption>
@@ -281,7 +281,7 @@
               </XRAM>
               <OCR_RVCT1>
                 <Type>1</Type>
-                <StartAddress>0x0</StartAddress>
+                <StartAddress>0x30000000</StartAddress>
                 <Size>0x1000000</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
@@ -376,9 +376,9 @@
             <noStLib>0</noStLib>
             <RepFail>1</RepFail>
             <useFile>0</useFile>
-            <TextAddressRange>0x00000000</TextAddressRange>
-            <DataAddressRange>0x30000000</DataAddressRange>
-            <ScatterFile>.\script\runinFlash.sct</ScatterFile>
+            <TextAddressRange>0x30000000</TextAddressRange>
+            <DataAddressRange>0x40000000</DataAddressRange>
+            <ScatterFile>.\script\runinRam.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -392,14 +392,9 @@
           <GroupName>vBoot</GroupName>
           <Files>
             <File>
-              <FileName>2440init.s</FileName>
+              <FileName>start_rvds.S</FileName>
               <FileType>2</FileType>
-              <FilePath>..\vPort\vBoot\2440init.s</FilePath>
-            </File>
-            <File>
-              <FileName>Option.inc</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\vPort\vBoot\Option.inc</FilePath>
+              <FilePath>..\vPort\start_rvds.S</FilePath>
             </File>
           </Files>
         </Group>

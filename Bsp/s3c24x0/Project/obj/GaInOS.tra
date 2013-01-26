@@ -1,7 +1,7 @@
 *** Creating Trace Output File '.\obj\GaInOS.tra' Ok.
 ### Preparing for ADS-LD.
 ### Creating ADS-LD Command Line
-### List of Objects: adding '".\obj\2440init.o"'
+### List of Objects: adding '".\obj\start_rvds.o"'
 ### List of Objects: adding '".\obj\alarm.o"'
 ### List of Objects: adding '".\obj\autosar.o"'
 ### List of Objects: adding '".\obj\event.o"'
@@ -21,15 +21,15 @@
 ### List of Objects: adding '".\obj\vport.o"'
 ### List of Objects: adding '".\obj\vport_rvds.o"'
 ### ADS-LD Command completed:
---cpu ARM920T ".\obj\2440init.o" ".\obj\alarm.o" ".\obj\autosar.o" ".\obj\event.o" ".\obj\hooks.o" ".\obj\interrupt.o" ".\obj\osctrl.o" ".\obj\resource.o" ".\obj\task.o" ".\obj\counter.o" ".\obj\schedtbl.o" ".\obj\main.o" ".\obj\cpu.o" ".\obj\serial.o" ".\obj\cfgobj.o" ".\obj\cfgrdyq.o" ".\obj\cfgschedtbl.o" ".\obj\vport.o" ".\obj\vport_rvds.o" 
---strict --scatter ".\script\runinFlash.sct" 
+--cpu ARM920T ".\obj\start_rvds.o" ".\obj\alarm.o" ".\obj\autosar.o" ".\obj\event.o" ".\obj\hooks.o" ".\obj\interrupt.o" ".\obj\osctrl.o" ".\obj\resource.o" ".\obj\task.o" ".\obj\counter.o" ".\obj\schedtbl.o" ".\obj\main.o" ".\obj\cpu.o" ".\obj\serial.o" ".\obj\cfgobj.o" ".\obj\cfgrdyq.o" ".\obj\cfgschedtbl.o" ".\obj\vport.o" ".\obj\vport_rvds.o" 
+--strict --scatter ".\script\runinRam.sct" 
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
 --info sizes --info totals --info unused --info veneers 
  --list ".\obj\GaInOS.map" -o .\obj\GaInOS.axf### Preparing Environment (PrepEnvAds)
 ### ADS-LD Output File: '.\obj\GaInOS.axf'
 ### ADS-LD Command File: '.\obj\GaInOS.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '.\obj\GaInOS.lnp', Handle=0x00000678
+### Creating CmdFile '.\obj\GaInOS.lnp', Handle=0x00001090
 ### Writing '.lnp' file
 ### ADS-LD Command file '.\obj\GaInOS.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.

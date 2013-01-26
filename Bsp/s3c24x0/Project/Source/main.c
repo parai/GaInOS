@@ -3,10 +3,9 @@
 #include "Serial.h"
 
 int main(void) {
-
     CpuFrequencyInit();
     Sci_Init();
-    printk("Start GaInOS,Welcome,Parai!\r\n");
+    printk("Welcome to GaInOS's world!\r\n");
     __asm("SWI 0");
     StartOS(OSDEFAULTAPPMODE);
     for(;;) {    

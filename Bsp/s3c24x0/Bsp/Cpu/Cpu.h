@@ -44,6 +44,8 @@
 #define vPCLK_OUT  cfgCpuFrequency/16
 #endif
 void CpuFrequencyInit(void);
-
-
+/* ================================================================ */
+/* Copy from leeos:www.leeos.org */
+void init_sys_mmu(void);
+void start_mmu(void);
 #endif /* _CPU_H_ */

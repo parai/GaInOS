@@ -16,6 +16,7 @@
 		IMPORT OSCurTcb
 		IMPORT OSHighRdyTcb
 		IMPORT G_INVALID_TASK
+		IMPORT OSIsr2Nesting
 	
 Mode_USR        EQU     0x10
 Mode_FIQ        EQU     0x11
@@ -29,6 +30,7 @@ I_Bit           EQU     0x80            ; when I bit is set, IRQ is disabled
 F_Bit           EQU     0x40            ; when F bit is set, FIQ is disabled
 ;;OsCpuSrType vPortSaveMsrAndDisableIrq(void)
 vPortSaveMsrAndDisableIrq
+	PRESERVE8
 	STMDB	SP!, {R1}			;; Push R1.
 	MRS		R0, CPSR			;; Get CPSR.
 	MOV		R1,R0
@@ -39,12 +41,15 @@ vPortSaveMsrAndDisableIrq
 
 ;;void vPortRestoreMsr(OsCpuSrType xMSR)
 vPortRestoreMsr
+	PRESERVE8	
 	MSR		CPSR_cxsf, R0
 	BX		LR
+		
 ;;void vPortSwitch2Task(void)
 ;; Make sure vPortSwitch2Task() was executed in USER MODE,
 ;; Or May be an fault happened
 vPortSwitch2Task
+	PRESERVE8	
 	;;OSCurTsk = OSHighRdyTsk;
 	LDR     R0, =OSHighRdyTsk
 	LDRB	R0, [R0]
@@ -81,7 +86,7 @@ in_ready_state
     ;;    vPortRestoreSP();
 	LDR		SP, [R0]
     ;;    vPortStartCurRdyTsk();	
-	MSR 	CPSR_cxsf, #Mode_USR  ;IRQ FIQ Enable,USER Mode
+	MSR 	CPSR_cxsf, #Mode_SYS  ;IRQ FIQ Enable,USER Mode
 	LDR		R0, =vPortPreActivateTask
 	BX		R0
     ;;}
@@ -98,24 +103,31 @@ not_in_ready_state
 	BX		LR
     ;;}
 
+vPortDispatch	
+		PRESERVE8
+		SVC 0
+		bx lr
+		
 ;; When the context was saved,It looks as below in the stack.
 ;; |------------+-----------------|
 ;; | R0         | <- High Address |
 ;; | CPSR       |                 |		
-;; | LR(PC)     |                 |
+;; | LR         |                 |
 ;; | R12        |                 |
 ;; | ...        |                 |
 ;; | R1         |<- SP            |
+;; | PC         |<- SP            |
 ;; |------------+-----------------|
 ;;; As vPortDispatcher() is critical method so that the way
 ;; void vPortDispatcher(void)		
 vPortDispatcher
+		PRESERVE8
 		;; Save R0 For use
 		STMFD	SP!, {R0}		;Push R0
 		MRS		R0,  CPSR       ;Push CPSR
 		STMFD	SP!, {R0}
 		;; Enter Critical Section,Just Disable Interrupt
-		MSR		CPSR_cxsf, #Mode_USR:OR:F_Bit:OR:I_Bit
+		MSR		CPSR_cxsf, #Mode_SYS:OR:F_Bit:OR:I_Bit
 		;; if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
 		;; {
 		LDR	 	R0, =OSCurTcb
@@ -127,7 +139,8 @@ not_in_running_state
 		CMP 	R0, #2  ;;WAITING
 		BNE 	not_in_waiting_state
 save_context_and_sp
-		STMFD	SP!, {R1-R12,LR}    ;R0-R12 PC
+		STMFD	SP!, {R1-R12,LR}    ;R0-R12 LR
+		STMFD	SP!, {LR}			;PC
 		LDR		R0, =OSCurTcb
 		LDR		R0, [R0]
 		STR		SP, [R0]
@@ -137,24 +150,48 @@ not_in_waiting_state
 		BX		R0	
 
 vPortIrqHandler
+	;; Enter Critical Section,Just Disable Interrupt
+		MSR		CPSR_cxsf, #Mode_USR:OR:F_Bit:OR:I_Bit
 	;if(OSCurTsk != INVALID_TASK)
     ;{
-    ;    if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
-    ;    {
-    ;        save context
-	LDR	 	R0, =OSCurTsk
-	LDR 	R0, [R0]
-	LDR		R1, =G_INVALID_TASK
-	LDRB	R1, [R1]
-	CMP		R0,R1
-	BNE		not_invalid_task2
+		LDR	 	R0, =OSCurTsk
+		LDR 	R0, [R0]
+		LDR		R1, =G_INVALID_TASK
+		LDRB	R1, [R1]
+		CMP		R0,R1
+		BNE		not_invalid_task2
 invalid_task2
-	
-	
+	;    if(0x00u == OSIsr2Nesting)
+    ;    {
+		LDR	 	R0, =OSIsr2Nesting
+		LDR 	R0, [R0]  
+		CMP     R0,#0
+		BNE     not_isr2_nest
+	;        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+    ;        {
+    ;        save context
+		LDR	 	R0, =OSCurTcb
+		LDR 	R0, [R0]
+		LDRB 	R0, [R0,#5]
+		CMP  	R0, #0  ;;RUNNING
+		BEQ  	save_context_and_sp2
+not_in_running_state2
+		CMP 	R0, #2  ;;WAITING
+		BNE 	not_in_waiting_state
+save_context_and_sp2
+		STMFD	SP!, {R1-R12,LR}    ;R0-R12 PC
+		LDR		R0, =OSCurTcb
+		LDR		R0, [R0]
+		STR		SP, [R0]
+not_in_waiting_state2
+not_isr2_nest	
 not_invalid_task2
-    ;    }
+    ;       }
+	;    }
     ;}	
 		nop
-		
+
+
+	
 		END
 		
