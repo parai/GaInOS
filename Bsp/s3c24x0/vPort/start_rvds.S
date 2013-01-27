@@ -63,7 +63,7 @@ SVC_Stack_Size  EQU     0x00000400
 ABT_Stack_Size  EQU     0x00000000
 FIQ_Stack_Size  EQU     0x00000000
 IRQ_Stack_Size  EQU     0x00000400
-USR_Stack_Size  EQU     0x00000400
+USR_Stack_Size  EQU     0x00000000
 
 ISR_Stack_Size  EQU     (UND_Stack_Size + SVC_Stack_Size + ABT_Stack_Size + \
                          FIQ_Stack_Size + IRQ_Stack_Size)
@@ -847,7 +847,7 @@ GPJUP_Val       EQU     0x00000000
 ;  Mapped to Address 0.
 ;  Absolute addressing mode must be used.
 ;  Dummy Handlers are implemented as infinite loops which can be modified.
-		IMPORT vPortSystemCall
+		IMPORT vPortDispatcher
 Vectors         LDR     PC, Reset_Addr         
                 LDR     PC, Undef_Addr
                 LDR     PC, SWI_Addr
@@ -870,7 +870,7 @@ Vectors         LDR     PC, Reset_Addr
 
 Reset_Addr      DCD     Reset_Handler
 Undef_Addr      DCD     Undef_Handler
-SWI_Addr        DCD     vPortSystemCall ;;SWI_Handler
+SWI_Addr        DCD     vPortDispatcher ;;SWI_Handler
 PAbt_Addr       DCD     PAbt_Handler
 DAbt_Addr       DCD     DAbt_Handler
                 DCD     0                   ; Reserved Address 
@@ -1084,7 +1084,7 @@ Reset_Handler
                 MSR     CPSR_c, #Mode_SVC:OR:I_Bit:OR:F_Bit
                 MOV     SP, R0
                 SUB     R0, R0, #SVC_Stack_Size
-
+				IF      :DEF:__USR_MODE_FOR_TASK
 ;  Enter User Mode and set its Stack Pointer
                 MSR     CPSR_c, #Mode_USR
                 MOV     SP, R0
@@ -1092,6 +1092,7 @@ Reset_Handler
 
 ;  Enter User Mode and set its Stack Pointer
                 MSR     CPSR_c, #Mode_USR
+				ENDIF				
                 IF      :DEF:__MICROLIB
 
                 EXPORT __initial_sp
@@ -1105,7 +1106,7 @@ Reset_Handler
 
 
 ; Enter the C code -------------------------------------------------------------
-
+				MSR     CPSR_c, #Mode_SVC
                 IMPORT  __main
                 LDR     R0, =__main
                 BX      R0

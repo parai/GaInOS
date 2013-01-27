@@ -90,9 +90,6 @@ void CpuFrequencyInit(void)
        Fin=12MHZ;
        m=(MDIV+8),p=(PDIV+2),s=SDIV */
     MPLLCON=(cfgMDIV<<12)|(cfgPDIV<<4)|(cfgSDIV);
-    /*make run in ram,*/
-    init_sys_mmu();
-    start_mmu();
 }
 
 void CpuInitOsTick(void) 
@@ -175,9 +172,9 @@ start_mmu
     mcr p15,0,r0,c1,c0,0          ;set back to control register 
 	bx  lr
 */
+#if 0
 void start_mmu(void){
     /* asm volatile("mov r0,#L1_PTR_BASE_ADDR */
-    int register a =L1_PTR_BASE_ADDR
     __asm volatile("LDR r0,=0x30700000");
     __asm volatile("mcr p15,0,r0,c2,c0,0");          /* set base address of page table*/
     __asm volatile("mvn r0,#0");                  
@@ -187,6 +184,7 @@ void start_mmu(void){
     __asm volatile("orr r0,r0,#0x1");
     __asm volatile("mcr p15,0,r0,c1,c0,0");         /* set back to control register */	
 }
+#endif
 #endif
 unsigned int gen_l1_pte(unsigned int paddr){
 	return (paddr&PTE_L1_SECTION_PADDR_BASE_MASK)|\

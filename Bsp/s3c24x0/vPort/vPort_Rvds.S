@@ -28,6 +28,7 @@ Mode_SYS        EQU     0x1F
 
 I_Bit           EQU     0x80            ; when I bit is set, IRQ is disabled
 F_Bit           EQU     0x40            ; when F bit is set, FIQ is disabled
+INTOFFSET       EQU  0x4a000014	
 ;;OsCpuSrType vPortSaveMsrAndDisableIrq(void)
 vPortSaveMsrAndDisableIrq
 	PRESERVE8
@@ -86,7 +87,7 @@ in_ready_state
     ;;    vPortRestoreSP();
 	LDR		SP, [R0]
     ;;    vPortStartCurRdyTsk();	
-	MSR 	CPSR_cxsf, #Mode_SYS  ;IRQ FIQ Enable,USER Mode
+	MSR 	CPSR_cxsf, #Mode_SVC  ;IRQ FIQ Enable,SVC Mode
 	LDR		R0, =vPortPreActivateTask
 	BX		R0
     ;;}
@@ -95,39 +96,28 @@ not_in_ready_state
     ;;{
     ;;  vPortRestoreSP();
 	LDR		SP, [R0]
-    ;;  vPortRestoreContext() 
-	LDMFD 	SP!, {R1-R12,LR}
-	LDMFD 	SP!, {R0}		;POP CPSR
-	MSR 	CPSR_cxsf, R0
-	LDMFD 	SP!, {R0}		;POP R0
-	BX		LR
-    ;;}
+    ;;  vPortRestoreContext()
+	LDMFD 	SP!, {R0}  
+	MSR 	SPSR_cxsf, R0
+	LDMFD 	SP!, {R0-R12, LR, PC}^
+	;;}
 
-vPortDispatch	
-		PRESERVE8
-		SVC 0
-		bx lr
-		
 ;; When the context was saved,It looks as below in the stack.
 ;; |------------+-----------------|
-;; | R0         | <- High Address |
-;; | CPSR       |                 |		
-;; | LR         |                 |
+;; | PC         | <- High Address |
+;; | LR         |                 |		
 ;; | R12        |                 |
 ;; | ...        |                 |
-;; | R1         |<- SP            |
-;; | PC         |<- SP            |
+;; | R0         |                 |
+;; | SPSR       |<- SP            |
 ;; |------------+-----------------|
 ;;; As vPortDispatcher() is critical method so that the way
 ;; void vPortDispatcher(void)		
 vPortDispatcher
 		PRESERVE8
+        ;; now in svc mode
 		;; Save R0 For use
 		STMFD	SP!, {R0}		;Push R0
-		MRS		R0,  CPSR       ;Push CPSR
-		STMFD	SP!, {R0}
-		;; Enter Critical Section,Just Disable Interrupt
-		MSR		CPSR_cxsf, #Mode_SYS:OR:F_Bit:OR:I_Bit
 		;; if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
 		;; {
 		LDR	 	R0, =OSCurTcb
@@ -139,8 +129,11 @@ not_in_running_state
 		CMP 	R0, #2  ;;WAITING
 		BNE 	not_in_waiting_state
 save_context_and_sp
-		STMFD	SP!, {R1-R12,LR}    ;R0-R12 LR
-		STMFD	SP!, {LR}			;PC
+		LDMFD   SP!,{R0}		    ;pop R0
+		STMFD	SP!, {LR}           ;PC
+		STMFD	SP!, {R0-R12, LR}   ;R0-R12 LR
+		MRS		R0,  SPSR           ;Push SPSR
+		STMFD	SP!, {R0}
 		LDR		R0, =OSCurTcb
 		LDR		R0, [R0]
 		STR		SP, [R0]
@@ -150,8 +143,9 @@ not_in_waiting_state
 		BX		R0	
 
 vPortIrqHandler
-	;; Enter Critical Section,Just Disable Interrupt
-		MSR		CPSR_cxsf, #Mode_USR:OR:F_Bit:OR:I_Bit
+		PRESERVE8
+		STMFD   SP, {R0-R2}			; We will use R0 R1 R2 as temporary registers
+	
 	;if(OSCurTsk != INVALID_TASK)
     ;{
 		LDR	 	R0, =OSCurTsk
@@ -159,14 +153,14 @@ vPortIrqHandler
 		LDR		R1, =G_INVALID_TASK
 		LDRB	R1, [R1]
 		CMP		R0,R1
-		BNE		not_invalid_task2
+		BNE		not_to_save_context
 invalid_task2
 	;    if(0x00u == OSIsr2Nesting)
     ;    {
 		LDR	 	R0, =OSIsr2Nesting
 		LDR 	R0, [R0]  
 		CMP     R0,#0
-		BNE     not_isr2_nest
+		BNE     not_to_save_context
 	;        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
     ;        {
     ;        save context
@@ -175,23 +169,58 @@ invalid_task2
 		LDRB 	R0, [R0,#5]
 		CMP  	R0, #0  ;;RUNNING
 		BEQ  	save_context_and_sp2
-not_in_running_state2
+		;; not in running state
 		CMP 	R0, #2  ;;WAITING
-		BNE 	not_in_waiting_state
+		BNE 	not_to_save_context
 save_context_and_sp2
-		STMFD	SP!, {R1-R12,LR}    ;R0-R12 PC
+		;now R0 R1 R2 have all saved to IRQ's stack before,but no adjust to SP
+	;----------------------------------------------------------------------------
+	;   R0--SP
+	;	R1--PC 
+	;   R2--SPSR
+	;------------------------------------------------------------------------
+		SUB     R0, SP,#12
+		SUB     R1, LR, #4              ;Adjust PC for return address to task
+
+		MRS     R2, SPSR				; Copy SPSR (Task CPSR)
+	
+		MSR     CPSR_cxsf, #Mode_SVC:OR:F_Bit:OR:I_Bit   ;Change to SVC mode,that is task's mode
+									; SAVE TASK''S CONTEXT ONTO OLD TASK''S STACK									
+		STMFD   SP!, {R1}				; Push task''s PC 
+		STMFD   SP!, {R3-R12, LR}		; Push task''s LR,R12-R4
+	
+		LDMFD   R1!, {R3-R5}			; Load Task''s R0-R2 from IRQ stack 
+		STMFD   SP!, {R3-R5}			; Push Task''s R0-R2 to SVC stack
+	
+		STMFD   SP!, {R2}				; Push task''s CPSR
 		LDR		R0, =OSCurTcb
 		LDR		R0, [R0]
 		STR		SP, [R0]
-not_in_waiting_state2
-not_isr2_nest	
-not_invalid_task2
+not_to_save_context
     ;       }
 	;    }
     ;}	
-		nop
-
-
+	MSR    CPSR_c,#Mode_IRQ:OR:F_Bit:OR:I_Bit    ;Change to IRQ mode to use IRQ stack to handle interrupt
 	
+	LDR     R0, =INTOFFSET
+    LDR     R0, [R0]
+       
+    LDR     R1, IRQIsrVect
+    MOV     LR, PC                          ; Save LR befor jump to the C function we need return back
+    LDR     PC, [R1, R0, LSL #2]            ; Call OS_CPU_IRQ_ISR_handler();   
+
+start_mmu
+	EXPORT start_mmu
+    ;asm volatile("mov r0,#L1_PTR_BASE_ADDR")
+    LDR r0,=0x30700000
+    mcr p15,0,r0,c2,c0,0          ;set base address of page table
+    mvn r0,#0                  
+    mcr p15,0,r0,c3,c0,0          ;enable all region access
+
+	mrc p15,0,r0,c1,c0,0
+    orr r0,r0,#0x1
+    mcr p15,0,r0,c1,c0,0          ;set back to control register 
+	bx  lr
+
 		END
 		

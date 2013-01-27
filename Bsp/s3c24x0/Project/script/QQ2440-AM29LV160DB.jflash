@@ -1,7 +1,7 @@
   AppVersion = 43400
 [GENERAL]
   ConnectMode = 0
-  CurrentFile = "F:\parai@foxmail.com\nt\GaInOS\Bsp\s3c24x0\Project\GaInOS.bin"
+  CurrentFile = "F:\parai\myDoc\FriendlyArm\images\linux\supervivi.bin"
   DataFileSAddr = 0x00000000
   GUIMode = 0
   HostName = ""

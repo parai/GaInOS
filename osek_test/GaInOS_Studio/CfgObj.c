@@ -175,21 +175,21 @@ TASK(vTask4){
 
 TASK(vTask5){
 /* Add Your Task Code Here. */
-
+    ActivateTask(vTask4);
 	printk("vTask5 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTask6){
 /* Add Your Task Code Here. */
-
+    ActivateTask(vTask5);
 	printk("vTask6 is running.\r\n");
 	(void)TerminateTask();
 }
 
 TASK(vTaskIdle){
 /* Add Your Task Code Here. */
-
+    ActivateTask(vTask6);
 	printk("vTaskIdle is running.\r\n");
 	(void)TerminateTask();
 }

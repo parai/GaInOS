@@ -45,7 +45,7 @@
         vPortSwitch2Task();                     \
     }while(0)
 
-#define vPortDispatch() vPortDispatcher()
+#define vPortDispatch() __asm("SWI 0")          //vPortDispatcher()
 #define vPortEnableInterrupt()  
 #define vPortDisableInterrupt() 
 

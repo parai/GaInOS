@@ -1,4 +1,4 @@
-﻿#include "Serial.h"
+#include "Serial.h"
 #include "Cpu.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,6 +43,8 @@ void printk(char* fmt,...)
 #endif	
 	len = vsprintf((char*)buf,(char *)fmt,args)+1;
 	while('\0'!=buf[i]&&i<len)  Sci_Send(buf[i++]) ;
+#if 0    
 	free(buf);
+#endif    
 	va_end(args);
 }

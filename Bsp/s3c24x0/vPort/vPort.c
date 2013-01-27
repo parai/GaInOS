@@ -107,8 +107,4 @@ void OSTickISR(void)
 
     //vPortLeaveISR();
 }
-#include "Serial.h"
-void vPortSystemCall(void)
-{
-     printk("In vPortSystemCall().\r\n");
-}
+
