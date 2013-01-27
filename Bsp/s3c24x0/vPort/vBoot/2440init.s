@@ -148,14 +148,14 @@ ChangeBigEndian
 	DCD 0xffffffff
 	b ResetHandler
 	
-	IMPORT vPortSystemCall
+	IMPORT vPortDispatcher
 	IMPORT vPortIrqHandler
 HandlerFIQ      HANDLER HandleFIQ
 ;HandlerIRQ      HANDLER HandleIRQ
 IRQ_Addr        DCD     vPortIrqHandler
 HandlerUndef    HANDLER HandleUndef
 ;HandlerSWI      HANDLER HandleSWI
-SWI_Addr DCD     vPortSystemCall
+SWI_Addr DCD     vPortDispatcher
 HandlerDabort   HANDLER HandleDabort
 HandlerPabort   HANDLER HandlePabort
 

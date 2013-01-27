@@ -98,13 +98,11 @@ void vPortIntGetIpl(void)
   
 void OSTickISR(void)
 {  
-    //vPortEnterISR();
-
+    extern void printk(char* fmt,...);
+    printk("In OS Tick ISR.\r\n");
+    vPortTickIsrClear();
 #if(cfgOS_USE_ALARM == STD_TRUE)    
     IncrementCounter(0);		/* Process the first counter,Default as system counter */
 #endif
-    //vPortTickIsrClear();
-
-    //vPortLeaveISR();
 }
 

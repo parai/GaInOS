@@ -44,6 +44,43 @@
 #define vPCLK_OUT  cfgCpuFrequency/16
 #endif
 void CpuFrequencyInit(void);
+
+typedef void (*OSIsrHandlerType)(void);
+extern OSIsrHandlerType OSIsrVector[32];
+
+#define     OS_EINT0_Handler		OS_Default_IRQ_Handler
+#define     OS_EINT1_Handler		OS_Default_IRQ_Handler
+#define     OS_EINT2_Handler		OS_Default_IRQ_Handler
+#define     OS_EINT3_Handler		OS_Default_IRQ_Handler
+#define     OS_EINT4_7_Handler		OS_Default_IRQ_Handler
+#define     OS_EINT8_23_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_CAM_Handler		OS_Default_IRQ_Handler
+#define     OS_nBATT_FLT_Handler	OS_Default_IRQ_Handler
+extern void OSTickISR(void);
+#define     OS_INT_TICK_Handler		OSTickISR
+#define     OS_INT_WDTAC97_Handler	OS_Default_IRQ_Handler
+#define     OS_INT_TIMER0_Handler	OS_Default_IRQ_Handler
+#define     OS_INT_TIMER1_Handler	OS_Default_IRQ_Handler
+#define     OS_INT_TIMER2_Handler	OS_Default_IRQ_Handler
+#define     OS_INT_TIMER3_Handler	OS_Default_IRQ_Handler
+#define     OS_INT_TIMER4_Handler	OS_Default_IRQ_Handler
+#define     OS_INT_UART2_Handler	OS_Default_IRQ_Handler
+#define     OS_INT_LCD_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_DMA0_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_DMA1_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_DMA2_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_DMA3_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_SDI_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_SPI0_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_UART1_Handler	OS_Default_IRQ_Handler
+#define     OS_INT_NFCON_Handler	OS_Default_IRQ_Handler
+#define     OS_INT_USBD_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_USBH_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_IIC_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_UART0_Handler	OS_Default_IRQ_Handler
+#define     OS_INT_SPI1_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_RTC_Handler		OS_Default_IRQ_Handler
+#define     OS_INT_ADC_Handler		OS_Default_IRQ_Handler
 /* ================================================================ */
 /* Copy from leeos:www.leeos.org */
 void init_sys_mmu(void);

@@ -848,6 +848,7 @@ GPJUP_Val       EQU     0x00000000
 ;  Absolute addressing mode must be used.
 ;  Dummy Handlers are implemented as infinite loops which can be modified.
 		IMPORT vPortDispatcher
+		IMPORT vPortIrqHandler
 Vectors         LDR     PC, Reset_Addr         
                 LDR     PC, Undef_Addr
                 LDR     PC, SWI_Addr
@@ -874,11 +875,11 @@ SWI_Addr        DCD     vPortDispatcher ;;SWI_Handler
 PAbt_Addr       DCD     PAbt_Handler
 DAbt_Addr       DCD     DAbt_Handler
                 DCD     0                   ; Reserved Address 
-                IF      :DEF:__RTX
-IRQ_Addr        DCD     IRQ_Handler_RTX
-                ELSE
-IRQ_Addr        DCD     IRQ_Handler
-                ENDIF
+;                IF      :DEF:__RTX
+IRQ_Addr        DCD     vPortIrqHandler
+;                ELSE
+;IRQ_Addr        DCD     IRQ_Handler
+;                ENDIF
 FIQ_Addr        DCD     FIQ_Handler
 
 Undef_Handler   B       Undef_Handler

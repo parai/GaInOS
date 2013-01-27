@@ -39,7 +39,7 @@
 #define _VPORT_H_
 
 #include "Os_Cfg.h"
-
+#include "Cpu.h"
 #define vPortStartHighRdy()                     \
     do{                                         \
         vPortSwitch2Task();                     \
@@ -55,7 +55,12 @@ OsCpuSrType vPortSaveMsrAndDisableIrq(void);	/* In "vPort_Rvds.S"*/
 
 void vPortRestoreMsr(OsCpuSrType xMSR);		/* In "vPort_Rvds.S"*/
 		
-#define vPortTickIsrClear()  
+#define vPortTickIsrClear()     \
+    {                           \
+        TICNT = (1<<7)|1;       \
+        SRCPND &= (~(1<<8));    \
+        INTPND &= (~(1<<8));    \
+    }
 
 #define vPortEnterISR()                                                 \
     vPortSaveContext();                                                 \

@@ -92,12 +92,58 @@ void CpuFrequencyInit(void)
     MPLLCON=(cfgMDIV<<12)|(cfgPDIV<<4)|(cfgSDIV);
 }
 
+#define cfgOS_TICKS_PER_SEC 64
 void CpuInitOsTick(void) 
 {
-
+    /* Period = ((n+1)/128) second */
+	TICNT = (1<<7)|1;
+    /* RTC TICK IRQ mode*/
+    INTMOD &= (~BIT_TICK);
+    /* Clear The Pending bit*/
+    SRCPND &= (~BIT_TICK);
+    /* Enable RTC TICK interrupe*/
+    INTMSK &= (~BIT_TICK);
 }
-
-
+void OS_Default_IRQ_Handler(void)
+{
+    extern void printk(char *fmt,...);
+    printk("Non Implemented IRQ interrupt Handler!\r\n");
+}
+OSIsrHandlerType OSIsrVector[32]=
+{
+    OS_EINT0_Handler,
+    OS_EINT1_Handler,
+    OS_EINT2_Handler,
+    OS_EINT3_Handler,
+    OS_EINT4_7_Handler,
+    OS_EINT8_23_Handler,
+    OS_INT_CAM_Handler,
+    OS_nBATT_FLT_Handler,
+    OS_INT_TICK_Handler,
+    OS_INT_WDTAC97_Handler,
+    OS_INT_TIMER0_Handler,
+    OS_INT_TIMER1_Handler,
+    OS_INT_TIMER2_Handler,
+    OS_INT_TIMER3_Handler,
+    OS_INT_TIMER4_Handler,
+    OS_INT_UART2_Handler,
+    OS_INT_LCD_Handler,
+    OS_INT_DMA0_Handler,
+    OS_INT_DMA1_Handler,
+    OS_INT_DMA2_Handler,
+    OS_INT_DMA3_Handler,
+    OS_INT_SDI_Handler,
+    OS_INT_SPI0_Handler,
+    OS_INT_UART1_Handler,
+    OS_INT_NFCON_Handler,
+    OS_INT_USBD_Handler,
+    OS_INT_USBH_Handler,
+    OS_INT_IIC_Handler,
+    OS_INT_UART0_Handler,
+    OS_INT_SPI1_Handler,
+    OS_INT_RTC_Handler,
+    OS_INT_ADC_Handler
+};
 /* ================================================================================ */
 /*
 mmu.c:

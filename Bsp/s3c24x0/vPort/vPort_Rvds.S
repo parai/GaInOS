@@ -17,6 +17,9 @@
 		IMPORT OSHighRdyTcb
 		IMPORT G_INVALID_TASK
 		IMPORT OSIsr2Nesting
+		IMPORT OSIsrVector
+		IMPORT OSEnterISR
+		IMPORT OSExitISR
 	
 Mode_USR        EQU     0x10
 Mode_FIQ        EQU     0x11
@@ -144,36 +147,11 @@ not_in_waiting_state
 
 vPortIrqHandler
 		PRESERVE8
+;;vPortEnterISR();
+		; Save Context To task SVC stack
+		; vPortSaveContext();
 		STMFD   SP, {R0-R2}			; We will use R0 R1 R2 as temporary registers
-	
-	;if(OSCurTsk != INVALID_TASK)
-    ;{
-		LDR	 	R0, =OSCurTsk
-		LDR 	R0, [R0]
-		LDR		R1, =G_INVALID_TASK
-		LDRB	R1, [R1]
-		CMP		R0,R1
-		BNE		not_to_save_context
-invalid_task2
-	;    if(0x00u == OSIsr2Nesting)
-    ;    {
-		LDR	 	R0, =OSIsr2Nesting
-		LDR 	R0, [R0]  
-		CMP     R0,#0
-		BNE     not_to_save_context
-	;        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
-    ;        {
-    ;        save context
-		LDR	 	R0, =OSCurTcb
-		LDR 	R0, [R0]
-		LDRB 	R0, [R0,#5]
-		CMP  	R0, #0  ;;RUNNING
-		BEQ  	save_context_and_sp2
-		;; not in running state
-		CMP 	R0, #2  ;;WAITING
-		BNE 	not_to_save_context
-save_context_and_sp2
-		;now R0 R1 R2 have all saved to IRQ's stack before,but no adjust to SP
+	;now R0 R1 R2 have all saved to IRQ's stack before,but no adjust to SP
 	;----------------------------------------------------------------------------
 	;   R0--SP
 	;	R1--PC 
@@ -181,34 +159,68 @@ save_context_and_sp2
 	;------------------------------------------------------------------------
 		SUB     R0, SP,#12
 		SUB     R1, LR, #4              ;Adjust PC for return address to task
-
 		MRS     R2, SPSR				; Copy SPSR (Task CPSR)
-	
 		MSR     CPSR_cxsf, #Mode_SVC:OR:F_Bit:OR:I_Bit   ;Change to SVC mode,that is task's mode
 									; SAVE TASK''S CONTEXT ONTO OLD TASK''S STACK									
 		STMFD   SP!, {R1}				; Push task''s PC 
-		STMFD   SP!, {R3-R12, LR}		; Push task''s LR,R12-R4
-	
-		LDMFD   R1!, {R3-R5}			; Load Task''s R0-R2 from IRQ stack 
+		STMFD   SP!, {R3-R12, LR}		; Push task''s LR,R12-R4	
+		LDMFD   R0!, {R3-R5}			; Load Task''s R0-R2 from IRQ stack 
 		STMFD   SP!, {R3-R5}			; Push Task''s R0-R2 to SVC stack
-	
-		STMFD   SP!, {R2}				; Push task''s CPSR
+		STMFD   SP!, {R2}				; Push task''s SPSR
+		
+	;if(OSCurTsk != INVALID_TASK)
+    ;{
+		LDR	 	R0, =OSCurTsk
+		LDR 	R0, [R0]
+		LDR		R1, =G_INVALID_TASK
+		LDRB	R1, [R1]
+		CMP		R0,R1
+		BNE		not_to_save
+invalid_task2
+	;    if(0x00u == OSIsr2Nesting)
+    ;    {
+		LDR	 	R0, =OSIsr2Nesting
+		LDR 	R0, [R0]  
+		CMP     R0,#0
+		BNE     not_to_save
+	;        if(RUNNING == OSCurTcb->xState || WAITING == OSCurTcb->xState)
+    ;        {
+    ;        save context
+		LDR	 	R0, =OSCurTcb
+		LDR 	R0, [R0]
+		LDRB 	R0, [R0,#5]
+		CMP  	R0, #0  ;;RUNNING
+		BEQ  	save_sp
+		;; not in running state
+		CMP 	R0, #2  ;;WAITING
+		BNE 	not_to_save
+save_sp
 		LDR		R0, =OSCurTcb
 		LDR		R0, [R0]
 		STR		SP, [R0]
-not_to_save_context
+not_to_save
     ;       }
 	;    }
-    ;}	
-	MSR    CPSR_c,#Mode_IRQ:OR:F_Bit:OR:I_Bit    ;Change to IRQ mode to use IRQ stack to handle interrupt
+    ;}
+	;OSEnterISR
+	LDR		R0, =OSEnterISR
+	BX		R0
 	
 	LDR     R0, =INTOFFSET
     LDR     R0, [R0]
        
-    LDR     R1, IRQIsrVect
-    MOV     LR, PC                          ; Save LR befor jump to the C function we need return back
-    LDR     PC, [R1, R0, LSL #2]            ; Call OS_CPU_IRQ_ISR_handler();   
-
+    LDR     R1, =OSIsrVector
+	LDR     R0, [R1, R0, LSL#2]            ; Call OS_CPU_IRQ_ISR_handler(); 
+	BX		R0
+;;vPortLeaveISR()
+	LDR		R0, =OSExitISR
+	BX		R0
+	;;  vPortRestoreContext()
+	LDMFD 	SP!, {R0}  
+	MSR 	SPSR_cxsf, R0
+	LDMFD 	SP!, {R0-R12, LR, PC}^
+	;return
+	
 start_mmu
 	EXPORT start_mmu
     ;asm volatile("mov r0,#L1_PTR_BASE_ADDR")
